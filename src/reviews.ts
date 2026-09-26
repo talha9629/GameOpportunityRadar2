@@ -145,12 +145,12 @@ function parseLine(raw: string, sequence: number): ReviewEntry | null {
 
 export function analyzeReviewSample(rawText: string): ReviewSampleAnalysis {
   const rawLines = rawText.split(/\r?\n/).filter((line) => line.trim().length > 0);
+  if (rawLines.length === 0) throw new Error('Paste at least one non-empty review, one review per line.');
+  if (rawLines.length > 500) throw new Error('Maximum 500 reviews per sample. Split the evidence into separate samples so no supplied review is silently dropped.');
+
   const entries = rawLines
-    .slice(0, 500)
     .map((line, index) => parseLine(line, index + 1))
     .filter((entry): entry is ReviewEntry => entry !== null);
-
-  if (entries.length === 0) throw new Error('Paste at least one non-empty review, one review per line.');
 
   const clusters: ReviewCluster[] = clusterDefinitions.map((definition) => {
     const evidenceSequences = entries
