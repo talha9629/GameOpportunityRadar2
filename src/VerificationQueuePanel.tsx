@@ -22,7 +22,7 @@ function CaptureSession({
   onDeepVerify,
 }: {
   session: VerificationCaptureSession;
-  onDeepVerify: (appId: string, name: string) => void;
+  onDeepVerify: (session: VerificationCaptureSession) => void;
 }) {
   return <div className={`verification-session impact-${session.impact}`}>
     <div className="verification-order">S{session.sessionOrder}</div>
@@ -37,7 +37,7 @@ function CaptureSession({
     </div>
     <div className="verification-action">
       <span>{session.impact} impact</span>
-      <button onClick={() => onDeepVerify(session.appId, session.name)}>Open Deep Verify</button>
+      <button onClick={() => onDeepVerify(session)}>Open Deep Verify</button>
     </div>
   </div>;
 }
@@ -48,7 +48,7 @@ export function VerificationQueuePanel({
   onCompetitors,
 }: {
   queue: VerificationQueue;
-  onDeepVerify: (appId: string, name: string) => void;
+  onDeepVerify: (session: VerificationCaptureSession) => void;
   onCompetitors: () => void;
 }) {
   const nonVideoActionable = queue.tasks
