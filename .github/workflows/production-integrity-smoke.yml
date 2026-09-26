@@ -1,4 +1,4 @@
-name: Production persistence integrity
+name: Production persistence boundary
 
 on:
   push:
@@ -9,27 +9,20 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - name: Query live Radar integrity report
-        id: integrity
+      - name: Verify anonymous clients cannot read integrity report
         shell: bash
         run: |
           set -euo pipefail
-          RESPONSE=$(curl --fail --silent --show-error \
+          HTTP_CODE=$(curl --silent --output /tmp/integrity-response.json --write-out '%{http_code}' \
             --request POST \
             'https://gajkwzgxfjlvdbzrvdqn.supabase.co/rest/v1/rpc/radar_integrity_report' \
             --header 'apikey: sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg' \
             --header 'Content-Type: application/json' \
             --data '{}')
-          echo "Integrity report: $RESPONSE"
-          REPORT="$RESPONSE" node - <<'NODE'
-          const report = JSON.parse(process.env.REPORT || '{}');
-          if (report.ok !== true) {
-            console.error('Production persistence integrity failed:', report);
-            process.exit(1);
-          }
-          if (typeof report.savedDossierRuns !== 'number') {
-            console.error('Integrity report shape is invalid:', report);
-            process.exit(1);
-          }
-          console.log(`Production integrity PASS · saved dossiers: ${report.savedDossierRuns}`);
-          NODE
+          echo "Anonymous integrity RPC status: $HTTP_CODE"
+          cat /tmp/integrity-response.json
+          if [ "$HTTP_CODE" != "401" ] && [ "$HTTP_CODE" != "403" ]; then
+            echo "Integrity RPC must remain inaccessible to anonymous clients."
+            exit 1
+          fi
+          echo "Production persistence boundary PASS · privileged integrity data is not public"
