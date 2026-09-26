@@ -3,6 +3,7 @@ import type { DeepVerifyEvent } from './deepVerify';
 import {
   VerificationTaskResolutionSchema,
   confirmedEventsForResolution,
+  provenanceLocksForVideo,
   resolutionForTask,
   resolvedTaskCount,
 } from './verificationResolution';
@@ -58,6 +59,16 @@ const resolved = VerificationTaskResolutionSchema.parse({
   updatedAt: '2026-09-26T20:05:00.000Z',
 });
 
+const open = VerificationTaskResolutionSchema.parse({
+  ...resolved,
+  resolutionId: '55555555-5555-4555-8555-555555555555',
+  taskId: 'cccccccccccccccccccccccc',
+  sourceEventId: null,
+  state: 'needs_more_evidence',
+  summary: 'Human kept this verification task open for more evidence.',
+  resolvedAt: null,
+});
+
 describe('verification task resolution', () => {
   it('offers only category-matched human-confirmed events as closing evidence', () => {
     expect(confirmedEventsForResolution('gameplay_mechanic', events).map((event) => event.eventId)).toEqual([events[0].eventId]);
@@ -70,17 +81,23 @@ describe('verification task resolution', () => {
   });
 
   it('finds and counts only explicitly resolved task overlays', () => {
-    const open = VerificationTaskResolutionSchema.parse({
-      ...resolved,
-      resolutionId: '55555555-5555-4555-8555-555555555555',
-      taskId: 'cccccccccccccccccccccccc',
-      sourceEventId: null,
-      state: 'needs_more_evidence',
-      summary: 'Human kept this verification task open for more evidence.',
-      resolvedAt: null,
-    });
     const rows = [resolved, open];
     expect(resolutionForTask(rows, resolved.taskId)?.state).toBe('resolved');
     expect(resolvedTaskCount(rows, [resolved.taskId, open.taskId])).toBe(1);
+  });
+
+  it('keeps the video locked for any human task decision but locks only cited resolved events', () => {
+    const locks = provenanceLocksForVideo([resolved, open], resolved.sourceVideoId);
+    expect(locks.videoLocked).toBe(true);
+    expect(locks.decisionCount).toBe(2);
+    expect(locks.eventIds).toEqual([events[0].eventId]);
+  });
+
+  it('does not leak locks across evidence records', () => {
+    expect(provenanceLocksForVideo([resolved, open], '66666666-6666-4666-8666-666666666666')).toEqual({
+      videoLocked: false,
+      eventIds: [],
+      decisionCount: 0,
+    });
   });
 });
