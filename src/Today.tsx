@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { AlertTriangle, ArrowDown, ArrowUp, ExternalLink, RefreshCw } from 'lucide-react';
+import { AlertTriangle, ArrowDown, ArrowUp, ExternalLink, RefreshCw, Search } from 'lucide-react';
 import { fastestMovers, loadRadarSnapshot, newEntrants, type RadarEntry, type RadarSnapshot } from './radar';
 
 function Movement({ entry }: { entry: RadarEntry }) {
@@ -9,19 +9,22 @@ function Movement({ entry }: { entry: RadarEntry }) {
   return <span className="movement flat">—</span>;
 }
 
-function EntryRow({ entry, market }: { entry: RadarEntry; market?: string }) {
+function EntryRow({ entry, market, onAnalyze }: { entry: RadarEntry; market?: string; onAnalyze: (appId: string) => void }) {
   return (
     <div className="radar-row">
       <div className="rank">#{entry.rank}</div>
       {entry.iconUrl && <img src={entry.iconUrl} alt="" />}
       <div className="radar-game"><strong>{entry.name}</strong><span>{entry.publisher}{market ? ` · ${market}` : ''}</span></div>
       <Movement entry={entry} />
-      {entry.storeUrl && <a href={entry.storeUrl} target="_blank" rel="noreferrer" className="icon-link"><ExternalLink size={15} /></a>}
+      <div className="radar-actions">
+        <button onClick={() => onAnalyze(entry.appId)} title={`Analyze ${entry.name}`}><Search size={14} /> Analyze</button>
+        {entry.storeUrl && <a href={entry.storeUrl} target="_blank" rel="noreferrer" className="icon-link" title="Open App Store"><ExternalLink size={15} /></a>}
+      </div>
     </div>
   );
 }
 
-export function Today() {
+export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
   const [snapshot, setSnapshot] = useState<RadarSnapshot | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -65,14 +68,14 @@ export function Today() {
         )}
 
         <div className="radar-columns">
-          <section className="panel"><div className="section-heading"><h2>Fastest Movers</h2><span>vs previous observed snapshot</span></div>{movers.length ? movers.map((entry) => <EntryRow key={`${entry.country}-${entry.appId}`} entry={entry} market={entry.market} />) : <p>No upward movers yet; at least two snapshots are needed.</p>}</section>
-          <section className="panel"><div className="section-heading"><h2>New Entrants</h2><span>new to tracked range</span></div>{entrants.length ? entrants.map((entry) => <EntryRow key={`${entry.country}-${entry.appId}`} entry={entry} market={entry.market} />) : <p>No new entrants in this snapshot.</p>}</section>
+          <section className="panel"><div className="section-heading"><h2>Fastest Movers</h2><span>vs previous observed snapshot</span></div>{movers.length ? movers.map((entry) => <EntryRow key={`${entry.country}-${entry.appId}`} entry={entry} market={entry.market} onAnalyze={onAnalyze} />) : <p>No upward movers yet; at least two snapshots are needed.</p>}</section>
+          <section className="panel"><div className="section-heading"><h2>New Entrants</h2><span>new to tracked range</span></div>{entrants.length ? entrants.map((entry) => <EntryRow key={`${entry.country}-${entry.appId}`} entry={entry} market={entry.market} onAnalyze={onAnalyze} />) : <p>No new entrants in this snapshot.</p>}</section>
         </div>
 
         <section className="panel market-panel">
           <div className="market-toolbar"><div><h2>Tracked Chart</h2><p>Top 20 shown from the latest tracked range.</p></div><div className="market-tabs">{Object.entries(snapshot.markets).map(([code, item]) => <button key={code} className={selectedMarket === code ? 'active' : ''} onClick={() => setSelectedMarket(code)}>{item.label}</button>)}</div></div>
           {market && <div className="source-strip"><span>{market.gameFocused ? 'Games-category chart' : 'Overall Top Free fallback'}</span><span>{market.sourceMode}</span>{market.warning && <span className="source-warning">{market.warning}</span>}</div>}
-          {market?.status === 'failed' ? <div className="error-box">{market.error}</div> : marketEntries.map((entry) => <EntryRow key={entry.appId} entry={entry} />)}
+          {market?.status === 'failed' ? <div className="error-box">{market.error}</div> : marketEntries.map((entry) => <EntryRow key={entry.appId} entry={entry} onAnalyze={onAnalyze} />)}
         </section>
       </>}
     </section>
