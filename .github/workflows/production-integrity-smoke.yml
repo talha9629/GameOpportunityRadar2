@@ -52,3 +52,21 @@ jobs:
 
           echo "Deep Verify provider returned an unexpected anonymous-access state."
           exit 1
+
+      - name: Verify anonymous clients cannot register verification-session evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          HTTP_CODE=$(curl --silent --output /tmp/session-evidence-response.json --write-out '%{http_code}' \
+            --request POST \
+            'https://gajkwzgxfjlvdbzrvdqn.supabase.co/rest/v1/rpc/register_deep_verify_video_with_session' \
+            --header 'apikey: sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg' \
+            --header 'Content-Type: application/json' \
+            --data '{"p_label":"anonymous smoke","p_store_id":"1234567890","p_source_type":"youtube_url","p_storage_path":null,"p_external_url":"https://www.youtube.com/watch?v=dQw4w9WgXcQ","p_original_name":null,"p_mime_type":null,"p_size_bytes":null,"p_duration_seconds":null,"p_verification_session_id":"aaaaaaaaaaaaaaaaaaaaaaaa","p_verification_task_ids":["bbbbbbbbbbbbbbbbbbbbbbbb"],"p_verification_unknowns":["This is a deliberately unresolved verification smoke-test claim."],"p_verification_categories":["gameplay_mechanic"],"p_verification_research_generated_at":"2026-09-26T00:00:00Z"}')
+          echo "Anonymous verification-session RPC status: $HTTP_CODE"
+          cat /tmp/session-evidence-response.json
+          if [[ "$HTTP_CODE" =~ ^2 ]]; then
+            echo "Verification-session evidence registration must remain inaccessible to anonymous clients."
+            exit 1
+          fi
+          echo "Verification-session persistence boundary PASS · anonymous write denied"
