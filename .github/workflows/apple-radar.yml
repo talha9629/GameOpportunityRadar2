@@ -83,7 +83,7 @@ jobs:
           console.log('');
           console.log(`Data health: **${h.overall}** · essential pipelines **${h.essentialHealthy}/${h.essentialCount} healthy** · exact history **${h.facts.exactHistoryDays}/7 days**`);
           console.log(`Radar date: **${q.radarDate}** · Apple charts: **${q.sources.appleCharts.status}** · live evidence: **${q.sources.liveAnalyzer?.status ?? 'not-run'}** · AppBrain: **${q.sources.appBrain.status}**`);
-          console.log(`Verification queue: **${v.summary.taskCount} traceable task(s)** · ${v.summary.readyForHumanEvidence} evidence-ready · ${v.summary.readyForHumanReview} human-review · ${v.summary.autoWaiting} auto-waiting`);
+          console.log(`Verification queue: **${v.summary.taskCount}/${v.summary.rawTaskCount} explicit unknown(s) routed** · omitted ${v.summary.omittedTaskCount} · ${v.summary.readyForHumanEvidence} evidence-ready · ${v.summary.readyForHumanReview} human-review · ${v.summary.autoWaiting} auto-waiting · ${v.summary.optionalExternal} optional external`);
           console.log(`Daily digest: **${d.status}** · ${d.summary.changeCount} exact-date change(s) · ${d.summary.attentionCount} attention item(s)`);
           console.log('');
           console.log('| # | Title | Priority | Listing facts | Unknowns | First-party reasons |');
@@ -98,7 +98,7 @@ jobs:
       - name: Commit snapshot, queue, verification, digest and health safely
         run: |
           git config user.name 'github-actions[bot]'
-          git config user.email '4189828+github-actions[bot]@users.noreply.github.com'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add public/data/radar public/data/research public/data/verification public/data/health
           if ! git diff --cached --quiet; then
             git commit -m 'data: collect daily Apple radar and research queue'
