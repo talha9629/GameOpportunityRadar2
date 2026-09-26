@@ -4,6 +4,8 @@ import { VerificationQueuePanel } from './VerificationQueuePanel';
 import { loadVerificationQueue, type VerificationCaptureSession, type VerificationQueue } from './verificationQueue';
 import { listVerificationSessionEvidence } from './verificationEvidenceApi';
 import type { VerificationSessionEvidence } from './verificationEvidence';
+import { listVerificationTaskResolutions } from './verificationResolutionApi';
+import type { VerificationTaskResolution } from './verificationResolution';
 
 export function VerificationQueuePage({
   onDeepVerify,
@@ -14,26 +16,44 @@ export function VerificationQueuePage({
 }) {
   const [queue, setQueue] = useState<VerificationQueue | null>(null);
   const [evidence, setEvidence] = useState<VerificationSessionEvidence[]>([]);
+  const [resolutions, setResolutions] = useState<VerificationTaskResolution[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [evidenceError, setEvidenceError] = useState<string | null>(null);
+  const [resolutionError, setResolutionError] = useState<string | null>(null);
 
   async function refresh() {
     setLoading(true);
     setError(null);
     setEvidenceError(null);
+    setResolutionError(null);
     try {
       const nextQueue = await loadVerificationQueue();
       setQueue(nextQueue);
-      try {
-        setEvidence(await listVerificationSessionEvidence(nextQueue.captureSessions.map((session) => session.sessionId)));
-      } catch (err) {
+      const sessionIds = nextQueue.captureSessions.map((session) => session.sessionId);
+      const taskIds = nextQueue.captureSessions.flatMap((session) => session.taskIds);
+      const [evidenceResult, resolutionResult] = await Promise.allSettled([
+        listVerificationSessionEvidence(sessionIds),
+        listVerificationTaskResolutions(taskIds),
+      ]);
+
+      if (evidenceResult.status === 'fulfilled') {
+        setEvidence(evidenceResult.value);
+      } else {
         setEvidence([]);
-        setEvidenceError(err instanceof Error ? err.message : 'Owner verification evidence could not be loaded.');
+        setEvidenceError(evidenceResult.reason instanceof Error ? evidenceResult.reason.message : 'Owner verification evidence could not be loaded.');
+      }
+
+      if (resolutionResult.status === 'fulfilled') {
+        setResolutions(resolutionResult.value);
+      } else {
+        setResolutions([]);
+        setResolutionError(resolutionResult.reason instanceof Error ? resolutionResult.reason.message : 'Owner verification resolutions could not be loaded.');
       }
     } catch (err) {
       setQueue(null);
       setEvidence([]);
+      setResolutions([]);
       setError(err instanceof Error ? err.message : 'Verification Queue is not available yet.');
     } finally {
       setLoading(false);
@@ -47,11 +67,19 @@ export function VerificationQueuePage({
       <div>
         <div className="eyebrow">VERIFY · QUEUE</div>
         <h1>Resolve the unknowns that matter.</h1>
-        <p>Tasks are generated only from explicit evidence gaps already recorded by Radar. Owner-linked evidence progress is overlaid separately; nothing is silently inferred or marked resolved.</p>
+        <p>Tasks are generated only from explicit evidence gaps already recorded by Radar. Owner evidence and human resolution progress are overlaid separately; nothing is silently inferred or marked resolved.</p>
       </div>
       <button onClick={() => void refresh()} disabled={loading}><RefreshCw size={16} /> {loading ? 'Refreshing…' : 'Refresh'}</button>
     </div>
     {error && <div className="error-box">{error}</div>}
-    {queue && <VerificationQueuePanel queue={queue} evidence={evidence} evidenceError={evidenceError} onDeepVerify={onDeepVerify} onCompetitors={onCompetitors} />}
+    {queue && <VerificationQueuePanel
+      queue={queue}
+      evidence={evidence}
+      resolutions={resolutions}
+      evidenceError={evidenceError}
+      resolutionError={resolutionError}
+      onDeepVerify={onDeepVerify}
+      onCompetitors={onCompetitors}
+    />}
   </section>;
 }
