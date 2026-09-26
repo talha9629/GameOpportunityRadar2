@@ -119,10 +119,18 @@ function EventReviewButtons({
   </div>;
 }
 
-export function DeepVerifyWorkspace({ ownerEmail = null }: { ownerEmail?: string | null }) {
+export function DeepVerifyWorkspace({
+  ownerEmail = null,
+  initialStoreId = '',
+  initialLabel = '',
+}: {
+  ownerEmail?: string | null;
+  initialStoreId?: string;
+  initialLabel?: string;
+}) {
   const [sourceMode, setSourceMode] = useState<'upload' | 'youtube'>('upload');
-  const [label, setLabel] = useState('');
-  const [storeId, setStoreId] = useState('');
+  const [label, setLabel] = useState(initialLabel);
+  const [storeId, setStoreId] = useState(initialStoreId);
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [fileDuration, setFileDuration] = useState<number | null>(null);
