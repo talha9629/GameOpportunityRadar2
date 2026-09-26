@@ -17,7 +17,7 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
-      - name: Test live iOS analysis
+      - name: Test live iOS analysis and source provenance
         shell: bash
         run: |
           set -euo pipefail
@@ -37,6 +37,8 @@ jobs:
           if (!Array.isArray(data.findings) || data.findings.length < 5) throw new Error('Expected at least five evidence findings.');
           if (!Array.isArray(data.unknowns) || data.unknowns.length < 3) throw new Error('Expected explicit unknowns.');
           if (data.sourceMode !== 'automated') throw new Error(`Unexpected sourceMode: ${data.sourceMode}`);
+          if (!data.rawSource || String(data.rawSource.trackId) !== '6761760135') throw new Error('Raw Apple source payload was not preserved.');
+          if (typeof data.sourceObservedAt !== 'string' || Number.isNaN(Date.parse(data.sourceObservedAt))) throw new Error('Missing/invalid source observation timestamp.');
           const keys = new Set(data.findings.map((f) => f.key));
           for (const required of ['publisher', 'rating', 'rating_count', 'release_date']) {
             if (!keys.has(required)) throw new Error(`Missing finding: ${required}`);
@@ -46,8 +48,8 @@ jobs:
             publisher: data.game.publisher,
             findings: data.findings.length,
             unknowns: data.unknowns.length,
-            rating: data.game.rating,
-            ratingCount: data.game.ratingCount,
+            rawTrackId: data.rawSource.trackId,
+            sourceObservedAt: data.sourceObservedAt,
           }, null, 2));
           NODE
 
