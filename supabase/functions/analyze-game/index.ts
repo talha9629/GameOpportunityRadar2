@@ -94,7 +94,7 @@ Deno.serve(async (request) => {
       const endpoint = appleId
         ? `https://itunes.apple.com/lookup?id=${encodeURIComponent(appleId)}&country=us`
         : `https://itunes.apple.com/search?term=${encodeURIComponent(body.input)}&entity=software&country=us&limit=8`;
-      const searchResponse = await fetch(endpoint, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.3' } });
+      const searchResponse = await fetch(endpoint, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.4' } });
       if (!searchResponse.ok) throw new Error(`Apple search request failed (${searchResponse.status}).`);
       const payload = await searchResponse.json();
       const candidates = (Array.isArray(payload?.results) ? payload.results : [])
@@ -112,7 +112,7 @@ Deno.serve(async (request) => {
     }
 
     const endpoint = `https://itunes.apple.com/lookup?id=${encodeURIComponent(appleId)}&country=us`;
-    const appleResponse = await fetch(endpoint, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.3' } });
+    const appleResponse = await fetch(endpoint, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.4' } });
     if (!appleResponse.ok) throw new Error(`Apple metadata request failed (${appleResponse.status}).`);
     const payload = await appleResponse.json();
     const item = payload?.results?.[0];
@@ -156,6 +156,7 @@ Deno.serve(async (request) => {
         'Download/revenue performance is not available from this official Apple metadata source.',
       ],
       sourceMode: 'automated',
+      rawSource: item,
     }, { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unexpected analysis failure.';
