@@ -5,6 +5,7 @@ import {
   type AnalysisResult,
   type CandidateSearchResult,
 } from './domain';
+import type { DecisionResult, Scorecard } from './decision';
 import { hasSupabaseConfig, supabase } from './lib/supabase';
 
 function requireSupabase() {
@@ -38,4 +39,24 @@ export async function analyzeGame(input: string): Promise<AnalysisResult> {
 
   if (error) throw error;
   return AnalysisResultSchema.parse(data);
+}
+
+export async function saveDossier(result: AnalysisResult, scorecard: Scorecard, decision: DecisionResult): Promise<string> {
+  const client = requireSupabase();
+  const { data: userData, error: userError } = await client.auth.getUser();
+  if (userError || !userData.user) {
+    throw new Error('Owner sign-in is required before saving a dossier.');
+  }
+
+  const { data, error } = await client.rpc('save_dossier', {
+    p_dossier: result,
+    p_scorecard: scorecard,
+    p_decision: decision,
+  });
+
+  if (error) throw error;
+  if (typeof data !== 'string' || data.length < 10) {
+    throw new Error('The dossier save completed without a valid analysis run ID.');
+  }
+  return data;
 }
