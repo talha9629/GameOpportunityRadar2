@@ -13,14 +13,18 @@ const research = JSON.parse(await readFile(researchPath, 'utf8'));
 if (queue.schemaVersion !== 1) throw new Error('Unsupported verification queue schemaVersion.');
 if (queue.researchGeneratedAt !== research.generatedAt) throw new Error('Verification queue is not derived from the current research queue.');
 if (queue.radarDate !== research.radarDate) throw new Error('Verification queue radarDate mismatch.');
-if (!Array.isArray(queue.tasks) || queue.tasks.length > 32) throw new Error('Invalid verification task count.');
+if (!Array.isArray(queue.tasks) || queue.tasks.length > 64) throw new Error('Invalid verification task count.');
 if (queue.method?.name !== 'explicit_unknown_evidence_router_v1') throw new Error('Unexpected verification routing method.');
+if (queue.method?.taskCap !== 64) throw new Error('Verification taskCap must be 64.');
 
 const allowedEvidenceTypes = new Set(['deep_verify_video', 'competitor_map', 'exact_rank_history', 'third_party_estimate', 'manual_evidence']);
 const allowedStates = new Set(['ready_for_human_evidence', 'ready_for_human_review', 'auto_waiting', 'optional_external']);
 const allowedImpacts = new Set(['critical', 'high', 'medium', 'low']);
-const candidateById = new Map((research.candidates ?? []).map((candidate) => [candidate.appId, candidate]));
+const selectedCandidates = (research.candidates ?? []).slice(0, queue.method.candidateCap);
+const candidateById = new Map(selectedCandidates.map((candidate) => [candidate.appId, candidate]));
+const expectedUnknownCount = selectedCandidates.reduce((sum, candidate) => sum + (candidate.analysisEvidence?.unknowns?.length ?? 0), 0);
 const ids = new Set();
+const routedUnknownKeys = new Set();
 let priorOrder = 0;
 
 for (const task of queue.tasks) {
@@ -35,10 +39,13 @@ for (const task of queue.tasks) {
   if (typeof task.why !== 'string' || task.why.length < 30) throw new Error(`Missing evidence-routing rationale for ${task.taskId}`);
 
   const candidate = candidateById.get(task.appId);
-  if (!candidate) throw new Error(`Task references unknown candidate ${task.appId}`);
+  if (!candidate) throw new Error(`Task references unknown/out-of-scope candidate ${task.appId}`);
   if (!candidate.analysisEvidence?.unknowns?.includes(task.unknown)) {
     throw new Error(`Task ${task.taskId} is not traceable to an explicit candidate unknown.`);
   }
+  const routedKey = `${task.appId}\u0000${task.unknown}`;
+  if (routedUnknownKeys.has(routedKey)) throw new Error(`Duplicate routed unknown for ${task.appId}: ${task.unknown}`);
+  routedUnknownKeys.add(routedKey);
   if (task.source?.researchGeneratedAt !== research.generatedAt) throw new Error(`Task ${task.taskId} has stale research provenance.`);
 
   if (task.evidenceType === 'deep_verify_video' && task.automationState !== 'ready_for_human_evidence') {
@@ -62,9 +69,13 @@ const actual = {
   autoWaiting: queue.tasks.filter((task) => task.automationState === 'auto_waiting').length,
   optionalExternal: queue.tasks.filter((task) => task.automationState === 'optional_external').length,
 };
+if (expected.rawTaskCount !== expectedUnknownCount) throw new Error(`Raw verification task count must equal explicit unknown count (${expectedUnknownCount}).`);
 if (expected.taskCount !== queue.tasks.length) throw new Error('Verification summary taskCount mismatch.');
+if (expected.omittedTaskCount !== expected.rawTaskCount - expected.taskCount) throw new Error('Verification summary omittedTaskCount mismatch.');
+if (expected.omittedTaskCount !== 0) throw new Error(`Verification queue omitted ${expected.omittedTaskCount} explicit unknown(s); increase the safety cap rather than silently dropping them.`);
+if (routedUnknownKeys.size !== expectedUnknownCount) throw new Error(`Only ${routedUnknownKeys.size}/${expectedUnknownCount} explicit unknowns were routed.`);
 for (const [key, value] of Object.entries(actual)) {
   if (expected[key] !== value) throw new Error(`Verification summary ${key} mismatch.`);
 }
 
-console.log(`[verification-queue] validation PASS · ${queue.tasks.length} traceable tasks · ${actual.readyForHumanEvidence} evidence-ready · ${actual.readyForHumanReview} human-review · ${actual.autoWaiting} auto-waiting · ${actual.optionalExternal} optional`);
+console.log(`[verification-queue] validation PASS · ${queue.tasks.length}/${expectedUnknownCount} explicit unknowns routed · omitted 0 · ${actual.readyForHumanEvidence} evidence-ready · ${actual.readyForHumanReview} human-review · ${actual.autoWaiting} auto-waiting · ${actual.optionalExternal} optional`);
