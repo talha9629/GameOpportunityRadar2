@@ -6,7 +6,7 @@ const RESEARCH_PATH = path.resolve('public/data/research/latest.json');
 const OUTPUT_DIR = path.resolve('public/data/verification');
 const OUTPUT_PATH = path.join(OUTPUT_DIR, 'latest.json');
 const MAX_CANDIDATES = 8;
-const MAX_TASKS = 32;
+const MAX_TASKS = 64;
 
 const research = JSON.parse(await readFile(RESEARCH_PATH, 'utf8'));
 
@@ -136,6 +136,7 @@ const selected = tasks.slice(0, MAX_TASKS).map((task, index) => ({
   verificationOrder: index + 1,
   ...task,
 }));
+const omittedTaskCount = Math.max(0, tasks.length - selected.length);
 
 const summary = selected.reduce((acc, task) => {
   acc[task.automationState] = (acc[task.automationState] ?? 0) + 1;
@@ -162,7 +163,9 @@ const output = {
   },
   summary: {
     candidateCount: candidates.length,
+    rawTaskCount: tasks.length,
     taskCount: selected.length,
+    omittedTaskCount,
     readyForHumanEvidence: summary.ready_for_human_evidence ?? 0,
     readyForHumanReview: summary.ready_for_human_review ?? 0,
     autoWaiting: summary.auto_waiting ?? 0,
@@ -174,4 +177,4 @@ const output = {
 await mkdir(OUTPUT_DIR, { recursive: true });
 await writeFile(OUTPUT_PATH, `${JSON.stringify(output, null, 2)}\n`, 'utf8');
 
-console.log(`[verification-queue] ${output.summary.taskCount} tasks · ${output.summary.readyForHumanEvidence} evidence-ready · ${output.summary.readyForHumanReview} review-ready · ${output.summary.autoWaiting} auto-waiting · ${output.summary.optionalExternal} optional external`);
+console.log(`[verification-queue] ${output.summary.taskCount}/${output.summary.rawTaskCount} tasks kept · omitted ${omittedTaskCount} · ${output.summary.readyForHumanEvidence} evidence-ready · ${output.summary.readyForHumanReview} review-ready · ${output.summary.autoWaiting} auto-waiting · ${output.summary.optionalExternal} optional external`);
