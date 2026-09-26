@@ -14,6 +14,8 @@ import {
 import { loadResearchQueue, primaryMomentum, type ResearchQueue } from './researchQueue';
 import { loadResearchDigest, type ResearchDigest } from './researchDigest';
 import { ResearchDigestPanel } from './ResearchDigestPanel';
+import { loadDataHealth, type DataHealth } from './dataHealth';
+import { DataHealthPanel } from './DataHealthPanel';
 import './researchQueue.css';
 
 function Movement({ entry }: { entry: RadarEntry }) {
@@ -139,14 +141,16 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
   const [history, setHistory] = useState<RadarSnapshot[]>([]);
   const [researchQueue, setResearchQueue] = useState<ResearchQueue | null>(null);
   const [researchDigest, setResearchDigest] = useState<ResearchDigest | null>(null);
+  const [dataHealth, setDataHealth] = useState<DataHealth | null>(null);
   const [queueError, setQueueError] = useState<string | null>(null);
   const [digestError, setDigestError] = useState<string | null>(null);
+  const [healthError, setHealthError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedMarket, setSelectedMarket] = useState('us');
 
   async function refresh() {
-    setLoading(true); setError(null); setQueueError(null); setDigestError(null);
+    setLoading(true); setError(null); setQueueError(null); setDigestError(null); setHealthError(null);
     try {
       const window = await loadRadarWindow(8);
       setSnapshot(window.latest);
@@ -165,6 +169,12 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
     } catch (err) {
       setResearchDigest(null);
       setDigestError(err instanceof Error ? err.message : 'Research digest has not been generated yet.');
+    }
+    try {
+      setDataHealth(await loadDataHealth());
+    } catch (err) {
+      setDataHealth(null);
+      setHealthError(err instanceof Error ? err.message : 'Data health has not been generated yet.');
     } finally {
       setLoading(false);
     }
@@ -211,6 +221,9 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
         {hasFallback && (
           <div className="warning-banner"><AlertTriangle size={18} /><span>At least one market fell back to Apple’s overall Top Free chart because the games-category RSS was unavailable. Those ranks are explicitly labeled and must not be read as Games-category rank.</span></div>
         )}
+
+        {dataHealth && <DataHealthPanel health={dataHealth} onAnalyze={onAnalyze} />}
+        {!dataHealth && healthError && <div className="history-banner"><strong>Data Health pending.</strong><span>{healthError} The next Apple Radar automation will generate a factual pipeline-health report.</span></div>}
 
         {researchDigest && <ResearchDigestPanel digest={researchDigest} onAnalyze={onAnalyze} />}
         {!researchDigest && digestError && <div className="history-banner"><strong>Daily change digest pending.</strong><span>{digestError} The next Apple Radar run will generate it from exact dated queue evidence.</span></div>}
