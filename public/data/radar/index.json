@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-09-26T07:53:43.827Z",
+  "snapshots": [
+    {
+      "date": "2026-09-26",
+      "generatedAt": "2026-09-26T07:53:43.827Z",
+      "successfulMarkets": 4,
+      "freshMarkets": 4,
+      "gameFocusedMarkets": 4,
+      "runStatus": "complete",
+      "marketStatus": {
+        "us": "ok",
+        "gb": "ok",
+        "ca": "ok",
+        "au": "ok"
+      }
+    }
+  ]
+}
