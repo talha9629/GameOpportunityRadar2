@@ -9,7 +9,7 @@ assert(health.schemaVersion === 1, 'schemaVersion must be 1');
 assert(['ready', 'ready_with_maturing_history', 'degraded', 'blocked'].includes(health.overall), 'invalid overall health');
 assert(typeof health.generatedAt === 'string' && !Number.isNaN(Date.parse(health.generatedAt)), 'generatedAt invalid');
 assert(typeof health.statement === 'string' && /does not score game opportunities/i.test(health.statement), 'health statement must reject opportunity scoring');
-assert(Array.isArray(health.components) && health.components.length >= 7, 'health components missing');
+assert(Array.isArray(health.components) && health.components.length >= 8, 'health components missing');
 assert(Array.isArray(health.recommendedActions), 'recommendedActions must be an array');
 
 const allowedStates = new Set(['healthy', 'degraded', 'blocked', 'maturing', 'optional']);
@@ -19,7 +19,7 @@ for (const item of health.components ?? []) {
   assert(Array.isArray(item.facts) && item.facts.length > 0, `${item.id} has no facts`);
 }
 const ids = new Set(health.components.map((item) => item.id));
-for (const required of ['apple_radar', 'research_queue', 'verification_queue', 'history_maturity', 'research_digest', 'policy_watch', 'appbrain']) {
+for (const required of ['apple_radar', 'research_queue', 'verification_queue', 'gameplay_discovery', 'history_maturity', 'research_digest', 'policy_watch', 'appbrain']) {
   assert(ids.has(required), `missing required health component ${required}`);
 }
 
@@ -48,6 +48,9 @@ assert(Number.isInteger(health.facts?.verificationGroupedEvidenceTaskCount) && h
 assert(health.facts.verificationGroupedEvidenceTaskCount <= health.facts.verificationTaskCount, 'grouped evidence tasks cannot exceed atomic verification tasks');
 assert(health.facts.verificationGroupedEvidenceTaskCount === 0 || health.facts.verificationCaptureSessionCount > 0, 'grouped evidence tasks require at least one capture session');
 assert(typeof health.facts?.verificationDerivedFromCurrentQueue === 'boolean', 'verificationDerivedFromCurrentQueue invalid');
+assert(typeof health.facts?.gameplayDiscoveryConfigured === 'boolean', 'gameplayDiscoveryConfigured invalid');
+assert(Number.isInteger(health.facts?.gameplayDiscoveryCandidateCount) && health.facts.gameplayDiscoveryCandidateCount >= 0 && health.facts.gameplayDiscoveryCandidateCount <= 24, 'gameplayDiscoveryCandidateCount invalid');
+assert(typeof health.facts?.gameplayDiscoveryDerivedFromCurrentVerification === 'boolean', 'gameplayDiscoveryDerivedFromCurrentVerification invalid');
 assert(typeof health.facts?.appBrainConfigured === 'boolean', 'appBrainConfigured invalid');
 
 const verificationComponent = health.components.find((item) => item.id === 'verification_queue');
@@ -58,6 +61,16 @@ if (verificationComponent?.state === 'healthy') {
   assert(health.facts.verificationGroupedEvidenceTaskCount === 0 || health.facts.verificationCaptureSessionCount > 0, 'healthy grouped verification coverage needs capture sessions');
   assert(verificationComponent.facts.some((fact) => /capture session\(s\) cover .* gameplay evidence task\(s\)/i.test(fact)), 'healthy verification component must expose grouped session coverage');
 }
+
+const discoveryComponent = health.components.find((item) => item.id === 'gameplay_discovery');
+if (discoveryComponent?.state === 'healthy') {
+  assert(health.facts.gameplayDiscoveryConfigured === true, 'healthy gameplay discovery must be configured');
+  assert(health.facts.gameplayDiscoveryDerivedFromCurrentVerification === true, 'healthy gameplay discovery must match the current verification queue');
+}
+if (discoveryComponent?.state === 'optional') {
+  assert(health.facts.gameplayDiscoveryConfigured === false, 'optional gameplay discovery should represent an unconfigured provider');
+}
+assert(discoveryComponent?.facts?.some((fact) => /not verified gameplay evidence/i.test(fact)), 'gameplay discovery must expose the search-candidate evidence boundary');
 assert(!/success probability|revenue estimate from rank|downloads? from rank/i.test(JSON.stringify(health)), 'health report contains unsafe inference');
 
 if (errors.length) {
@@ -65,4 +78,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · verification ${health.facts.verificationTaskCount}/${health.facts.verificationRawTaskCount}, omitted ${health.facts.verificationOmittedTaskCount} · sessions ${health.facts.verificationCaptureSessionCount}/${health.facts.verificationGroupedEvidenceTaskCount} grouped task(s) · ${health.recommendedActions.length} action(s)`);
+console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · verification ${health.facts.verificationTaskCount}/${health.facts.verificationRawTaskCount}, omitted ${health.facts.verificationOmittedTaskCount} · discovery ${health.facts.gameplayDiscoveryCandidateCount} candidate(s) · sessions ${health.facts.verificationCaptureSessionCount}/${health.facts.verificationGroupedEvidenceTaskCount} grouped task(s) · ${health.recommendedActions.length} action(s)`);

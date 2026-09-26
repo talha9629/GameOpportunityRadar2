@@ -3,6 +3,9 @@
 .verification-summary span { border: 1px solid #2b405e; border-radius: 999px; padding: 5px 8px; color: #9fb0c8; font-size: 11px; }
 .verification-summary b { color: #e6eef9; }
 .verification-progress-warning { padding: 9px 11px; border: 1px solid #6b5127; border-radius: 9px; background: #211a0f; color: #d8c79f; font-size: 11px; line-height: 1.45; }
+.verification-progress-warning code { color: #f7e1ad; }
+.verification-discovery-status { display: flex; flex-wrap: wrap; gap: 8px; padding: 9px 11px; border: 1px solid #294965; border-radius: 10px; background: #0c1b2a; color: #91a9c4; font-size: 11px; }
+.verification-discovery-status b { color: #bfdbfe; }
 .verification-session-heading { display: flex; justify-content: space-between; gap: 16px; align-items: end; padding-top: 4px; }
 .verification-session-heading.secondary { padding-top: 10px; border-top: 1px solid #20334b; }
 .verification-session-heading > div { display: grid; gap: 3px; }
@@ -28,6 +31,16 @@
 .verification-copy p { margin: 0; color: #d3deed; font-size: 12px; line-height: 1.45; }
 .verification-copy small { color: #879bb4; line-height: 1.45; }
 .verification-session-unknowns { margin: 2px 0 4px; padding-left: 18px; display: grid; gap: 3px; color: #d3deed; font-size: 11px; line-height: 1.4; }
+.verification-source-suggestions { display: grid; gap: 6px; margin: 5px 0 7px; padding: 9px; border: 1px solid #2f5571; border-radius: 9px; background: #0a1826; }
+.verification-source-suggestions > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; }
+.verification-source-suggestions > div strong { color: #dcecff; font-size: 11px; }
+.verification-source-suggestions > div span { color: #86a2bf; font-size: 10px; }
+.verification-source-suggestions a { display: flex; align-items: flex-start; gap: 7px; padding: 7px 8px; border: 1px solid #263f59; border-radius: 8px; color: #a9d9f5; text-decoration: none; background: #0d2032; }
+.verification-source-suggestions a:hover { border-color: #3f6b90; background: #10283e; }
+.verification-source-suggestions a svg { flex: 0 0 auto; margin-top: 2px; }
+.verification-source-suggestions a span { display: grid; gap: 2px; min-width: 0; }
+.verification-source-suggestions a b { color: #cfeaff; font-size: 11px; line-height: 1.3; }
+.verification-source-suggestions a small { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: #8097b1; font-size: 10px; }
 .verification-action { display: grid; gap: 7px; justify-items: stretch; }
 .verification-action > span { text-align: right; color: #8ea3bd; font-size: 10px; text-transform: uppercase; }
 .verification-action button { border: 1px solid #365a7c; background: #10253a; color: #d8eeff; border-radius: 8px; padding: 8px 10px; cursor: pointer; }
