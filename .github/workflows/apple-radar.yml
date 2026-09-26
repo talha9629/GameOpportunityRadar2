@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/collect-apple-radar.mjs'
+      - 'scripts/validate-radar-data.mjs'
       - '.github/workflows/apple-radar.yml'
 
 permissions:
@@ -29,8 +30,12 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - name: Install dependencies
+        run: npm ci
       - name: Collect Apple charts
         run: node scripts/collect-apple-radar.mjs
+      - name: Validate collected Radar data
+        run: npm run validate:radar
       - name: Commit snapshot safely
         run: |
           git config user.name 'github-actions[bot]'
