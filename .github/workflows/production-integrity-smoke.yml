@@ -70,3 +70,22 @@ jobs:
             exit 1
           fi
           echo "Verification-session persistence boundary PASS · anonymous write denied"
+
+      - name: Verify anonymous clients cannot write verification task resolutions
+        shell: bash
+        run: |
+          set -euo pipefail
+          HTTP_CODE=$(curl --silent --output /tmp/task-resolution-response.json --write-out '%{http_code}' \
+            --request POST \
+            'https://gajkwzgxfjlvdbzrvdqn.supabase.co/rest/v1/verification_task_resolutions' \
+            --header 'apikey: sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg' \
+            --header 'Content-Type: application/json' \
+            --header 'Prefer: return=representation' \
+            --data '{"task_id":"aaaaaaaaaaaaaaaaaaaaaaaa","session_id":"bbbbbbbbbbbbbbbbbbbbbbbb","source_video_id":"00000000-0000-4000-8000-000000000000","source_event_id":null,"unknown_snapshot":"This anonymous smoke must never become an owner resolution.","category":"gameplay_mechanic","research_generated_at":"2026-09-26T00:00:00Z","resolution_state":"needs_more_evidence","resolution_summary":"Anonymous clients must not persist this owner review state."}')
+          echo "Anonymous verification resolution status: $HTTP_CODE"
+          cat /tmp/task-resolution-response.json
+          if [[ "$HTTP_CODE" =~ ^2 ]]; then
+            echo "Verification task resolution writes must remain inaccessible to anonymous clients."
+            exit 1
+          fi
+          echo "Verification task resolution boundary PASS · anonymous write denied"
