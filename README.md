@@ -14,19 +14,25 @@ Radar is not a clone generator, revenue predictor, or automatic game-selection e
 
 Implemented in this repository:
 - React + TypeScript + Vite web app
-- live Supabase Postgres/Auth/RLS backend
+- live Supabase Postgres/RLS backend
 - evidence/provenance model
-- human review lifecycle for findings
-- Apple App Store resolver via authenticated Supabase Edge Function
+- session-local human review lifecycle for findings
+- Apple App Store resolver via Supabase Edge Function
 - explicit assisted/manual state for unsupported Android enrichment
 - Zod validation at external boundaries
 - GitHub CI and dependency-audit workflows
-- host-agnostic static build for GitHub Pages / Render / Cloudflare Pages
+- GitHub Pages deployment
+
+## Temporary public-preview mode
+
+The current M1 build opens directly without sign-in. The public `analyze-game` Edge Function is intentionally **read-only/stateless**: it fetches official Apple metadata and returns structured evidence, but it does not read from or write to the private Radar database tables. Finding review actions are session-local in the browser for now.
+
+This mode is temporary. Authenticated persistence will return when saved dossiers/history become part of the active milestone.
 
 ## Architecture
 
 Frontend: React/Vite/TypeScript
-Backend: Supabase Postgres/Auth/RLS/Edge Functions
+Backend: Supabase Postgres/RLS/Edge Functions
 Source of truth: GitHub
 Scheduled jobs: GitHub Actions (later milestones)
 Heavy jobs: GitHub Actions first, Modal only when justified
@@ -35,8 +41,8 @@ Heavy jobs: GitHub Actions first, Modal only when justified
 
 Supabase project: `Game Opportunity Radar 2`
 Region: `ap-south-1`
-Edge Function: `analyze-game` with JWT verification enabled
-RLS: per-user ownership on all exposed Radar tables
+Edge Function: `analyze-game` public/read-only for the current preview
+RLS: private per-user ownership remains enabled on Radar tables
 
 ## Environment
 
