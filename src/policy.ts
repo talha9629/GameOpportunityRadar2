@@ -42,10 +42,22 @@ export const PolicyChangeSchema = z.object({
   fromHash: HashSchema,
   toHash: HashSchema,
   detectedAt: z.string().datetime(),
+  confirmedAt: z.string().datetime().optional(),
+  observations: z.number().int().positive().optional(),
+  confirmationStatus: z.enum(['legacy_unconfirmed', 'confirmed_repeat']).optional(),
   fromPath: z.string().min(1),
   toPath: z.string().min(1),
 });
 export type PolicyChange = z.infer<typeof PolicyChangeSchema>;
+
+export const PolicyPendingCandidateSchema = z.object({
+  hash: HashSchema,
+  path: z.string().min(1),
+  firstSeenAt: z.string().datetime(),
+  lastSeenAt: z.string().datetime(),
+  observations: z.number().int().positive(),
+  minimumConfirmationAt: z.string().datetime(),
+});
 
 export const PolicySourceSchema = z.object({
   id: z.string().min(3),
@@ -58,6 +70,7 @@ export const PolicySourceSchema = z.object({
   lastAttemptAt: z.string().datetime(),
   error: z.string().nullable(),
   current: PolicySnapshotRefSchema.nullable(),
+  pendingCandidate: PolicyPendingCandidateSchema.nullable().optional(),
   history: z.array(PolicySnapshotRefSchema),
   changes: z.array(PolicyChangeSchema),
 });
@@ -70,6 +83,11 @@ export const PolicyIndexSchema = z.object({
   sourceCount: z.number().int().nonnegative(),
   freshCount: z.number().int().nonnegative(),
   failureCount: z.number().int().nonnegative(),
+  confirmationPolicy: z.object({
+    observationsRequired: z.literal(2),
+    minimumElapsedMinutes: z.number().min(60),
+    statement: z.string().min(20),
+  }).optional(),
   sources: z.array(PolicySourceSchema),
 });
 export type PolicyIndex = z.infer<typeof PolicyIndexSchema>;
@@ -128,8 +146,17 @@ export function buildPolicyDiff(before: string, after: string): PolicyDiff {
 
 export function flattenPolicyChanges(index: PolicyIndex) {
   return index.sources
-    .flatMap((source) => source.changes.map((change) => ({ source, change })))
-    .sort((a, b) => b.change.detectedAt.localeCompare(a.change.detectedAt));
+    .flatMap((source) => source.changes
+      .filter((change) => change.confirmationStatus === 'confirmed_repeat')
+      .map((change) => ({ source, change })))
+    .sort((a, b) => (b.change.confirmedAt ?? b.change.detectedAt).localeCompare(a.change.confirmedAt ?? a.change.detectedAt));
+}
+
+export function policyStabilityCounts(index: PolicyIndex) {
+  const confirmed = index.sources.reduce((sum, source) => sum + source.changes.filter((change) => change.confirmationStatus === 'confirmed_repeat').length, 0);
+  const legacyUnconfirmed = index.sources.reduce((sum, source) => sum + source.changes.filter((change) => change.confirmationStatus !== 'confirmed_repeat').length, 0);
+  const pending = index.sources.filter((source) => Boolean(source.pendingCandidate)).length;
+  return { confirmed, legacyUnconfirmed, pending };
 }
 
 export async function loadPolicyIndex(): Promise<PolicyIndex> {
