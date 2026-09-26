@@ -8,6 +8,7 @@ create type public.radar_review_state as enum ('unreviewed','human_confirmed','h
 
 create table public.games (
   id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid(),
   canonical_name text not null,
   publisher text,
   created_at timestamptz not null default now(),
@@ -16,27 +17,29 @@ create table public.games (
 
 create table public.store_apps (
   id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid(),
   game_id uuid not null references public.games(id) on delete cascade,
   platform public.radar_platform not null,
   store_id text not null,
   store_url text not null,
   created_at timestamptz not null default now(),
-  unique(platform, store_id)
+  unique(owner_id, platform, store_id)
 );
 
 create table public.observations (
   id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid(),
   game_id uuid not null references public.games(id) on delete cascade,
   origin public.radar_origin not null,
   source_name text not null,
   source_url text,
   raw_value jsonb not null,
-  observed_at timestamptz not null default now(),
-  created_by uuid not null default auth.uid()
+  observed_at timestamptz not null default now()
 );
 
 create table public.findings (
   id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid(),
   game_id uuid not null references public.games(id) on delete cascade,
   key text not null,
   label text not null,
@@ -51,6 +54,7 @@ create table public.findings (
 );
 
 create table public.finding_evidence (
+  owner_id uuid not null default auth.uid(),
   finding_id uuid not null references public.findings(id) on delete cascade,
   observation_id uuid not null references public.observations(id) on delete cascade,
   primary key (finding_id, observation_id)
@@ -58,6 +62,7 @@ create table public.finding_evidence (
 
 create table public.analysis_runs (
   id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null default auth.uid(),
   game_id uuid references public.games(id) on delete cascade,
   run_type text not null,
   provider text not null,
@@ -77,9 +82,23 @@ alter table public.findings enable row level security;
 alter table public.finding_evidence enable row level security;
 alter table public.analysis_runs enable row level security;
 
-create policy "authenticated users manage games" on public.games for all to authenticated using (true) with check (true);
-create policy "authenticated users manage store apps" on public.store_apps for all to authenticated using (true) with check (true);
-create policy "authenticated users manage observations" on public.observations for all to authenticated using (true) with check (true);
-create policy "authenticated users manage findings" on public.findings for all to authenticated using (true) with check (true);
-create policy "authenticated users manage finding evidence" on public.finding_evidence for all to authenticated using (true) with check (true);
-create policy "authenticated users manage analysis runs" on public.analysis_runs for all to authenticated using (true) with check (true);
+create policy "owner manages games" on public.games for all to authenticated
+  using ((select auth.uid()) = owner_id) with check ((select auth.uid()) = owner_id);
+create policy "owner manages store apps" on public.store_apps for all to authenticated
+  using ((select auth.uid()) = owner_id) with check ((select auth.uid()) = owner_id);
+create policy "owner manages observations" on public.observations for all to authenticated
+  using ((select auth.uid()) = owner_id) with check ((select auth.uid()) = owner_id);
+create policy "owner manages findings" on public.findings for all to authenticated
+  using ((select auth.uid()) = owner_id) with check ((select auth.uid()) = owner_id);
+create policy "owner manages finding evidence" on public.finding_evidence for all to authenticated
+  using ((select auth.uid()) = owner_id) with check ((select auth.uid()) = owner_id);
+create policy "owner manages analysis runs" on public.analysis_runs for all to authenticated
+  using ((select auth.uid()) = owner_id) with check ((select auth.uid()) = owner_id);
+
+grant usage on schema public to authenticated;
+grant select, insert, update, delete on public.games to authenticated;
+grant select, insert, update, delete on public.store_apps to authenticated;
+grant select, insert, update, delete on public.observations to authenticated;
+grant select, insert, update, delete on public.findings to authenticated;
+grant select, insert, update, delete on public.finding_evidence to authenticated;
+grant select, insert, update, delete on public.analysis_runs to authenticated;
