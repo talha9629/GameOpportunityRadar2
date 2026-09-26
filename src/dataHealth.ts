@@ -30,6 +30,9 @@ export const DataHealthSchema = z.object({
     researchQueueDate: z.string().nullable(),
     exactHistoryDays: z.number().int().nonnegative(),
     policyDetectedChangeCount: z.number().int().nonnegative(),
+    confirmedPolicyChanges: z.number().int().nonnegative().optional(),
+    pendingPolicyCandidates: z.number().int().nonnegative().optional(),
+    legacyUnconfirmedPolicyChanges: z.number().int().nonnegative().optional(),
     appBrainConfigured: z.boolean(),
   }),
 });
