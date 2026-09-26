@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "validate:radar": "node scripts/validate-radar-data.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.1",
