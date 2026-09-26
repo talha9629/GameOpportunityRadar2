@@ -3,6 +3,8 @@ import {
   VerificationResolutionCategorySchema,
   VerificationTaskResolutionRowSchema,
   VerificationTaskResolutionSchema,
+  provenanceLocksForVideo,
+  type VerificationProvenanceLocks,
   type VerificationResolutionCategory,
   type VerificationTaskResolution,
 } from './verificationResolution';
@@ -33,6 +35,8 @@ async function requireOwnerClient() {
   return { client: supabase, userId: data.user.id };
 }
 
+const resolutionSelect = 'id,owner_id,task_id,session_id,source_video_id,source_event_id,unknown_snapshot,category,research_generated_at,resolution_state,resolution_summary,resolved_at,created_at,updated_at';
+
 export async function listVerificationTaskResolutions(taskIds: string[]): Promise<VerificationTaskResolution[]> {
   if (!hasSupabaseConfig || !supabase) return [];
   const ids = [...new Set(taskIds.filter((value) => /^[a-f0-9]{24}$/.test(value)))];
@@ -42,11 +46,25 @@ export async function listVerificationTaskResolutions(taskIds: string[]): Promis
 
   const { data, error } = await supabase
     .from('verification_task_resolutions')
-    .select('id,owner_id,task_id,session_id,source_video_id,source_event_id,unknown_snapshot,category,research_generated_at,resolution_state,resolution_summary,resolved_at,created_at,updated_at')
+    .select(resolutionSelect)
     .in('task_id', ids)
     .limit(100);
   if (error) throw error;
   return (data ?? []).map(toResolution);
+}
+
+export async function loadVerificationProvenanceLocks(videoId: string): Promise<VerificationProvenanceLocks> {
+  if (!hasSupabaseConfig || !supabase) return { videoLocked: false, eventIds: [], decisionCount: 0 };
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  if (userError || !userData.user) return { videoLocked: false, eventIds: [], decisionCount: 0 };
+
+  const { data, error } = await supabase
+    .from('verification_task_resolutions')
+    .select(resolutionSelect)
+    .eq('source_video_id', videoId)
+    .limit(100);
+  if (error) throw error;
+  return provenanceLocksForVideo((data ?? []).map(toResolution), videoId);
 }
 
 export async function saveVerificationTaskResolution(input: {
@@ -81,7 +99,7 @@ export async function saveVerificationTaskResolution(input: {
   const { data, error } = await client
     .from('verification_task_resolutions')
     .upsert(row, { onConflict: 'owner_id,task_id' })
-    .select('id,owner_id,task_id,session_id,source_video_id,source_event_id,unknown_snapshot,category,research_generated_at,resolution_state,resolution_summary,resolved_at,created_at,updated_at')
+    .select(resolutionSelect)
     .single();
   if (error) throw error;
   return toResolution(data);

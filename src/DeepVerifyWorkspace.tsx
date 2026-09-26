@@ -39,11 +39,14 @@ import {
   runDeepVerifyAnalysis,
 } from './deepVerifyProvider';
 import { VerificationResolutionPanel } from './VerificationResolutionPanel';
+import { loadVerificationProvenanceLocks } from './verificationResolutionApi';
+import type { VerificationProvenanceLocks } from './verificationResolution';
 import type { Coverage, Interpretation, ReviewState } from './domain';
 import './deepVerify.css';
 import './deepVerifyProvider.css';
 
 const GEMINI_DIRECT_URL_MAX_BYTES = 100_000_000;
+const EMPTY_PROVENANCE_LOCKS: VerificationProvenanceLocks = { videoLocked: false, eventIds: [], decisionCount: 0 };
 
 const eventTypes = [
   ['mechanic', 'Mechanic'],
@@ -157,6 +160,7 @@ export function DeepVerifyWorkspace({
   const [saved, setSaved] = useState<DeepVerifyVideoSummary[]>([]);
   const [selected, setSelected] = useState<DeepVerifyVideoPayload | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [provenanceLocks, setProvenanceLocks] = useState<VerificationProvenanceLocks>(EMPTY_PROVENANCE_LOCKS);
   const [busy, setBusy] = useState(false);
   const [savingEvidence, setSavingEvidence] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
@@ -196,14 +200,24 @@ export function DeepVerifyWorkspace({
     }
   }
 
+  async function refreshProvenanceLocks(videoId: string) {
+    try {
+      setProvenanceLocks(await loadVerificationProvenanceLocks(videoId));
+    } catch {
+      setProvenanceLocks(EMPTY_PROVENANCE_LOCKS);
+    }
+  }
+
   async function openEvidence(videoId: string) {
     setBusy(true);
     setError(null);
     setMessage(null);
     setPreviewUrl(null);
+    setProvenanceLocks(EMPTY_PROVENANCE_LOCKS);
     try {
       const payload = await loadDeepVerifyVideo(videoId);
       setSelected(payload);
+      await refreshProvenanceLocks(payload.videoId);
       if (payload.sourceType === 'upload' && payload.storagePath && !payload.sourceDeletedAt) {
         try {
           setPreviewUrl(await createDeepVerifyPreviewUrl(payload.storagePath));
@@ -222,6 +236,7 @@ export function DeepVerifyWorkspace({
     if (!selected) return;
     const payload = await loadDeepVerifyVideo(selected.videoId);
     setSelected(payload);
+    await refreshProvenanceLocks(payload.videoId);
     if (payload.sourceType === 'upload' && payload.storagePath && !payload.sourceDeletedAt) {
       try {
         setPreviewUrl(await createDeepVerifyPreviewUrl(payload.storagePath));
@@ -237,6 +252,7 @@ export function DeepVerifyWorkspace({
   useEffect(() => {
     setSelected(null);
     setPreviewUrl(null);
+    setProvenanceLocks(EMPTY_PROVENANCE_LOCKS);
     setError(null);
     void refreshSaved(true);
     if (ownerEmail && initialVideoId) void openEvidence(initialVideoId);
@@ -383,6 +399,7 @@ export function DeepVerifyWorkspace({
       await deleteDeepVerifyVideo(selected);
       setSelected(null);
       setPreviewUrl(null);
+      setProvenanceLocks(EMPTY_PROVENANCE_LOCKS);
       setMessage('Evidence record deleted.');
       await refreshSaved(false);
     } catch (err) {
@@ -463,7 +480,12 @@ export function DeepVerifyWorkspace({
       <section className="panel deep-selected-panel">
         <div className="section-heading">
           <div><div className="eyebrow">SELECTED EVIDENCE</div><h2>{selected.label}</h2><p>{selected.canonicalName ?? (selected.storeId ? `Apple ID ${selected.storeId}` : 'Unlinked evidence')}</p></div>
-          <button className="danger-action" disabled={busy || analyzing} onClick={() => void removeSelectedEvidence()}><Trash2 size={16} /> Delete record</button>
+          <button
+            className="danger-action"
+            disabled={busy || analyzing || provenanceLocks.videoLocked}
+            onClick={() => void removeSelectedEvidence()}
+            title={provenanceLocks.videoLocked ? 'Locked by human verification-task provenance.' : 'Delete evidence record'}
+          ><Trash2 size={16} /> Delete record</button>
         </div>
         <div className="deep-meta-grid">
           <div><span>Source</span><strong>{selected.sourceType === 'upload' ? 'Private upload' : 'Public YouTube URL'}</strong></div>
@@ -471,6 +493,10 @@ export function DeepVerifyWorkspace({
           <div><span>Duration</span><strong>{selected.durationSeconds != null ? formatTimestamp(selected.durationSeconds) : 'Unknown'}</strong></div>
           <div><span>Size</span><strong>{humanBytes(selected.sizeBytes)}</strong></div>
         </div>
+        {provenanceLocks.videoLocked && <div className="deep-retention-note">
+          <ShieldCheck size={18} />
+          <span><strong>Provenance locked.</strong> This source is cited by {provenanceLocks.decisionCount} human verification-task decision{provenanceLocks.decisionCount === 1 ? '' : 's'} and cannot be deleted while that audit history exists.</span>
+        </div>}
         {selected.verificationSession && <VerificationSessionBlock session={selected.verificationSession} saved />}
         {selected.sourceType === 'upload'
           ? selected.sourceDeletedAt
@@ -531,20 +557,33 @@ export function DeepVerifyWorkspace({
         <div className="section-heading"><div><h2>Timestamped findings</h2><p>Every finding preserves source, interpretation, coverage, confidence, review state, and review timestamp.</p></div><span>{selected.events.length} findings</span></div>
         {selected.events.length === 0
           ? <p>No timestamped findings yet.</p>
-          : <div className="deep-event-list">{selected.events.map((event) => <article key={event.eventId} className={`deep-event-card ${event.interpretation === 'ai_inferred' ? 'deep-event-ai' : ''}`}>
-              <div className="deep-event-top">
-                <div><span className="deep-time">{formatTimestamp(event.startSeconds)}{event.endSeconds != null ? `–${formatTimestamp(event.endSeconds)}` : ''}</span><strong>{event.label}</strong>{event.interpretation === 'ai_inferred' && <span className="deep-ai-badge"><Sparkles size={12} /> AI inferred</span>}</div>
-                <button className="icon-danger" disabled={eventBusyId === event.eventId || analyzing} onClick={() => void removeEvent(event.eventId)} title="Delete finding"><Trash2 size={15} /></button>
-              </div>
-              <p>{event.claim}</p>
-              <div className="finding-meta"><span>{event.origin}</span><span>{event.interpretation}</span><span>{event.coverage}</span><span>{Math.round(event.confidence * 100)}% confidence</span><span className={`badge-${event.reviewState}`}>{event.reviewState.replaceAll('_', ' ')}</span></div>
-              {event.reviewedAt && <small className="deep-reviewed-at">Reviewed {new Date(event.reviewedAt).toLocaleString()}</small>}
-              {event.evidenceNote && <div className="deep-note">{event.evidenceNote}</div>}
-              <EventReviewButtons state={event.reviewState} busy={eventBusyId === event.eventId || analyzing} onReview={(state) => void reviewEvent(event.eventId, state)} />
-            </article>)}</div>}
+          : <div className="deep-event-list">{selected.events.map((event) => {
+              const provenanceLocked = provenanceLocks.eventIds.includes(event.eventId);
+              return <article key={event.eventId} className={`deep-event-card ${event.interpretation === 'ai_inferred' ? 'deep-event-ai' : ''}`}>
+                <div className="deep-event-top">
+                  <div>
+                    <span className="deep-time">{formatTimestamp(event.startSeconds)}{event.endSeconds != null ? `–${formatTimestamp(event.endSeconds)}` : ''}</span>
+                    <strong>{event.label}</strong>
+                    {event.interpretation === 'ai_inferred' && <span className="deep-ai-badge"><Sparkles size={12} /> AI inferred</span>}
+                    {provenanceLocked && <span className="badge-human_confirmed"><ShieldCheck size={12} /> Provenance locked</span>}
+                  </div>
+                  <button
+                    className="icon-danger"
+                    disabled={eventBusyId === event.eventId || analyzing || provenanceLocked}
+                    onClick={() => void removeEvent(event.eventId)}
+                    title={provenanceLocked ? 'Locked because a human verification-task decision cites this finding.' : 'Delete finding'}
+                  ><Trash2 size={15} /></button>
+                </div>
+                <p>{event.claim}</p>
+                <div className="finding-meta"><span>{event.origin}</span><span>{event.interpretation}</span><span>{event.coverage}</span><span>{Math.round(event.confidence * 100)}% confidence</span><span className={`badge-${event.reviewState}`}>{event.reviewState.replaceAll('_', ' ')}</span></div>
+                {event.reviewedAt && <small className="deep-reviewed-at">Reviewed {new Date(event.reviewedAt).toLocaleString()}</small>}
+                {event.evidenceNote && <div className="deep-note">{event.evidenceNote}</div>}
+                <EventReviewButtons state={event.reviewState} busy={eventBusyId === event.eventId || analyzing} onReview={(state) => void reviewEvent(event.eventId, state)} />
+              </article>;
+            })}</div>}
       </section>
 
-      {selected.verificationSession && <VerificationResolutionPanel video={selected} />}
+      {selected.verificationSession && <VerificationResolutionPanel video={selected} onResolutionChanged={() => void refreshProvenanceLocks(selected.videoId)} />}
 
       {selected.sourceType === 'upload' && (selected.sizeBytes ?? 0) > GEMINI_DIRECT_URL_MAX_BYTES && <div className="deep-retention-note"><AlertTriangle size={18} /><span>Uploads between 100 MB and 500 MB are accepted as private evidence, but the current Gemini direct-URL path cannot analyze them. The next provider phase is a Files API worker; no result is fabricated in the meantime.</span></div>}
     </>}

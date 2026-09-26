@@ -15,7 +15,13 @@ import {
 
 const keepOpenSummary = 'Human kept this verification task open for more evidence.';
 
-export function VerificationResolutionPanel({ video }: { video: DeepVerifyVideoPayload }) {
+export function VerificationResolutionPanel({
+  video,
+  onResolutionChanged,
+}: {
+  video: DeepVerifyVideoPayload;
+  onResolutionChanged?: () => void;
+}) {
   const session = video.verificationSession;
   const [resolutions, setResolutions] = useState<VerificationTaskResolution[]>([]);
   const [busyTaskId, setBusyTaskId] = useState<string | null>(null);
@@ -73,6 +79,7 @@ export function VerificationResolutionPanel({ video }: { video: DeepVerifyVideoP
       setMessage(state === 'resolved'
         ? 'Atomic verification task resolved from a human-confirmed timestamped finding.'
         : 'Atomic verification task remains open for more evidence.');
+      onResolutionChanged?.();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not update verification task resolution.');
     } finally {
