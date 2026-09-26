@@ -34,6 +34,7 @@ const RadarSnapshotSchema = z.object({
   generatedAt: z.string().nullable(),
   chart: z.string(),
   category: z.string(),
+  chartDepth: z.number().int().min(10).max(100).optional(),
   runStatus: z.enum(['complete', 'partial', 'failed']).optional(),
   successfulMarkets: z.number().int().nonnegative().optional(),
   markets: z.record(z.string(), RadarMarketSchema),
@@ -80,6 +81,21 @@ export interface HistoryMaturity {
   consecutiveDays: number;
   requiredDays: 7;
   label: 'INSUFFICIENT_DATA' | 'EARLY' | 'BUILDING' | 'MATURE_7D';
+}
+
+export type RadarTrendState =
+  | 'EMERGING'
+  | 'RISING'
+  | 'ESTABLISHED'
+  | 'CROWDED'
+  | 'WINDOW_CLOSING'
+  | 'DECLINING'
+  | 'INSUFFICIENT_DATA';
+
+export interface RadarTrendAssessment {
+  state: RadarTrendState;
+  reason: string;
+  evidenceDays: Array<1 | 3 | 7>;
 }
 
 function dateKey(snapshot: RadarSnapshot) {
@@ -188,6 +204,99 @@ export function rankWindowChange(
     delta: priorEntry.rank - currentEntry.rank,
     priorRank: priorEntry.rank,
     currentRank: currentEntry.rank,
+  };
+}
+
+// Bounded rank-position heuristic from the frozen Radar V1 design.
+// It describes position inside the observed chart only; it is not download share, revenue share, or probability.
+export function rankVisibility(rank: number, depth: number) {
+  if (!Number.isInteger(rank) || !Number.isInteger(depth) || depth < 1 || rank < 1 || rank > depth) return null;
+  const value = Math.log((depth + 1) / rank) / Math.log(depth + 1);
+  return Math.max(0, Math.min(1, value));
+}
+
+// Trend states are intentionally conservative. Rank evidence can support movement/persistence states,
+// but CROWDED and WINDOW_CLOSING require mechanic-cluster saturation evidence and are never emitted here.
+export function assessRadarTrend(
+  current: RadarSnapshot,
+  history: RadarSnapshot[],
+  marketCode: string,
+  appId: string,
+): RadarTrendAssessment {
+  const market = current.markets[marketCode];
+  const entry = market?.entries.find((item) => item.appId === appId);
+  if (!market || market.status !== 'ok' || market.gameFocused === false || !entry) {
+    return {
+      state: 'INSUFFICIENT_DATA',
+      reason: 'A healthy Games-category observation is required before assigning a rank trend state.',
+      evidenceDays: [],
+    };
+  }
+
+  const oneDay = rankWindowChange(current, history, marketCode, appId, 1);
+  const threeDay = rankWindowChange(current, history, marketCode, appId, 3);
+  const sevenDay = rankWindowChange(current, history, marketCode, appId, 7);
+
+  if (oneDay.status === 'not_ranked' && entry.rank <= 20) {
+    return {
+      state: 'EMERGING',
+      reason: `Entered the tracked Games chart at #${entry.rank} after not ranking on the exact prior-day snapshot.`,
+      evidenceDays: [1],
+    };
+  }
+
+  if (sevenDay.status === 'available' && (sevenDay.delta ?? 0) <= -10) {
+    return {
+      state: 'DECLINING',
+      reason: `Rank fell ${Math.abs(sevenDay.delta ?? 0)} places over the exact 7-day window.`,
+      evidenceDays: [7],
+    };
+  }
+
+  if (threeDay.status === 'available' && (threeDay.delta ?? 0) <= -5) {
+    return {
+      state: 'DECLINING',
+      reason: `Rank fell ${Math.abs(threeDay.delta ?? 0)} places over the exact 3-day window.`,
+      evidenceDays: [3],
+    };
+  }
+
+  if (sevenDay.status === 'available' && (sevenDay.delta ?? 0) >= 10) {
+    return {
+      state: 'RISING',
+      reason: `Rank improved ${sevenDay.delta} places over the exact 7-day window.`,
+      evidenceDays: [7],
+    };
+  }
+
+  if (threeDay.status === 'available' && (threeDay.delta ?? 0) >= 5) {
+    return {
+      state: 'RISING',
+      reason: `Rank improved ${threeDay.delta} places over the exact 3-day window.`,
+      evidenceDays: [3],
+    };
+  }
+
+  if (oneDay.status === 'available' && (oneDay.delta ?? 0) >= 8) {
+    return {
+      state: 'RISING',
+      reason: `Rank improved ${oneDay.delta} places on the exact prior-day comparison.`,
+      evidenceDays: [1],
+    };
+  }
+
+  if (entry.daysObserved >= 7 && sevenDay.status === 'available' && entry.rank <= 30) {
+    return {
+      state: 'ESTABLISHED',
+      reason: `Observed for ${entry.daysObserved} daily snapshots, currently #${entry.rank}, with an exact 7-day comparison available.`,
+      evidenceDays: [7],
+    };
+  }
+
+  return {
+    state: 'INSUFFICIENT_DATA',
+    reason: 'Exact rank history does not yet meet the evidence gate for emerging, rising, established, or declining.',
+    evidenceDays: [],
   };
 }
 
