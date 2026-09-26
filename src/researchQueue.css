@@ -27,8 +27,30 @@
 .queue-pack { display: grid; gap: 2px; min-width: 88px; text-align: right; }
 .queue-pack strong { color: #86efac; font-size: 12px; }
 .queue-pack small { color: #7f92ad; font-size: 9px; text-transform: uppercase; }
+.digest-panel { display: grid; gap: 12px; }
+.digest-panel .section-heading > span { display: inline-flex; align-items: center; gap: 5px; }
+.digest-kpis { display: flex; flex-wrap: wrap; gap: 8px; }
+.digest-kpis span { color: #9fb0c8; border: 1px solid #2b405e; border-radius: 999px; padding: 5px 8px; font-size: 11px; }
+.digest-kpis b { color: #e5eefb; }
+.digest-list { display: grid; gap: 7px; }
+.digest-change { display: grid; grid-template-columns: 20px minmax(170px, .8fr) minmax(220px, 1.4fr); gap: 10px; align-items: center; width: 100%; text-align: left; padding: 10px 12px; border-radius: 10px; border: 1px solid #263a55; background: #0d1726; color: #dbe8f7; }
+.digest-change:hover { border-color: #406181; background: #111e30; }
+.digest-change.attention { border-color: #3f5877; }
+.digest-change.attention > svg { color: #7dd3fc; }
+.digest-change.info > svg { color: #a8b6c8; }
+.digest-change-main { display: grid; gap: 2px; min-width: 0; }
+.digest-change-main strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.digest-change-main small { color: #86a5c5; font-size: 9px; letter-spacing: .04em; }
+.digest-evidence { color: #aabbd0; font-size: 11px; }
+.digest-empty { display: flex; gap: 10px; align-items: flex-start; padding: 12px; border: 1px dashed #344965; border-radius: 10px; color: #a9bbd1; }
+.digest-empty > div { display: grid; gap: 3px; }
+.digest-empty strong { color: #dce9f8; }
+.digest-empty span { font-size: 12px; line-height: 1.45; }
+.digest-pending .digest-empty > svg { color: #fde68a; }
 @media (max-width: 1050px) {
   .research-queue-row { grid-template-columns: 42px 42px minmax(0, 1fr) auto; }
   .queue-reasons { grid-column: 3 / -1; justify-content: flex-start; max-width: none; }
   .queue-estimate, .queue-pack { display: none; }
+  .digest-change { grid-template-columns: 20px minmax(0, 1fr); }
+  .digest-evidence { grid-column: 2; }
 }
