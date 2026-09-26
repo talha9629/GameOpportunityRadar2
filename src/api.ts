@@ -19,6 +19,14 @@ import {
   type SavedDossierPayload,
   type SavedDossierSummary,
 } from './saved';
+import {
+  SavedReviewPayloadSchema,
+  SavedReviewSummaryRowSchema,
+  SavedReviewSummarySchema,
+  type ReviewSampleAnalysis,
+  type SavedReviewPayload,
+  type SavedReviewSummary,
+} from './reviews';
 import { hasSupabaseConfig, supabase } from './lib/supabase';
 
 function requireSupabase() {
@@ -116,4 +124,53 @@ export async function loadCompetitorMap(primaryStoreId: string): Promise<Competi
   if (error) throw error;
   if (!data) return null;
   return CompetitorMapPayloadSchema.parse(data);
+}
+
+export async function saveReviewSample(
+  label: string,
+  storeId: string,
+  analysis: ReviewSampleAnalysis,
+): Promise<string> {
+  const client = await requireOwner();
+  const trimmedLabel = label.trim();
+  if (!trimmedLabel) throw new Error('A sample label is required before saving.');
+  const { data, error } = await client.rpc('save_review_sample', {
+    p_label: trimmedLabel,
+    p_store_id: storeId.trim() || null,
+    p_entries: analysis.entries,
+    p_clusters: analysis.clusters,
+    p_analysis_method: analysis.analysisMethod,
+  });
+  if (error) throw error;
+  if (typeof data !== 'string' || data.length < 10) throw new Error('Review sample save completed without a valid sample ID.');
+  return data;
+}
+
+export async function listReviewSamples(): Promise<SavedReviewSummary[]> {
+  const client = requireSupabase();
+  const { data: userData, error: userError } = await client.auth.getUser();
+  if (userError || !userData.user) return [];
+  const { data, error } = await client.rpc('list_review_samples');
+  if (error) throw error;
+  return (Array.isArray(data) ? data : []).map((raw) => {
+    const row = SavedReviewSummaryRowSchema.parse(raw);
+    return SavedReviewSummarySchema.parse({
+      sampleId: row.sample_id,
+      label: row.label,
+      canonicalName: row.canonical_name,
+      storeId: row.store_id,
+      analysisMethod: row.analysis_method,
+      entryCount: row.entry_count,
+      createdAt: row.created_at,
+    });
+  });
+}
+
+export async function loadReviewSample(sampleId: string): Promise<SavedReviewPayload> {
+  const client = await requireOwner();
+  const parsedId = SavedReviewSummarySchema.shape.sampleId.parse(sampleId);
+  const { data, error } = await client.rpc('load_review_sample', { p_sample_id: parsedId });
+  if (error) throw error;
+  if (!data) throw new Error('Saved review sample was not found or is not accessible to this owner.');
+  return SavedReviewPayloadSchema.parse(data);
 }
