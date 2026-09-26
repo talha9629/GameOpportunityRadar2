@@ -1,5 +1,10 @@
 import { Clock3, Database, SearchCheck, Users, Video } from 'lucide-react';
 import type { VerificationCaptureSession, VerificationQueue, VerificationTask } from './verificationQueue';
+import {
+  evidenceCountForSession,
+  latestEvidenceForSession,
+  type VerificationSessionEvidence,
+} from './verificationEvidence';
 import './verificationQueue.css';
 
 function TaskIcon({ task }: { task: VerificationTask }) {
@@ -19,41 +24,57 @@ function stateLabel(task: VerificationTask) {
 
 function CaptureSession({
   session,
+  evidence,
   onDeepVerify,
 }: {
   session: VerificationCaptureSession;
+  evidence: VerificationSessionEvidence[];
   onDeepVerify: (session: VerificationCaptureSession) => void;
 }) {
-  return <div className={`verification-session impact-${session.impact}`}>
+  const latest = latestEvidenceForSession(evidence, session.sessionId);
+  const evidenceCount = evidenceCountForSession(evidence, session.sessionId);
+
+  return <div className={`verification-session impact-${session.impact} ${latest ? 'has-evidence' : ''}`}>
     <div className="verification-order">S{session.sessionOrder}</div>
     <div className="verification-icon"><Video size={16} /></div>
     <div className="verification-copy">
-      <div className="verification-title"><strong>{session.name}</strong><span>ONE CAPTURE · {session.taskCount} GAPS</span></div>
-      <b>{session.actionLabel}</b>
+      <div className="verification-title">
+        <strong>{session.name}</strong>
+        <span>{latest ? `EVIDENCE COLLECTED · ${evidenceCount} SOURCE${evidenceCount === 1 ? '' : 'S'}` : `ONE CAPTURE · ${session.taskCount} GAPS`}</span>
+      </div>
+      <b>{latest ? 'Source saved; evidence review still required' : session.actionLabel}</b>
       <ul className="verification-session-unknowns">
         {session.unknowns.map((unknown, index) => <li key={session.taskIds[index]}>{unknown}</li>)}
       </ul>
-      <small>{session.why}</small>
+      <small>{latest
+        ? `Latest linked source saved ${new Date(latest.createdAt).toLocaleString()}. Saving a source does not establish that any listed claim is supported or disproven.`
+        : session.why}</small>
     </div>
     <div className="verification-action">
       <span>{session.impact} impact</span>
-      <button onClick={() => onDeepVerify(session)}>Open Deep Verify</button>
+      <button onClick={() => onDeepVerify(session)}>{latest ? 'Review / add evidence' : 'Collect evidence'}</button>
+      {latest && <em>{latest.sourceType === 'upload' ? 'Private upload' : 'YouTube source'} · {latest.status.replaceAll('_', ' ')}</em>}
     </div>
   </div>;
 }
 
 export function VerificationQueuePanel({
   queue,
+  evidence,
+  evidenceError = null,
   onDeepVerify,
   onCompetitors,
 }: {
   queue: VerificationQueue;
+  evidence: VerificationSessionEvidence[];
+  evidenceError?: string | null;
   onDeepVerify: (session: VerificationCaptureSession) => void;
   onCompetitors: () => void;
 }) {
   const nonVideoActionable = queue.tasks
     .filter((task) => task.evidenceType !== 'deep_verify_video' && task.automationState !== 'optional_external')
     .slice(0, 12);
+  const sessionsWithEvidence = queue.captureSessions.filter((session) => evidenceCountForSession(evidence, session.sessionId) > 0).length;
 
   return <section className="panel verification-queue-panel">
     <div className="section-heading">
@@ -67,17 +88,20 @@ export function VerificationQueuePanel({
     <div className="verification-summary">
       <span><b>{queue.summary.captureSessionCount}</b> capture sessions</span>
       <span><b>{queue.summary.groupedEvidenceTaskCount}</b> gameplay gaps covered</span>
+      <span><b>{sessionsWithEvidence}</b> sessions with saved evidence</span>
       <span><b>{queue.summary.readyForHumanReview}</b> human-review</span>
       <span><b>{queue.summary.autoWaiting}</b> automated waiting</span>
       <span><b>{queue.summary.optionalExternal}</b> optional external</span>
     </div>
 
+    {evidenceError && <div className="verification-progress-warning">Generated verification work is still available, but owner evidence progress could not be loaded: {evidenceError}</div>}
+
     <div className="verification-session-heading">
-      <div><strong>Evidence collection sessions</strong><span>One representative gameplay/menu capture can be reviewed against every atomic gap listed in that session.</span></div>
-      <b>{queue.captureSessions.length} human capture actions</b>
+      <div><strong>Evidence collection sessions</strong><span>One representative gameplay/menu capture can be reviewed against every atomic gap listed in that session. Saved evidence is owner-scoped and does not alter the generated queue.</span></div>
+      <b>{queue.captureSessions.length - sessionsWithEvidence} capture action{queue.captureSessions.length - sessionsWithEvidence === 1 ? '' : 's'} still need evidence</b>
     </div>
     <div className="verification-list verification-session-list">
-      {queue.captureSessions.map((session) => <CaptureSession key={session.sessionId} session={session} onDeepVerify={onDeepVerify} />)}
+      {queue.captureSessions.map((session) => <CaptureSession key={session.sessionId} session={session} evidence={evidence} onDeepVerify={onDeepVerify} />)}
     </div>
 
     <div className="verification-session-heading secondary">
@@ -101,6 +125,6 @@ export function VerificationQueuePanel({
       </div>)}
     </div>
 
-    <p className="verification-boundary">Capture sessions reduce duplicate work only. They do not collapse or resolve the underlying unknowns: all {queue.summary.taskCount} atomic tasks remain canonical, Deep Verify still needs source footage, competitor relationships still need human confirmation, and rank-history tasks mature only when exact dated observations exist.</p>
+    <p className="verification-boundary">Evidence collected means only that an owner-linked source exists for the exact capture session. It does not resolve, support, or disprove the underlying unknowns. All {queue.summary.taskCount} atomic tasks remain canonical until their evidence is explicitly reviewed.</p>
   </section>;
 }
