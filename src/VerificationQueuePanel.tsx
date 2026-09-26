@@ -1,5 +1,6 @@
 import { Clock3, Database, SearchCheck, Users, Video } from 'lucide-react';
 import type { VerificationQueue, VerificationTask } from './verificationQueue';
+import './verificationQueue.css';
 
 function TaskIcon({ task }: { task: VerificationTask }) {
   if (task.evidenceType === 'deep_verify_video') return <Video size={16} />;
