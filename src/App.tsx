@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { User } from '@supabase/supabase-js';
 import { Analyze } from './Analyze';
 import { Competitors } from './Competitors';
 import { Today } from './Today';
+import { OwnerAccess } from './OwnerAccess';
+import { getOwnerUser, subscribeOwnerAuth } from './auth';
 
 type View = 'today' | 'analyze' | 'competitors';
 
 export function App() {
   const [view, setView] = useState<View>('today');
   const [analyzeSeed, setAnalyzeSeed] = useState<string | null>(null);
+  const [owner, setOwner] = useState<User | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    void getOwnerUser().then((user) => {
+      if (active) setOwner(user);
+    });
+    const unsubscribe = subscribeOwnerAuth((user) => setOwner(user));
+    return () => {
+      active = false;
+      unsubscribe();
+    };
+  }, []);
 
   function openAnalyze(appId?: string) {
     setAnalyzeSeed(appId ?? null);
@@ -27,9 +43,10 @@ export function App() {
           <button className={view === 'competitors' ? 'active' : ''} onClick={() => setView('competitors')}>Competitors</button>
           <button disabled title="Next milestone">Deep Verify</button>
         </div>
+        <OwnerAccess user={owner} />
       </nav>
       {view === 'today' && <Today onAnalyze={(appId) => openAnalyze(appId)} />}
-      {view === 'analyze' && <Analyze key={analyzeSeed ?? 'manual'} initialInput={analyzeSeed ?? ''} />}
+      {view === 'analyze' && <Analyze key={analyzeSeed ?? 'manual'} initialInput={analyzeSeed ?? ''} ownerEmail={owner?.email ?? null} />}
       {view === 'competitors' && <Competitors />}
     </main>
   );
