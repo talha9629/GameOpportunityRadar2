@@ -8,11 +8,13 @@ import { ReviewSamples } from './ReviewSamples';
 import { SavedDossiers } from './SavedDossiers';
 import { Today } from './Today';
 import { VerificationQueuePage } from './VerificationQueuePage';
+import type { VerificationCaptureSession } from './verificationQueue';
 import { OwnerAccess } from './OwnerAccess';
 import { getOwnerUser, subscribeOwnerAuth } from './auth';
 
 type View = 'today' | 'verification' | 'analyze' | 'competitors' | 'reviews' | 'deep-verify' | 'policy' | 'saved';
-type DeepVerifySeed = { appId: string; name: string } | null;
+
+type DeepVerifySeed = VerificationCaptureSession | null;
 
 export function App() {
   const [view, setView] = useState<View>('today');
@@ -45,8 +47,8 @@ export function App() {
     setView('analyze');
   }
 
-  function openDeepVerify(appId: string, name: string) {
-    setDeepVerifySeed({ appId, name });
+  function openDeepVerify(session: VerificationCaptureSession) {
+    setDeepVerifySeed(session);
     setView('deep-verify');
   }
 
@@ -76,12 +78,22 @@ export function App() {
       {view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
       {view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
       {view === 'deep-verify' && <>
-        {deepVerifySeed && <div className="history-banner"><strong>Verification target: {deepVerifySeed.name}</strong><span>Apple ID {deepVerifySeed.appId} and the evidence label are prefilled below.</span></div>}
+        {deepVerifySeed && <div className="history-banner">
+          <strong>Verification session S{deepVerifySeed.sessionOrder}: {deepVerifySeed.name}</strong>
+          <span>Apple ID {deepVerifySeed.appId} · {deepVerifySeed.taskCount} atomic evidence gap{deepVerifySeed.taskCount === 1 ? '' : 's'} will be linked to this capture when it is saved.</span>
+        </div>}
         <DeepVerifyWorkspace
-          key={deepVerifySeed ? `${deepVerifySeed.appId}:${deepVerifySeed.name}` : 'manual'}
+          key={deepVerifySeed ? `${deepVerifySeed.sessionId}:${deepVerifySeed.source.researchGeneratedAt}` : 'manual'}
           ownerEmail={owner?.email ?? null}
           initialStoreId={deepVerifySeed?.appId ?? ''}
           initialLabel={deepVerifySeed ? `${deepVerifySeed.name} gameplay verification` : ''}
+          verificationSession={deepVerifySeed ? {
+            sessionId: deepVerifySeed.sessionId,
+            taskIds: deepVerifySeed.taskIds,
+            unknowns: deepVerifySeed.unknowns,
+            categories: deepVerifySeed.categories,
+            researchGeneratedAt: deepVerifySeed.source.researchGeneratedAt,
+          } : null}
         />
       </>}
       {view === 'policy' && <PolicyWatch ownerEmail={owner?.email ?? null} />}

@@ -24,6 +24,29 @@ export const DeepVerifyStatusSchema = z.enum([
 ]);
 export type DeepVerifyStatus = z.infer<typeof DeepVerifyStatusSchema>;
 
+export const DeepVerifyVerificationCategorySchema = z.enum([
+  'gameplay_mechanic',
+  'monetization_placement',
+  'meta_progression',
+  'other_unknown',
+]);
+
+export const DeepVerifyVerificationSessionSchema = z.object({
+  sessionId: z.string().regex(/^[a-f0-9]{24}$/),
+  taskIds: z.array(z.string().regex(/^[a-f0-9]{24}$/)).min(1).max(8),
+  unknowns: z.array(z.string().trim().min(15).max(2000)).min(1).max(8),
+  categories: z.array(DeepVerifyVerificationCategorySchema).min(1).max(8),
+  researchGeneratedAt: z.string().datetime({ offset: true }),
+}).superRefine((value, context) => {
+  if (value.taskIds.length !== value.unknowns.length || value.taskIds.length !== value.categories.length) {
+    context.addIssue({ code: z.ZodIssueCode.custom, path: ['taskIds'], message: 'Verification task, unknown, and category counts must match.' });
+  }
+  if (new Set(value.taskIds).size !== value.taskIds.length) {
+    context.addIssue({ code: z.ZodIssueCode.custom, path: ['taskIds'], message: 'Verification task IDs must be unique.' });
+  }
+});
+export type DeepVerifyVerificationSession = z.infer<typeof DeepVerifyVerificationSessionSchema>;
+
 export const DeepVerifyVideoSummaryRowSchema = z.object({
   video_id: z.string().uuid(),
   label: z.string().min(1),
@@ -114,6 +137,7 @@ export const DeepVerifyVideoPayloadSchema = z.object({
   deleteAfter: z.string().nullable(),
   sourceDeletedAt: z.string().nullable().optional(),
   createdAt: z.string(),
+  verificationSession: DeepVerifyVerificationSessionSchema.nullable().optional(),
   latestAnalysis: DeepVerifyLatestAnalysisSchema.nullable().optional(),
   events: z.array(DeepVerifyEventSchema),
 });
