@@ -38,6 +38,7 @@ import {
   purgeExpiredDeepVerifySources,
   runDeepVerifyAnalysis,
 } from './deepVerifyProvider';
+import { VerificationResolutionPanel } from './VerificationResolutionPanel';
 import type { Coverage, Interpretation, ReviewState } from './domain';
 import './deepVerify.css';
 import './deepVerifyProvider.css';
@@ -542,6 +543,8 @@ export function DeepVerifyWorkspace({
               <EventReviewButtons state={event.reviewState} busy={eventBusyId === event.eventId || analyzing} onReview={(state) => void reviewEvent(event.eventId, state)} />
             </article>)}</div>}
       </section>
+
+      {selected.verificationSession && <VerificationResolutionPanel video={selected} />}
 
       {selected.sourceType === 'upload' && (selected.sizeBytes ?? 0) > GEMINI_DIRECT_URL_MAX_BYTES && <div className="deep-retention-note"><AlertTriangle size={18} /><span>Uploads between 100 MB and 500 MB are accepted as private evidence, but the current Gemini direct-URL path cannot analyze them. The next provider phase is a Files API worker; no result is fabricated in the meantime.</span></div>}
     </>}
