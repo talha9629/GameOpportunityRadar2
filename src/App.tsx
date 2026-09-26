@@ -8,7 +8,10 @@ import { ReviewSamples } from './ReviewSamples';
 import { SavedDossiers } from './SavedDossiers';
 import { Today } from './Today';
 import { VerificationQueuePage } from './VerificationQueuePage';
-import type { VerificationCaptureSession } from './verificationQueue';
+import { loadVerificationQueue, type VerificationCaptureSession } from './verificationQueue';
+import { latestEvidenceForSession } from './verificationEvidence';
+import { listVerificationSessionEvidence } from './verificationEvidenceApi';
+import { subscribeDeepVerifyRequests } from './navigation';
 import { OwnerAccess } from './OwnerAccess';
 import { getOwnerUser, subscribeOwnerAuth } from './auth';
 
@@ -38,6 +41,10 @@ export function App() {
     };
   }, []);
 
+  useEffect(() => subscribeDeepVerifyRequests((appId) => {
+    void openDeepVerifyForApp(appId);
+  }), []);
+
   function openAnalyze(appId?: string) {
     setSavedRunId(null);
     setAnalyzeSeed(appId ?? null);
@@ -53,6 +60,31 @@ export function App() {
   function openDeepVerify(session: VerificationCaptureSession, videoId?: string) {
     setDeepVerifySeed({ session, initialVideoId: videoId ?? null });
     setView('deep-verify');
+  }
+
+  async function openDeepVerifyForApp(appId: string) {
+    try {
+      const queue = await loadVerificationQueue();
+      const session = queue.captureSessions.find((item) => item.appId === appId);
+      if (!session) {
+        setView('verification');
+        return;
+      }
+
+      let videoId: string | undefined;
+      try {
+        const evidence = await listVerificationSessionEvidence([session.sessionId]);
+        videoId = latestEvidenceForSession(evidence, session.sessionId)?.videoId;
+      } catch {
+        // Evidence lookup is an owner-only enhancement. Collection mode stays reachable
+        // even if the user is signed out or owner evidence is temporarily unavailable.
+      }
+      openDeepVerify(session, videoId);
+    } catch {
+      // Generated queue failure should not strand the user on Today. The Verify Queue
+      // surface can show its own factual loading/error state and retry path.
+      setView('verification');
+    }
   }
 
   const deepVerifySession = deepVerifySeed?.session ?? null;
