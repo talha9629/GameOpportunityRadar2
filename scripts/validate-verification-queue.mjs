@@ -14,8 +14,10 @@ if (queue.schemaVersion !== 1) throw new Error('Unsupported verification queue s
 if (queue.researchGeneratedAt !== research.generatedAt) throw new Error('Verification queue is not derived from the current research queue.');
 if (queue.radarDate !== research.radarDate) throw new Error('Verification queue radarDate mismatch.');
 if (!Array.isArray(queue.tasks) || queue.tasks.length > 64) throw new Error('Invalid verification task count.');
+if (!Array.isArray(queue.captureSessions) || queue.captureSessions.length > 8) throw new Error('Invalid capture session count.');
 if (queue.method?.name !== 'explicit_unknown_evidence_router_v1') throw new Error('Unexpected verification routing method.');
 if (queue.method?.taskCap !== 64) throw new Error('Verification taskCap must be 64.');
+if (queue.method?.sessionGrouping?.name !== 'candidate_deep_verify_capture_session_v1') throw new Error('Unexpected capture session grouping method.');
 
 const allowedEvidenceTypes = new Set(['deep_verify_video', 'competitor_map', 'exact_rank_history', 'third_party_estimate', 'manual_evidence']);
 const allowedStates = new Set(['ready_for_human_evidence', 'ready_for_human_review', 'auto_waiting', 'optional_external']);
@@ -62,6 +64,46 @@ for (const task of queue.tasks) {
   }
 }
 
+const tasksById = new Map(queue.tasks.map((task) => [task.taskId, task]));
+const expectedVideoTasks = queue.tasks.filter((task) => task.evidenceType === 'deep_verify_video');
+const expectedSessionApps = new Set(expectedVideoTasks.map((task) => task.appId));
+const sessionIds = new Set();
+const groupedVideoTaskIds = new Set();
+let priorSessionOrder = 0;
+
+for (const session of queue.captureSessions) {
+  if (!/^[a-f0-9]{24}$/.test(session.sessionId) || sessionIds.has(session.sessionId)) throw new Error(`Invalid/duplicate capture session id: ${session.sessionId}`);
+  sessionIds.add(session.sessionId);
+  if (!Number.isInteger(session.sessionOrder) || session.sessionOrder !== priorSessionOrder + 1) throw new Error('Capture session order must be contiguous.');
+  priorSessionOrder = session.sessionOrder;
+  if (!candidateById.has(session.appId)) throw new Error(`Capture session references out-of-scope candidate ${session.appId}`);
+  if (session.evidenceType !== 'deep_verify_video' || session.evidenceMode !== 'user_capture_or_public_youtube') throw new Error(`Capture session ${session.sessionId} must use Deep Verify video evidence.`);
+  if (session.automationState !== 'ready_for_human_evidence') throw new Error(`Capture session ${session.sessionId} cannot resolve itself.`);
+  if (!allowedImpacts.has(session.impact)) throw new Error(`Capture session ${session.sessionId} has invalid impact.`);
+  if (!Array.isArray(session.taskIds) || session.taskIds.length === 0) throw new Error(`Capture session ${session.sessionId} has no atomic tasks.`);
+  if (session.taskCount !== session.taskIds.length) throw new Error(`Capture session ${session.sessionId} taskCount mismatch.`);
+  if (!Array.isArray(session.unknowns) || session.unknowns.length !== session.taskIds.length) throw new Error(`Capture session ${session.sessionId} unknown list mismatch.`);
+  if (!Array.isArray(session.categories) || session.categories.length !== session.taskIds.length) throw new Error(`Capture session ${session.sessionId} category list mismatch.`);
+  if (session.source?.researchGeneratedAt !== research.generatedAt) throw new Error(`Capture session ${session.sessionId} has stale research provenance.`);
+
+  for (let index = 0; index < session.taskIds.length; index += 1) {
+    const taskId = session.taskIds[index];
+    if (groupedVideoTaskIds.has(taskId)) throw new Error(`Video task ${taskId} appears in more than one capture session.`);
+    const task = tasksById.get(taskId);
+    if (!task) throw new Error(`Capture session ${session.sessionId} references missing task ${taskId}.`);
+    if (task.appId !== session.appId || task.evidenceType !== 'deep_verify_video') throw new Error(`Capture session ${session.sessionId} mixes candidates or evidence types.`);
+    if (session.unknowns[index] !== task.unknown) throw new Error(`Capture session ${session.sessionId} unknown is not the exact atomic task unknown.`);
+    if (session.categories[index] !== task.category) throw new Error(`Capture session ${session.sessionId} category mismatch for ${taskId}.`);
+    groupedVideoTaskIds.add(taskId);
+  }
+}
+
+if (queue.captureSessions.length !== expectedSessionApps.size) throw new Error(`Expected ${expectedSessionApps.size} capture session(s), found ${queue.captureSessions.length}.`);
+if (groupedVideoTaskIds.size !== expectedVideoTasks.length) throw new Error(`Capture sessions cover ${groupedVideoTaskIds.size}/${expectedVideoTasks.length} Deep Verify tasks.`);
+for (const task of expectedVideoTasks) {
+  if (!groupedVideoTaskIds.has(task.taskId)) throw new Error(`Deep Verify task ${task.taskId} was not grouped into a capture session.`);
+}
+
 const expected = queue.summary ?? {};
 const actual = {
   readyForHumanEvidence: queue.tasks.filter((task) => task.automationState === 'ready_for_human_evidence').length,
@@ -74,8 +116,10 @@ if (expected.taskCount !== queue.tasks.length) throw new Error('Verification sum
 if (expected.omittedTaskCount !== expected.rawTaskCount - expected.taskCount) throw new Error('Verification summary omittedTaskCount mismatch.');
 if (expected.omittedTaskCount !== 0) throw new Error(`Verification queue omitted ${expected.omittedTaskCount} explicit unknown(s); increase the safety cap rather than silently dropping them.`);
 if (routedUnknownKeys.size !== expectedUnknownCount) throw new Error(`Only ${routedUnknownKeys.size}/${expectedUnknownCount} explicit unknowns were routed.`);
+if (expected.captureSessionCount !== queue.captureSessions.length) throw new Error('Verification summary captureSessionCount mismatch.');
+if (expected.groupedEvidenceTaskCount !== expectedVideoTasks.length) throw new Error('Verification summary groupedEvidenceTaskCount mismatch.');
 for (const [key, value] of Object.entries(actual)) {
   if (expected[key] !== value) throw new Error(`Verification summary ${key} mismatch.`);
 }
 
-console.log(`[verification-queue] validation PASS · ${queue.tasks.length}/${expectedUnknownCount} explicit unknowns routed · omitted 0 · ${actual.readyForHumanEvidence} evidence-ready · ${actual.readyForHumanReview} human-review · ${actual.autoWaiting} auto-waiting · ${actual.optionalExternal} optional`);
+console.log(`[verification-queue] validation PASS · ${queue.tasks.length}/${expectedUnknownCount} explicit unknowns routed · omitted 0 · ${queue.captureSessions.length} capture session(s) cover ${expectedVideoTasks.length} video task(s) · ${actual.readyForHumanReview} human-review · ${actual.autoWaiting} auto-waiting · ${actual.optionalExternal} optional`);

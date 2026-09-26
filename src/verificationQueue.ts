@@ -31,6 +31,29 @@ export const VerificationTaskSchema = z.object({
   }),
 });
 
+export const VerificationCaptureSessionSchema = z.object({
+  sessionOrder: z.number().int().positive(),
+  sessionId: z.string().regex(/^[a-f0-9]{24}$/),
+  appId: z.string().min(5),
+  name: z.string().min(1),
+  queueRank: z.number().int().positive(),
+  researchPriority: z.number().int().min(0).max(100),
+  evidenceType: z.literal('deep_verify_video'),
+  evidenceMode: z.literal('user_capture_or_public_youtube'),
+  automationState: z.literal('ready_for_human_evidence'),
+  impact: z.enum(['critical', 'high']),
+  actionLabel: z.string().min(3),
+  why: z.string().min(30),
+  taskCount: z.number().int().positive(),
+  taskIds: z.array(z.string().regex(/^[a-f0-9]{24}$/)).min(1),
+  unknowns: z.array(z.string().min(15)).min(1),
+  categories: z.array(z.enum(['gameplay_mechanic', 'monetization_placement', 'meta_progression', 'other_unknown'])).min(1),
+  source: z.object({
+    researchGeneratedAt: z.string(),
+    analysisObservedAt: z.string().nullable(),
+  }),
+});
+
 export const VerificationQueueSchema = z.object({
   schemaVersion: z.literal(1),
   generatedAt: z.string(),
@@ -42,6 +65,10 @@ export const VerificationQueueSchema = z.object({
     candidateCap: z.number().int().positive().max(8),
     taskCap: z.number().int().positive().max(64),
     ordering: z.array(z.string()).min(2),
+    sessionGrouping: z.object({
+      name: z.literal('candidate_deep_verify_capture_session_v1'),
+      rule: z.string().min(30),
+    }),
     prohibitedShortcuts: z.array(z.string()).min(4),
   }),
   summary: z.object({
@@ -53,11 +80,15 @@ export const VerificationQueueSchema = z.object({
     readyForHumanReview: z.number().int().nonnegative(),
     autoWaiting: z.number().int().nonnegative(),
     optionalExternal: z.number().int().nonnegative(),
+    captureSessionCount: z.number().int().nonnegative().max(8),
+    groupedEvidenceTaskCount: z.number().int().nonnegative().max(64),
   }),
+  captureSessions: z.array(VerificationCaptureSessionSchema).max(8),
   tasks: z.array(VerificationTaskSchema).max(64),
 });
 
 export type VerificationTask = z.infer<typeof VerificationTaskSchema>;
+export type VerificationCaptureSession = z.infer<typeof VerificationCaptureSessionSchema>;
 export type VerificationQueue = z.infer<typeof VerificationQueueSchema>;
 
 export async function loadVerificationQueue(): Promise<VerificationQueue> {
