@@ -372,16 +372,37 @@ export async function reviewDeepVerifyEvent(eventId: string, state: ReviewState)
 
 export async function deleteDeepVerifyEvent(eventId: string): Promise<void> {
   const client = await requireOwner();
+  const { count: resolutionCount, error: resolutionError } = await client
+    .from('verification_task_resolutions')
+    .select('id', { count: 'exact', head: true })
+    .eq('source_event_id', eventId);
+  if (resolutionError) throw resolutionError;
+  if ((resolutionCount ?? 0) > 0) {
+    throw new Error('This timestamped finding is locked because a human verification-task decision cites it as provenance. Keep the cited finding instead of deleting it.');
+  }
+
   const { error } = await client.from('deep_verify_events').delete().eq('id', eventId);
   if (error) throw error;
 }
 
 export async function deleteDeepVerifyVideo(video: DeepVerifyVideoPayload): Promise<void> {
   const client = await requireOwner();
-  if (video.sourceType === 'upload' && video.storagePath) {
-    const { error: storageError } = await client.storage.from(DEEP_VERIFY_BUCKET).remove([video.storagePath]);
-    if (storageError) throw storageError;
+  const { count: resolutionCount, error: resolutionError } = await client
+    .from('verification_task_resolutions')
+    .select('id', { count: 'exact', head: true })
+    .eq('source_video_id', video.videoId);
+  if (resolutionError) throw resolutionError;
+  if ((resolutionCount ?? 0) > 0) {
+    throw new Error('This evidence record is locked because a human verification-task decision cites it as provenance. Keep the cited evidence record instead of deleting it.');
   }
+
   const { error } = await client.from('deep_verify_videos').delete().eq('id', video.videoId);
   if (error) throw error;
+
+  if (video.sourceType === 'upload' && video.storagePath && !video.sourceDeletedAt) {
+    const { error: storageError } = await client.storage.from(DEEP_VERIFY_BUCKET).remove([video.storagePath]);
+    if (storageError) {
+      throw new Error(`Evidence record deleted, but private source-file cleanup failed: ${storageError.message}`);
+    }
+  }
 }
