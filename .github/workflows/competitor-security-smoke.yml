@@ -1,0 +1,40 @@
+name: Competitor map security smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/competitor-security-smoke.yml'
+      - 'supabase/migrations/010_competitor_map_persistence.sql'
+      - 'src/api.ts'
+      - 'src/competitor.ts'
+      - 'src/competitor.test.ts'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  anonymous-write-denied:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reject anonymous competitor map save
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENDPOINT='https://gajkwzgxfjlvdbzrvdqn.supabase.co/rest/v1/rpc/save_competitor_map'
+          KEY='sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg'
+          STATUS=$(curl --silent --show-error \
+            -X POST "$ENDPOINT" \
+            -H 'Content-Type: application/json' \
+            -H "apikey: $KEY" \
+            --data '{"p_primary":{},"p_competitors":[]}' \
+            -o response.json \
+            -w '%{http_code}')
+          if [[ "$STATUS" =~ ^2 ]]; then
+            echo 'Anonymous competitor map save unexpectedly succeeded.' >&2
+            cat response.json >&2
+            exit 1
+          fi
+          echo "Anonymous save denied as expected (HTTP $STATUS)."
+          cat response.json
