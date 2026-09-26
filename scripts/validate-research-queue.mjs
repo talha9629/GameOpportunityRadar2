@@ -41,6 +41,18 @@ for (let index = 0; index < (queue.candidates ?? []).length; index += 1) {
     assert(candidate.appBrainEstimate.sourceOrigin === 'third_party_estimate', `${candidate.appId} AppBrain data must be labeled third_party_estimate`);
     assert(candidate.appBrainEstimate.provider === 'AppBrain', `${candidate.appId} AppBrain provider label missing`);
   }
+  if (candidate.analysisEvidence != null) {
+    const pack = candidate.analysisEvidence;
+    assert(pack.source === 'live_analyze_game', `${candidate.appId} evidence pack has wrong source`);
+    assert(pack.sourceOrigin === 'official_public', `${candidate.appId} evidence pack must remain official_public`);
+    assert(typeof pack.observedAt === 'string' && !Number.isNaN(Date.parse(pack.observedAt)), `${candidate.appId} evidence pack observedAt invalid`);
+    assert(Number.isInteger(pack.findingCount) && pack.findingCount >= 5, `${candidate.appId} evidence pack has too few findings`);
+    assert(Number.isInteger(pack.unknownCount) && pack.unknownCount >= 5, `${candidate.appId} evidence pack must preserve explicit unknowns`);
+    assert(Array.isArray(pack.findings) && pack.findings.length === pack.findingCount, `${candidate.appId} evidence pack finding count mismatch`);
+    assert(Array.isArray(pack.unknowns) && pack.unknowns.length === pack.unknownCount, `${candidate.appId} evidence pack unknown count mismatch`);
+    assert(pack.findings.every((finding) => typeof finding.evidenceLabel === 'string' && finding.evidenceLabel.length >= 10), `${candidate.appId} evidence pack contains finding without evidence label`);
+    assert(!/downloads? estimated from rank|revenue estimated from rank|percent of players/i.test(JSON.stringify(pack)), `${candidate.appId} evidence pack contains forbidden performance/population claim`);
+  }
 }
 
 const appBrain = queue.sources?.appBrain;
@@ -53,6 +65,15 @@ if (appBrain?.status === 'unconfigured') {
 
 assert(['complete', 'partial'].includes(queue.sources?.appleCharts?.status), 'Apple chart source must be complete or partial');
 assert(['complete', 'partial', 'failed'].includes(queue.sources?.appleLookup?.status), 'invalid Apple lookup status');
+const liveAnalyzer = queue.sources?.liveAnalyzer;
+if (liveAnalyzer != null) {
+  assert(['disabled', 'complete', 'partial', 'failed'].includes(liveAnalyzer.status), 'invalid liveAnalyzer source status');
+  assert(Number.isInteger(liveAnalyzer.cap) && liveAnalyzer.cap >= 0 && liveAnalyzer.cap <= 8, 'liveAnalyzer cap must be 0..8');
+  assert(Number.isInteger(liveAnalyzer.attempted) && liveAnalyzer.attempted >= 0 && liveAnalyzer.attempted <= liveAnalyzer.cap, 'liveAnalyzer attempted count invalid');
+  assert(Number.isInteger(liveAnalyzer.succeeded) && liveAnalyzer.succeeded >= 0 && liveAnalyzer.succeeded <= liveAnalyzer.attempted, 'liveAnalyzer succeeded count invalid');
+  const packCount = (queue.candidates ?? []).filter((candidate) => candidate.analysisEvidence != null).length;
+  assert(packCount === liveAnalyzer.succeeded, 'liveAnalyzer succeeded count must equal persisted evidence packs');
+}
 
 if (errors.length) {
   console.error('[research-queue] validation FAILED');
@@ -60,4 +81,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`[research-queue] validation PASS · ${queue.candidates.length} candidates · AppBrain ${appBrain.status} · ${appBrain.creditsUsedThisRun}/${appBrain.dailyCreditCap} credits`);
+console.log(`[research-queue] validation PASS · ${queue.candidates.length} candidates · AppBrain ${appBrain.status} · ${appBrain.creditsUsedThisRun}/${appBrain.dailyCreditCap} credits · evidence packs ${liveAnalyzer?.succeeded ?? 0}/${liveAnalyzer?.attempted ?? 0}`);
