@@ -1,5 +1,6 @@
-import { AlertTriangle, CheckCircle2, Clock3, DatabaseZap, Search, ShieldAlert } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, Clock3, DatabaseZap, Search, ShieldAlert, Video } from 'lucide-react';
 import type { DataHealth } from './dataHealth';
+import { requestDeepVerifyByAppId } from './navigation';
 
 function StateIcon({ state }: { state: string }) {
   if (state === 'healthy') return <CheckCircle2 size={16} />;
@@ -24,9 +25,15 @@ export function DataHealthPanel({ health, onAnalyze }: { health: DataHealth; onA
     </div>
     <div className="health-actions">
       <div><strong>Next factual actions</strong><span>Derived from missing or degraded evidence—not from an AI success prediction.</span></div>
-      {health.recommendedActions.length === 0 ? <span className="health-no-action">No evidence-pipeline action is currently required.</span> : health.recommendedActions.slice(0, 4).map((action) => action.appId
-        ? <button key={`${action.action}-${action.appId}`} onClick={() => onAnalyze(action.appId!)}><Search size={14} /><span><b>{action.action.replaceAll('_', ' ')}</b><small>{action.name} · {action.why}</small></span></button>
-        : <div key={action.action} className="health-action-static"><span><b>{action.action.replaceAll('_', ' ')}</b><small>{action.why}</small></span></div>)}
+      {health.recommendedActions.length === 0 ? <span className="health-no-action">No evidence-pipeline action is currently required.</span> : health.recommendedActions.slice(0, 4).map((action) => {
+        if (action.appId && action.action === 'deep_verify_top_candidate') {
+          return <button key={`${action.action}-${action.appId}`} onClick={() => requestDeepVerifyByAppId(action.appId!)}><Video size={14} /><span><b>deep verify top candidate</b><small>{action.name} · {action.why}</small></span></button>;
+        }
+        if (action.appId) {
+          return <button key={`${action.action}-${action.appId}`} onClick={() => onAnalyze(action.appId!)}><Search size={14} /><span><b>{action.action.replaceAll('_', ' ')}</b><small>{action.name} · {action.why}</small></span></button>;
+        }
+        return <div key={action.action} className="health-action-static"><span><b>{action.action.replaceAll('_', ' ')}</b><small>{action.why}</small></span></div>;
+      })}
     </div>
   </section>;
 }
