@@ -3,19 +3,19 @@ import { GameplayDiscoverySchema, discoveryForSession } from './gameplayDiscover
 
 const sessionId = 'aaaaaaaaaaaaaaaaaaaaaaaa';
 
-function payload() {
+function payload(): Record<string, any> {
   return {
-    schemaVersion: 1 as const,
+    schemaVersion: 1,
     generatedAt: '2026-09-27T00:00:00.000Z',
     verificationGeneratedAt: '2026-09-26T23:59:00.000Z',
     statement: 'Public gameplay discovery proposes search candidates only. Search results are never verified evidence without Deep Verify and human review.',
     provider: {
-      name: 'Tavily' as const,
-      status: 'complete' as const,
-      sourceOrigin: 'third_party_public_search' as const,
-      sourceMode: 'assisted' as const,
-      searchDepth: 'basic' as const,
-      creditModel: 'basic_search_1_credit_per_request' as const,
+      name: 'Tavily',
+      status: 'complete',
+      sourceOrigin: 'third_party_public_search',
+      sourceMode: 'assisted',
+      searchDepth: 'basic',
+      creditModel: 'basic_search_1_credit_per_request',
       dailyCreditCap: 8,
       creditsUsedThisRun: 1,
       attemptedSessions: 1,
@@ -30,7 +30,7 @@ function payload() {
       queueRank: 1,
       query: '"Meowdoku!" gameplay walkthrough menu monetization progression',
       searchedAt: '2026-09-27T00:00:00.000Z',
-      status: 'found' as const,
+      status: 'found',
       error: null,
       candidates: [{
         rank: 1,
@@ -38,10 +38,10 @@ function payload() {
         title: 'Meowdoku gameplay',
         snippet: 'Gameplay result candidate.',
         score: 0.8,
-        domain: 'youtube.com' as const,
-        sourceOrigin: 'third_party_public' as const,
-        interpretation: 'search_candidate' as const,
-        reviewState: 'suggested' as const,
+        domain: 'youtube.com',
+        sourceOrigin: 'third_party_public',
+        interpretation: 'search_candidate',
+        reviewState: 'suggested',
       }],
     }],
   };
