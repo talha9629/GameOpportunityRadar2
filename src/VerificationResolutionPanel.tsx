@@ -42,6 +42,7 @@ export function VerificationResolutionPanel({ video }: { video: DeepVerifyVideoP
   }, [video.videoId, session?.sessionId]);
 
   if (!session) return null;
+  const resolvedSession = session;
 
   async function saveTask(
     index: number,
@@ -49,19 +50,19 @@ export function VerificationResolutionPanel({ video }: { video: DeepVerifyVideoP
     eventId: string | null,
     summary: string,
   ) {
-    const taskId = session.taskIds[index];
+    const taskId = resolvedSession.taskIds[index];
     setBusyTaskId(taskId);
     setError(null);
     setMessage(null);
     try {
       const saved = await saveVerificationTaskResolution({
         taskId,
-        sessionId: session.sessionId,
+        sessionId: resolvedSession.sessionId,
         sourceVideoId: video.videoId,
         sourceEventId: eventId,
-        unknownSnapshot: session.unknowns[index],
-        category: session.categories[index] as VerificationResolutionCategory,
-        researchGeneratedAt: session.researchGeneratedAt,
+        unknownSnapshot: resolvedSession.unknowns[index],
+        category: resolvedSession.categories[index] as VerificationResolutionCategory,
+        researchGeneratedAt: resolvedSession.researchGeneratedAt,
         state,
         summary,
       });
@@ -79,7 +80,7 @@ export function VerificationResolutionPanel({ video }: { video: DeepVerifyVideoP
     }
   }
 
-  const resolvedCount = session.taskIds.filter((taskId) => resolutionForTask(resolutions, taskId)?.state === 'resolved').length;
+  const resolvedCount = resolvedSession.taskIds.filter((taskId) => resolutionForTask(resolutions, taskId)?.state === 'resolved').length;
 
   return <section className="panel deep-resolution-panel">
     <div className="section-heading">
@@ -88,12 +89,12 @@ export function VerificationResolutionPanel({ video }: { video: DeepVerifyVideoP
         <h2>Close only what the reviewed evidence answers.</h2>
         <p>A saved source is not enough. Radar accepts a resolved task only when you explicitly choose a category-matched timestamped finding that is already human-confirmed.</p>
       </div>
-      <span>{resolvedCount}/{session.taskIds.length} resolved</span>
+      <span>{resolvedCount}/{resolvedSession.taskIds.length} resolved</span>
     </div>
 
     <div className="deep-resolution-list">
-      {session.taskIds.map((taskId, index) => {
-        const category = session.categories[index] as VerificationResolutionCategory;
+      {resolvedSession.taskIds.map((taskId, index) => {
+        const category = resolvedSession.categories[index] as VerificationResolutionCategory;
         const current = resolutionForTask(resolutions, taskId);
         const candidates = confirmedEventsForResolution(category, video.events);
         const busy = busyTaskId === taskId;
@@ -101,7 +102,7 @@ export function VerificationResolutionPanel({ video }: { video: DeepVerifyVideoP
           <div className="deep-event-top">
             <div>
               <span className="deep-time">#{index + 1}</span>
-              <strong>{session.unknowns[index]}</strong>
+              <strong>{resolvedSession.unknowns[index]}</strong>
             </div>
             <span className={current?.state === 'resolved' ? 'badge-human_confirmed' : 'badge-needs_more_evidence'}>
               {current?.state === 'resolved' ? 'resolved' : 'open'}
