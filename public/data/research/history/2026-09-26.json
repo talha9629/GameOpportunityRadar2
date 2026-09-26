@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T18:04:04.152Z",
+  "generatedAt": "2026-09-26T18:05:21.522Z",
   "radarDate": "2026-09-26",
-  "radarGeneratedAt": "2026-09-26T18:04:01.544Z",
+  "radarGeneratedAt": "2026-09-26T18:05:16.631Z",
   "method": {
     "name": "deterministic_research_priority_v1",
     "inputs": [
@@ -25,7 +25,7 @@
     "appleCharts": {
       "status": "complete",
       "origin": "official_public",
-      "observedAt": "2026-09-26T18:04:01.544Z",
+      "observedAt": "2026-09-26T18:05:16.631Z",
       "healthyGameMarkets": 4
     },
     "appleLookup": {
@@ -42,6 +42,16 @@
       "successfulApps": 0,
       "failures": [],
       "note": "AppBrain getapp costs 1 API credit per app. Values remain labeled estimates and do not affect researchPriority."
+    },
+    "liveAnalyzer": {
+      "status": "complete",
+      "origin": "official_public",
+      "endpoint": "https://gajkwzgxfjlvdbzrvdqn.supabase.co/functions/v1/analyze-game",
+      "cap": 8,
+      "attempted": 8,
+      "succeeded": 8,
+      "failures": [],
+      "note": "Compact evidence packs come from the live Radar analyzer backed by Apple store metadata. They do not gameplay-verify mechanics or infer downloads/revenue."
     }
   },
   "limitations": [
@@ -85,7 +95,7 @@
             "bestObservedRank": 1,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -97,7 +107,7 @@
             "bestObservedRank": 1,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "ca",
@@ -109,7 +119,7 @@
             "bestObservedRank": 1,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -121,7 +131,7 @@
             "bestObservedRank": 1,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -259,7 +269,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Meowdoku!",
@@ -286,7 +296,121 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": {
+        "source": "live_analyze_game",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated",
+        "observedAt": "2026-09-26T18:05:19.955Z",
+        "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
+        "canonicalName": "Meowdoku!",
+        "publisher": "OAKEVER GAMES PTE. LTD.",
+        "findingCount": 9,
+        "unknownCount": 6,
+        "verifiedDirectFindingCount": 5,
+        "listingFindingCount": 4,
+        "findings": [
+          {
+            "key": "publisher",
+            "label": "Publisher",
+            "value": "OAKEVER GAMES PTE. LTD.",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating",
+            "label": "Current store rating",
+            "value": "4.80928",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating_count",
+            "label": "Rating count",
+            "value": "246971",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "release_date",
+            "label": "Release date",
+            "value": "2026-05-19T07:00:00Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "version_release_date",
+            "label": "Current version release",
+            "value": "2026-09-20T10:34:12Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "listing_mechanics",
+            "label": "Publisher-described mechanics",
+            "value": "Sudoku-like, Minesweeper-like, Puzzle",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          },
+          {
+            "key": "listing_controls",
+            "label": "Publisher-described controls",
+            "value": "Double tap, Tap",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          },
+          {
+            "key": "listing_systems",
+            "label": "Publisher-described systems",
+            "value": "Daily content, Leaderboard, Offline play, Lives/hearts",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          },
+          {
+            "key": "listing_monetization",
+            "label": "Publisher-described monetization",
+            "value": "Ads mentioned, No-interruption ad claim",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          }
+        ],
+        "unknowns": [
+          "Core mechanic has not been gameplay-verified.",
+          "Monetization placement and frequency are unknown until gameplay evidence is added.",
+          "Meta progression and retention systems are only partially observable from the listing.",
+          "Competitor family and differentiation room have not been human-confirmed.",
+          "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+          "Download/revenue performance is not available from this official Apple metadata source."
+        ],
+        "nextAction": "Resolve the highest-impact unknowns with competitor mapping, review evidence or Deep Verify before changing the prototype decision."
+      }
     },
     {
       "queueRank": 2,
@@ -321,7 +445,7 @@
             "bestObservedRank": 2,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "ca",
@@ -333,7 +457,7 @@
             "bestObservedRank": 2,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -345,7 +469,7 @@
             "bestObservedRank": 2,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -357,7 +481,7 @@
             "bestObservedRank": 3,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -495,7 +619,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Block Out! - Color Sort Puzzle",
@@ -522,7 +646,101 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": {
+        "source": "live_analyze_game",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated",
+        "observedAt": "2026-09-26T18:05:20.249Z",
+        "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
+        "canonicalName": "Block Out! - Color Sort Puzzle",
+        "publisher": "GRAND GAMES OYUN VE YAZILIM ANONIM SIRKETI",
+        "findingCount": 7,
+        "unknownCount": 6,
+        "verifiedDirectFindingCount": 5,
+        "listingFindingCount": 2,
+        "findings": [
+          {
+            "key": "publisher",
+            "label": "Publisher",
+            "value": "GRAND GAMES OYUN VE YAZILIM ANONIM SIRKETI",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating",
+            "label": "Current store rating",
+            "value": "4.72795",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating_count",
+            "label": "Rating count",
+            "value": "263697",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "release_date",
+            "label": "Release date",
+            "value": "2025-10-31T07:00:00Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "version_release_date",
+            "label": "Current version release",
+            "value": "2026-09-14T07:06:18Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "listing_mechanics",
+            "label": "Publisher-described mechanics",
+            "value": "Puzzle",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          },
+          {
+            "key": "listing_systems",
+            "label": "Publisher-described systems",
+            "value": "Offline play, Levels",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          }
+        ],
+        "unknowns": [
+          "Core mechanic has not been gameplay-verified.",
+          "Monetization placement and frequency are unknown until gameplay evidence is added.",
+          "Meta progression and retention systems are only partially observable from the listing.",
+          "Competitor family and differentiation room have not been human-confirmed.",
+          "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+          "Download/revenue performance is not available from this official Apple metadata source."
+        ],
+        "nextAction": "Resolve the highest-impact unknowns with competitor mapping, review evidence or Deep Verify before changing the prototype decision."
+      }
     },
     {
       "queueRank": 3,
@@ -557,7 +775,7 @@
             "bestObservedRank": 2,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -569,7 +787,7 @@
             "bestObservedRank": 12,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "us",
@@ -581,7 +799,7 @@
             "bestObservedRank": 18,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "ca",
@@ -593,7 +811,7 @@
             "bestObservedRank": 18,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -731,7 +949,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1623318294&country=gb&entity=software",
         "canonicalName": "Gossip Harbor®: Merge & Story",
@@ -742,8 +960,8 @@
           "Puzzle",
           "Casual"
         ],
-        "rating": 4.51449,
-        "ratingCount": 18871,
+        "rating": 4.51476,
+        "ratingCount": 18838,
         "releaseDate": "2022-06-02T07:00:00Z",
         "currentVersionReleaseDate": "2026-09-21T23:50:28Z",
         "version": "3.99.0",
@@ -758,7 +976,91 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": {
+        "source": "live_analyze_game",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated",
+        "observedAt": "2026-09-26T18:05:20.537Z",
+        "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
+        "canonicalName": "Gossip Harbor®: Merge & Story",
+        "publisher": "Microfun Limited",
+        "findingCount": 6,
+        "unknownCount": 6,
+        "verifiedDirectFindingCount": 5,
+        "listingFindingCount": 1,
+        "findings": [
+          {
+            "key": "publisher",
+            "label": "Publisher",
+            "value": "Microfun Limited",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating",
+            "label": "Current store rating",
+            "value": "4.62194",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating_count",
+            "label": "Rating count",
+            "value": "204821",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "release_date",
+            "label": "Release date",
+            "value": "2022-07-07T07:00:00Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "version_release_date",
+            "label": "Current version release",
+            "value": "2026-09-21T23:50:28Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "listing_mechanics",
+            "label": "Publisher-described mechanics",
+            "value": "Merge",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          }
+        ],
+        "unknowns": [
+          "Core mechanic has not been gameplay-verified.",
+          "Monetization placement and frequency are unknown until gameplay evidence is added.",
+          "Meta progression and retention systems are only partially observable from the listing.",
+          "Competitor family and differentiation room have not been human-confirmed.",
+          "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+          "Download/revenue performance is not available from this official Apple metadata source."
+        ],
+        "nextAction": "Resolve the highest-impact unknowns with competitor mapping, review evidence or Deep Verify before changing the prototype decision."
+      }
     },
     {
       "queueRank": 4,
@@ -793,7 +1095,7 @@
             "bestObservedRank": 3,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -805,7 +1107,7 @@
             "bestObservedRank": 3,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -817,7 +1119,7 @@
             "bestObservedRank": 4,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "ca",
@@ -829,7 +1131,7 @@
             "bestObservedRank": 5,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -967,7 +1269,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Minion Rush: Running game",
@@ -995,7 +1297,111 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": {
+        "source": "live_analyze_game",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated",
+        "observedAt": "2026-09-26T18:05:20.745Z",
+        "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
+        "canonicalName": "Minion Rush: Running game",
+        "publisher": "Gameloft",
+        "findingCount": 8,
+        "unknownCount": 6,
+        "verifiedDirectFindingCount": 5,
+        "listingFindingCount": 3,
+        "findings": [
+          {
+            "key": "publisher",
+            "label": "Publisher",
+            "value": "Gameloft",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating",
+            "label": "Current store rating",
+            "value": "4.58734",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating_count",
+            "label": "Rating count",
+            "value": "297455",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "release_date",
+            "label": "Release date",
+            "value": "2013-06-13T07:00:00Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "version_release_date",
+            "label": "Current version release",
+            "value": "2026-07-30T12:07:37Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "listing_mechanics",
+            "label": "Publisher-described mechanics",
+            "value": "Puzzle, Runner",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          },
+          {
+            "key": "listing_systems",
+            "label": "Publisher-described systems",
+            "value": "Leaderboard, Collection, Upgrade system",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          },
+          {
+            "key": "listing_monetization",
+            "label": "Publisher-described monetization",
+            "value": "Ads mentioned, In-app purchases mentioned",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          }
+        ],
+        "unknowns": [
+          "Core mechanic has not been gameplay-verified.",
+          "Monetization placement and frequency are unknown until gameplay evidence is added.",
+          "Meta progression and retention systems are only partially observable from the listing.",
+          "Competitor family and differentiation room have not been human-confirmed.",
+          "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+          "Download/revenue performance is not available from this official Apple metadata source."
+        ],
+        "nextAction": "Resolve the highest-impact unknowns with competitor mapping, review evidence or Deep Verify before changing the prototype decision."
+      }
     },
     {
       "queueRank": 5,
@@ -1030,7 +1436,7 @@
             "bestObservedRank": 3,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "us",
@@ -1042,7 +1448,7 @@
             "bestObservedRank": 5,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -1054,7 +1460,7 @@
             "bestObservedRank": 8,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -1066,7 +1472,7 @@
             "bestObservedRank": 19,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -1204,7 +1610,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "ca",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1498019884,6760325543,6793924927&country=ca&entity=software",
         "canonicalName": "Castlevania: 40th Anniversary",
@@ -1232,7 +1638,91 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": {
+        "source": "live_analyze_game",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated",
+        "observedAt": "2026-09-26T18:05:20.954Z",
+        "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
+        "canonicalName": "Castlevania: 40th Anniversary",
+        "publisher": "Konami Digital Entertainment Co., Ltd.",
+        "findingCount": 6,
+        "unknownCount": 6,
+        "verifiedDirectFindingCount": 5,
+        "listingFindingCount": 1,
+        "findings": [
+          {
+            "key": "publisher",
+            "label": "Publisher",
+            "value": "Konami Digital Entertainment Co., Ltd.",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating",
+            "label": "Current store rating",
+            "value": "0",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating_count",
+            "label": "Rating count",
+            "value": "0",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "release_date",
+            "label": "Release date",
+            "value": "2026-09-24T07:00:00Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "version_release_date",
+            "label": "Current version release",
+            "value": "2026-09-25T00:01:18Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "listing_systems",
+            "label": "Publisher-described systems",
+            "value": "Offline play, Lives/hearts",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          }
+        ],
+        "unknowns": [
+          "Core mechanic has not been gameplay-verified.",
+          "Monetization placement and frequency are unknown until gameplay evidence is added.",
+          "Meta progression and retention systems are only partially observable from the listing.",
+          "Competitor family and differentiation room have not been human-confirmed.",
+          "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+          "Download/revenue performance is not available from this official Apple metadata source."
+        ],
+        "nextAction": "Resolve the highest-impact unknowns with competitor mapping, review evidence or Deep Verify before changing the prototype decision."
+      }
     },
     {
       "queueRank": 6,
@@ -1267,7 +1757,7 @@
             "bestObservedRank": 4,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -1279,7 +1769,7 @@
             "bestObservedRank": 5,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "ca",
@@ -1291,7 +1781,7 @@
             "bestObservedRank": 6,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -1303,7 +1793,7 @@
             "bestObservedRank": 7,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -1441,7 +1931,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Smash Fest!",
@@ -1466,7 +1956,101 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": {
+        "source": "live_analyze_game",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated",
+        "observedAt": "2026-09-26T18:05:21.121Z",
+        "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
+        "canonicalName": "Smash Fest!",
+        "publisher": "Flow Games Bilisim Yazilim ve Pazarlama Anonim Sirketi",
+        "findingCount": 7,
+        "unknownCount": 6,
+        "verifiedDirectFindingCount": 5,
+        "listingFindingCount": 2,
+        "findings": [
+          {
+            "key": "publisher",
+            "label": "Publisher",
+            "value": "Flow Games Bilisim Yazilim ve Pazarlama Anonim Sirketi",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating",
+            "label": "Current store rating",
+            "value": "4.72006",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating_count",
+            "label": "Rating count",
+            "value": "486626",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "release_date",
+            "label": "Release date",
+            "value": "2025-12-16T08:00:00Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "version_release_date",
+            "label": "Current version release",
+            "value": "2026-09-23T11:21:41Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "listing_mechanics",
+            "label": "Publisher-described mechanics",
+            "value": "Destruction",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          },
+          {
+            "key": "listing_systems",
+            "label": "Publisher-described systems",
+            "value": "Levels",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          }
+        ],
+        "unknowns": [
+          "Core mechanic has not been gameplay-verified.",
+          "Monetization placement and frequency are unknown until gameplay evidence is added.",
+          "Meta progression and retention systems are only partially observable from the listing.",
+          "Competitor family and differentiation room have not been human-confirmed.",
+          "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+          "Download/revenue performance is not available from this official Apple metadata source."
+        ],
+        "nextAction": "Resolve the highest-impact unknowns with competitor mapping, review evidence or Deep Verify before changing the prototype decision."
+      }
     },
     {
       "queueRank": 7,
@@ -1501,7 +2085,7 @@
             "bestObservedRank": 4,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -1513,7 +2097,7 @@
             "bestObservedRank": 4,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "us",
@@ -1525,7 +2109,7 @@
             "bestObservedRank": 7,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -1537,7 +2121,7 @@
             "bestObservedRank": 11,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -1675,7 +2259,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "ca",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1498019884,6760325543,6793924927&country=ca&entity=software",
         "canonicalName": "CubeAway - 3DPuzzle",
@@ -1702,7 +2286,91 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": {
+        "source": "live_analyze_game",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated",
+        "observedAt": "2026-09-26T18:05:21.293Z",
+        "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
+        "canonicalName": "CubeAway - 3DPuzzle",
+        "publisher": "GOODROID,Inc.",
+        "findingCount": 6,
+        "unknownCount": 6,
+        "verifiedDirectFindingCount": 5,
+        "listingFindingCount": 1,
+        "findings": [
+          {
+            "key": "publisher",
+            "label": "Publisher",
+            "value": "GOODROID,Inc.",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating",
+            "label": "Current store rating",
+            "value": "4.66179",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating_count",
+            "label": "Rating count",
+            "value": "99465",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "release_date",
+            "label": "Release date",
+            "value": "2026-03-13T07:00:00Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "version_release_date",
+            "label": "Current version release",
+            "value": "2026-09-09T05:21:58Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "listing_mechanics",
+            "label": "Publisher-described mechanics",
+            "value": "Puzzle",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          }
+        ],
+        "unknowns": [
+          "Core mechanic has not been gameplay-verified.",
+          "Monetization placement and frequency are unknown until gameplay evidence is added.",
+          "Meta progression and retention systems are only partially observable from the listing.",
+          "Competitor family and differentiation room have not been human-confirmed.",
+          "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+          "Download/revenue performance is not available from this official Apple metadata source."
+        ],
+        "nextAction": "Resolve the highest-impact unknowns with competitor mapping, review evidence or Deep Verify before changing the prototype decision."
+      }
     },
     {
       "queueRank": 8,
@@ -1737,7 +2405,7 @@
             "bestObservedRank": 5,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "ca",
@@ -1749,7 +2417,7 @@
             "bestObservedRank": 8,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "us",
@@ -1761,7 +2429,7 @@
             "bestObservedRank": 9,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -1773,7 +2441,7 @@
             "bestObservedRank": 14,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -1911,7 +2579,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "au",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6779167923,6759763476&country=au&entity=software",
         "canonicalName": "Colony Flow!",
@@ -1937,7 +2605,111 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": {
+        "source": "live_analyze_game",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated",
+        "observedAt": "2026-09-26T18:05:21.500Z",
+        "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
+        "canonicalName": "Colony Flow!",
+        "publisher": "ABI GLOBAL LTD.",
+        "findingCount": 8,
+        "unknownCount": 6,
+        "verifiedDirectFindingCount": 5,
+        "listingFindingCount": 3,
+        "findings": [
+          {
+            "key": "publisher",
+            "label": "Publisher",
+            "value": "ABI GLOBAL LTD.",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating",
+            "label": "Current store rating",
+            "value": "4.70467",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "rating_count",
+            "label": "Rating count",
+            "value": "25121",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "release_date",
+            "label": "Release date",
+            "value": "2026-06-13T07:00:00Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "version_release_date",
+            "label": "Current version release",
+            "value": "2026-09-18T19:09:44Z",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "verified",
+            "confidence": 1,
+            "evidenceLabel": "Apple store metadata returned in this analysis request"
+          },
+          {
+            "key": "listing_mechanics",
+            "label": "Publisher-described mechanics",
+            "value": "Puzzle",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          },
+          {
+            "key": "listing_controls",
+            "label": "Publisher-described controls",
+            "value": "Tap",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          },
+          {
+            "key": "listing_systems",
+            "label": "Publisher-described systems",
+            "value": "Collection, Levels, Lives/hearts",
+            "origin": "official_public",
+            "interpretation": "direct",
+            "coverage": "partial",
+            "confidence": 0.8,
+            "evidenceLabel": "Explicit wording in the publisher-provided App Store description; gameplay verification still required"
+          }
+        ],
+        "unknowns": [
+          "Core mechanic has not been gameplay-verified.",
+          "Monetization placement and frequency are unknown until gameplay evidence is added.",
+          "Meta progression and retention systems are only partially observable from the listing.",
+          "Competitor family and differentiation room have not been human-confirmed.",
+          "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+          "Download/revenue performance is not available from this official Apple metadata source."
+        ],
+        "nextAction": "Resolve the highest-impact unknowns with competitor mapping, review evidence or Deep Verify before changing the prototype decision."
+      }
     },
     {
       "queueRank": 9,
@@ -1972,7 +2744,7 @@
             "bestObservedRank": 6,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -1984,7 +2756,7 @@
             "bestObservedRank": 10,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "ca",
@@ -1996,7 +2768,7 @@
             "bestObservedRank": 16,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -2008,7 +2780,7 @@
             "bestObservedRank": 18,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -2146,7 +2918,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Vita Mahjong",
@@ -2174,7 +2946,8 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": null
     },
     {
       "queueRank": 10,
@@ -2209,7 +2982,7 @@
             "bestObservedRank": 6,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "ca",
@@ -2221,7 +2994,7 @@
             "bestObservedRank": 9,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -2233,7 +3006,7 @@
             "bestObservedRank": 12,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "us",
@@ -2245,7 +3018,7 @@
             "bestObservedRank": 14,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -2383,7 +3156,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "au",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6779167923,6759763476&country=au&entity=software",
         "canonicalName": "Bus Traffic Fever!",
@@ -2410,7 +3183,8 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": null
     },
     {
       "queueRank": 11,
@@ -2445,7 +3219,7 @@
             "bestObservedRank": 7,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -2457,7 +3231,7 @@
             "bestObservedRank": 8,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -2469,7 +3243,7 @@
             "bestObservedRank": 11,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "us",
@@ -2481,7 +3255,7 @@
             "bestObservedRank": 15,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -2619,7 +3393,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "ca",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1498019884,6760325543,6793924927&country=ca&entity=software",
         "canonicalName": "Rotate Rings",
@@ -2647,7 +3421,8 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": null
     },
     {
       "queueRank": 12,
@@ -2682,7 +3457,7 @@
             "bestObservedRank": 8,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "ca",
@@ -2694,7 +3469,7 @@
             "bestObservedRank": 10,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "gb",
@@ -2706,7 +3481,7 @@
             "bestObservedRank": 16,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           },
           {
             "country": "au",
@@ -2718,7 +3493,7 @@
             "bestObservedRank": 30,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-26T18:04:01.544Z"
+            "observedAt": "2026-09-26T18:05:16.631Z"
           }
         ],
         "exactWindows": {
@@ -2856,7 +3631,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-26T18:04:01.544Z",
+        "observedAt": "2026-09-26T18:05:16.631Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Magic Sort!",
@@ -2883,7 +3658,8 @@
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
         "Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment."
-      ]
+      ],
+      "analysisEvidence": null
     }
   ]
 }
