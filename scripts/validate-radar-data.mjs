@@ -5,6 +5,7 @@ const root = path.resolve('public/data/radar');
 const latestPath = path.join(root, 'latest.json');
 const indexPath = path.join(root, 'index.json');
 const expectedMarkets = ['us', 'gb', 'ca', 'au'];
+const maxChartDepth = 100;
 
 function fail(message) {
   throw new Error(`Radar data validation failed: ${message}`);
@@ -19,12 +20,13 @@ function dateKey(value) {
   return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(value) ? value.slice(0, 10) : null;
 }
 
-function validateEntry(entry, expectedRank, market, file) {
+function validateEntry(entry, expectedRank, market, file, chartDepth) {
   if (entry?.rank !== expectedRank) fail(`${file} ${market} rank sequence expected ${expectedRank}, got ${entry?.rank}`);
+  if (entry.rank > chartDepth) fail(`${file} ${market} rank ${entry.rank} exceeds declared chart depth ${chartDepth}`);
   if (!String(entry?.appId ?? '').trim()) fail(`${file} ${market} rank ${expectedRank} has no appId`);
   if (!String(entry?.name ?? '').trim()) fail(`${file} ${market} rank ${expectedRank} has no name`);
   if (!Number.isInteger(entry?.daysObserved) || entry.daysObserved < 1) fail(`${file} ${market} rank ${expectedRank} has invalid daysObserved`);
-  if (!Number.isInteger(entry?.bestObservedRank) || entry.bestObservedRank < 1) fail(`${file} ${market} rank ${expectedRank} has invalid bestObservedRank`);
+  if (!Number.isInteger(entry?.bestObservedRank) || entry.bestObservedRank < 1 || entry.bestObservedRank > maxChartDepth) fail(`${file} ${market} rank ${expectedRank} has invalid bestObservedRank`);
   if (!Array.isArray(entry?.events)) fail(`${file} ${market} rank ${expectedRank} events must be an array`);
 }
 
@@ -36,6 +38,9 @@ function validateSnapshot(snapshot, file, expectedDate = null) {
   if (snapshot.category !== 'Games' || snapshot.chart !== 'top-free') fail(`${file} has unexpected chart/category`);
   if (!snapshot.markets || typeof snapshot.markets !== 'object') fail(`${file} has no markets object`);
 
+  const chartDepth = snapshot.chartDepth ?? Math.max(50, ...Object.values(snapshot.markets).map((market) => Array.isArray(market?.entries) ? market.entries.length : 0));
+  if (!Number.isInteger(chartDepth) || chartDepth < 10 || chartDepth > maxChartDepth) fail(`${file} has invalid chartDepth ${chartDepth}`);
+
   let successful = 0;
   let fresh = 0;
   for (const code of expectedMarkets) {
@@ -46,10 +51,10 @@ function validateSnapshot(snapshot, file, expectedDate = null) {
 
     if (market.status === 'ok') {
       successful += 1;
-      if (market.entries.length < 10 || market.entries.length > 50) fail(`${file} ${code} successful market has ${market.entries.length} entries`);
+      if (market.entries.length < 10 || market.entries.length > chartDepth) fail(`${file} ${code} successful market has ${market.entries.length} entries for chartDepth ${chartDepth}`);
       const ids = new Set();
       market.entries.forEach((entry, index) => {
-        validateEntry(entry, index + 1, code, file);
+        validateEntry(entry, index + 1, code, file, chartDepth);
         if (ids.has(entry.appId)) fail(`${file} ${code} contains duplicate appId ${entry.appId}`);
         ids.add(entry.appId);
       });
