@@ -11,6 +11,8 @@ import {
   type RadarSnapshot,
   type RankWindowChange,
 } from './radar';
+import { loadResearchQueue, primaryMomentum, type ResearchQueue } from './researchQueue';
+import './researchQueue.css';
 
 function Movement({ entry }: { entry: RadarEntry }) {
   if (entry.delta == null) return <span className="movement new">NEW</span>;
@@ -77,21 +79,68 @@ function CrossMarketRow({ item, onAnalyze }: {
   </div>;
 }
 
+function ResearchQueuePanel({ queue, onAnalyze }: { queue: ResearchQueue; onAnalyze: (appId: string) => void }) {
+  const appBrainReady = queue.sources.appBrain.status !== 'unconfigured';
+  return <section className="panel research-queue-panel">
+    <div className="section-heading">
+      <div><h2>Automated Research Queue</h2><p>Deterministic triage from first-party Apple Games chart evidence. Priority means “investigate first,” not “build this.”</p></div>
+      <span>{queue.candidates.length} evidence-backed candidates</span>
+    </div>
+    <div className="research-queue-note">
+      <span>Apple charts: {queue.sources.appleCharts.status}</span>
+      <span>Apple metadata: {queue.sources.appleLookup.status}</span>
+      <span className={appBrainReady ? '' : 'estimate-off'}>AppBrain estimates: {queue.sources.appBrain.status}</span>
+      <span>Updated {new Date(queue.generatedAt).toLocaleString()}</span>
+    </div>
+    {queue.candidates.length === 0 ? <p>No title currently meets the deterministic research-queue thresholds.</p> : <div className="research-queue-list">
+      {queue.candidates.slice(0, 8).map((candidate) => <div className="research-queue-row" key={candidate.appId}>
+        {candidate.iconUrl ? <img src={candidate.iconUrl} alt="" /> : <div />}
+        <div className="queue-priority" title={candidate.priorityMeaning}><strong>{candidate.researchPriority}</strong><small>priority</small></div>
+        <div className="queue-game">
+          <strong>#{candidate.queueRank} {candidate.name}</strong>
+          <span>{candidate.publisher}</span>
+          <div className="queue-facts">
+            <span>{candidate.evidence.marketCount} market{candidate.evidence.marketCount === 1 ? '' : 's'}</span>
+            <span>best #{candidate.evidence.bestRank}</span>
+            <span>{primaryMomentum(candidate)}</span>
+            {candidate.appleMetadata?.releaseAgeDays != null && <span>{candidate.appleMetadata.releaseAgeDays}d since release</span>}
+          </div>
+        </div>
+        <div className="queue-reasons">{candidate.reasonCodes.slice(0, 4).map((reason) => <span key={reason}>{reason.replaceAll('_', ' ')}</span>)}</div>
+        <div className="queue-estimate">
+          {candidate.appBrainEstimate?.estimatedRecentDownloads != null
+            ? <><strong>{candidate.appBrainEstimate.estimatedRecentDownloads.toLocaleString()}</strong><small>AppBrain recent est.</small></>
+            : <><strong>—</strong><small>estimate not used</small></>}
+        </div>
+        <button onClick={() => onAnalyze(candidate.appId)} title={`Analyze ${candidate.name}`}><Search size={14} /> Analyze</button>
+      </div>)}
+    </div>}
+  </section>;
+}
+
 export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
   const [snapshot, setSnapshot] = useState<RadarSnapshot | null>(null);
   const [history, setHistory] = useState<RadarSnapshot[]>([]);
+  const [researchQueue, setResearchQueue] = useState<ResearchQueue | null>(null);
+  const [queueError, setQueueError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedMarket, setSelectedMarket] = useState('us');
 
   async function refresh() {
-    setLoading(true); setError(null);
+    setLoading(true); setError(null); setQueueError(null);
     try {
       const window = await loadRadarWindow(8);
       setSnapshot(window.latest);
       setHistory(window.history);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not load Radar snapshot.');
+    }
+    try {
+      setResearchQueue(await loadResearchQueue());
+    } catch (err) {
+      setResearchQueue(null);
+      setQueueError(err instanceof Error ? err.message : 'Research queue has not been generated yet.');
     } finally {
       setLoading(false);
     }
@@ -138,6 +187,9 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
         {hasFallback && (
           <div className="warning-banner"><AlertTriangle size={18} /><span>At least one market fell back to Apple’s overall Top Free chart because the games-category RSS was unavailable. Those ranks are explicitly labeled and must not be read as Games-category rank.</span></div>
         )}
+
+        {researchQueue && <ResearchQueuePanel queue={researchQueue} onAnalyze={onAnalyze} />}
+        {!researchQueue && queueError && <div className="history-banner"><strong>Automated research queue pending.</strong><span>{queueError} The next Apple Radar run will generate it from the latest verified chart evidence.</span></div>}
 
         <div className="radar-columns">
           <section className="panel"><div className="section-heading"><h2>Fastest Movers</h2><span>vs previous observed daily snapshot</span></div>{movers.length ? movers.map((entry) => <EntryRow key={`${entry.country}-${entry.appId}`} entry={entry} market={entry.market} onAnalyze={onAnalyze} />) : <p>No upward movers yet; at least two daily snapshots are needed.</p>}</section>
