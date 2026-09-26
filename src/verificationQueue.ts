@@ -40,19 +40,21 @@ export const VerificationQueueSchema = z.object({
   method: z.object({
     name: z.literal('explicit_unknown_evidence_router_v1'),
     candidateCap: z.number().int().positive().max(8),
-    taskCap: z.number().int().positive().max(32),
+    taskCap: z.number().int().positive().max(64),
     ordering: z.array(z.string()).min(2),
     prohibitedShortcuts: z.array(z.string()).min(4),
   }),
   summary: z.object({
     candidateCount: z.number().int().nonnegative().max(8),
-    taskCount: z.number().int().nonnegative().max(32),
+    rawTaskCount: z.number().int().nonnegative().max(64),
+    taskCount: z.number().int().nonnegative().max(64),
+    omittedTaskCount: z.number().int().nonnegative().max(64),
     readyForHumanEvidence: z.number().int().nonnegative(),
     readyForHumanReview: z.number().int().nonnegative(),
     autoWaiting: z.number().int().nonnegative(),
     optionalExternal: z.number().int().nonnegative(),
   }),
-  tasks: z.array(VerificationTaskSchema).max(32),
+  tasks: z.array(VerificationTaskSchema).max(64),
 });
 
 export type VerificationTask = z.infer<typeof VerificationTaskSchema>;
