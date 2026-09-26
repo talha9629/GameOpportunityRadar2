@@ -32,6 +32,8 @@ alter table public.deep_verify_videos
         verification_session_id is not null
         and cardinality(verification_task_ids) between 1 and 8
         and verification_research_generated_at is not null
+        and store_id is not null
+        and btrim(store_id) <> ''
       )
     )
   )
@@ -69,6 +71,7 @@ declare
   v_owner uuid := auth.uid();
   v_video_id uuid;
   v_session_id text := btrim(coalesce(p_verification_session_id, ''));
+  v_store_id text := nullif(btrim(coalesce(p_store_id, '')), '');
   v_task_ids text[] := coalesce(p_verification_task_ids, '{}'::text[]);
   v_unknowns text[] := coalesce(p_verification_unknowns, '{}'::text[]);
   v_categories text[] := coalesce(p_verification_categories, '{}'::text[]);
@@ -77,6 +80,7 @@ declare
   v_category text;
 begin
   if v_owner is null then raise exception 'Authentication required'; end if;
+  if v_store_id is null then raise exception 'Verification-session evidence requires a store ID'; end if;
   if v_session_id !~ '^[a-f0-9]{24}$' then raise exception 'Invalid verification session ID'; end if;
   if cardinality(v_task_ids) < 1 or cardinality(v_task_ids) > 8 then
     raise exception 'Verification session must contain 1-8 task IDs';
@@ -84,6 +88,9 @@ begin
   if cardinality(v_task_ids) <> cardinality(v_unknowns)
      or cardinality(v_task_ids) <> cardinality(v_categories) then
     raise exception 'Verification session task, unknown, and category counts must match';
+  end if;
+  if (select count(distinct task_id) from unnest(v_task_ids) as task_id) <> cardinality(v_task_ids) then
+    raise exception 'Verification task IDs must be unique';
   end if;
   if p_verification_research_generated_at is null then
     raise exception 'Verification session research timestamp is required';
@@ -107,7 +114,7 @@ begin
 
   v_video_id := public.register_deep_verify_video(
     p_label,
-    p_store_id,
+    v_store_id,
     p_source_type,
     p_storage_path,
     p_external_url,
