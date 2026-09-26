@@ -1,0 +1,17 @@
+.deep-provider-live { border-color: #245273; background: linear-gradient(135deg, rgba(8, 31, 49, .92), rgba(12, 26, 42, .92)); }
+.deep-provider-live code, .deep-event-footer code { color: #7dd3fc; }
+.deep-provider-warning { color: #fcd34d; }
+.deep-analysis-result { display: grid; gap: 16px; }
+.deep-analysis-meta { display: flex; flex-wrap: wrap; gap: 10px; }
+.deep-analysis-meta span { border: 1px solid #29415e; background: #091522; border-radius: 999px; padding: 7px 10px; color: #8fa2bd; font-size: 12px; }
+.deep-analysis-meta b { color: #edf2ff; }
+.deep-analysis-summary, .deep-analysis-unknowns { border: 1px solid #263b58; background: #0a1424; border-radius: 14px; padding: 15px; }
+.deep-analysis-summary p { margin-bottom: 0; white-space: pre-wrap; }
+.deep-analysis-unknowns ul { margin: 10px 0 0; padding-left: 20px; color: #aebbd1; }
+.deep-analysis-unknowns li + li { margin-top: 7px; }
+.deep-source-expired { display: flex; gap: 11px; align-items: flex-start; padding: 15px; border: 1px solid #256d58; background: #0d2c24; color: #bbf7d0; border-radius: 14px; }
+.deep-source-expired div { display: grid; gap: 4px; }
+.deep-source-expired span { color: #a7d7c4; }
+.deep-event-ai { border-color: #28587a; box-shadow: inset 3px 0 0 #38bdf8; }
+.deep-ai-badge { display: inline-flex; gap: 5px; align-items: center; color: #7dd3fc; border: 1px solid #28587a; background: #0a2033; border-radius: 999px; padding: 4px 7px; font-size: 11px; font-weight: 800; }
+.deep-reviewed-at { display: block; margin-top: 9px; color: #8395ae; }
