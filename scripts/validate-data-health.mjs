@@ -43,6 +43,10 @@ assert(Number.isInteger(health.facts?.exactHistoryDays) && health.facts.exactHis
 assert(Number.isInteger(health.facts?.verificationTaskCount) && health.facts.verificationTaskCount >= 0, 'verificationTaskCount invalid');
 assert(Number.isInteger(health.facts?.verificationRawTaskCount) && health.facts.verificationRawTaskCount >= 0, 'verificationRawTaskCount invalid');
 assert(Number.isInteger(health.facts?.verificationOmittedTaskCount) && health.facts.verificationOmittedTaskCount >= 0, 'verificationOmittedTaskCount invalid');
+assert(Number.isInteger(health.facts?.verificationCaptureSessionCount) && health.facts.verificationCaptureSessionCount >= 0 && health.facts.verificationCaptureSessionCount <= 8, 'verificationCaptureSessionCount invalid');
+assert(Number.isInteger(health.facts?.verificationGroupedEvidenceTaskCount) && health.facts.verificationGroupedEvidenceTaskCount >= 0, 'verificationGroupedEvidenceTaskCount invalid');
+assert(health.facts.verificationGroupedEvidenceTaskCount <= health.facts.verificationTaskCount, 'grouped evidence tasks cannot exceed atomic verification tasks');
+assert(health.facts.verificationGroupedEvidenceTaskCount === 0 || health.facts.verificationCaptureSessionCount > 0, 'grouped evidence tasks require at least one capture session');
 assert(typeof health.facts?.verificationDerivedFromCurrentQueue === 'boolean', 'verificationDerivedFromCurrentQueue invalid');
 assert(typeof health.facts?.appBrainConfigured === 'boolean', 'appBrainConfigured invalid');
 
@@ -51,6 +55,8 @@ if (verificationComponent?.state === 'healthy') {
   assert(health.facts.verificationDerivedFromCurrentQueue === true, 'healthy verification queue must be derived from current research queue');
   assert(health.facts.verificationOmittedTaskCount === 0, 'healthy verification queue cannot omit explicit unknowns');
   assert(health.facts.verificationTaskCount === health.facts.verificationRawTaskCount, 'healthy verification queue must route every raw task');
+  assert(health.facts.verificationGroupedEvidenceTaskCount === 0 || health.facts.verificationCaptureSessionCount > 0, 'healthy grouped verification coverage needs capture sessions');
+  assert(verificationComponent.facts.some((fact) => /capture session\(s\) cover .* gameplay evidence task\(s\)/i.test(fact)), 'healthy verification component must expose grouped session coverage');
 }
 assert(!/success probability|revenue estimate from rank|downloads? from rank/i.test(JSON.stringify(health)), 'health report contains unsafe inference');
 
@@ -59,4 +65,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · verification ${health.facts.verificationTaskCount}/${health.facts.verificationRawTaskCount}, omitted ${health.facts.verificationOmittedTaskCount} · ${health.recommendedActions.length} action(s)`);
+console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · verification ${health.facts.verificationTaskCount}/${health.facts.verificationRawTaskCount}, omitted ${health.facts.verificationOmittedTaskCount} · sessions ${health.facts.verificationCaptureSessionCount}/${health.facts.verificationGroupedEvidenceTaskCount} grouped task(s) · ${health.recommendedActions.length} action(s)`);
