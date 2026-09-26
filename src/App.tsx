@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react';
-import { AlertTriangle, CheckCircle2, ExternalLink, Search, ShieldQuestion, XCircle } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { AlertTriangle, CheckCircle2, ExternalLink, LogOut, Mail, Search, ShieldQuestion, XCircle } from 'lucide-react';
+import type { Session } from '@supabase/supabase-js';
 import { analyzeGame, setFindingReviewState } from './api';
 import type { AnalysisResult, Finding, ReviewState } from './domain';
-import { hasSupabaseConfig } from './lib/supabase';
+import { hasSupabaseConfig, supabase } from './lib/supabase';
 
 function ReviewBadge({ state }: { state: ReviewState }) {
   const labels: Record<ReviewState, string> = {
@@ -38,11 +39,70 @@ function FindingCard({ finding, onReview }: { finding: Finding; onReview: (id: s
   );
 }
 
+function LoginPanel() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  async function sendMagicLink() {
+    if (!supabase) return;
+    setBusy(true);
+    setMessage(null);
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: window.location.origin },
+    });
+    setBusy(false);
+    setMessage(error ? error.message : 'Check your email for the secure sign-in link.');
+  }
+
+  return (
+    <main className="page-shell login-shell">
+      <section className="panel login-panel">
+        <div className="eyebrow">GAME OPPORTUNITY RADAR 2.0</div>
+        <h1>Private studio intelligence.</h1>
+        <p>Sign in with your approved email. There is no public signup workflow.</p>
+        {!hasSupabaseConfig ? (
+          <div className="error-box">Cloud backend is not configured for this deployment yet.</div>
+        ) : (
+          <>
+            <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" />
+            <button className="primary" disabled={busy || !email.includes('@')} onClick={sendMagicLink}>
+              <Mail size={18} /> {busy ? 'Sending…' : 'Email sign-in link'}
+            </button>
+            {message && <div className="info-box">{message}</div>}
+          </>
+        )}
+      </section>
+    </main>
+  );
+}
+
 export function App() {
+  const [session, setSession] = useState<Session | null>(null);
+  const [authReady, setAuthReady] = useState(!hasSupabaseConfig);
   const [input, setInput] = useState('');
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!supabase) {
+      setAuthReady(true);
+      return;
+    }
+
+    void supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setAuthReady(true);
+    });
+
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+      setSession(nextSession);
+      setAuthReady(true);
+    });
+    return () => listener.subscription.unsubscribe();
+  }, []);
 
   const reviewedCount = useMemo(
     () => result?.findings.filter((finding) => finding.reviewState !== 'unreviewed').length ?? 0,
@@ -73,6 +133,9 @@ export function App() {
     }
   }
 
+  if (!authReady) return <main className="page-shell"><section className="panel">Loading secure session…</section></main>;
+  if (hasSupabaseConfig && !session) return <LoginPanel />;
+
   return (
     <main className="page-shell">
       <header className="hero">
@@ -84,8 +147,9 @@ export function App() {
         <div className={`connection-card ${hasSupabaseConfig ? 'ok' : 'warn'}`}>
           {hasSupabaseConfig ? <CheckCircle2 /> : <AlertTriangle />}
           <div>
-            <strong>{hasSupabaseConfig ? 'Cloud backend configured' : 'Cloud setup required'}</strong>
-            <span>{hasSupabaseConfig ? 'Supabase connection variables found.' : 'Deploy with VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.'}</span>
+            <strong>{hasSupabaseConfig ? 'Private cloud session' : 'Cloud setup required'}</strong>
+            <span>{session?.user.email ?? (hasSupabaseConfig ? 'Authenticated' : 'Supabase environment variables missing.')}</span>
+            {session && <button className="link-button" onClick={() => void supabase?.auth.signOut()}><LogOut size={14} /> Sign out</button>}
           </div>
         </div>
       </header>
