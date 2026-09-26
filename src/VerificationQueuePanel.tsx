@@ -29,7 +29,7 @@ function CaptureSession({
 }: {
   session: VerificationCaptureSession;
   evidence: VerificationSessionEvidence[];
-  onDeepVerify: (session: VerificationCaptureSession) => void;
+  onDeepVerify: (session: VerificationCaptureSession, videoId?: string) => void;
 }) {
   const latest = latestEvidenceForSession(evidence, session.sessionId);
   const evidenceCount = evidenceCountForSession(evidence, session.sessionId);
@@ -52,7 +52,7 @@ function CaptureSession({
     </div>
     <div className="verification-action">
       <span>{session.impact} impact</span>
-      <button onClick={() => onDeepVerify(session)}>{latest ? 'Review / add evidence' : 'Collect evidence'}</button>
+      <button onClick={() => onDeepVerify(session, latest?.videoId)}>{latest ? 'Open saved evidence' : 'Collect evidence'}</button>
       {latest && <em>{latest.sourceType === 'upload' ? 'Private upload' : 'YouTube source'} · {latest.status.replaceAll('_', ' ')}</em>}
     </div>
   </div>;
@@ -68,7 +68,7 @@ export function VerificationQueuePanel({
   queue: VerificationQueue;
   evidence: VerificationSessionEvidence[];
   evidenceError?: string | null;
-  onDeepVerify: (session: VerificationCaptureSession) => void;
+  onDeepVerify: (session: VerificationCaptureSession, videoId?: string) => void;
   onCompetitors: () => void;
 }) {
   const nonVideoActionable = queue.tasks

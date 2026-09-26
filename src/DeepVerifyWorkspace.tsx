@@ -137,11 +137,13 @@ export function DeepVerifyWorkspace({
   ownerEmail = null,
   initialStoreId = '',
   initialLabel = '',
+  initialVideoId = null,
   verificationSession = null,
 }: {
   ownerEmail?: string | null;
   initialStoreId?: string;
   initialLabel?: string;
+  initialVideoId?: string | null;
   verificationSession?: DeepVerifyVerificationSession | null;
 }) {
   const [sourceMode, setSourceMode] = useState<'upload' | 'youtube'>('upload');
@@ -236,8 +238,9 @@ export function DeepVerifyWorkspace({
     setPreviewUrl(null);
     setError(null);
     void refreshSaved(true);
+    if (ownerEmail && initialVideoId) void openEvidence(initialVideoId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ownerEmail]);
+  }, [ownerEmail, initialVideoId]);
 
   async function chooseFile(nextFile: File | null) {
     setFile(nextFile);

@@ -9,7 +9,7 @@ export function VerificationQueuePage({
   onDeepVerify,
   onCompetitors,
 }: {
-  onDeepVerify: (session: VerificationCaptureSession) => void;
+  onDeepVerify: (session: VerificationCaptureSession, videoId?: string) => void;
   onCompetitors: () => void;
 }) {
   const [queue, setQueue] = useState<VerificationQueue | null>(null);
