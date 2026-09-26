@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T07:51:31.082Z",
+  "generatedAt": "2026-09-26T07:53:43.827Z",
   "chart": "top-free",
   "category": "Games",
   "markets": {
@@ -24,7 +24,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 0,
+          "bestObservedRank": 1,
           "events": [
             "NEW ENTRY"
           ]
@@ -40,7 +40,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 1,
+          "bestObservedRank": 2,
           "events": [
             "NEW ENTRY"
           ]
@@ -56,7 +56,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 2,
+          "bestObservedRank": 3,
           "events": [
             "NEW ENTRY"
           ]
@@ -72,7 +72,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 3,
+          "bestObservedRank": 4,
           "events": [
             "NEW ENTRY"
           ]
@@ -88,7 +88,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 4,
+          "bestObservedRank": 5,
           "events": [
             "NEW ENTRY"
           ]
@@ -104,7 +104,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 5,
+          "bestObservedRank": 6,
           "events": [
             "NEW ENTRY"
           ]
@@ -120,7 +120,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 6,
+          "bestObservedRank": 7,
           "events": [
             "NEW ENTRY"
           ]
@@ -136,7 +136,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 7,
+          "bestObservedRank": 8,
           "events": [
             "NEW ENTRY"
           ]
@@ -152,7 +152,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 8,
+          "bestObservedRank": 9,
           "events": [
             "NEW ENTRY"
           ]
@@ -168,7 +168,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 9,
+          "bestObservedRank": 10,
           "events": [
             "NEW ENTRY"
           ]
@@ -184,7 +184,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 10,
+          "bestObservedRank": 11,
           "events": [
             "NEW ENTRY"
           ]
@@ -200,7 +200,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 11,
+          "bestObservedRank": 12,
           "events": [
             "NEW ENTRY"
           ]
@@ -216,7 +216,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 12,
+          "bestObservedRank": 13,
           "events": [
             "NEW ENTRY"
           ]
@@ -232,7 +232,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 13,
+          "bestObservedRank": 14,
           "events": [
             "NEW ENTRY"
           ]
@@ -248,7 +248,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 14,
+          "bestObservedRank": 15,
           "events": [
             "NEW ENTRY"
           ]
@@ -264,7 +264,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 15,
+          "bestObservedRank": 16,
           "events": [
             "NEW ENTRY"
           ]
@@ -280,7 +280,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 16,
+          "bestObservedRank": 17,
           "events": [
             "NEW ENTRY"
           ]
@@ -296,7 +296,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 17,
+          "bestObservedRank": 18,
           "events": [
             "NEW ENTRY"
           ]
@@ -312,7 +312,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 18,
+          "bestObservedRank": 19,
           "events": [
             "NEW ENTRY"
           ]
@@ -328,7 +328,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 19,
+          "bestObservedRank": 20,
           "events": [
             "NEW ENTRY"
           ]
@@ -344,7 +344,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 20,
+          "bestObservedRank": 21,
           "events": [
             "NEW ENTRY"
           ]
@@ -360,7 +360,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 21,
+          "bestObservedRank": 22,
           "events": [
             "NEW ENTRY"
           ]
@@ -376,7 +376,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 22,
+          "bestObservedRank": 23,
           "events": [
             "NEW ENTRY"
           ]
@@ -392,7 +392,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 23,
+          "bestObservedRank": 24,
           "events": [
             "NEW ENTRY"
           ]
@@ -408,7 +408,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 24,
+          "bestObservedRank": 25,
           "events": [
             "NEW ENTRY"
           ]
@@ -424,7 +424,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 25,
+          "bestObservedRank": 26,
           "events": [
             "NEW ENTRY"
           ]
@@ -440,7 +440,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 26,
+          "bestObservedRank": 27,
           "events": [
             "NEW ENTRY"
           ]
@@ -456,7 +456,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 27,
+          "bestObservedRank": 28,
           "events": [
             "NEW ENTRY"
           ]
@@ -472,7 +472,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 28,
+          "bestObservedRank": 29,
           "events": [
             "NEW ENTRY"
           ]
@@ -488,7 +488,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 29,
+          "bestObservedRank": 30,
           "events": [
             "NEW ENTRY"
           ]
@@ -504,7 +504,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 30,
+          "bestObservedRank": 31,
           "events": [
             "NEW ENTRY"
           ]
@@ -520,7 +520,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 31,
+          "bestObservedRank": 32,
           "events": [
             "NEW ENTRY"
           ]
@@ -536,7 +536,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 32,
+          "bestObservedRank": 33,
           "events": [
             "NEW ENTRY"
           ]
@@ -552,7 +552,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 33,
+          "bestObservedRank": 34,
           "events": [
             "NEW ENTRY"
           ]
@@ -568,7 +568,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 34,
+          "bestObservedRank": 35,
           "events": [
             "NEW ENTRY"
           ]
@@ -584,7 +584,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 35,
+          "bestObservedRank": 36,
           "events": [
             "NEW ENTRY"
           ]
@@ -600,7 +600,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 36,
+          "bestObservedRank": 37,
           "events": [
             "NEW ENTRY"
           ]
@@ -616,7 +616,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 37,
+          "bestObservedRank": 38,
           "events": [
             "NEW ENTRY"
           ]
@@ -632,7 +632,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 38,
+          "bestObservedRank": 39,
           "events": [
             "NEW ENTRY"
           ]
@@ -648,7 +648,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 39,
+          "bestObservedRank": 40,
           "events": [
             "NEW ENTRY"
           ]
@@ -664,7 +664,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 40,
+          "bestObservedRank": 41,
           "events": [
             "NEW ENTRY"
           ]
@@ -680,7 +680,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 41,
+          "bestObservedRank": 42,
           "events": [
             "NEW ENTRY"
           ]
@@ -696,7 +696,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 42,
+          "bestObservedRank": 43,
           "events": [
             "NEW ENTRY"
           ]
@@ -712,7 +712,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 43,
+          "bestObservedRank": 44,
           "events": [
             "NEW ENTRY"
           ]
@@ -728,7 +728,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 44,
+          "bestObservedRank": 45,
           "events": [
             "NEW ENTRY"
           ]
@@ -744,7 +744,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 45,
+          "bestObservedRank": 46,
           "events": [
             "NEW ENTRY"
           ]
@@ -760,7 +760,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 46,
+          "bestObservedRank": 47,
           "events": [
             "NEW ENTRY"
           ]
@@ -776,7 +776,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 47,
+          "bestObservedRank": 48,
           "events": [
             "NEW ENTRY"
           ]
@@ -792,7 +792,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 48,
+          "bestObservedRank": 49,
           "events": [
             "NEW ENTRY"
           ]
@@ -808,7 +808,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 49,
+          "bestObservedRank": 50,
           "events": [
             "NEW ENTRY"
           ]
@@ -835,7 +835,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 0,
+          "bestObservedRank": 1,
           "events": [
             "NEW ENTRY"
           ]
@@ -851,7 +851,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 1,
+          "bestObservedRank": 2,
           "events": [
             "NEW ENTRY"
           ]
@@ -867,7 +867,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 2,
+          "bestObservedRank": 3,
           "events": [
             "NEW ENTRY"
           ]
@@ -883,7 +883,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 3,
+          "bestObservedRank": 4,
           "events": [
             "NEW ENTRY"
           ]
@@ -899,7 +899,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 4,
+          "bestObservedRank": 5,
           "events": [
             "NEW ENTRY"
           ]
@@ -915,7 +915,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 5,
+          "bestObservedRank": 6,
           "events": [
             "NEW ENTRY"
           ]
@@ -931,7 +931,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 6,
+          "bestObservedRank": 7,
           "events": [
             "NEW ENTRY"
           ]
@@ -947,7 +947,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 7,
+          "bestObservedRank": 8,
           "events": [
             "NEW ENTRY"
           ]
@@ -963,7 +963,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 8,
+          "bestObservedRank": 9,
           "events": [
             "NEW ENTRY"
           ]
@@ -979,7 +979,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 9,
+          "bestObservedRank": 10,
           "events": [
             "NEW ENTRY"
           ]
@@ -995,7 +995,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 10,
+          "bestObservedRank": 11,
           "events": [
             "NEW ENTRY"
           ]
@@ -1011,7 +1011,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 11,
+          "bestObservedRank": 12,
           "events": [
             "NEW ENTRY"
           ]
@@ -1027,7 +1027,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 12,
+          "bestObservedRank": 13,
           "events": [
             "NEW ENTRY"
           ]
@@ -1043,7 +1043,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 13,
+          "bestObservedRank": 14,
           "events": [
             "NEW ENTRY"
           ]
@@ -1059,7 +1059,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 14,
+          "bestObservedRank": 15,
           "events": [
             "NEW ENTRY"
           ]
@@ -1075,7 +1075,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 15,
+          "bestObservedRank": 16,
           "events": [
             "NEW ENTRY"
           ]
@@ -1091,7 +1091,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 16,
+          "bestObservedRank": 17,
           "events": [
             "NEW ENTRY"
           ]
@@ -1107,7 +1107,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 17,
+          "bestObservedRank": 18,
           "events": [
             "NEW ENTRY"
           ]
@@ -1123,7 +1123,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 18,
+          "bestObservedRank": 19,
           "events": [
             "NEW ENTRY"
           ]
@@ -1139,7 +1139,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 19,
+          "bestObservedRank": 20,
           "events": [
             "NEW ENTRY"
           ]
@@ -1155,7 +1155,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 20,
+          "bestObservedRank": 21,
           "events": [
             "NEW ENTRY"
           ]
@@ -1171,7 +1171,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 21,
+          "bestObservedRank": 22,
           "events": [
             "NEW ENTRY"
           ]
@@ -1187,7 +1187,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 22,
+          "bestObservedRank": 23,
           "events": [
             "NEW ENTRY"
           ]
@@ -1203,7 +1203,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 23,
+          "bestObservedRank": 24,
           "events": [
             "NEW ENTRY"
           ]
@@ -1219,7 +1219,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 24,
+          "bestObservedRank": 25,
           "events": [
             "NEW ENTRY"
           ]
@@ -1235,7 +1235,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 25,
+          "bestObservedRank": 26,
           "events": [
             "NEW ENTRY"
           ]
@@ -1251,7 +1251,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 26,
+          "bestObservedRank": 27,
           "events": [
             "NEW ENTRY"
           ]
@@ -1267,7 +1267,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 27,
+          "bestObservedRank": 28,
           "events": [
             "NEW ENTRY"
           ]
@@ -1283,7 +1283,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 28,
+          "bestObservedRank": 29,
           "events": [
             "NEW ENTRY"
           ]
@@ -1299,7 +1299,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 29,
+          "bestObservedRank": 30,
           "events": [
             "NEW ENTRY"
           ]
@@ -1315,7 +1315,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 30,
+          "bestObservedRank": 31,
           "events": [
             "NEW ENTRY"
           ]
@@ -1331,7 +1331,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 31,
+          "bestObservedRank": 32,
           "events": [
             "NEW ENTRY"
           ]
@@ -1347,7 +1347,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 32,
+          "bestObservedRank": 33,
           "events": [
             "NEW ENTRY"
           ]
@@ -1363,7 +1363,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 33,
+          "bestObservedRank": 34,
           "events": [
             "NEW ENTRY"
           ]
@@ -1379,7 +1379,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 34,
+          "bestObservedRank": 35,
           "events": [
             "NEW ENTRY"
           ]
@@ -1395,7 +1395,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 35,
+          "bestObservedRank": 36,
           "events": [
             "NEW ENTRY"
           ]
@@ -1411,7 +1411,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 36,
+          "bestObservedRank": 37,
           "events": [
             "NEW ENTRY"
           ]
@@ -1427,7 +1427,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 37,
+          "bestObservedRank": 38,
           "events": [
             "NEW ENTRY"
           ]
@@ -1443,7 +1443,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 38,
+          "bestObservedRank": 39,
           "events": [
             "NEW ENTRY"
           ]
@@ -1459,7 +1459,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 39,
+          "bestObservedRank": 40,
           "events": [
             "NEW ENTRY"
           ]
@@ -1475,7 +1475,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 40,
+          "bestObservedRank": 41,
           "events": [
             "NEW ENTRY"
           ]
@@ -1491,7 +1491,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 41,
+          "bestObservedRank": 42,
           "events": [
             "NEW ENTRY"
           ]
@@ -1507,7 +1507,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 42,
+          "bestObservedRank": 43,
           "events": [
             "NEW ENTRY"
           ]
@@ -1523,7 +1523,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 43,
+          "bestObservedRank": 44,
           "events": [
             "NEW ENTRY"
           ]
@@ -1539,7 +1539,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 44,
+          "bestObservedRank": 45,
           "events": [
             "NEW ENTRY"
           ]
@@ -1555,7 +1555,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 45,
+          "bestObservedRank": 46,
           "events": [
             "NEW ENTRY"
           ]
@@ -1571,7 +1571,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 46,
+          "bestObservedRank": 47,
           "events": [
             "NEW ENTRY"
           ]
@@ -1587,7 +1587,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 47,
+          "bestObservedRank": 48,
           "events": [
             "NEW ENTRY"
           ]
@@ -1603,7 +1603,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 48,
+          "bestObservedRank": 49,
           "events": [
             "NEW ENTRY"
           ]
@@ -1619,7 +1619,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 49,
+          "bestObservedRank": 50,
           "events": [
             "NEW ENTRY"
           ]
@@ -1646,7 +1646,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 0,
+          "bestObservedRank": 1,
           "events": [
             "NEW ENTRY"
           ]
@@ -1662,7 +1662,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 1,
+          "bestObservedRank": 2,
           "events": [
             "NEW ENTRY"
           ]
@@ -1678,7 +1678,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 2,
+          "bestObservedRank": 3,
           "events": [
             "NEW ENTRY"
           ]
@@ -1694,7 +1694,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 3,
+          "bestObservedRank": 4,
           "events": [
             "NEW ENTRY"
           ]
@@ -1710,7 +1710,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 4,
+          "bestObservedRank": 5,
           "events": [
             "NEW ENTRY"
           ]
@@ -1726,7 +1726,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 5,
+          "bestObservedRank": 6,
           "events": [
             "NEW ENTRY"
           ]
@@ -1742,7 +1742,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 6,
+          "bestObservedRank": 7,
           "events": [
             "NEW ENTRY"
           ]
@@ -1758,7 +1758,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 7,
+          "bestObservedRank": 8,
           "events": [
             "NEW ENTRY"
           ]
@@ -1774,7 +1774,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 8,
+          "bestObservedRank": 9,
           "events": [
             "NEW ENTRY"
           ]
@@ -1790,7 +1790,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 9,
+          "bestObservedRank": 10,
           "events": [
             "NEW ENTRY"
           ]
@@ -1806,7 +1806,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 10,
+          "bestObservedRank": 11,
           "events": [
             "NEW ENTRY"
           ]
@@ -1822,7 +1822,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 11,
+          "bestObservedRank": 12,
           "events": [
             "NEW ENTRY"
           ]
@@ -1838,7 +1838,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 12,
+          "bestObservedRank": 13,
           "events": [
             "NEW ENTRY"
           ]
@@ -1854,7 +1854,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 13,
+          "bestObservedRank": 14,
           "events": [
             "NEW ENTRY"
           ]
@@ -1870,7 +1870,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 14,
+          "bestObservedRank": 15,
           "events": [
             "NEW ENTRY"
           ]
@@ -1886,7 +1886,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 15,
+          "bestObservedRank": 16,
           "events": [
             "NEW ENTRY"
           ]
@@ -1902,7 +1902,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 16,
+          "bestObservedRank": 17,
           "events": [
             "NEW ENTRY"
           ]
@@ -1918,7 +1918,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 17,
+          "bestObservedRank": 18,
           "events": [
             "NEW ENTRY"
           ]
@@ -1934,7 +1934,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 18,
+          "bestObservedRank": 19,
           "events": [
             "NEW ENTRY"
           ]
@@ -1950,7 +1950,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 19,
+          "bestObservedRank": 20,
           "events": [
             "NEW ENTRY"
           ]
@@ -1966,7 +1966,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 20,
+          "bestObservedRank": 21,
           "events": [
             "NEW ENTRY"
           ]
@@ -1982,7 +1982,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 21,
+          "bestObservedRank": 22,
           "events": [
             "NEW ENTRY"
           ]
@@ -1998,7 +1998,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 22,
+          "bestObservedRank": 23,
           "events": [
             "NEW ENTRY"
           ]
@@ -2014,7 +2014,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 23,
+          "bestObservedRank": 24,
           "events": [
             "NEW ENTRY"
           ]
@@ -2030,7 +2030,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 24,
+          "bestObservedRank": 25,
           "events": [
             "NEW ENTRY"
           ]
@@ -2046,7 +2046,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 25,
+          "bestObservedRank": 26,
           "events": [
             "NEW ENTRY"
           ]
@@ -2062,7 +2062,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 26,
+          "bestObservedRank": 27,
           "events": [
             "NEW ENTRY"
           ]
@@ -2078,7 +2078,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 27,
+          "bestObservedRank": 28,
           "events": [
             "NEW ENTRY"
           ]
@@ -2094,7 +2094,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 28,
+          "bestObservedRank": 29,
           "events": [
             "NEW ENTRY"
           ]
@@ -2110,7 +2110,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 29,
+          "bestObservedRank": 30,
           "events": [
             "NEW ENTRY"
           ]
@@ -2126,7 +2126,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 30,
+          "bestObservedRank": 31,
           "events": [
             "NEW ENTRY"
           ]
@@ -2142,7 +2142,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 31,
+          "bestObservedRank": 32,
           "events": [
             "NEW ENTRY"
           ]
@@ -2158,7 +2158,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 32,
+          "bestObservedRank": 33,
           "events": [
             "NEW ENTRY"
           ]
@@ -2174,7 +2174,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 33,
+          "bestObservedRank": 34,
           "events": [
             "NEW ENTRY"
           ]
@@ -2190,7 +2190,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 34,
+          "bestObservedRank": 35,
           "events": [
             "NEW ENTRY"
           ]
@@ -2206,7 +2206,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 35,
+          "bestObservedRank": 36,
           "events": [
             "NEW ENTRY"
           ]
@@ -2222,7 +2222,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 36,
+          "bestObservedRank": 37,
           "events": [
             "NEW ENTRY"
           ]
@@ -2238,7 +2238,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 37,
+          "bestObservedRank": 38,
           "events": [
             "NEW ENTRY"
           ]
@@ -2254,7 +2254,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 38,
+          "bestObservedRank": 39,
           "events": [
             "NEW ENTRY"
           ]
@@ -2270,7 +2270,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 39,
+          "bestObservedRank": 40,
           "events": [
             "NEW ENTRY"
           ]
@@ -2286,7 +2286,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 40,
+          "bestObservedRank": 41,
           "events": [
             "NEW ENTRY"
           ]
@@ -2302,7 +2302,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 41,
+          "bestObservedRank": 42,
           "events": [
             "NEW ENTRY"
           ]
@@ -2318,7 +2318,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 42,
+          "bestObservedRank": 43,
           "events": [
             "NEW ENTRY"
           ]
@@ -2334,7 +2334,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 43,
+          "bestObservedRank": 44,
           "events": [
             "NEW ENTRY"
           ]
@@ -2350,7 +2350,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 44,
+          "bestObservedRank": 45,
           "events": [
             "NEW ENTRY"
           ]
@@ -2366,7 +2366,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 45,
+          "bestObservedRank": 46,
           "events": [
             "NEW ENTRY"
           ]
@@ -2382,7 +2382,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 46,
+          "bestObservedRank": 47,
           "events": [
             "NEW ENTRY"
           ]
@@ -2398,7 +2398,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 47,
+          "bestObservedRank": 48,
           "events": [
             "NEW ENTRY"
           ]
@@ -2414,7 +2414,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 48,
+          "bestObservedRank": 49,
           "events": [
             "NEW ENTRY"
           ]
@@ -2430,7 +2430,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 49,
+          "bestObservedRank": 50,
           "events": [
             "NEW ENTRY"
           ]
@@ -2457,7 +2457,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 0,
+          "bestObservedRank": 1,
           "events": [
             "NEW ENTRY"
           ]
@@ -2473,7 +2473,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 1,
+          "bestObservedRank": 2,
           "events": [
             "NEW ENTRY"
           ]
@@ -2489,7 +2489,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 2,
+          "bestObservedRank": 3,
           "events": [
             "NEW ENTRY"
           ]
@@ -2505,7 +2505,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 3,
+          "bestObservedRank": 4,
           "events": [
             "NEW ENTRY"
           ]
@@ -2521,7 +2521,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 4,
+          "bestObservedRank": 5,
           "events": [
             "NEW ENTRY"
           ]
@@ -2537,7 +2537,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 5,
+          "bestObservedRank": 6,
           "events": [
             "NEW ENTRY"
           ]
@@ -2553,7 +2553,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 6,
+          "bestObservedRank": 7,
           "events": [
             "NEW ENTRY"
           ]
@@ -2569,7 +2569,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 7,
+          "bestObservedRank": 8,
           "events": [
             "NEW ENTRY"
           ]
@@ -2585,7 +2585,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 8,
+          "bestObservedRank": 9,
           "events": [
             "NEW ENTRY"
           ]
@@ -2601,7 +2601,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 9,
+          "bestObservedRank": 10,
           "events": [
             "NEW ENTRY"
           ]
@@ -2617,7 +2617,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 10,
+          "bestObservedRank": 11,
           "events": [
             "NEW ENTRY"
           ]
@@ -2633,7 +2633,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 11,
+          "bestObservedRank": 12,
           "events": [
             "NEW ENTRY"
           ]
@@ -2649,7 +2649,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 12,
+          "bestObservedRank": 13,
           "events": [
             "NEW ENTRY"
           ]
@@ -2665,7 +2665,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 13,
+          "bestObservedRank": 14,
           "events": [
             "NEW ENTRY"
           ]
@@ -2681,7 +2681,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 14,
+          "bestObservedRank": 15,
           "events": [
             "NEW ENTRY"
           ]
@@ -2697,7 +2697,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 15,
+          "bestObservedRank": 16,
           "events": [
             "NEW ENTRY"
           ]
@@ -2713,7 +2713,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 16,
+          "bestObservedRank": 17,
           "events": [
             "NEW ENTRY"
           ]
@@ -2729,7 +2729,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 17,
+          "bestObservedRank": 18,
           "events": [
             "NEW ENTRY"
           ]
@@ -2745,7 +2745,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 18,
+          "bestObservedRank": 19,
           "events": [
             "NEW ENTRY"
           ]
@@ -2761,7 +2761,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 19,
+          "bestObservedRank": 20,
           "events": [
             "NEW ENTRY"
           ]
@@ -2777,7 +2777,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 20,
+          "bestObservedRank": 21,
           "events": [
             "NEW ENTRY"
           ]
@@ -2793,7 +2793,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 21,
+          "bestObservedRank": 22,
           "events": [
             "NEW ENTRY"
           ]
@@ -2809,7 +2809,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 22,
+          "bestObservedRank": 23,
           "events": [
             "NEW ENTRY"
           ]
@@ -2825,7 +2825,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 23,
+          "bestObservedRank": 24,
           "events": [
             "NEW ENTRY"
           ]
@@ -2841,7 +2841,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 24,
+          "bestObservedRank": 25,
           "events": [
             "NEW ENTRY"
           ]
@@ -2857,7 +2857,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 25,
+          "bestObservedRank": 26,
           "events": [
             "NEW ENTRY"
           ]
@@ -2873,7 +2873,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 26,
+          "bestObservedRank": 27,
           "events": [
             "NEW ENTRY"
           ]
@@ -2889,7 +2889,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 27,
+          "bestObservedRank": 28,
           "events": [
             "NEW ENTRY"
           ]
@@ -2905,7 +2905,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 28,
+          "bestObservedRank": 29,
           "events": [
             "NEW ENTRY"
           ]
@@ -2921,7 +2921,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 29,
+          "bestObservedRank": 30,
           "events": [
             "NEW ENTRY"
           ]
@@ -2937,7 +2937,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 30,
+          "bestObservedRank": 31,
           "events": [
             "NEW ENTRY"
           ]
@@ -2953,7 +2953,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 31,
+          "bestObservedRank": 32,
           "events": [
             "NEW ENTRY"
           ]
@@ -2969,7 +2969,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 32,
+          "bestObservedRank": 33,
           "events": [
             "NEW ENTRY"
           ]
@@ -2985,7 +2985,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 33,
+          "bestObservedRank": 34,
           "events": [
             "NEW ENTRY"
           ]
@@ -3001,7 +3001,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 34,
+          "bestObservedRank": 35,
           "events": [
             "NEW ENTRY"
           ]
@@ -3017,7 +3017,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 35,
+          "bestObservedRank": 36,
           "events": [
             "NEW ENTRY"
           ]
@@ -3033,7 +3033,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 36,
+          "bestObservedRank": 37,
           "events": [
             "NEW ENTRY"
           ]
@@ -3049,7 +3049,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 37,
+          "bestObservedRank": 38,
           "events": [
             "NEW ENTRY"
           ]
@@ -3065,7 +3065,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 38,
+          "bestObservedRank": 39,
           "events": [
             "NEW ENTRY"
           ]
@@ -3081,7 +3081,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 39,
+          "bestObservedRank": 40,
           "events": [
             "NEW ENTRY"
           ]
@@ -3097,7 +3097,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 40,
+          "bestObservedRank": 41,
           "events": [
             "NEW ENTRY"
           ]
@@ -3113,7 +3113,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 41,
+          "bestObservedRank": 42,
           "events": [
             "NEW ENTRY"
           ]
@@ -3129,7 +3129,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 42,
+          "bestObservedRank": 43,
           "events": [
             "NEW ENTRY"
           ]
@@ -3145,7 +3145,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 43,
+          "bestObservedRank": 44,
           "events": [
             "NEW ENTRY"
           ]
@@ -3161,7 +3161,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 44,
+          "bestObservedRank": 45,
           "events": [
             "NEW ENTRY"
           ]
@@ -3177,7 +3177,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 45,
+          "bestObservedRank": 46,
           "events": [
             "NEW ENTRY"
           ]
@@ -3193,7 +3193,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 46,
+          "bestObservedRank": 47,
           "events": [
             "NEW ENTRY"
           ]
@@ -3209,7 +3209,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 47,
+          "bestObservedRank": 48,
           "events": [
             "NEW ENTRY"
           ]
@@ -3225,7 +3225,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 48,
+          "bestObservedRank": 49,
           "events": [
             "NEW ENTRY"
           ]
@@ -3241,7 +3241,7 @@
           "delta": null,
           "firstObserved": "2026-09-26",
           "daysObserved": 1,
-          "bestObservedRank": 49,
+          "bestObservedRank": 50,
           "events": [
             "NEW ENTRY"
           ]
