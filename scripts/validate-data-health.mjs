@@ -9,7 +9,7 @@ assert(health.schemaVersion === 1, 'schemaVersion must be 1');
 assert(['ready', 'ready_with_maturing_history', 'degraded', 'blocked'].includes(health.overall), 'invalid overall health');
 assert(typeof health.generatedAt === 'string' && !Number.isNaN(Date.parse(health.generatedAt)), 'generatedAt invalid');
 assert(typeof health.statement === 'string' && /does not score game opportunities/i.test(health.statement), 'health statement must reject opportunity scoring');
-assert(Array.isArray(health.components) && health.components.length >= 5, 'health components missing');
+assert(Array.isArray(health.components) && health.components.length >= 7, 'health components missing');
 assert(Array.isArray(health.recommendedActions), 'recommendedActions must be an array');
 
 const allowedStates = new Set(['healthy', 'degraded', 'blocked', 'maturing', 'optional']);
@@ -19,11 +19,11 @@ for (const item of health.components ?? []) {
   assert(Array.isArray(item.facts) && item.facts.length > 0, `${item.id} has no facts`);
 }
 const ids = new Set(health.components.map((item) => item.id));
-for (const required of ['apple_radar', 'research_queue', 'history_maturity', 'research_digest', 'policy_watch', 'appbrain']) {
+for (const required of ['apple_radar', 'research_queue', 'verification_queue', 'history_maturity', 'research_digest', 'policy_watch', 'appbrain']) {
   assert(ids.has(required), `missing required health component ${required}`);
 }
 
-const essentialIds = new Set(['apple_radar', 'research_queue', 'policy_watch']);
+const essentialIds = new Set(['apple_radar', 'research_queue', 'verification_queue', 'policy_watch']);
 const essential = health.components.filter((item) => essentialIds.has(item.id));
 assert(health.essentialCount === essential.length, 'essentialCount mismatch');
 assert(health.essentialHealthy === essential.filter((item) => item.state === 'healthy').length, 'essentialHealthy mismatch');
@@ -40,7 +40,18 @@ for (const action of health.recommendedActions ?? []) {
 }
 
 assert(Number.isInteger(health.facts?.exactHistoryDays) && health.facts.exactHistoryDays >= 0, 'exactHistoryDays invalid');
+assert(Number.isInteger(health.facts?.verificationTaskCount) && health.facts.verificationTaskCount >= 0, 'verificationTaskCount invalid');
+assert(Number.isInteger(health.facts?.verificationRawTaskCount) && health.facts.verificationRawTaskCount >= 0, 'verificationRawTaskCount invalid');
+assert(Number.isInteger(health.facts?.verificationOmittedTaskCount) && health.facts.verificationOmittedTaskCount >= 0, 'verificationOmittedTaskCount invalid');
+assert(typeof health.facts?.verificationDerivedFromCurrentQueue === 'boolean', 'verificationDerivedFromCurrentQueue invalid');
 assert(typeof health.facts?.appBrainConfigured === 'boolean', 'appBrainConfigured invalid');
+
+const verificationComponent = health.components.find((item) => item.id === 'verification_queue');
+if (verificationComponent?.state === 'healthy') {
+  assert(health.facts.verificationDerivedFromCurrentQueue === true, 'healthy verification queue must be derived from current research queue');
+  assert(health.facts.verificationOmittedTaskCount === 0, 'healthy verification queue cannot omit explicit unknowns');
+  assert(health.facts.verificationTaskCount === health.facts.verificationRawTaskCount, 'healthy verification queue must route every raw task');
+}
 assert(!/success probability|revenue estimate from rank|downloads? from rank/i.test(JSON.stringify(health)), 'health report contains unsafe inference');
 
 if (errors.length) {
@@ -48,4 +59,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · ${health.recommendedActions.length} action(s)`);
+console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · verification ${health.facts.verificationTaskCount}/${health.facts.verificationRawTaskCount}, omitted ${health.facts.verificationOmittedTaskCount} · ${health.recommendedActions.length} action(s)`);
