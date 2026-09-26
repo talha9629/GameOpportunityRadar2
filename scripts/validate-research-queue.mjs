@@ -1,0 +1,63 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
+const file = path.resolve('public/data/research/latest.json');
+const queue = JSON.parse(fs.readFileSync(file, 'utf8'));
+const errors = [];
+
+function assert(condition, message) {
+  if (!condition) errors.push(message);
+}
+
+assert(queue.schemaVersion === 1, 'schemaVersion must be 1');
+assert(typeof queue.generatedAt === 'string' && !Number.isNaN(Date.parse(queue.generatedAt)), 'generatedAt must be an ISO date');
+assert(/^\d{4}-\d{2}-\d{2}$/.test(queue.radarDate ?? ''), 'radarDate must be YYYY-MM-DD');
+assert(queue.method?.name === 'deterministic_research_priority_v1', 'unexpected queue method');
+assert(queue.method?.statement?.includes('not an opportunity score'), 'method must explicitly disclaim opportunity scoring');
+assert(Array.isArray(queue.limitations) && queue.limitations.some((value) => /not a download count/i.test(value)), 'rank/download limitation must be explicit');
+assert(Array.isArray(queue.candidates), 'candidates must be an array');
+assert(queue.candidates.length <= 12, 'candidate queue must stay capped at 12');
+
+const ids = new Set();
+let priorPriority = Number.POSITIVE_INFINITY;
+for (let index = 0; index < (queue.candidates ?? []).length; index += 1) {
+  const candidate = queue.candidates[index];
+  assert(candidate.queueRank === index + 1, `candidate ${candidate.appId} queueRank is not contiguous`);
+  assert(typeof candidate.appId === 'string' && candidate.appId.length >= 5, `candidate ${index + 1} has invalid appId`);
+  assert(!ids.has(candidate.appId), `duplicate candidate ${candidate.appId}`);
+  ids.add(candidate.appId);
+  assert(Number.isInteger(candidate.researchPriority) && candidate.researchPriority >= 0 && candidate.researchPriority <= 100, `${candidate.appId} has invalid researchPriority`);
+  assert(candidate.researchPriority <= priorPriority, `${candidate.appId} queue is not priority-sorted`);
+  priorPriority = candidate.researchPriority;
+  assert(candidate.priorityMeaning?.includes('not a success probability'), `${candidate.appId} priority meaning is unsafe/ambiguous`);
+  assert(Array.isArray(candidate.reasonCodes) && candidate.reasonCodes.length > 0, `${candidate.appId} must have evidence reason codes`);
+  assert(candidate.evidence?.sourceOrigin === 'official_public', `${candidate.appId} rank evidence must be official_public`);
+  assert(candidate.evidence?.chartCategory === 'Games', `${candidate.appId} queue evidence must be Games chart evidence`);
+  assert(Number.isInteger(candidate.evidence?.marketCount) && candidate.evidence.marketCount >= 1 && candidate.evidence.marketCount <= 4, `${candidate.appId} invalid marketCount`);
+  assert(Number.isInteger(candidate.evidence?.bestRank) && candidate.evidence.bestRank >= 1 && candidate.evidence.bestRank <= 50, `${candidate.appId} invalid bestRank`);
+  assert(Array.isArray(candidate.evidence?.markets) && candidate.evidence.markets.length === candidate.evidence.marketCount, `${candidate.appId} market evidence mismatch`);
+  assert(candidate.appleMetadata == null || candidate.appleMetadata.sourceOrigin === 'official_public', `${candidate.appId} Apple metadata provenance missing`);
+  if (candidate.appBrainEstimate != null) {
+    assert(candidate.appBrainEstimate.sourceOrigin === 'third_party_estimate', `${candidate.appId} AppBrain data must be labeled third_party_estimate`);
+    assert(candidate.appBrainEstimate.provider === 'AppBrain', `${candidate.appId} AppBrain provider label missing`);
+  }
+}
+
+const appBrain = queue.sources?.appBrain;
+assert(['unconfigured', 'complete', 'partial', 'failed'].includes(appBrain?.status), 'invalid AppBrain source status');
+assert(Number.isInteger(appBrain?.dailyCreditCap) && appBrain.dailyCreditCap >= 0 && appBrain.dailyCreditCap <= 10, 'AppBrain daily cap must be 0..10');
+assert(Number.isInteger(appBrain?.creditsUsedThisRun) && appBrain.creditsUsedThisRun >= 0 && appBrain.creditsUsedThisRun <= appBrain.dailyCreditCap, 'AppBrain credits exceed daily cap');
+if (appBrain?.status === 'unconfigured') {
+  assert((queue.candidates ?? []).every((candidate) => candidate.appBrainEstimate == null), 'unconfigured AppBrain must not produce estimate rows');
+}
+
+assert(['complete', 'partial'].includes(queue.sources?.appleCharts?.status), 'Apple chart source must be complete or partial');
+assert(['complete', 'partial', 'failed'].includes(queue.sources?.appleLookup?.status), 'invalid Apple lookup status');
+
+if (errors.length) {
+  console.error('[research-queue] validation FAILED');
+  for (const error of errors) console.error(`- ${error}`);
+  process.exit(1);
+}
+
+console.log(`[research-queue] validation PASS · ${queue.candidates.length} candidates · AppBrain ${appBrain.status} · ${appBrain.creditsUsedThisRun}/${appBrain.dailyCreditCap} credits`);
