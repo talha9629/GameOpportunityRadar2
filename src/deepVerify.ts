@@ -70,6 +70,7 @@ export const DeepVerifyEventSchema = z.object({
   interpretation: InterpretationSchema,
   coverage: CoverageSchema,
   reviewState: ReviewStateSchema,
+  reviewedAt: z.string().nullable().optional(),
   confidence: z.coerce.number().min(0).max(1),
   evidenceNote: z.string().nullable(),
 }).superRefine((value, context) => {
