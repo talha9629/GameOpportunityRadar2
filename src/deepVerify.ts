@@ -37,6 +37,7 @@ export const DeepVerifyVideoSummaryRowSchema = z.object({
   size_bytes: z.coerce.number().nonnegative().nullable(),
   duration_seconds: z.coerce.number().nonnegative().nullable(),
   delete_after: z.string().nullable(),
+  source_deleted_at: z.string().nullable().optional(),
   created_at: z.string(),
   event_count: z.coerce.number().int().nonnegative(),
 });
@@ -54,8 +55,22 @@ export const DeepVerifyVideoSummarySchema = z.object({
   sizeBytes: z.number().nonnegative().nullable(),
   durationSeconds: z.number().nonnegative().nullable(),
   deleteAfter: z.string().nullable(),
+  sourceDeletedAt: z.string().nullable().optional(),
   createdAt: z.string(),
   eventCount: z.number().int().nonnegative(),
+});
+
+export const DeepVerifyLatestAnalysisSchema = z.object({
+  runId: z.string().uuid(),
+  status: z.string().min(1),
+  provider: z.string().min(1),
+  model: z.string().nullable(),
+  estimatedCostUsd: z.coerce.number().nonnegative(),
+  startedAt: z.string(),
+  completedAt: z.string().nullable(),
+  summary: z.string().nullable(),
+  unknowns: z.array(z.string()),
+  usage: z.record(z.string(), z.unknown()).nullable(),
 });
 
 export const DeepVerifyEventSchema = z.object({
@@ -97,7 +112,9 @@ export const DeepVerifyVideoPayloadSchema = z.object({
   errorCode: z.string().nullable(),
   errorMessage: z.string().nullable(),
   deleteAfter: z.string().nullable(),
+  sourceDeletedAt: z.string().nullable().optional(),
   createdAt: z.string(),
+  latestAnalysis: DeepVerifyLatestAnalysisSchema.nullable().optional(),
   events: z.array(DeepVerifyEventSchema),
 });
 
@@ -119,6 +136,7 @@ export const DeepVerifyEventDraftSchema = z.object({
 });
 
 export type DeepVerifyVideoSummary = z.infer<typeof DeepVerifyVideoSummarySchema>;
+export type DeepVerifyLatestAnalysis = z.infer<typeof DeepVerifyLatestAnalysisSchema>;
 export type DeepVerifyEvent = z.infer<typeof DeepVerifyEventSchema>;
 export type DeepVerifyVideoPayload = z.infer<typeof DeepVerifyVideoPayloadSchema>;
 export type DeepVerifyEventDraft = z.infer<typeof DeepVerifyEventDraftSchema>;
