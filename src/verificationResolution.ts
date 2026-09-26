@@ -54,6 +54,12 @@ export type VerificationResolutionCategory = z.infer<typeof VerificationResoluti
 export type VerificationResolutionState = z.infer<typeof VerificationResolutionStateSchema>;
 export type VerificationTaskResolution = z.infer<typeof VerificationTaskResolutionSchema>;
 
+export type VerificationProvenanceLocks = {
+  videoLocked: boolean;
+  eventIds: string[];
+  decisionCount: number;
+};
+
 export function eventKeyForResolutionCategory(category: VerificationResolutionCategory) {
   if (category === 'gameplay_mechanic') return 'mechanic';
   if (category === 'monetization_placement') return 'monetization';
@@ -76,4 +82,16 @@ export function resolutionForTask(resolutions: VerificationTaskResolution[], tas
 export function resolvedTaskCount(resolutions: VerificationTaskResolution[], taskIds: string[]) {
   const ids = new Set(taskIds);
   return resolutions.filter((resolution) => ids.has(resolution.taskId) && resolution.state === 'resolved').length;
+}
+
+export function provenanceLocksForVideo(
+  resolutions: VerificationTaskResolution[],
+  videoId: string,
+): VerificationProvenanceLocks {
+  const matching = resolutions.filter((resolution) => resolution.sourceVideoId === videoId);
+  return {
+    videoLocked: matching.length > 0,
+    eventIds: [...new Set(matching.flatMap((resolution) => resolution.sourceEventId ? [resolution.sourceEventId] : []))],
+    decisionCount: matching.length,
+  };
 }
