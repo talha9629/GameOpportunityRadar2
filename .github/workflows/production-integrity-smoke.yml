@@ -26,3 +26,21 @@ jobs:
             exit 1
           fi
           echo "Production persistence boundary PASS · privileged integrity data is not public"
+
+      - name: Verify anonymous clients cannot run Deep Verify provider
+        shell: bash
+        run: |
+          set -euo pipefail
+          HTTP_CODE=$(curl --silent --output /tmp/deep-verify-response.json --write-out '%{http_code}' \
+            --request POST \
+            'https://gajkwzgxfjlvdbzrvdqn.supabase.co/functions/v1/deep-verify-analyze' \
+            --header 'apikey: sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg' \
+            --header 'Content-Type: application/json' \
+            --data '{"videoId":"00000000-0000-0000-0000-000000000000"}')
+          echo "Anonymous Deep Verify status: $HTTP_CODE"
+          cat /tmp/deep-verify-response.json
+          if [ "$HTTP_CODE" != "401" ] && [ "$HTTP_CODE" != "403" ]; then
+            echo "Deep Verify provider must remain inaccessible to anonymous clients."
+            exit 1
+          fi
+          echo "Deep Verify provider boundary PASS · owner JWT required"
