@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T19:03:01.070Z",
-  "overall": "ready_with_maturing_history",
+  "generatedAt": "2026-09-26T19:14:51.888Z",
+  "overall": "blocked",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
-  "essentialHealthy": 4,
+  "essentialHealthy": 3,
   "essentialCount": 4,
   "components": [
     {
@@ -14,7 +14,7 @@
         "4/4 healthy Games markets",
         "0 failed market(s)",
         "0 overall-chart fallback market(s)",
-        "0.0h snapshot age"
+        "0.2h snapshot age"
       ],
       "action": null
     },
@@ -26,21 +26,22 @@
         "12 candidates",
         "Apple lookup complete",
         "live evidence complete (8/8)",
-        "0.0h queue age"
+        "0.2h queue age"
       ],
       "action": null
     },
     {
       "id": "verification_queue",
       "label": "Automated Verification Queue",
-      "state": "healthy",
+      "state": "blocked",
       "facts": [
         "48/48 explicit unknown(s) routed",
         "0 omitted task(s)",
+        "0 capture session(s) cover 0 gameplay evidence task(s)",
         "derived from current research queue",
-        "0.0h verification age"
+        "0.2h verification age"
       ],
-      "action": null
+      "action": "Rebuild Verification Queue before using its evidence-routing actions; stale, incomplete, or incorrectly grouped routing is a hard evidence-coverage failure."
     },
     {
       "id": "history_maturity",
@@ -91,6 +92,11 @@
   ],
   "recommendedActions": [
     {
+      "priority": 2,
+      "action": "FIX_VERIFICATION_COVERAGE",
+      "why": "Verification routing is stale, incomplete, incorrectly grouped, or no longer derived from the current research queue."
+    },
+    {
       "priority": 3,
       "action": "DEEP_VERIFY_TOP_CANDIDATE",
       "appId": "6761760135",
@@ -115,6 +121,8 @@
     "verificationTaskCount": 48,
     "verificationRawTaskCount": 48,
     "verificationOmittedTaskCount": 0,
+    "verificationCaptureSessionCount": 0,
+    "verificationGroupedEvidenceTaskCount": 0,
     "verificationDerivedFromCurrentQueue": true,
     "policyDetectedChangeCount": 0,
     "confirmedPolicyChanges": 0,
