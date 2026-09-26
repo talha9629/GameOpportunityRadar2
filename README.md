@@ -14,13 +14,14 @@ Radar is not a clone generator, revenue predictor, or automatic game-selection e
 
 Implemented in this repository:
 - React + TypeScript + Vite web app
-- Supabase-ready schema and RLS
+- live Supabase Postgres/Auth/RLS backend
 - evidence/provenance model
 - human review lifecycle for findings
-- Apple App Store resolver via Supabase Edge Function
+- Apple App Store resolver via authenticated Supabase Edge Function
 - explicit assisted/manual state for unsupported Android enrichment
 - Zod validation at external boundaries
-- CI build/type checks
+- GitHub CI and dependency-audit workflows
+- host-agnostic static build for GitHub Pages / Render / Cloudflare Pages
 
 ## Architecture
 
@@ -30,13 +31,20 @@ Source of truth: GitHub
 Scheduled jobs: GitHub Actions (later milestones)
 Heavy jobs: GitHub Actions first, Modal only when justified
 
+## Cloud backend
+
+Supabase project: `Game Opportunity Radar 2`
+Region: `ap-south-1`
+Edge Function: `analyze-game` with JWT verification enabled
+RLS: per-user ownership on all exposed Radar tables
+
 ## Environment
 
-Copy `.env.example` to `.env` for local development or configure equivalent deployment variables:
+Configure these public frontend variables in the deployment environment:
 
 ```text
 VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
+VITE_SUPABASE_PUBLISHABLE_KEY=
 ```
 
 Never commit service-role keys or provider secrets.
@@ -44,7 +52,7 @@ Never commit service-role keys or provider secrets.
 ## Commands
 
 ```bash
-npm install
+npm ci
 npm run typecheck
 npm run build
 npm run test
