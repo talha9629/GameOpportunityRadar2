@@ -10,6 +10,7 @@ on:
       - 'scripts/collect-apple-radar.mjs'
       - 'scripts/validate-radar-data.mjs'
       - 'scripts/build-research-queue.mjs'
+      - 'scripts/enrich-research-queue.mjs'
       - 'scripts/validate-research-queue.mjs'
       - '.github/workflows/apple-radar.yml'
 
@@ -43,6 +44,12 @@ jobs:
           APPBRAIN_API_KEY: ${{ secrets.APPBRAIN_API_KEY }}
           APPBRAIN_DAILY_CREDIT_CAP: '10'
         run: node scripts/build-research-queue.mjs
+      - name: Attach live listing evidence packs to top candidates
+        env:
+          RADAR_ANALYZE_ENDPOINT: https://gajkwzgxfjlvdbzrvdqn.supabase.co/functions/v1/analyze-game
+          RADAR_PUBLISHABLE_KEY: sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg
+          RADAR_EVIDENCE_PACK_CAP: '8'
+        run: node scripts/enrich-research-queue.mjs
       - name: Validate research queue provenance and budget
         run: node scripts/validate-research-queue.mjs
       - name: Write run summary
@@ -53,13 +60,13 @@ jobs:
           const q = JSON.parse(fs.readFileSync('public/data/research/latest.json', 'utf8'));
           console.log('## Automated Research Queue');
           console.log('');
-          console.log(`Radar date: **${q.radarDate}** · Apple charts: **${q.sources.appleCharts.status}** · AppBrain: **${q.sources.appBrain.status}**`);
+          console.log(`Radar date: **${q.radarDate}** · Apple charts: **${q.sources.appleCharts.status}** · live evidence: **${q.sources.liveAnalyzer?.status ?? 'not-run'}** · AppBrain: **${q.sources.appBrain.status}**`);
           console.log('');
-          console.log('| # | Title | Priority | First-party reasons |');
-          console.log('|---:|---|---:|---|');
-          for (const c of q.candidates.slice(0, 8)) console.log(`| ${c.queueRank} | ${c.name.replaceAll('|', '\\|')} | ${c.researchPriority} | ${c.reasonCodes.join(', ')} |`);
+          console.log('| # | Title | Priority | Listing facts | Unknowns | First-party reasons |');
+          console.log('|---:|---|---:|---:|---:|---|');
+          for (const c of q.candidates.slice(0, 8)) console.log(`| ${c.queueRank} | ${c.name.replaceAll('|', '\\|')} | ${c.researchPriority} | ${c.analysisEvidence?.listingFindingCount ?? 0} | ${c.analysisEvidence?.unknownCount ?? '—'} | ${c.reasonCodes.join(', ')} |`);
           console.log('');
-          console.log('Priority is deterministic research ordering from Apple chart evidence, not a success probability or build recommendation.');
+          console.log('Priority is deterministic research ordering from Apple chart evidence, not a success probability or build recommendation. Listing facts remain listing-derived until gameplay evidence verifies them.');
           NODE
       - name: Commit snapshot and research queue safely
         run: |
