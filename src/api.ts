@@ -2,8 +2,10 @@ import {
   AnalysisResultSchema,
   CandidateSearchResultSchema,
   GameInputSchema,
+  ReviewStateSchema,
   type AnalysisResult,
   type CandidateSearchResult,
+  type ReviewState,
 } from './domain';
 import type { DecisionResult, Scorecard } from './decision';
 import {
@@ -27,6 +29,19 @@ import {
   type SavedReviewPayload,
   type SavedReviewSummary,
 } from './reviews';
+import {
+  DEEP_VERIFY_BUCKET,
+  DeepVerifyEventDraftSchema,
+  DeepVerifyVideoPayloadSchema,
+  DeepVerifyVideoSummaryRowSchema,
+  DeepVerifyVideoSummarySchema,
+  normalizeYoutubeUrl,
+  sanitizeEvidenceFileName,
+  validateUploadEvidence,
+  type DeepVerifyEventDraft,
+  type DeepVerifyVideoPayload,
+  type DeepVerifyVideoSummary,
+} from './deepVerify';
 import { hasSupabaseConfig, supabase } from './lib/supabase';
 
 function requireSupabase() {
@@ -36,10 +51,15 @@ function requireSupabase() {
   return supabase;
 }
 
-async function requireOwner() {
+async function requireOwnerContext() {
   const client = requireSupabase();
   const { data: userData, error: userError } = await client.auth.getUser();
   if (userError || !userData.user) throw new Error('Owner sign-in is required for this cloud action.');
+  return { client, user: userData.user };
+}
+
+async function requireOwner() {
+  const { client } = await requireOwnerContext();
   return client;
 }
 
@@ -173,4 +193,163 @@ export async function loadReviewSample(sampleId: string): Promise<SavedReviewPay
   if (error) throw error;
   if (!data) throw new Error('Saved review sample was not found or is not accessible to this owner.');
   return SavedReviewPayloadSchema.parse(data);
+}
+
+export async function uploadDeepVerifyVideo(
+  label: string,
+  storeId: string,
+  file: File,
+  durationSeconds: number,
+): Promise<string> {
+  const { client, user } = await requireOwnerContext();
+  const trimmedLabel = label.trim();
+  if (!trimmedLabel) throw new Error('An evidence label is required before uploading.');
+  validateUploadEvidence({ sizeBytes: file.size, mimeType: file.type, durationSeconds });
+
+  const storagePath = `${user.id}/${crypto.randomUUID()}/${sanitizeEvidenceFileName(file.name)}`;
+  const { error: uploadError } = await client.storage.from(DEEP_VERIFY_BUCKET).upload(storagePath, file, {
+    cacheControl: '3600',
+    contentType: file.type,
+    upsert: false,
+  });
+  if (uploadError) throw uploadError;
+
+  try {
+    const { data, error } = await client.rpc('register_deep_verify_video', {
+      p_label: trimmedLabel,
+      p_store_id: storeId.trim() || null,
+      p_source_type: 'upload',
+      p_storage_path: storagePath,
+      p_external_url: null,
+      p_original_name: file.name,
+      p_mime_type: file.type,
+      p_size_bytes: file.size,
+      p_duration_seconds: durationSeconds,
+    });
+    if (error) throw error;
+    if (typeof data !== 'string' || data.length < 10) throw new Error('Deep Verify registration returned an invalid evidence ID.');
+    return data;
+  } catch (error) {
+    const cleanup = await client.storage.from(DEEP_VERIFY_BUCKET).remove([storagePath]);
+    if (cleanup.error) {
+      throw new Error(`Evidence registration failed and uploaded-file cleanup also failed: ${cleanup.error.message}`);
+    }
+    throw error;
+  }
+}
+
+export async function registerDeepVerifyYoutube(label: string, storeId: string, url: string): Promise<string> {
+  const client = await requireOwner();
+  const trimmedLabel = label.trim();
+  if (!trimmedLabel) throw new Error('An evidence label is required before saving.');
+  const normalizedUrl = normalizeYoutubeUrl(url);
+  const { data, error } = await client.rpc('register_deep_verify_video', {
+    p_label: trimmedLabel,
+    p_store_id: storeId.trim() || null,
+    p_source_type: 'youtube_url',
+    p_storage_path: null,
+    p_external_url: normalizedUrl,
+    p_original_name: null,
+    p_mime_type: null,
+    p_size_bytes: null,
+    p_duration_seconds: null,
+  });
+  if (error) throw error;
+  if (typeof data !== 'string' || data.length < 10) throw new Error('Deep Verify registration returned an invalid evidence ID.');
+  return data;
+}
+
+export async function listDeepVerifyVideos(): Promise<DeepVerifyVideoSummary[]> {
+  const client = requireSupabase();
+  const { data: userData, error: userError } = await client.auth.getUser();
+  if (userError || !userData.user) return [];
+  const { data, error } = await client.rpc('list_deep_verify_videos');
+  if (error) throw error;
+  return (Array.isArray(data) ? data : []).map((raw) => {
+    const row = DeepVerifyVideoSummaryRowSchema.parse(raw);
+    return DeepVerifyVideoSummarySchema.parse({
+      videoId: row.video_id,
+      label: row.label,
+      canonicalName: row.canonical_name,
+      storeId: row.store_id,
+      sourceType: row.source_type,
+      status: row.status,
+      provider: row.provider,
+      model: row.model,
+      originalName: row.original_name,
+      sizeBytes: row.size_bytes,
+      durationSeconds: row.duration_seconds,
+      deleteAfter: row.delete_after,
+      createdAt: row.created_at,
+      eventCount: row.event_count,
+    });
+  });
+}
+
+export async function loadDeepVerifyVideo(videoId: string): Promise<DeepVerifyVideoPayload> {
+  const client = await requireOwner();
+  const parsedId = DeepVerifyVideoSummarySchema.shape.videoId.parse(videoId);
+  const { data, error } = await client.rpc('load_deep_verify_video', { p_video_id: parsedId });
+  if (error) throw error;
+  if (!data) throw new Error('Deep Verify evidence was not found or is not accessible to this owner.');
+  return DeepVerifyVideoPayloadSchema.parse(data);
+}
+
+export async function createDeepVerifyPreviewUrl(storagePath: string): Promise<string> {
+  const client = await requireOwner();
+  const path = storagePath.trim();
+  if (!path) throw new Error('This evidence record has no uploaded storage path.');
+  const { data, error } = await client.storage.from(DEEP_VERIFY_BUCKET).createSignedUrl(path, 15 * 60);
+  if (error) throw error;
+  if (!data.signedUrl) throw new Error('Could not create a temporary private preview URL.');
+  return data.signedUrl;
+}
+
+export async function addDeepVerifyEvent(videoId: string, draft: DeepVerifyEventDraft): Promise<string> {
+  const client = await requireOwner();
+  const parsedVideoId = DeepVerifyVideoSummarySchema.shape.videoId.parse(videoId);
+  const parsed = DeepVerifyEventDraftSchema.parse(draft);
+  const { data, error } = await client.from('deep_verify_events').insert({
+    video_id: parsedVideoId,
+    event_key: parsed.eventKey,
+    label: parsed.label,
+    claim: parsed.claim,
+    start_seconds: parsed.startSeconds,
+    end_seconds: parsed.endSeconds,
+    origin: parsed.origin,
+    interpretation: parsed.interpretation,
+    coverage: parsed.coverage,
+    review_state: 'unreviewed',
+    confidence: parsed.confidence,
+    evidence_note: parsed.evidenceNote,
+  }).select('id').single();
+  if (error) throw error;
+  if (!data?.id) throw new Error('Timestamped evidence save returned no event ID.');
+  return String(data.id);
+}
+
+export async function reviewDeepVerifyEvent(eventId: string, state: ReviewState): Promise<void> {
+  const client = await requireOwner();
+  const parsedState = ReviewStateSchema.parse(state);
+  const { error } = await client.from('deep_verify_events').update({
+    review_state: parsedState,
+    reviewed_at: parsedState === 'unreviewed' ? null : new Date().toISOString(),
+  }).eq('id', eventId);
+  if (error) throw error;
+}
+
+export async function deleteDeepVerifyEvent(eventId: string): Promise<void> {
+  const client = await requireOwner();
+  const { error } = await client.from('deep_verify_events').delete().eq('id', eventId);
+  if (error) throw error;
+}
+
+export async function deleteDeepVerifyVideo(video: DeepVerifyVideoPayload): Promise<void> {
+  const client = await requireOwner();
+  if (video.sourceType === 'upload' && video.storagePath) {
+    const { error: storageError } = await client.storage.from(DEEP_VERIFY_BUCKET).remove([video.storagePath]);
+    if (storageError) throw storageError;
+  }
+  const { error } = await client.from('deep_verify_videos').delete().eq('id', video.videoId);
+  if (error) throw error;
 }
