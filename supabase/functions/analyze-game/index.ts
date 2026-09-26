@@ -1,4 +1,3 @@
-import { createClient } from 'npm:@supabase/supabase-js@2.58.0';
 import { z } from 'npm:zod@4.1.11';
 
 const InputSchema = z.object({ input: z.string().trim().min(2).max(500) });
@@ -21,9 +20,6 @@ Deno.serve(async (request) => {
   if (request.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
 
   try {
-    const authHeader = request.headers.get('Authorization');
-    if (!authHeader) throw new Error('Authentication required.');
-
     const body = InputSchema.parse(await request.json());
     if (isGooglePlayInput(body.input)) {
       return Response.json({
@@ -43,49 +39,6 @@ Deno.serve(async (request) => {
     const item = payload?.results?.[0];
     if (!item?.trackId || !item?.trackName || !item?.trackViewUrl) throw new Error('No matching iOS game was found.');
 
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
-    const anonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
-    const supabase = createClient(supabaseUrl, anonKey, { global: { headers: { Authorization: authHeader } } });
-
-    const { data: existingStore } = await supabase
-      .from('store_apps')
-      .select('id, game_id')
-      .eq('platform', 'ios')
-      .eq('store_id', String(item.trackId))
-      .maybeSingle();
-
-    let gameId = existingStore?.game_id as string | undefined;
-    if (!gameId) {
-      const { data: game, error: gameError } = await supabase
-        .from('games')
-        .insert({ canonical_name: item.trackName, publisher: item.sellerName ?? item.artistName ?? null })
-        .select('id')
-        .single();
-      if (gameError) throw gameError;
-      gameId = game.id;
-
-      const { error: storeError } = await supabase.from('store_apps').insert({
-        game_id: gameId,
-        platform: 'ios',
-        store_id: String(item.trackId),
-        store_url: item.trackViewUrl,
-      });
-      if (storeError) throw storeError;
-    }
-
-    const { data: observation, error: observationError } = await supabase
-      .from('observations')
-      .insert({
-        game_id: gameId,
-        origin: 'official_public',
-        source_name: 'Apple iTunes Search/Lookup',
-        source_url: endpoint,
-        raw_value: item,
-      })
-      .select('id')
-      .single();
-    if (observationError) throw observationError;
-
     const directFindings = [
       ['publisher', 'Publisher', item.sellerName ?? item.artistName ?? 'Unknown'],
       ['rating', 'Current store rating', item.averageUserRating != null ? String(item.averageUserRating) : 'Unknown'],
@@ -94,38 +47,21 @@ Deno.serve(async (request) => {
       ['version_release_date', 'Current version release', item.currentVersionReleaseDate ?? 'Unknown'],
     ];
 
-    const responseFindings = [];
-    for (const [key, label, value] of directFindings) {
+    const responseFindings = directFindings.map(([key, label, value]) => {
       const coverage = value === 'Unknown' ? 'unknown' : 'verified';
-      const { data: finding, error: findingError } = await supabase
-        .from('findings')
-        .insert({
-          game_id: gameId,
-          key,
-          label,
-          value: { text: value },
-          origin: 'official_public',
-          interpretation: 'direct',
-          coverage,
-          confidence: coverage === 'verified' ? 1 : 0,
-        })
-        .select('id, review_state')
-        .single();
-      if (findingError) throw findingError;
-      await supabase.from('finding_evidence').insert({ finding_id: finding.id, observation_id: observation.id });
-      responseFindings.push({
-        id: finding.id,
+      return {
+        id: crypto.randomUUID(),
         key,
         label,
         value,
         origin: 'official_public',
         interpretation: 'direct',
         coverage,
-        reviewState: finding.review_state,
+        reviewState: 'unreviewed',
         confidence: coverage === 'verified' ? 1 : 0,
-        evidenceLabel: 'Apple store metadata captured in this analysis run',
-      });
-    }
+        evidenceLabel: 'Apple store metadata returned in this analysis request',
+      };
+    });
 
     const game = {
       platform: 'ios',
