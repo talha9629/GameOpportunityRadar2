@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-26T18:10:29.095Z",
+  "currentDate": "2026-09-26",
+  "comparisonDate": "2026-09-25",
+  "status": "history_pending",
+  "statement": "This digest reports exact observed changes between dated research queues. It does not predict success, downloads, revenue, or causal demand.",
+  "summary": {
+    "currentCandidateCount": 12,
+    "changeCount": 0,
+    "attentionCount": 0,
+    "newCandidates": 0,
+    "droppedCandidates": 0,
+    "marketChanges": 0,
+    "maturityEvents": 0
+  },
+  "limitations": [
+    "No previous exact-date queue means history_pending, not zero change.",
+    "Priority changes reflect deterministic triage inputs, not changes in probability of commercial success.",
+    "Dropped-from-queue is a triage state only and is not a claim about installs, revenue, retention or product quality.",
+    "RISING/FALLING lifecycle states are only emitted when an exact 3-day rank comparison exists."
+  ],
+  "changes": [],
+  "states": [
+    {
+      "appId": "6761760135",
+      "name": "Meowdoku!",
+      "queueRank": 1,
+      "researchPriority": 67,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "6752672568",
+      "name": "Block Out! - Color Sort Puzzle",
+      "queueRank": 2,
+      "researchPriority": 67,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "1623318294",
+      "name": "Gossip Harbor®: Merge & Story",
+      "queueRank": 3,
+      "researchPriority": 67,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "596402997",
+      "name": "Minion Rush: Running game",
+      "queueRank": 4,
+      "researchPriority": 67,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "1498019884",
+      "name": "Castlevania: 40th Anniversary",
+      "queueRank": 5,
+      "researchPriority": 67,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "6748084174",
+      "name": "Smash Fest!",
+      "queueRank": 6,
+      "researchPriority": 61,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
+      "queueRank": 7,
+      "researchPriority": 61,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "6779167923",
+      "name": "Colony Flow!",
+      "queueRank": 8,
+      "researchPriority": 61,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "6468921495",
+      "name": "Vita Mahjong",
+      "queueRank": 9,
+      "researchPriority": 61,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "6759763476",
+      "name": "Bus Traffic Fever!",
+      "queueRank": 10,
+      "researchPriority": 61,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "queueRank": 11,
+      "researchPriority": 61,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    },
+    {
+      "appId": "6499209744",
+      "name": "Magic Sort!",
+      "queueRank": 12,
+      "researchPriority": 61,
+      "state": "INSUFFICIENT_HISTORY",
+      "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
+    }
+  ]
+}
