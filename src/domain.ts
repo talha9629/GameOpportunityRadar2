@@ -83,5 +83,6 @@ export const AnalysisResultSchema = z.object({
   findings: z.array(FindingSchema),
   unknowns: z.array(z.string()),
   sourceMode: z.enum(['automated', 'assisted', 'manual']),
+  rawSource: z.record(z.string(), z.unknown()).optional(),
 });
 export type AnalysisResult = z.infer<typeof AnalysisResultSchema>;
