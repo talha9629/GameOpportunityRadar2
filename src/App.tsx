@@ -48,10 +48,11 @@ function LoginPanel() {
     if (!supabase) return;
     setBusy(true);
     setMessage(null);
+    const redirectUrl = window.location.href.split('#')[0].split('?')[0];
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: window.location.origin,
+        emailRedirectTo: redirectUrl,
         shouldCreateUser: false,
       },
     });
@@ -160,10 +161,10 @@ export function App() {
       <section className="panel analyze-panel">
         <div>
           <h2>Analyze a Game</h2>
-          <p>Paste an App Store URL, Google Play URL, store ID, package ID or title.</p>
+          <p>For the reliable M1 path, paste an App Store URL or numeric Apple store ID. Title search is provisional; Google Play remains assisted until an approved Android source is integrated.</p>
         </div>
         <div className="search-row">
-          <input value={input} onChange={(event) => setInput(event.target.value)} placeholder="https://apps.apple.com/... or Meowdoku" />
+          <input value={input} onChange={(event) => setInput(event.target.value)} placeholder="https://apps.apple.com/... or 123456789" />
           <button className="primary" disabled={busy || input.trim().length < 2} onClick={submit}>
             <Search size={18} /> {busy ? 'Analyzing…' : 'Analyze'}
           </button>
@@ -174,7 +175,7 @@ export function App() {
       {!result && (
         <section className="empty-state panel">
           <h3>M1 acceptance target</h3>
-          <p>Apple inputs resolve automatically through the server-side analyzer. Unsupported Android enrichment must return an explicit assisted/manual requirement rather than invented data.</p>
+          <p>Apple URL/store-ID inputs resolve automatically through the server-side analyzer. Unsupported Android enrichment must return an explicit assisted/manual requirement rather than invented data.</p>
         </section>
       )}
 
