@@ -14,7 +14,10 @@ import { getOwnerUser, subscribeOwnerAuth } from './auth';
 
 type View = 'today' | 'verification' | 'analyze' | 'competitors' | 'reviews' | 'deep-verify' | 'policy' | 'saved';
 
-type DeepVerifySeed = VerificationCaptureSession | null;
+type DeepVerifySeed = {
+  session: VerificationCaptureSession;
+  initialVideoId: string | null;
+} | null;
 
 export function App() {
   const [view, setView] = useState<View>('today');
@@ -47,10 +50,12 @@ export function App() {
     setView('analyze');
   }
 
-  function openDeepVerify(session: VerificationCaptureSession) {
-    setDeepVerifySeed(session);
+  function openDeepVerify(session: VerificationCaptureSession, videoId?: string) {
+    setDeepVerifySeed({ session, initialVideoId: videoId ?? null });
     setView('deep-verify');
   }
+
+  const deepVerifySession = deepVerifySeed?.session ?? null;
 
   return (
     <main className="page-shell">
@@ -78,21 +83,24 @@ export function App() {
       {view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
       {view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
       {view === 'deep-verify' && <>
-        {deepVerifySeed && <div className="history-banner">
-          <strong>Verification session S{deepVerifySeed.sessionOrder}: {deepVerifySeed.name}</strong>
-          <span>Apple ID {deepVerifySeed.appId} · {deepVerifySeed.taskCount} atomic evidence gap{deepVerifySeed.taskCount === 1 ? '' : 's'} will be linked to this capture when it is saved.</span>
+        {deepVerifySession && <div className="history-banner">
+          <strong>Verification session S{deepVerifySession.sessionOrder}: {deepVerifySession.name}</strong>
+          <span>{deepVerifySeed?.initialVideoId
+            ? `Opening the latest saved source linked to ${deepVerifySession.taskCount} atomic evidence gap${deepVerifySession.taskCount === 1 ? '' : 's'}.`
+            : `Apple ID ${deepVerifySession.appId} · ${deepVerifySession.taskCount} atomic evidence gap${deepVerifySession.taskCount === 1 ? '' : 's'} will be linked to this capture when it is saved.`}</span>
         </div>}
         <DeepVerifyWorkspace
-          key={deepVerifySeed ? `${deepVerifySeed.sessionId}:${deepVerifySeed.source.researchGeneratedAt}` : 'manual'}
+          key={deepVerifySession ? `${deepVerifySession.sessionId}:${deepVerifySession.source.researchGeneratedAt}:${deepVerifySeed?.initialVideoId ?? 'collect'}` : 'manual'}
           ownerEmail={owner?.email ?? null}
-          initialStoreId={deepVerifySeed?.appId ?? ''}
-          initialLabel={deepVerifySeed ? `${deepVerifySeed.name} gameplay verification` : ''}
-          verificationSession={deepVerifySeed ? {
-            sessionId: deepVerifySeed.sessionId,
-            taskIds: deepVerifySeed.taskIds,
-            unknowns: deepVerifySeed.unknowns,
-            categories: deepVerifySeed.categories,
-            researchGeneratedAt: deepVerifySeed.source.researchGeneratedAt,
+          initialStoreId={deepVerifySession?.appId ?? ''}
+          initialLabel={deepVerifySession ? `${deepVerifySession.name} gameplay verification` : ''}
+          initialVideoId={deepVerifySeed?.initialVideoId ?? null}
+          verificationSession={deepVerifySession ? {
+            sessionId: deepVerifySession.sessionId,
+            taskIds: deepVerifySession.taskIds,
+            unknowns: deepVerifySession.unknowns,
+            categories: deepVerifySession.categories,
+            researchGeneratedAt: deepVerifySession.source.researchGeneratedAt,
           } : null}
         />
       </>}
