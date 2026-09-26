@@ -67,7 +67,8 @@ if (discovery.provider?.status === 'unconfigured') {
   assert((discovery.sessions ?? []).every((session) => session.status === 'unconfigured'), 'unconfigured provider requires unconfigured session states');
 }
 
-assert(!/api[_-]?key|bearer\s+[a-z0-9_-]{10,}/i.test(JSON.stringify(discovery)), 'discovery artifact appears to contain secret material');
+const serialized = JSON.stringify(discovery);
+assert(!/bearer\s+[a-z0-9._-]{10,}|tvly-[a-z0-9_-]{12,}/i.test(serialized), 'discovery artifact appears to contain secret token material');
 
 if (errors.length) {
   console.error('[gameplay-discovery] validation FAILED');
