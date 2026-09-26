@@ -47,6 +47,26 @@ jobs:
       - name: Validate data health semantics
         run: node scripts/validate-data-health.mjs
 
+      - name: Write policy confirmation summary
+        shell: bash
+        run: |
+          node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const fs = require('fs');
+          const index = JSON.parse(fs.readFileSync('public/data/policy/index.json', 'utf8'));
+          const health = JSON.parse(fs.readFileSync('public/data/health/latest.json', 'utf8'));
+          const changes = index.sources.flatMap((source) => source.changes ?? []);
+          const confirmed = changes.filter((change) => change.confirmationStatus === 'confirmed_repeat').length;
+          const legacy = changes.filter((change) => change.confirmationStatus === 'legacy_unconfirmed').length;
+          const pending = index.sources.filter((source) => source.pendingCandidate).length;
+          console.log('## Policy Watch');
+          console.log('');
+          console.log(`Sources: **${index.freshCount}/${index.sourceCount} fresh** · fetch run: **${index.runStatus}**`);
+          console.log(`Confirmed repeated changes: **${confirmed}** · pending changed hashes: **${pending}** · legacy unconfirmed records: **${legacy}**`);
+          console.log(`Data Health: **${health.overall}** · essential pipelines: **${health.essentialHealthy}/${health.essentialCount} healthy**`);
+          console.log('');
+          console.log('A policy change is reviewable only after the same changed content is observed again at least 60 minutes later. Pending and legacy-unconfirmed hashes never count as confirmed policy changes.');
+          NODE
+
       - name: Commit policy evidence and health when changed
         id: commit
         shell: bash
