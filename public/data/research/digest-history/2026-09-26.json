@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T19:03:00.948Z",
+  "generatedAt": "2026-09-26T19:15:15.777Z",
   "currentDate": "2026-09-26",
   "comparisonDate": "2026-09-25",
   "status": "history_pending",
@@ -63,16 +63,16 @@
       "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
     },
     {
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 6,
       "researchPriority": 61,
       "state": "INSUFFICIENT_HISTORY",
       "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
     },
     {
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
+      "appId": "6748084174",
+      "name": "Smash Fest!",
       "queueRank": 7,
       "researchPriority": 61,
       "state": "INSUFFICIENT_HISTORY",
@@ -95,16 +95,16 @@
       "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
     },
     {
-      "appId": "6759763476",
-      "name": "Bus Traffic Fever!",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
       "queueRank": 10,
       "researchPriority": 61,
       "state": "INSUFFICIENT_HISTORY",
       "evidence": "Only 1 observed day(s); no 3-day direction is claimed."
     },
     {
-      "appId": "6793924927",
-      "name": "Rotate Rings",
+      "appId": "6759763476",
+      "name": "Bus Traffic Fever!",
       "queueRank": 11,
       "researchPriority": 61,
       "state": "INSUFFICIENT_HISTORY",
