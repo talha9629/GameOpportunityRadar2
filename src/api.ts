@@ -6,6 +6,13 @@ import {
   type CandidateSearchResult,
 } from './domain';
 import type { DecisionResult, Scorecard } from './decision';
+import {
+  SavedDossierPayloadSchema,
+  SavedDossierSummaryRowSchema,
+  SavedDossierSummarySchema,
+  type SavedDossierPayload,
+  type SavedDossierSummary,
+} from './saved';
 import { hasSupabaseConfig, supabase } from './lib/supabase';
 
 function requireSupabase() {
@@ -59,4 +66,43 @@ export async function saveDossier(result: AnalysisResult, scorecard: Scorecard, 
     throw new Error('The dossier save completed without a valid analysis run ID.');
   }
   return data;
+}
+
+export async function listSavedDossiers(): Promise<SavedDossierSummary[]> {
+  const client = requireSupabase();
+  const { data: userData, error: userError } = await client.auth.getUser();
+  if (userError || !userData.user) return [];
+
+  const { data, error } = await client.rpc('list_saved_dossiers');
+  if (error) throw error;
+
+  return (Array.isArray(data) ? data : []).map((raw) => {
+    const row = SavedDossierSummaryRowSchema.parse(raw);
+    return SavedDossierSummarySchema.parse({
+      runId: row.run_id,
+      gameId: row.game_id,
+      canonicalName: row.canonical_name,
+      publisher: row.publisher,
+      platform: row.platform,
+      storeId: row.store_id,
+      decisionStatus: row.decision_status,
+      reviewedCount: row.reviewed_count,
+      findingCount: row.finding_count,
+      savedAt: row.saved_at,
+    });
+  });
+}
+
+export async function loadSavedDossier(runId: string): Promise<SavedDossierPayload> {
+  const client = requireSupabase();
+  const parsedRunId = SavedDossierSummarySchema.shape.runId.parse(runId);
+  const { data: userData, error: userError } = await client.auth.getUser();
+  if (userError || !userData.user) {
+    throw new Error('Owner sign-in is required before loading a saved dossier.');
+  }
+
+  const { data, error } = await client.rpc('load_saved_dossier', { p_run_id: parsedRunId });
+  if (error) throw error;
+  if (!data) throw new Error('Saved dossier was not found or is not accessible to this owner.');
+  return SavedDossierPayloadSchema.parse(data);
 }
