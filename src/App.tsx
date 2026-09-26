@@ -76,8 +76,13 @@ export function App() {
       {view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
       {view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
       {view === 'deep-verify' && <>
-        {deepVerifySeed && <div className="history-banner"><strong>Verification target: {deepVerifySeed.name}</strong><span>Apple ID {deepVerifySeed.appId}. Use this target when saving the gameplay evidence below.</span></div>}
-        <DeepVerifyWorkspace key={deepVerifySeed ? `${deepVerifySeed.appId}:${deepVerifySeed.name}` : 'manual'} ownerEmail={owner?.email ?? null} />
+        {deepVerifySeed && <div className="history-banner"><strong>Verification target: {deepVerifySeed.name}</strong><span>Apple ID {deepVerifySeed.appId} and the evidence label are prefilled below.</span></div>}
+        <DeepVerifyWorkspace
+          key={deepVerifySeed ? `${deepVerifySeed.appId}:${deepVerifySeed.name}` : 'manual'}
+          ownerEmail={owner?.email ?? null}
+          initialStoreId={deepVerifySeed?.appId ?? ''}
+          initialLabel={deepVerifySeed ? `${deepVerifySeed.name} gameplay verification` : ''}
+        />
       </>}
       {view === 'policy' && <PolicyWatch ownerEmail={owner?.email ?? null} />}
     </main>
