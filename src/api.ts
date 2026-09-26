@@ -32,6 +32,7 @@ import {
 import {
   DEEP_VERIFY_BUCKET,
   DeepVerifyEventDraftSchema,
+  DeepVerifyVerificationSessionSchema,
   DeepVerifyVideoPayloadSchema,
   DeepVerifyVideoSummaryRowSchema,
   DeepVerifyVideoSummarySchema,
@@ -39,6 +40,7 @@ import {
   sanitizeEvidenceFileName,
   validateUploadEvidence,
   type DeepVerifyEventDraft,
+  type DeepVerifyVerificationSession,
   type DeepVerifyVideoPayload,
   type DeepVerifyVideoSummary,
 } from './deepVerify';
@@ -195,11 +197,23 @@ export async function loadReviewSample(sampleId: string): Promise<SavedReviewPay
   return SavedReviewPayloadSchema.parse(data);
 }
 
+function verificationRegistrationArgs(session: DeepVerifyVerificationSession) {
+  const parsed = DeepVerifyVerificationSessionSchema.parse(session);
+  return {
+    p_verification_session_id: parsed.sessionId,
+    p_verification_task_ids: parsed.taskIds,
+    p_verification_unknowns: parsed.unknowns,
+    p_verification_categories: parsed.categories,
+    p_verification_research_generated_at: parsed.researchGeneratedAt,
+  };
+}
+
 export async function uploadDeepVerifyVideo(
   label: string,
   storeId: string,
   file: File,
   durationSeconds: number,
+  verificationSession: DeepVerifyVerificationSession | null = null,
 ): Promise<string> {
   const { client, user } = await requireOwnerContext();
   const trimmedLabel = label.trim();
@@ -215,7 +229,7 @@ export async function uploadDeepVerifyVideo(
   if (uploadError) throw uploadError;
 
   try {
-    const { data, error } = await client.rpc('register_deep_verify_video', {
+    const baseArgs = {
       p_label: trimmedLabel,
       p_store_id: storeId.trim() || null,
       p_source_type: 'upload',
@@ -225,7 +239,13 @@ export async function uploadDeepVerifyVideo(
       p_mime_type: file.type,
       p_size_bytes: file.size,
       p_duration_seconds: durationSeconds,
-    });
+    };
+    const { data, error } = verificationSession
+      ? await client.rpc('register_deep_verify_video_with_session', {
+          ...baseArgs,
+          ...verificationRegistrationArgs(verificationSession),
+        })
+      : await client.rpc('register_deep_verify_video', baseArgs);
     if (error) throw error;
     if (typeof data !== 'string' || data.length < 10) throw new Error('Deep Verify registration returned an invalid evidence ID.');
     return data;
@@ -238,12 +258,17 @@ export async function uploadDeepVerifyVideo(
   }
 }
 
-export async function registerDeepVerifyYoutube(label: string, storeId: string, url: string): Promise<string> {
+export async function registerDeepVerifyYoutube(
+  label: string,
+  storeId: string,
+  url: string,
+  verificationSession: DeepVerifyVerificationSession | null = null,
+): Promise<string> {
   const client = await requireOwner();
   const trimmedLabel = label.trim();
   if (!trimmedLabel) throw new Error('An evidence label is required before saving.');
   const normalizedUrl = normalizeYoutubeUrl(url);
-  const { data, error } = await client.rpc('register_deep_verify_video', {
+  const baseArgs = {
     p_label: trimmedLabel,
     p_store_id: storeId.trim() || null,
     p_source_type: 'youtube_url',
@@ -253,7 +278,13 @@ export async function registerDeepVerifyYoutube(label: string, storeId: string, 
     p_mime_type: null,
     p_size_bytes: null,
     p_duration_seconds: null,
-  });
+  };
+  const { data, error } = verificationSession
+    ? await client.rpc('register_deep_verify_video_with_session', {
+        ...baseArgs,
+        ...verificationRegistrationArgs(verificationSession),
+      })
+    : await client.rpc('register_deep_verify_video', baseArgs);
   if (error) throw error;
   if (typeof data !== 'string' || data.length < 10) throw new Error('Deep Verify registration returned an invalid evidence ID.');
   return data;
@@ -280,6 +311,7 @@ export async function listDeepVerifyVideos(): Promise<DeepVerifyVideoSummary[]> 
       sizeBytes: row.size_bytes,
       durationSeconds: row.duration_seconds,
       deleteAfter: row.delete_after,
+      sourceDeletedAt: row.source_deleted_at ?? null,
       createdAt: row.created_at,
       eventCount: row.event_count,
     });
