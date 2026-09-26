@@ -43,9 +43,8 @@ describe('analyzeReviewSample', () => {
     expect(() => analyzeReviewSample(' \n ')).toThrow(/at least one/i);
   });
 
-  it('caps processing at 500 supplied review rows', () => {
-    const input = Array.from({ length: 520 }, (_, index) => `Great game ${index}`).join('\n');
-    const result = analyzeReviewSample(input);
-    expect(result.entries).toHaveLength(500);
+  it('rejects samples over 500 rows instead of silently dropping evidence', () => {
+    const input = Array.from({ length: 501 }, (_, index) => `Great game ${index}`).join('\n');
+    expect(() => analyzeReviewSample(input)).toThrow(/maximum 500/i);
   });
 });
