@@ -11,5 +11,7 @@ export function requestDeepVerifyByAppId(appId: string) {
 
 export function subscribeDeepVerifyRequests(listener: DeepVerifyRequestListener) {
   deepVerifyListeners.add(listener);
-  return () => deepVerifyListeners.delete(listener);
+  return () => {
+    deepVerifyListeners.delete(listener);
+  };
 }
