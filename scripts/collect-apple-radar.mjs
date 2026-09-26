@@ -55,12 +55,13 @@ function addHistory(entry, previousMarket, sameDay) {
     return { ...entry, priorRank: null, delta: null, firstObserved: today, daysObserved: 1, bestObservedRank: entry.rank, events: ['NEW ENTRY'] };
   }
 
+  const firstDayReplacement = sameDay && prior.firstObserved === today && (prior.daysObserved ?? 1) === 1;
   const bestBefore = prior.bestObservedRank ?? prior.rank;
-  const bestObservedRank = Math.min(bestBefore, entry.rank);
+  const bestObservedRank = firstDayReplacement ? entry.rank : Math.min(bestBefore, entry.rank);
   const comparisonRank = sameDay ? prior.priorRank : prior.rank;
   const events = [];
   if (sameDay && prior.firstObserved === today && prior.events?.includes('NEW ENTRY')) events.push('NEW ENTRY');
-  if (entry.rank < bestBefore) events.push('NEW HIGH');
+  if (!firstDayReplacement && entry.rank < bestBefore) events.push('NEW HIGH');
   if (comparisonRank != null && comparisonRank > 10 && entry.rank <= 10) events.push('TOP 10');
 
   return {
