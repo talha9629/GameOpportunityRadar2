@@ -50,6 +50,34 @@ const AppBrainEstimateSchema = z.object({
   infoRefreshTime: z.union([z.string(), z.number()]).nullable(),
 });
 
+const CompactFindingSchema = z.object({
+  key: z.string().min(1),
+  label: z.string().min(1),
+  value: z.string(),
+  origin: z.string().min(1),
+  interpretation: z.string().min(1),
+  coverage: z.string().min(1),
+  confidence: z.number().min(0).max(1).nullable(),
+  evidenceLabel: z.string().min(10),
+});
+
+const AnalysisEvidenceSchema = z.object({
+  source: z.literal('live_analyze_game'),
+  sourceOrigin: z.literal('official_public'),
+  sourceMode: z.literal('automated'),
+  observedAt: z.string(),
+  endpointClass: z.string(),
+  canonicalName: z.string(),
+  publisher: z.string().nullable(),
+  findingCount: z.number().int().min(5),
+  unknownCount: z.number().int().min(5),
+  verifiedDirectFindingCount: z.number().int().nonnegative(),
+  listingFindingCount: z.number().int().nonnegative(),
+  findings: z.array(CompactFindingSchema).min(5),
+  unknowns: z.array(z.string()).min(5),
+  nextAction: z.string().min(20),
+});
+
 export const ResearchCandidateSchema = z.object({
   queueRank: z.number().int().positive(),
   appId: z.string().min(5),
@@ -88,6 +116,7 @@ export const ResearchCandidateSchema = z.object({
   }),
   appleMetadata: AppleMetadataSchema.nullable(),
   appBrainEstimate: AppBrainEstimateSchema.nullable(),
+  analysisEvidence: AnalysisEvidenceSchema.nullable().optional(),
   nextVerification: z.array(z.string()),
 });
 
@@ -124,6 +153,16 @@ export const ResearchQueueSchema = z.object({
       failures: z.array(z.object({ appId: z.string(), error: z.string() })),
       note: z.string(),
     }),
+    liveAnalyzer: z.object({
+      status: z.enum(['disabled', 'complete', 'partial', 'failed']),
+      origin: z.literal('official_public'),
+      endpoint: z.string(),
+      cap: z.number().int().min(0).max(8),
+      attempted: z.number().int().nonnegative(),
+      succeeded: z.number().int().nonnegative(),
+      failures: z.array(z.object({ appId: z.string(), name: z.string(), error: z.string() })),
+      note: z.string(),
+    }).optional(),
   }),
   limitations: z.array(z.string()).min(3),
   candidates: z.array(ResearchCandidateSchema).max(12),
