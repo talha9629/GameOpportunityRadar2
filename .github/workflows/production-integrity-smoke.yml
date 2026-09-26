@@ -1,0 +1,35 @@
+name: Production persistence integrity
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query live Radar integrity report
+        id: integrity
+        shell: bash
+        run: |
+          set -euo pipefail
+          RESPONSE=$(curl --fail --silent --show-error \
+            --request POST \
+            'https://gajkwzgxfjlvdbzrvdqn.supabase.co/rest/v1/rpc/radar_integrity_report' \
+            --header 'apikey: sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg' \
+            --header 'Content-Type: application/json' \
+            --data '{}')
+          echo "Integrity report: $RESPONSE"
+          REPORT="$RESPONSE" node - <<'NODE'
+          const report = JSON.parse(process.env.REPORT || '{}');
+          if (report.ok !== true) {
+            console.error('Production persistence integrity failed:', report);
+            process.exit(1);
+          }
+          if (typeof report.savedDossierRuns !== 'number') {
+            console.error('Integrity report shape is invalid:', report);
+            process.exit(1);
+          }
+          console.log(`Production integrity PASS · saved dossiers: ${report.savedDossierRuns}`);
+          NODE
