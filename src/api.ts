@@ -1,4 +1,4 @@
-import { AnalysisResultSchema, GameInputSchema, type AnalysisResult, type ReviewState } from './domain';
+import { AnalysisResultSchema, GameInputSchema, type AnalysisResult } from './domain';
 import { hasSupabaseConfig, supabase } from './lib/supabase';
 
 export async function analyzeGame(input: string): Promise<AnalysisResult> {
@@ -14,15 +14,4 @@ export async function analyzeGame(input: string): Promise<AnalysisResult> {
 
   if (error) throw error;
   return AnalysisResultSchema.parse(data);
-}
-
-export async function setFindingReviewState(findingId: string, reviewState: ReviewState) {
-  if (!supabase) throw new Error('Supabase is not configured.');
-
-  const { error } = await supabase
-    .from('findings')
-    .update({ review_state: reviewState, reviewed_at: new Date().toISOString() })
-    .eq('id', findingId);
-
-  if (error) throw error;
 }
