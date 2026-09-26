@@ -1,0 +1,70 @@
+.owner-access {
+  min-width: 250px;
+  display: grid;
+  gap: 6px;
+}
+
+.owner-signin-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) auto;
+  gap: 7px;
+}
+
+.owner-signin-row input {
+  min-width: 0;
+  padding: 9px 11px;
+  font-size: 13px;
+}
+
+.owner-signin-row button,
+.owner-access.signed-in button {
+  white-space: nowrap;
+  padding: 9px 11px;
+  font-size: 12px;
+}
+
+.owner-access small {
+  color: #8ea1bd;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.owner-note {
+  opacity: .9;
+}
+
+.owner-access.signed-in {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.owner-access.signed-in > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.owner-access.signed-in span {
+  color: #86efac;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 800;
+}
+
+.owner-access.signed-in strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.owner-access.signed-in small {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 820px) {
+  .owner-access { min-width: 0; width: 100%; }
+  .owner-signin-row { grid-template-columns: 1fr; }
+  .owner-access.signed-in { grid-template-columns: 1fr auto; }
+}
