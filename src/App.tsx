@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { Analyze } from './Analyze';
 import { Competitors } from './Competitors';
+import { DeepVerify } from './DeepVerify';
 import { ReviewSamples } from './ReviewSamples';
 import { SavedDossiers } from './SavedDossiers';
 import { Today } from './Today';
 import { OwnerAccess } from './OwnerAccess';
 import { getOwnerUser, subscribeOwnerAuth } from './auth';
 
-type View = 'today' | 'analyze' | 'competitors' | 'reviews' | 'saved';
+type View = 'today' | 'analyze' | 'competitors' | 'reviews' | 'deep-verify' | 'saved';
 
 export function App() {
   const [view, setView] = useState<View>('today');
@@ -53,7 +54,7 @@ export function App() {
           <button className={view === 'saved' ? 'active' : ''} onClick={() => setView('saved')}>Saved Dossiers</button>
           <button className={view === 'competitors' ? 'active' : ''} onClick={() => setView('competitors')}>Competitors</button>
           <button className={view === 'reviews' ? 'active' : ''} onClick={() => setView('reviews')}>Reviews</button>
-          <button disabled title="Next milestone">Deep Verify</button>
+          <button className={view === 'deep-verify' ? 'active' : ''} onClick={() => setView('deep-verify')}>Deep Verify</button>
         </div>
         <OwnerAccess user={owner} />
       </nav>
@@ -62,6 +63,7 @@ export function App() {
       {view === 'saved' && <SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} />}
       {view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
       {view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
+      {view === 'deep-verify' && <DeepVerify ownerEmail={owner?.email ?? null} />}
     </main>
   );
 }
