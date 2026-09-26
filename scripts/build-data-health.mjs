@@ -61,7 +61,9 @@ const historyState = maturityDays >= 7 ? 'healthy' : 'maturing';
 const policyAgeHours = hoursSince(policy.generatedAt, now);
 const policyFresh = policy.freshCount ?? 0;
 const policyFailures = policy.failureCount ?? 0;
-const detectedPolicyChanges = (policy.sources ?? []).reduce((sum, source) => sum + (Array.isArray(source?.changes) ? source.changes.length : 0), 0);
+const confirmedPolicyChanges = (policy.sources ?? []).reduce((sum, source) => sum + (source?.changes ?? []).filter((change) => change?.confirmationStatus === 'confirmed_repeat').length, 0);
+const legacyUnconfirmedPolicyChanges = (policy.sources ?? []).reduce((sum, source) => sum + (source?.changes ?? []).filter((change) => change?.confirmationStatus !== 'confirmed_repeat').length, 0);
+const pendingPolicyCandidates = (policy.sources ?? []).filter((source) => Boolean(source?.pendingCandidate)).length;
 const policyState = policy.__readError || policyAgeHours == null || policyAgeHours > 168 || policyFresh === 0
   ? 'blocked'
   : policyAgeHours > 48 || policyFailures > 0 || policy.runStatus !== 'complete'
@@ -100,7 +102,8 @@ const components = [
   component('policy_watch', 'Policy Watch Sources', policyState, [
     `${policyFresh}/${policy.sourceCount ?? 0} fresh official source(s)`,
     `${policyFailures} fetch failure(s)`,
-    `${detectedPolicyChanges} detected hash change(s) in retained source history`,
+    `${confirmedPolicyChanges} stability-confirmed policy change(s)`,
+    `${pendingPolicyCandidates} pending hash candidate(s); ${legacyUnconfirmedPolicyChanges} setup-era transition(s) quarantined`,
     policyAgeHours == null ? 'policy age unknown' : `${policyAgeHours.toFixed(1)}h policy-index age`,
     'Owner review state is stored in Supabase and is not inferred from this public health report.',
   ], policyState === 'healthy' ? null : 'Inspect Policy Watch source failures/freshness before relying on policy coverage.'),
@@ -124,6 +127,7 @@ if (topCandidate?.analysisEvidence?.unknowns?.some((value) => /core mechanic has
   recommendedActions.push({ priority: 3, action: 'DEEP_VERIFY_TOP_CANDIDATE', appId: topCandidate.appId, name: topCandidate.name, why: 'The highest-priority candidate still has an explicit gameplay-verification unknown.' });
 }
 if (maturityDays < 3) recommendedActions.push({ priority: 4, action: 'KEEP_COLLECTING_EXACT_HISTORY', why: `Only ${maturityDays} exact daily snapshot(s) exist; no 3-day direction should be claimed yet.` });
+if (confirmedPolicyChanges > 0) recommendedActions.push({ priority: 5, action: 'CHECK_CONFIRMED_POLICY_REVIEW_STATE', why: `${confirmedPolicyChanges} stability-confirmed official-source transition(s) exist; the public health report cannot infer whether the owner already reviewed them.` });
 if (appBrainStatus === 'unconfigured') recommendedActions.push({ priority: 9, action: 'OPTIONAL_CONFIGURE_APPBRAIN', why: 'Adds capped third-party estimate context but is not required for first-party triage.' });
 recommendedActions.sort((a, b) => a.priority - b.priority);
 
@@ -140,11 +144,14 @@ const output = {
     radarDate: dateOnly(radar.generatedAt),
     researchQueueDate: queue.radarDate ?? null,
     exactHistoryDays: maturityDays,
-    policyDetectedChangeCount: detectedPolicyChanges,
+    policyDetectedChangeCount: confirmedPolicyChanges,
+    confirmedPolicyChanges,
+    pendingPolicyCandidates,
+    legacyUnconfirmedPolicyChanges,
     appBrainConfigured: appBrainStatus !== 'unconfigured',
   },
 };
 
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(latestPath, `${JSON.stringify(output, null, 2)}\n`);
-console.log(`[data-health] ${overall} · essential ${output.essentialHealthy}/${output.essentialCount} healthy · history ${maturityDays}/7 · actions ${recommendedActions.length}`);
+console.log(`[data-health] ${overall} · essential ${output.essentialHealthy}/${output.essentialCount} healthy · history ${maturityDays}/7 · confirmed-policy ${confirmedPolicyChanges} · pending-policy ${pendingPolicyCandidates} · actions ${recommendedActions.length}`);
