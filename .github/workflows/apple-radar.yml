@@ -12,6 +12,8 @@ on:
       - 'scripts/build-research-queue.mjs'
       - 'scripts/enrich-research-queue.mjs'
       - 'scripts/validate-research-queue.mjs'
+      - 'scripts/build-research-digest.mjs'
+      - 'scripts/validate-research-digest.mjs'
       - '.github/workflows/apple-radar.yml'
 
 permissions:
@@ -52,15 +54,21 @@ jobs:
         run: node scripts/enrich-research-queue.mjs
       - name: Validate research queue provenance and budget
         run: node scripts/validate-research-queue.mjs
+      - name: Build exact-date research change digest
+        run: node scripts/build-research-digest.mjs
+      - name: Validate research digest semantics
+        run: node scripts/validate-research-digest.mjs
       - name: Write run summary
         shell: bash
         run: |
           node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
           const fs = require('fs');
           const q = JSON.parse(fs.readFileSync('public/data/research/latest.json', 'utf8'));
+          const d = JSON.parse(fs.readFileSync('public/data/research/digest.json', 'utf8'));
           console.log('## Automated Research Queue');
           console.log('');
           console.log(`Radar date: **${q.radarDate}** · Apple charts: **${q.sources.appleCharts.status}** · live evidence: **${q.sources.liveAnalyzer?.status ?? 'not-run'}** · AppBrain: **${q.sources.appBrain.status}**`);
+          console.log(`Daily digest: **${d.status}** · ${d.summary.changeCount} exact-date change(s) · ${d.summary.attentionCount} attention item(s)`);
           console.log('');
           console.log('| # | Title | Priority | Listing facts | Unknowns | First-party reasons |');
           console.log('|---:|---|---:|---:|---:|---|');
@@ -68,7 +76,7 @@ jobs:
           console.log('');
           console.log('Priority is deterministic research ordering from Apple chart evidence, not a success probability or build recommendation. Listing facts remain listing-derived until gameplay evidence verifies them.');
           NODE
-      - name: Commit snapshot and research queue safely
+      - name: Commit snapshot, queue and digest safely
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
