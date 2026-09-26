@@ -166,7 +166,7 @@ Deno.serve(async (request) => {
       videoUri = signed.signedUrl;
     }
 
-    const model = Deno.env.get('GEMINI_VIDEO_MODEL')?.trim() || 'gemini-3.5-flash-lite';
+    const model = Deno.env.get('GEMINI_VIDEO_MODEL')?.trim() || 'gemini-3.8-flash';
     const { data: run, error: runError } = await supabase.from('analysis_runs').insert({
       owner_id: userData.user.id,
       game_id: video.game_id,
@@ -272,13 +272,16 @@ Rules:
     }).eq('id', runId);
     if (completeRunError) throw completeRunError;
 
+    const deletionEligibleAt = video.source_type === 'upload'
+      ? new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+      : null;
     const { error: completeVideoError } = await supabase.from('deep_verify_videos').update({
       status: 'completed',
       provider: 'gemini',
       model,
       error_code: null,
       error_message: null,
-      delete_after: video.source_type === 'upload' ? new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() : null,
+      delete_after: deletionEligibleAt,
       updated_at: completedAt,
     }).eq('id', video.id);
     if (completeVideoError) throw completeVideoError;
@@ -292,7 +295,7 @@ Rules:
       unknowns: result.unknowns,
       eventCount: result.events.length,
       estimatedCostUsd,
-      deletionEligibleAt: video.source_type === 'upload' ? new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString() : null,
+      deletionEligibleAt,
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unexpected Deep Verify analysis failure.';
