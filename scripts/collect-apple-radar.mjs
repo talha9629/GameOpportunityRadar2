@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 // Daily public-chart collector. Each market persists independently so one failure never discards the others.
-// The scheduled run is the source of truth for rank observations; manual reruns are safe and auditable.
+// The scheduled run is the source of truth for rank observations; same-day manual reruns are idempotent.
 const markets = { us: 'United States', gb: 'United Kingdom', ca: 'Canada', au: 'Australia' };
 const root = path.resolve('public/data/radar');
 const latestPath = path.join(root, 'latest.json');
@@ -12,10 +12,10 @@ function readPrevious() {
   try { return JSON.parse(fs.readFileSync(latestPath, 'utf8')); } catch { return { markets: {} }; }
 }
 
-function legacyEntry(entry, rank) {
+function legacyEntry(entry, index) {
   const images = Array.isArray(entry?.['im:image']) ? entry['im:image'] : [];
   return {
-    rank,
+    rank: index + 1,
     appId: String(entry?.id?.attributes?.['im:id'] ?? ''),
     name: entry?.['im:name']?.label ?? 'Unknown',
     publisher: entry?.['im:artist']?.label ?? 'Unknown',
@@ -49,26 +49,34 @@ async function fetchMarket(country) {
   }
 }
 
-function addHistory(entry, previous) {
-  const prior = previous?.entries?.find((item) => item.appId === entry.appId);
-  const bestBefore = prior?.bestObservedRank ?? prior?.rank ?? null;
-  const bestObservedRank = bestBefore == null ? entry.rank : Math.min(bestBefore, entry.rank);
+function addHistory(entry, previousMarket, sameDay) {
+  const prior = previousMarket?.entries?.find((item) => item.appId === entry.appId);
+  if (!prior) {
+    return { ...entry, priorRank: null, delta: null, firstObserved: today, daysObserved: 1, bestObservedRank: entry.rank, events: ['NEW ENTRY'] };
+  }
+
+  const bestBefore = prior.bestObservedRank ?? prior.rank;
+  const bestObservedRank = Math.min(bestBefore, entry.rank);
+  const comparisonRank = sameDay ? prior.priorRank : prior.rank;
   const events = [];
-  if (!prior) events.push('NEW ENTRY');
-  if (prior && entry.rank < bestBefore) events.push('NEW HIGH');
-  if (prior && prior.rank > 10 && entry.rank <= 10) events.push('TOP 10');
+  if (sameDay && prior.firstObserved === today && prior.events?.includes('NEW ENTRY')) events.push('NEW ENTRY');
+  if (entry.rank < bestBefore) events.push('NEW HIGH');
+  if (comparisonRank != null && comparisonRank > 10 && entry.rank <= 10) events.push('TOP 10');
+
   return {
     ...entry,
-    priorRank: prior?.rank ?? null,
-    delta: prior ? prior.rank - entry.rank : null,
-    firstObserved: prior?.firstObserved ?? today,
-    daysObserved: prior ? (prior.daysObserved ?? 1) + 1 : 1,
+    priorRank: comparisonRank ?? null,
+    delta: comparisonRank != null ? comparisonRank - entry.rank : null,
+    firstObserved: prior.firstObserved ?? today,
+    daysObserved: sameDay ? (prior.daysObserved ?? 1) : (prior.daysObserved ?? 1) + 1,
     bestObservedRank,
     events,
   };
 }
 
 const previous = readPrevious();
+const previousDate = typeof previous.generatedAt === 'string' ? previous.generatedAt.slice(0, 10) : null;
+const sameDay = previousDate === today;
 const output = { schemaVersion: 1, generatedAt: new Date().toISOString(), chart: 'top-free', category: 'Games', markets: {} };
 
 for (const [country, label] of Object.entries(markets)) {
@@ -77,7 +85,7 @@ for (const [country, label] of Object.entries(markets)) {
     output.markets[country] = {
       country, label, status: 'ok', sourceMode: snapshot.sourceMode, sourceUrl: snapshot.sourceUrl,
       gameFocused: snapshot.gameFocused, warning: snapshot.warning ?? null,
-      entries: snapshot.entries.map((entry) => addHistory(entry, previous.markets?.[country])),
+      entries: snapshot.entries.map((entry) => addHistory(entry, previous.markets?.[country], sameDay)),
     };
   } catch (error) {
     output.markets[country] = { country, label, status: 'failed', error: String(error), entries: [] };
@@ -87,5 +95,5 @@ for (const [country, label] of Object.entries(markets)) {
 fs.mkdirSync(path.join(root, 'history'), { recursive: true });
 fs.writeFileSync(latestPath, JSON.stringify(output, null, 2) + '\n');
 fs.writeFileSync(path.join(root, 'history', `${today}.json`), JSON.stringify(output, null, 2) + '\n');
-console.log(`Radar snapshot written for ${today}`);
+console.log(`Radar snapshot written for ${today} (sameDay=${sameDay})`);
 for (const market of Object.values(output.markets)) console.log(`${market.country}: ${market.status} ${market.entries.length} entries ${market.sourceMode ?? ''}`);
