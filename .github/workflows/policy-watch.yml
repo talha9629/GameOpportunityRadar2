@@ -9,8 +9,6 @@ on:
     paths:
       - 'scripts/collect-policy-watch.mjs'
       - 'scripts/validate-policy-watch.mjs'
-      - 'scripts/build-data-health.mjs'
-      - 'scripts/validate-data-health.mjs'
       - '.github/workflows/policy-watch.yml'
 
 permissions:
