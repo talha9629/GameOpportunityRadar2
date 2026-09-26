@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { Analyze } from './Analyze';
 import { Competitors } from './Competitors';
+import { ReviewSamples } from './ReviewSamples';
 import { SavedDossiers } from './SavedDossiers';
 import { Today } from './Today';
 import { OwnerAccess } from './OwnerAccess';
 import { getOwnerUser, subscribeOwnerAuth } from './auth';
 
-type View = 'today' | 'analyze' | 'competitors' | 'saved';
+type View = 'today' | 'analyze' | 'competitors' | 'reviews' | 'saved';
 
 export function App() {
   const [view, setView] = useState<View>('today');
@@ -51,6 +52,7 @@ export function App() {
           <button className={view === 'analyze' ? 'active' : ''} onClick={() => openAnalyze()}>Analyze Game</button>
           <button className={view === 'saved' ? 'active' : ''} onClick={() => setView('saved')}>Saved Dossiers</button>
           <button className={view === 'competitors' ? 'active' : ''} onClick={() => setView('competitors')}>Competitors</button>
+          <button className={view === 'reviews' ? 'active' : ''} onClick={() => setView('reviews')}>Reviews</button>
           <button disabled title="Next milestone">Deep Verify</button>
         </div>
         <OwnerAccess user={owner} />
@@ -59,6 +61,7 @@ export function App() {
       {view === 'analyze' && <Analyze key={savedRunId ?? analyzeSeed ?? 'manual'} initialInput={analyzeSeed ?? ''} initialRunId={savedRunId} ownerEmail={owner?.email ?? null} />}
       {view === 'saved' && <SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} />}
       {view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
+      {view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
     </main>
   );
 }
