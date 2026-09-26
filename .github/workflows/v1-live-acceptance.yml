@@ -1,0 +1,38 @@
+name: V1 live acceptance
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 6 * * 1'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/v1-live-acceptance.mjs'
+      - '.github/workflows/v1-live-acceptance.yml'
+      - 'supabase/functions/analyze-game/**'
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Exercise frozen acceptance titles against live Radar backend
+        env:
+          RADAR_ANALYZE_ENDPOINT: https://gajkwzgxfjlvdbzrvdqn.supabase.co/functions/v1/analyze-game
+          RADAR_PUBLISHABLE_KEY: sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg
+        run: node scripts/v1-live-acceptance.mjs
+      - name: Upload acceptance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v1-live-acceptance
+          path: v1-live-acceptance.json
+          if-no-files-found: error
