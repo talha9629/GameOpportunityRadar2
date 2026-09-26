@@ -1,0 +1,26 @@
+.research-queue-panel { display: grid; gap: 14px; }
+.research-queue-note { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: #9fb0c8; font-size: 12px; }
+.research-queue-note span { border: 1px solid #2b405e; border-radius: 999px; padding: 5px 8px; }
+.research-queue-note .estimate-off { color: #fde68a; border-color: #74531d; }
+.research-queue-list { display: grid; }
+.research-queue-row { display: grid; grid-template-columns: 42px 48px minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #1b2b42; }
+.research-queue-row:last-child { border-bottom: 0; }
+.research-queue-row img { width: 42px; height: 42px; border-radius: 10px; object-fit: cover; }
+.queue-priority { display: grid; justify-items: center; gap: 2px; }
+.queue-priority strong { font-size: 18px; color: #7dd3fc; }
+.queue-priority small { color: #71849f; font-size: 9px; text-transform: uppercase; letter-spacing: .06em; }
+.queue-game { min-width: 0; display: grid; gap: 4px; }
+.queue-game strong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.queue-game > span { color: #8194ae; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.queue-facts { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 3px; }
+.queue-facts span { color: #c9d8ed; border: 1px solid #304563; border-radius: 999px; padding: 3px 6px; font-size: 10px; }
+.queue-reasons { display: flex; flex-wrap: wrap; gap: 5px; max-width: 260px; justify-content: flex-end; }
+.queue-reasons span { font-size: 9px; color: #9fdcf8; border: 1px solid #28587a; background: #0a2033; border-radius: 999px; padding: 4px 6px; white-space: nowrap; }
+.queue-estimate { display: grid; gap: 2px; text-align: right; min-width: 100px; }
+.queue-estimate strong { color: #fde68a; font-size: 12px; }
+.queue-estimate small { color: #7f92ad; font-size: 9px; text-transform: uppercase; }
+@media (max-width: 900px) {
+  .research-queue-row { grid-template-columns: 42px 42px minmax(0, 1fr) auto; }
+  .queue-reasons { grid-column: 3 / -1; justify-content: flex-start; max-width: none; }
+  .queue-estimate { display: none; }
+}
