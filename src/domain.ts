@@ -49,6 +49,21 @@ export const StoreGameSchema = z.object({
 });
 export type StoreGame = z.infer<typeof StoreGameSchema>;
 
+export const StoreCandidateSchema = z.object({
+  storeId: z.string().min(1),
+  canonicalName: z.string().min(1),
+  publisher: z.string().nullable(),
+  storeUrl: z.string().url(),
+  iconUrl: z.string().url().nullable(),
+});
+export type StoreCandidate = z.infer<typeof StoreCandidateSchema>;
+
+export const CandidateSearchResultSchema = z.object({
+  query: z.string(),
+  candidates: z.array(StoreCandidateSchema).min(1),
+});
+export type CandidateSearchResult = z.infer<typeof CandidateSearchResultSchema>;
+
 export const FindingSchema = z.object({
   id: z.string(),
   key: z.string(),
