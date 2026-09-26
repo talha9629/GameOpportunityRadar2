@@ -1,4 +1,4 @@
-import { Clock3, Database, SearchCheck, Users, Video } from 'lucide-react';
+import { Clock3, Database, ExternalLink, SearchCheck, Users, Video } from 'lucide-react';
 import type { VerificationCaptureSession, VerificationQueue, VerificationTask } from './verificationQueue';
 import {
   evidenceCountForSession,
@@ -9,6 +9,11 @@ import {
   resolvedTaskCount,
   type VerificationTaskResolution,
 } from './verificationResolution';
+import {
+  discoveryForSession,
+  type GameplayDiscovery,
+  type GameplayDiscoverySession,
+} from './gameplayDiscovery';
 import './verificationQueue.css';
 
 function TaskIcon({ task }: { task: VerificationTask }) {
@@ -26,15 +31,31 @@ function stateLabel(task: VerificationTask) {
   return 'EVIDENCE NEEDED';
 }
 
+function SourceSuggestions({ discovery }: { discovery: GameplayDiscoverySession }) {
+  if (discovery.status !== 'found' || discovery.candidates.length === 0) return null;
+  return <div className="verification-source-suggestions">
+    <div>
+      <strong>Suggested public gameplay sources</strong>
+      <span>Search candidates only · not verified evidence</span>
+    </div>
+    {discovery.candidates.map((candidate) => <a key={candidate.url} href={candidate.url} target="_blank" rel="noreferrer">
+      <ExternalLink size={14} />
+      <span><b>{candidate.title}</b>{candidate.snippet && <small>{candidate.snippet}</small>}</span>
+    </a>)}
+  </div>;
+}
+
 function CaptureSession({
   session,
   evidence,
   resolutions,
+  discovery,
   onDeepVerify,
 }: {
   session: VerificationCaptureSession;
   evidence: VerificationSessionEvidence[];
   resolutions: VerificationTaskResolution[];
+  discovery: GameplayDiscoverySession | null;
   onDeepVerify: (session: VerificationCaptureSession, videoId?: string) => void;
 }) {
   const latest = latestEvidenceForSession(evidence, session.sessionId);
@@ -65,6 +86,7 @@ function CaptureSession({
           return <li key={session.taskIds[index]}>{resolved ? `Resolved: ${unknown}` : unknown}</li>;
         })}
       </ul>
+      {!latest && discovery && <SourceSuggestions discovery={discovery} />}
       <small>{fullyResolved
         ? 'This is an owner review overlay. The canonical generated queue remains unchanged and the cited source/findings remain the evidence authority.'
         : latest
@@ -75,6 +97,7 @@ function CaptureSession({
       <span>{session.impact} impact</span>
       <button onClick={() => onDeepVerify(session, latest?.videoId)}>{latest ? 'Open saved evidence' : 'Collect evidence'}</button>
       {latest && <em>{latest.sourceType === 'upload' ? 'Private upload' : 'YouTube source'} · {latest.status.replaceAll('_', ' ')}</em>}
+      {!latest && discovery?.status === 'found' && <em>{discovery.candidates.length} public source suggestion{discovery.candidates.length === 1 ? '' : 's'}</em>}
     </div>
   </div>;
 }
@@ -83,16 +106,20 @@ export function VerificationQueuePanel({
   queue,
   evidence,
   resolutions,
+  discovery,
   evidenceError = null,
   resolutionError = null,
+  discoveryError = null,
   onDeepVerify,
   onCompetitors,
 }: {
   queue: VerificationQueue;
   evidence: VerificationSessionEvidence[];
   resolutions: VerificationTaskResolution[];
+  discovery: GameplayDiscovery | null;
   evidenceError?: string | null;
   resolutionError?: string | null;
+  discoveryError?: string | null;
   onDeepVerify: (session: VerificationCaptureSession, videoId?: string) => void;
   onCompetitors: () => void;
 }) {
@@ -102,6 +129,7 @@ export function VerificationQueuePanel({
   const sessionsWithEvidence = queue.captureSessions.filter((session) => evidenceCountForSession(evidence, session.sessionId) > 0).length;
   const fullyResolvedSessions = queue.captureSessions.filter((session) => resolvedTaskCount(resolutions, session.taskIds) === session.taskCount).length;
   const resolvedVideoTasks = resolvedTaskCount(resolutions, queue.captureSessions.flatMap((session) => session.taskIds));
+  const sessionsWithSuggestions = discovery?.sessions.filter((session) => session.status === 'found' && session.candidates.length > 0).length ?? 0;
 
   return <section className="panel verification-queue-panel">
     <div className="section-heading">
@@ -118,18 +146,34 @@ export function VerificationQueuePanel({
       <span><b>{resolvedVideoTasks}</b> human-resolved video tasks</span>
       <span><b>{fullyResolvedSessions}</b> fully resolved sessions</span>
       <span><b>{sessionsWithEvidence}</b> sessions with evidence</span>
+      <span><b>{sessionsWithSuggestions}</b> sessions with source suggestions</span>
       <span><b>{queue.summary.autoWaiting}</b> automated waiting</span>
     </div>
 
+    {discovery && <div className="verification-discovery-status">
+      <span>Public gameplay discovery · <b>{discovery.provider.status}</b></span>
+      <span>Tavily Basic · {discovery.provider.creditsUsedThisRun}/{discovery.provider.dailyCreditCap} credit budget this run</span>
+      <span>Suggestions never resolve evidence gaps automatically.</span>
+    </div>}
+    {discovery?.provider.status === 'unconfigured' && <div className="verification-progress-warning">Optional public gameplay discovery is not configured. Add the GitHub Actions secret <code>TAVILY_API_KEY</code> to enable bounded source suggestions; the Verification Queue and Deep Verify remain fully usable without it.</div>}
+    {discovery && ['partial', 'failed'].includes(discovery.provider.status) && <div className="verification-progress-warning">Public gameplay discovery was {discovery.provider.status}. Existing verification work remains valid; failed searches did not create or resolve evidence.</div>}
     {evidenceError && <div className="verification-progress-warning">Generated verification work is still available, but owner evidence progress could not be loaded: {evidenceError}</div>}
     {resolutionError && <div className="verification-progress-warning">Generated verification work and saved evidence are still available, but human task resolutions could not be loaded: {resolutionError}</div>}
+    {discoveryError && <div className="verification-progress-warning">Verification work remains available, but public gameplay suggestions are unavailable: {discoveryError}</div>}
 
     <div className="verification-session-heading">
       <div><strong>Evidence collection sessions</strong><span>One representative gameplay/menu capture can be reviewed against every atomic gap listed in that session. Owner evidence and resolution overlays never rewrite the generated queue.</span></div>
       <b>{queue.captureSessions.length - fullyResolvedSessions} session{queue.captureSessions.length - fullyResolvedSessions === 1 ? '' : 's'} still have open gaps</b>
     </div>
     <div className="verification-list verification-session-list">
-      {queue.captureSessions.map((session) => <CaptureSession key={session.sessionId} session={session} evidence={evidence} resolutions={resolutions} onDeepVerify={onDeepVerify} />)}
+      {queue.captureSessions.map((session) => <CaptureSession
+        key={session.sessionId}
+        session={session}
+        evidence={evidence}
+        resolutions={resolutions}
+        discovery={discoveryForSession(discovery, session.sessionId)}
+        onDeepVerify={onDeepVerify}
+      />)}
     </div>
 
     <div className="verification-session-heading secondary">
@@ -153,6 +197,6 @@ export function VerificationQueuePanel({
       </div>)}
     </div>
 
-    <p className="verification-boundary">Human resolved means an owner explicitly cited a category-matched timestamped finding already marked human-confirmed. Evidence collection alone never resolves a task. The canonical generated queue remains immutable and all resolution state is stored separately with source provenance.</p>
+    <p className="verification-boundary">Search candidates are third-party public source suggestions, not gameplay findings. Human resolved means an owner explicitly cited a category-matched timestamped finding already marked human-confirmed. Evidence collection alone never resolves a task. The canonical generated queue remains immutable and all resolution state is stored separately with source provenance.</p>
   </section>;
 }
