@@ -1,0 +1,28 @@
+.verification-queue-panel { display: grid; gap: 14px; }
+.verification-summary { display: flex; flex-wrap: wrap; gap: 8px; }
+.verification-summary span { border: 1px solid #2b405e; border-radius: 999px; padding: 5px 8px; color: #9fb0c8; font-size: 11px; }
+.verification-summary b { color: #e6eef9; }
+.verification-list { display: grid; gap: 8px; }
+.verification-task { display: grid; grid-template-columns: 34px 34px minmax(0,1fr) 150px; gap: 10px; align-items: start; padding: 12px; border: 1px solid #273b56; border-radius: 12px; background: #0c1726; }
+.verification-task.impact-critical { border-color: #74531d; }
+.verification-task.impact-high { border-color: #35506f; }
+.verification-order { color: #7f92ad; font-size: 11px; padding-top: 3px; }
+.verification-icon { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid #2f4764; border-radius: 9px; color: #7dd3fc; }
+.verification-copy { display: grid; gap: 4px; min-width: 0; }
+.verification-title { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.verification-title strong { color: #edf5ff; }
+.verification-title span { font-size: 9px; letter-spacing: .05em; color: #91c9e8; border: 1px solid #315778; border-radius: 999px; padding: 3px 6px; }
+.verification-copy > b { color: #bfdbfe; font-size: 12px; }
+.verification-copy p { margin: 0; color: #d3deed; font-size: 12px; line-height: 1.45; }
+.verification-copy small { color: #879bb4; line-height: 1.45; }
+.verification-action { display: grid; gap: 7px; justify-items: stretch; }
+.verification-action > span { text-align: right; color: #8ea3bd; font-size: 10px; text-transform: uppercase; }
+.verification-action button { border: 1px solid #365a7c; background: #10253a; color: #d8eeff; border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+.verification-action button:hover { background: #15304a; }
+.verification-action em { color: #86efac; font-size: 11px; font-style: normal; text-align: right; }
+.verification-boundary { margin: 0; padding: 10px 12px; border: 1px dashed #344965; border-radius: 10px; color: #8fa4be; font-size: 11px; line-height: 1.5; }
+@media (max-width: 900px) {
+  .verification-task { grid-template-columns: 28px 30px minmax(0,1fr); }
+  .verification-action { grid-column: 3; grid-template-columns: 1fr auto; align-items: center; }
+  .verification-action > span, .verification-action em { text-align: left; }
+}
