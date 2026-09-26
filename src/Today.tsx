@@ -12,6 +12,8 @@ import {
   type RankWindowChange,
 } from './radar';
 import { loadResearchQueue, primaryMomentum, type ResearchQueue } from './researchQueue';
+import { loadResearchDigest, type ResearchDigest } from './researchDigest';
+import { ResearchDigestPanel } from './ResearchDigestPanel';
 import './researchQueue.css';
 
 function Movement({ entry }: { entry: RadarEntry }) {
@@ -136,13 +138,15 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
   const [snapshot, setSnapshot] = useState<RadarSnapshot | null>(null);
   const [history, setHistory] = useState<RadarSnapshot[]>([]);
   const [researchQueue, setResearchQueue] = useState<ResearchQueue | null>(null);
+  const [researchDigest, setResearchDigest] = useState<ResearchDigest | null>(null);
   const [queueError, setQueueError] = useState<string | null>(null);
+  const [digestError, setDigestError] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedMarket, setSelectedMarket] = useState('us');
 
   async function refresh() {
-    setLoading(true); setError(null); setQueueError(null);
+    setLoading(true); setError(null); setQueueError(null); setDigestError(null);
     try {
       const window = await loadRadarWindow(8);
       setSnapshot(window.latest);
@@ -155,6 +159,12 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
     } catch (err) {
       setResearchQueue(null);
       setQueueError(err instanceof Error ? err.message : 'Research queue has not been generated yet.');
+    }
+    try {
+      setResearchDigest(await loadResearchDigest());
+    } catch (err) {
+      setResearchDigest(null);
+      setDigestError(err instanceof Error ? err.message : 'Research digest has not been generated yet.');
     } finally {
       setLoading(false);
     }
@@ -201,6 +211,9 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
         {hasFallback && (
           <div className="warning-banner"><AlertTriangle size={18} /><span>At least one market fell back to Apple’s overall Top Free chart because the games-category RSS was unavailable. Those ranks are explicitly labeled and must not be read as Games-category rank.</span></div>
         )}
+
+        {researchDigest && <ResearchDigestPanel digest={researchDigest} onAnalyze={onAnalyze} />}
+        {!researchDigest && digestError && <div className="history-banner"><strong>Daily change digest pending.</strong><span>{digestError} The next Apple Radar run will generate it from exact dated queue evidence.</span></div>}
 
         {researchQueue && <ResearchQueuePanel queue={researchQueue} onAnalyze={onAnalyze} />}
         {!researchQueue && queueError && <div className="history-banner"><strong>Automated research queue pending.</strong><span>{queueError} The next Apple Radar run will generate it from the latest verified chart evidence.</span></div>}
