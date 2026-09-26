@@ -1,18 +1,202 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T17:24:00.000Z",
-  "runStatus": "failed",
+  "generatedAt": "2026-09-26T17:33:24.055Z",
+  "runStatus": "complete",
   "sourceCount": 8,
-  "freshCount": 0,
-  "failureCount": 8,
+  "freshCount": 8,
+  "failureCount": 0,
   "sources": [
-    {"id":"apple-app-review-guidelines","vendor":"apple","title":"Apple App Review Guidelines","category":"store_review","critical":true,"url":"https://developer.apple.com/app-store/review/guidelines/","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
-    {"id":"apple-kids-safety","vendor":"apple","title":"Apple kids and age-appropriate experiences","category":"kids_privacy","critical":true,"url":"https://developer.apple.com/kids/","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
-    {"id":"apple-age-ratings","vendor":"apple","title":"Apple age ratings values and definitions","category":"age_rating","critical":true,"url":"https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
-    {"id":"google-play-policy-index","vendor":"google","title":"Google Play Central Policy Resource","category":"policy_index","critical":true,"url":"https://support.google.com/googleplay/android-developer/answer/15759508?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
-    {"id":"google-play-families","vendor":"google","title":"Google Play Families policies","category":"kids_privacy","critical":true,"url":"https://support.google.com/googleplay/android-developer/answer/9893335?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
-    {"id":"google-play-ads","vendor":"google","title":"Google Play Ads policy","category":"ads_monetization","critical":true,"url":"https://support.google.com/googleplay/android-developer/answer/9857753?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
-    {"id":"google-play-spam","vendor":"google","title":"Google Play Spam and repetitive content policy","category":"copycat_quality","critical":true,"url":"https://support.google.com/googleplay/android-developer/answer/9899034?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
-    {"id":"google-play-policy-deadlines","vendor":"google","title":"Google Play Policy Deadlines","category":"deadlines","critical":true,"url":"https://support.google.com/googleplay/android-developer/table/12921780?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]}
+    {
+      "id": "apple-app-review-guidelines",
+      "vendor": "apple",
+      "title": "Apple App Review Guidelines",
+      "category": "store_review",
+      "critical": true,
+      "url": "https://developer.apple.com/app-store/review/guidelines/",
+      "fetchStatus": "fresh",
+      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "error": null,
+      "current": {
+        "hash": "d957cc623cde14a507aaff047effc7fd6e3fa7607da71da4d32753f5dbb192f2",
+        "path": "data/policy/snapshots/apple-app-review-guidelines/d957cc623cde14a507aaff047effc7fd6e3fa7607da71da4d32753f5dbb192f2.json",
+        "fetchedAt": "2026-09-26T17:33:24.055Z"
+      },
+      "history": [
+        {
+          "hash": "d957cc623cde14a507aaff047effc7fd6e3fa7607da71da4d32753f5dbb192f2",
+          "path": "data/policy/snapshots/apple-app-review-guidelines/d957cc623cde14a507aaff047effc7fd6e3fa7607da71da4d32753f5dbb192f2.json",
+          "fetchedAt": "2026-09-26T17:33:24.055Z"
+        }
+      ],
+      "changes": []
+    },
+    {
+      "id": "apple-kids-safety",
+      "vendor": "apple",
+      "title": "Apple kids and age-appropriate experiences",
+      "category": "kids_privacy",
+      "critical": true,
+      "url": "https://developer.apple.com/kids/",
+      "fetchStatus": "fresh",
+      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "error": null,
+      "current": {
+        "hash": "9a78038b8d0874c23fb3113d49b973d80d40f97352da7aa945c002f05092a93e",
+        "path": "data/policy/snapshots/apple-kids-safety/9a78038b8d0874c23fb3113d49b973d80d40f97352da7aa945c002f05092a93e.json",
+        "fetchedAt": "2026-09-26T17:33:24.055Z"
+      },
+      "history": [
+        {
+          "hash": "9a78038b8d0874c23fb3113d49b973d80d40f97352da7aa945c002f05092a93e",
+          "path": "data/policy/snapshots/apple-kids-safety/9a78038b8d0874c23fb3113d49b973d80d40f97352da7aa945c002f05092a93e.json",
+          "fetchedAt": "2026-09-26T17:33:24.055Z"
+        }
+      ],
+      "changes": []
+    },
+    {
+      "id": "apple-age-ratings",
+      "vendor": "apple",
+      "title": "Apple age ratings values and definitions",
+      "category": "age_rating",
+      "critical": true,
+      "url": "https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions",
+      "fetchStatus": "fresh",
+      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "error": null,
+      "current": {
+        "hash": "9dd5a48d9432c9b4863c4fa1b93d20ba558b43df7c198cf377933d82d547dd3d",
+        "path": "data/policy/snapshots/apple-age-ratings/9dd5a48d9432c9b4863c4fa1b93d20ba558b43df7c198cf377933d82d547dd3d.json",
+        "fetchedAt": "2026-09-26T17:33:24.055Z"
+      },
+      "history": [
+        {
+          "hash": "9dd5a48d9432c9b4863c4fa1b93d20ba558b43df7c198cf377933d82d547dd3d",
+          "path": "data/policy/snapshots/apple-age-ratings/9dd5a48d9432c9b4863c4fa1b93d20ba558b43df7c198cf377933d82d547dd3d.json",
+          "fetchedAt": "2026-09-26T17:33:24.055Z"
+        }
+      ],
+      "changes": []
+    },
+    {
+      "id": "google-play-policy-index",
+      "vendor": "google",
+      "title": "Google Play Central Policy Resource",
+      "category": "policy_index",
+      "critical": true,
+      "url": "https://support.google.com/googleplay/android-developer/answer/15759508?hl=en",
+      "fetchStatus": "fresh",
+      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "error": null,
+      "current": {
+        "hash": "2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e",
+        "path": "data/policy/snapshots/google-play-policy-index/2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e.json",
+        "fetchedAt": "2026-09-26T17:33:24.055Z"
+      },
+      "history": [
+        {
+          "hash": "2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e",
+          "path": "data/policy/snapshots/google-play-policy-index/2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e.json",
+          "fetchedAt": "2026-09-26T17:33:24.055Z"
+        }
+      ],
+      "changes": []
+    },
+    {
+      "id": "google-play-families",
+      "vendor": "google",
+      "title": "Google Play Families policies",
+      "category": "kids_privacy",
+      "critical": true,
+      "url": "https://support.google.com/googleplay/android-developer/answer/9893335?hl=en",
+      "fetchStatus": "fresh",
+      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "error": null,
+      "current": {
+        "hash": "9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c",
+        "path": "data/policy/snapshots/google-play-families/9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c.json",
+        "fetchedAt": "2026-09-26T17:33:24.055Z"
+      },
+      "history": [
+        {
+          "hash": "9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c",
+          "path": "data/policy/snapshots/google-play-families/9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c.json",
+          "fetchedAt": "2026-09-26T17:33:24.055Z"
+        }
+      ],
+      "changes": []
+    },
+    {
+      "id": "google-play-ads",
+      "vendor": "google",
+      "title": "Google Play Ads policy",
+      "category": "ads_monetization",
+      "critical": true,
+      "url": "https://support.google.com/googleplay/android-developer/answer/9857753?hl=en",
+      "fetchStatus": "fresh",
+      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "error": null,
+      "current": {
+        "hash": "068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168",
+        "path": "data/policy/snapshots/google-play-ads/068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168.json",
+        "fetchedAt": "2026-09-26T17:33:24.055Z"
+      },
+      "history": [
+        {
+          "hash": "068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168",
+          "path": "data/policy/snapshots/google-play-ads/068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168.json",
+          "fetchedAt": "2026-09-26T17:33:24.055Z"
+        }
+      ],
+      "changes": []
+    },
+    {
+      "id": "google-play-spam",
+      "vendor": "google",
+      "title": "Google Play Spam and repetitive content policy",
+      "category": "copycat_quality",
+      "critical": true,
+      "url": "https://support.google.com/googleplay/android-developer/answer/9899034?hl=en",
+      "fetchStatus": "fresh",
+      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "error": null,
+      "current": {
+        "hash": "ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8",
+        "path": "data/policy/snapshots/google-play-spam/ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8.json",
+        "fetchedAt": "2026-09-26T17:33:24.055Z"
+      },
+      "history": [
+        {
+          "hash": "ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8",
+          "path": "data/policy/snapshots/google-play-spam/ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8.json",
+          "fetchedAt": "2026-09-26T17:33:24.055Z"
+        }
+      ],
+      "changes": []
+    },
+    {
+      "id": "google-play-policy-deadlines",
+      "vendor": "google",
+      "title": "Google Play Policy Deadlines",
+      "category": "deadlines",
+      "critical": true,
+      "url": "https://support.google.com/googleplay/android-developer/table/12921780?hl=en",
+      "fetchStatus": "fresh",
+      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "error": null,
+      "current": {
+        "hash": "b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3",
+        "path": "data/policy/snapshots/google-play-policy-deadlines/b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3.json",
+        "fetchedAt": "2026-09-26T17:33:24.055Z"
+      },
+      "history": [
+        {
+          "hash": "b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3",
+          "path": "data/policy/snapshots/google-play-policy-deadlines/b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3.json",
+          "fetchedAt": "2026-09-26T17:33:24.055Z"
+        }
+      ],
+      "changes": []
+    }
   ]
 }
