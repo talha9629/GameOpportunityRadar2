@@ -58,7 +58,7 @@ export function App() {
       {view === 'today' && <Today onAnalyze={(appId) => openAnalyze(appId)} />}
       {view === 'analyze' && <Analyze key={savedRunId ?? analyzeSeed ?? 'manual'} initialInput={analyzeSeed ?? ''} initialRunId={savedRunId} ownerEmail={owner?.email ?? null} />}
       {view === 'saved' && <SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} />}
-      {view === 'competitors' && <Competitors />}
+      {view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
     </main>
   );
 }
