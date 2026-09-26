@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T21:51:06.976Z",
+  "generatedAt": "2026-09-26T22:06:12.528Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 4,
@@ -44,6 +44,20 @@
       "action": null
     },
     {
+      "id": "gameplay_discovery",
+      "label": "Public Gameplay Source Discovery",
+      "state": "optional",
+      "facts": [
+        "Tavily status unconfigured",
+        "0/8 capture session(s) have public source suggestion(s)",
+        "0 suggested YouTube source(s)",
+        "0/8 Basic-search credit budget used",
+        "derived from current verification queue",
+        "Search candidates are not verified gameplay evidence."
+      ],
+      "action": "Optional only: configure TAVILY_API_KEY for bounded public gameplay source suggestions."
+    },
+    {
       "id": "history_maturity",
       "label": "Exact Rank History",
       "state": "maturing",
@@ -73,7 +87,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "5 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "2.6h policy-index age",
+        "2.8h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -104,6 +118,11 @@
       "why": "Only 1 exact daily snapshot(s) exist; no 3-day direction should be claimed yet."
     },
     {
+      "priority": 8,
+      "action": "OPTIONAL_CONFIGURE_GAMEPLAY_DISCOVERY",
+      "why": "Tavily can propose bounded public gameplay sources for Deep Verify without changing first-party research priority or resolving evidence automatically."
+    },
+    {
       "priority": 9,
       "action": "OPTIONAL_CONFIGURE_APPBRAIN",
       "why": "Adds capped third-party estimate context but is not required for first-party triage."
@@ -119,6 +138,9 @@
     "verificationCaptureSessionCount": 8,
     "verificationGroupedEvidenceTaskCount": 24,
     "verificationDerivedFromCurrentQueue": true,
+    "gameplayDiscoveryConfigured": false,
+    "gameplayDiscoveryCandidateCount": 0,
+    "gameplayDiscoveryDerivedFromCurrentVerification": true,
     "policyDetectedChangeCount": 0,
     "confirmedPolicyChanges": 0,
     "pendingPolicyCandidates": 5,
