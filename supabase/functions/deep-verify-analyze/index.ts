@@ -214,7 +214,7 @@ Rules:
         model,
         input: [videoInput, { type: 'text', text: prompt }],
         generation_config: { thinking_level: 'low', temperature: 0.1 },
-        response_format: [{ type: 'text', mime_type: 'application/json', schema: resultJsonSchema }],
+        response_format: { type: 'text', mime_type: 'application/json', schema: resultJsonSchema },
       }),
     });
 
