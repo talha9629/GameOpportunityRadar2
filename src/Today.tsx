@@ -81,6 +81,7 @@ function CrossMarketRow({ item, onAnalyze }: {
 
 function ResearchQueuePanel({ queue, onAnalyze }: { queue: ResearchQueue; onAnalyze: (appId: string) => void }) {
   const appBrainReady = queue.sources.appBrain.status !== 'unconfigured';
+  const analyzerStatus = queue.sources.liveAnalyzer?.status ?? 'pending';
   return <section className="panel research-queue-panel">
     <div className="section-heading">
       <div><h2>Automated Research Queue</h2><p>Deterministic triage from first-party Apple Games chart evidence. Priority means “investigate first,” not “build this.”</p></div>
@@ -89,31 +90,44 @@ function ResearchQueuePanel({ queue, onAnalyze }: { queue: ResearchQueue; onAnal
     <div className="research-queue-note">
       <span>Apple charts: {queue.sources.appleCharts.status}</span>
       <span>Apple metadata: {queue.sources.appleLookup.status}</span>
+      <span className={analyzerStatus === 'complete' ? 'evidence-ok' : ''}>Live evidence packs: {analyzerStatus}</span>
       <span className={appBrainReady ? '' : 'estimate-off'}>AppBrain estimates: {queue.sources.appBrain.status}</span>
       <span>Updated {new Date(queue.generatedAt).toLocaleString()}</span>
     </div>
     {queue.candidates.length === 0 ? <p>No title currently meets the deterministic research-queue thresholds.</p> : <div className="research-queue-list">
-      {queue.candidates.slice(0, 8).map((candidate) => <div className="research-queue-row" key={candidate.appId}>
-        {candidate.iconUrl ? <img src={candidate.iconUrl} alt="" /> : <div />}
-        <div className="queue-priority" title={candidate.priorityMeaning}><strong>{candidate.researchPriority}</strong><small>priority</small></div>
-        <div className="queue-game">
-          <strong>#{candidate.queueRank} {candidate.name}</strong>
-          <span>{candidate.publisher}</span>
-          <div className="queue-facts">
-            <span>{candidate.evidence.marketCount} market{candidate.evidence.marketCount === 1 ? '' : 's'}</span>
-            <span>best #{candidate.evidence.bestRank}</span>
-            <span>{primaryMomentum(candidate)}</span>
-            {candidate.appleMetadata?.releaseAgeDays != null && <span>{candidate.appleMetadata.releaseAgeDays}d since release</span>}
+      {queue.candidates.slice(0, 8).map((candidate) => {
+        const listingFacts = candidate.analysisEvidence?.findings.filter((finding) => finding.key.startsWith('listing_')).slice(0, 3) ?? [];
+        return <div className="research-queue-row" key={candidate.appId}>
+          {candidate.iconUrl ? <img src={candidate.iconUrl} alt="" /> : <div />}
+          <div className="queue-priority" title={candidate.priorityMeaning}><strong>{candidate.researchPriority}</strong><small>priority</small></div>
+          <div className="queue-game">
+            <strong>#{candidate.queueRank} {candidate.name}</strong>
+            <span>{candidate.publisher}</span>
+            <div className="queue-facts">
+              <span>{candidate.evidence.marketCount} market{candidate.evidence.marketCount === 1 ? '' : 's'}</span>
+              <span>best #{candidate.evidence.bestRank}</span>
+              <span>{primaryMomentum(candidate)}</span>
+              {candidate.appleMetadata?.releaseAgeDays != null && <span>{candidate.appleMetadata.releaseAgeDays}d since release</span>}
+              {candidate.analysisEvidence && <span className="unknown-count">{candidate.analysisEvidence.unknownCount} unresolved unknowns</span>}
+            </div>
+            {listingFacts.length > 0 && <div className="queue-listing-evidence" title="Publisher-listing-derived; not gameplay verified">
+              {listingFacts.map((finding) => <span key={finding.key}><b>{finding.label}:</b> {finding.value}</span>)}
+            </div>}
           </div>
-        </div>
-        <div className="queue-reasons">{candidate.reasonCodes.slice(0, 4).map((reason) => <span key={reason}>{reason.replaceAll('_', ' ')}</span>)}</div>
-        <div className="queue-estimate">
-          {candidate.appBrainEstimate?.estimatedRecentDownloads != null
-            ? <><strong>{candidate.appBrainEstimate.estimatedRecentDownloads.toLocaleString()}</strong><small>AppBrain recent est.</small></>
-            : <><strong>—</strong><small>estimate not used</small></>}
-        </div>
-        <button onClick={() => onAnalyze(candidate.appId)} title={`Analyze ${candidate.name}`}><Search size={14} /> Analyze</button>
-      </div>)}
+          <div className="queue-reasons">{candidate.reasonCodes.slice(0, 4).map((reason) => <span key={reason}>{reason.replaceAll('_', ' ')}</span>)}</div>
+          <div className="queue-pack">
+            {candidate.analysisEvidence
+              ? <><strong>{candidate.analysisEvidence.findingCount} facts</strong><small>{candidate.analysisEvidence.listingFindingCount} listing-derived</small></>
+              : <><strong>—</strong><small>pack pending</small></>}
+          </div>
+          <div className="queue-estimate">
+            {candidate.appBrainEstimate?.estimatedRecentDownloads != null
+              ? <><strong>{candidate.appBrainEstimate.estimatedRecentDownloads.toLocaleString()}</strong><small>AppBrain recent est.</small></>
+              : <><strong>—</strong><small>estimate not used</small></>}
+          </div>
+          <button onClick={() => onAnalyze(candidate.appId)} title={`Analyze ${candidate.name}`}><Search size={14} /> Analyze</button>
+        </div>;
+      })}
     </div>}
   </section>;
 }
