@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-26T18:18:41.716Z",
+  "overall": "ready_with_maturing_history",
+  "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
+  "essentialHealthy": 3,
+  "essentialCount": 3,
+  "components": [
+    {
+      "id": "apple_radar",
+      "label": "Apple Games Radar",
+      "state": "healthy",
+      "facts": [
+        "4/4 healthy Games markets",
+        "0 failed market(s)",
+        "0 overall-chart fallback market(s)",
+        "0.0h snapshot age"
+      ],
+      "action": null
+    },
+    {
+      "id": "research_queue",
+      "label": "Automated Research Queue",
+      "state": "healthy",
+      "facts": [
+        "12 candidates",
+        "Apple lookup complete",
+        "live evidence complete (8/8)",
+        "0.0h queue age"
+      ],
+      "action": null
+    },
+    {
+      "id": "history_maturity",
+      "label": "Exact Rank History",
+      "state": "maturing",
+      "facts": [
+        "1/7 consecutive exact dated snapshot(s)",
+        "1d/3d/7d comparisons never interpolate missing dates"
+      ],
+      "action": "Keep scheduled collection running; time is the missing evidence."
+    },
+    {
+      "id": "research_digest",
+      "label": "Daily Change Digest",
+      "state": "maturing",
+      "facts": [
+        "status history_pending",
+        "0 exact-date change(s)",
+        "0 attention item(s)"
+      ],
+      "action": "Wait for the next exact daily queue; zero changes are intentionally not inferred."
+    },
+    {
+      "id": "policy_watch",
+      "label": "Policy Watch Sources",
+      "state": "healthy",
+      "facts": [
+        "8/8 fresh official source(s)",
+        "0 fetch failure(s)",
+        "5 detected hash change(s) in retained source history",
+        "0.7h policy-index age",
+        "Owner review state is stored in Supabase and is not inferred from this public health report."
+      ],
+      "action": null
+    },
+    {
+      "id": "appbrain",
+      "label": "AppBrain Estimate Enrichment",
+      "state": "optional",
+      "facts": [
+        "status unconfigured",
+        "0/10 configured daily credit cap used in latest run",
+        "Third-party estimates never affect first-party research priority."
+      ],
+      "action": "Optional only: configure APPBRAIN_API_KEY for capped estimate enrichment."
+    }
+  ],
+  "recommendedActions": [
+    {
+      "priority": 3,
+      "action": "DEEP_VERIFY_TOP_CANDIDATE",
+      "appId": "6761760135",
+      "name": "Meowdoku!",
+      "why": "The highest-priority candidate still has an explicit gameplay-verification unknown."
+    },
+    {
+      "priority": 4,
+      "action": "KEEP_COLLECTING_EXACT_HISTORY",
+      "why": "Only 1 exact daily snapshot(s) exist; no 3-day direction should be claimed yet."
+    },
+    {
+      "priority": 9,
+      "action": "OPTIONAL_CONFIGURE_APPBRAIN",
+      "why": "Adds capped third-party estimate context but is not required for first-party triage."
+    }
+  ],
+  "facts": {
+    "radarDate": "2026-09-26",
+    "researchQueueDate": "2026-09-26",
+    "exactHistoryDays": 1,
+    "policyDetectedChangeCount": 5,
+    "appBrainConfigured": false
+  }
+}
