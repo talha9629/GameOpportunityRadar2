@@ -1,0 +1,18 @@
+.saved-view { display: grid; gap: 24px; }
+.saved-panel { display: grid; gap: 18px; }
+.saved-toolbar { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start; }
+.saved-toolbar p { margin: 5px 0 0; }
+.saved-grid { display: grid; gap: 12px; }
+.saved-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 17px; border: 1px solid #21344f; border-radius: 15px; background: #0a1424; }
+.saved-card-main { min-width: 0; display: grid; gap: 5px; }
+.saved-card-main h3 { margin-top: 2px; }
+.saved-card-main p { margin: 0; }
+.saved-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+.saved-meta span { color: #8ea1bd; font-size: 12px; border: 1px solid #2b405e; border-radius: 999px; padding: 4px 7px; }
+.empty-state.compact { padding-block: 30px; }
+
+@media (max-width: 720px) {
+  .saved-toolbar { flex-direction: column; }
+  .saved-card { grid-template-columns: 1fr; }
+  .saved-card > button { width: 100%; justify-content: center; }
+}
