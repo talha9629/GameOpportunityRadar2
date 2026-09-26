@@ -50,7 +50,10 @@ function LoginPanel() {
     setMessage(null);
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: window.location.origin },
+      options: {
+        emailRedirectTo: window.location.origin,
+        shouldCreateUser: false,
+      },
     });
     setBusy(false);
     setMessage(error ? error.message : 'Check your email for the secure sign-in link.');
@@ -61,7 +64,7 @@ function LoginPanel() {
       <section className="panel login-panel">
         <div className="eyebrow">GAME OPPORTUNITY RADAR 2.0</div>
         <h1>Private studio intelligence.</h1>
-        <p>Sign in with your approved email. There is no public signup workflow.</p>
+        <p>Sign in with the pre-approved account. Public user creation is disabled by the client flow.</p>
         {!hasSupabaseConfig ? (
           <div className="error-box">Cloud backend is not configured for this deployment yet.</div>
         ) : (
