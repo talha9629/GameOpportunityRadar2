@@ -17,7 +17,9 @@ alter table public.deep_verify_videos
 alter table public.deep_verify_videos
   validate constraint deep_verify_delete_after_completed_upload;
 
-create or replace function public.list_deep_verify_videos()
+drop function public.list_deep_verify_videos();
+
+create function public.list_deep_verify_videos()
 returns table (
   video_id uuid,
   label text,
@@ -67,6 +69,10 @@ as $$
   where dv.owner_id = auth.uid()
   order by dv.created_at desc;
 $$;
+
+revoke all on function public.list_deep_verify_videos() from PUBLIC;
+revoke all on function public.list_deep_verify_videos() from anon;
+grant execute on function public.list_deep_verify_videos() to authenticated;
 
 create or replace function public.load_deep_verify_video(p_video_id uuid)
 returns jsonb
