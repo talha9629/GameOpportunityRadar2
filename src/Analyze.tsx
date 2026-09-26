@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AlertTriangle, CheckCircle2, ExternalLink, Search, ShieldQuestion, XCircle } from 'lucide-react';
 import { analyzeGame, isDirectAppleInput, searchGameCandidates } from './api';
 import type { AnalysisResult, Finding, ReviewState, StoreCandidate } from './domain';
@@ -34,8 +34,8 @@ function CandidatePicker({ query, candidates, onChoose, busy }: { query: string;
   return <section className="panel candidate-panel"><div><div className="eyebrow">IDENTITY CHECK</div><h3>Choose the exact App Store title</h3><p>Radar found multiple candidates for “{query}”. Nothing is analyzed until you choose the intended game.</p></div><div className="candidate-grid">{candidates.map((candidate) => <button key={candidate.storeId} className="candidate-card" disabled={busy} onClick={() => onChoose(candidate)}>{candidate.iconUrl && <img src={candidate.iconUrl} alt="" />}<span><strong>{candidate.canonicalName}</strong><small>{candidate.publisher ?? 'Publisher unknown'}</small><small>Apple ID {candidate.storeId}</small></span></button>)}</div></section>;
 }
 
-export function Analyze() {
-  const [input, setInput] = useState('');
+export function Analyze({ initialInput = '' }: { initialInput?: string }) {
+  const [input, setInput] = useState(initialInput);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [candidates, setCandidates] = useState<StoreCandidate[]>([]);
   const [candidateQuery, setCandidateQuery] = useState('');
@@ -51,6 +51,12 @@ export function Analyze() {
     catch (err) { setError(err instanceof Error ? err.message : 'Analysis failed.'); }
     finally { setBusy(false); }
   }
+
+  useEffect(() => {
+    if (!initialInput) return;
+    setInput(initialInput);
+    void runAnalysis(initialInput);
+  }, [initialInput]);
 
   async function submit() {
     const value = input.trim();
