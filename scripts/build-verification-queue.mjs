@@ -14,6 +14,13 @@ function idFor(appId, unknown, evidenceType) {
   return createHash('sha256').update(`${appId}:${unknown}:${evidenceType}`, 'utf8').digest('hex').slice(0, 24);
 }
 
+function sessionIdFor(appId, taskIds) {
+  return createHash('sha256')
+    .update(`${appId}:${[...taskIds].sort().join(',')}:candidate_deep_verify_capture_session_v1`, 'utf8')
+    .digest('hex')
+    .slice(0, 24);
+}
+
 function routeUnknown(unknown) {
   const text = unknown.toLowerCase();
 
@@ -138,10 +145,43 @@ const selected = tasks.slice(0, MAX_TASKS).map((task, index) => ({
 }));
 const omittedTaskCount = Math.max(0, tasks.length - selected.length);
 
+const captureSessions = [];
+for (const candidate of candidates) {
+  const memberTasks = selected
+    .filter((task) => task.appId === candidate.appId && task.evidenceType === 'deep_verify_video')
+    .sort((a, b) => a.verificationOrder - b.verificationOrder);
+  if (memberTasks.length === 0) continue;
+
+  const taskIds = memberTasks.map((task) => task.taskId);
+  captureSessions.push({
+    sessionOrder: captureSessions.length + 1,
+    sessionId: sessionIdFor(candidate.appId, taskIds),
+    appId: candidate.appId,
+    name: candidate.name,
+    queueRank: candidate.queueRank,
+    researchPriority: candidate.researchPriority,
+    evidenceType: 'deep_verify_video',
+    evidenceMode: 'user_capture_or_public_youtube',
+    automationState: 'ready_for_human_evidence',
+    impact: memberTasks.some((task) => task.impact === 'critical') ? 'critical' : 'high',
+    actionLabel: 'Capture one gameplay session',
+    why: 'One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.',
+    taskCount: memberTasks.length,
+    taskIds,
+    unknowns: memberTasks.map((task) => task.unknown),
+    categories: memberTasks.map((task) => task.category),
+    source: {
+      researchGeneratedAt: research.generatedAt,
+      analysisObservedAt: candidate.analysisEvidence?.observedAt ?? null,
+    },
+  });
+}
+
 const summary = selected.reduce((acc, task) => {
   acc[task.automationState] = (acc[task.automationState] ?? 0) + 1;
   return acc;
 }, {});
+const groupedEvidenceTaskCount = captureSessions.reduce((sum, session) => sum + session.taskCount, 0);
 
 const output = {
   schemaVersion: 1,
@@ -154,6 +194,10 @@ const output = {
     candidateCap: MAX_CANDIDATES,
     taskCap: MAX_TASKS,
     ordering: ['evidence impact', 'research queue order', 'stable task id'],
+    sessionGrouping: {
+      name: 'candidate_deep_verify_capture_session_v1',
+      rule: 'Group only deep_verify_video tasks for the same candidate. Atomic tasks remain canonical and unresolved until evidence review.',
+    },
     prohibitedShortcuts: [
       'Listing wording cannot gameplay-verify mechanics.',
       'Missing dated rank history cannot be interpolated.',
@@ -170,11 +214,14 @@ const output = {
     readyForHumanReview: summary.ready_for_human_review ?? 0,
     autoWaiting: summary.auto_waiting ?? 0,
     optionalExternal: summary.optional_external ?? 0,
+    captureSessionCount: captureSessions.length,
+    groupedEvidenceTaskCount,
   },
+  captureSessions,
   tasks: selected,
 };
 
 await mkdir(OUTPUT_DIR, { recursive: true });
 await writeFile(OUTPUT_PATH, `${JSON.stringify(output, null, 2)}\n`, 'utf8');
 
-console.log(`[verification-queue] ${output.summary.taskCount}/${output.summary.rawTaskCount} tasks kept · omitted ${omittedTaskCount} · ${output.summary.readyForHumanEvidence} evidence-ready · ${output.summary.readyForHumanReview} review-ready · ${output.summary.autoWaiting} auto-waiting · ${output.summary.optionalExternal} optional external`);
+console.log(`[verification-queue] ${output.summary.taskCount}/${output.summary.rawTaskCount} tasks kept · omitted ${omittedTaskCount} · ${output.summary.captureSessionCount} capture session(s) cover ${output.summary.groupedEvidenceTaskCount} video task(s) · ${output.summary.readyForHumanReview} review-ready · ${output.summary.autoWaiting} auto-waiting · ${output.summary.optionalExternal} optional external`);
