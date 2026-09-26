@@ -9,6 +9,8 @@ on:
     paths:
       - 'scripts/collect-policy-watch.mjs'
       - 'scripts/validate-policy-watch.mjs'
+      - 'scripts/build-data-health.mjs'
+      - 'scripts/validate-data-health.mjs'
       - '.github/workflows/policy-watch.yml'
 
 permissions:
@@ -39,24 +41,32 @@ jobs:
       - name: Validate policy evidence
         run: node scripts/validate-policy-watch.mjs
 
-      - name: Commit policy evidence when changed
+      - name: Rebuild factual data health from updated policy state
+        run: node scripts/build-data-health.mjs
+
+      - name: Validate data health semantics
+        run: node scripts/validate-data-health.mjs
+
+      - name: Commit policy evidence and health when changed
         id: commit
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- public/data/policy; then
-            echo 'No policy evidence changes to commit.'
+          if git diff --quiet -- public/data/policy public/data/health; then
+            echo 'No policy/health evidence changes to commit.'
             echo 'changed=false' >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name 'game-opportunity-radar-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add public/data/policy
-          git commit -m 'data: refresh official policy snapshots'
-          git push
+          git add public/data/policy public/data/health
+          git commit -m 'data: refresh official policy snapshots and health'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
           echo 'changed=true' >> "$GITHUB_OUTPUT"
 
-      - name: Deploy refreshed policy evidence
+      - name: Deploy refreshed policy evidence and health
         if: steps.commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
