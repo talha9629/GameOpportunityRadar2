@@ -1,0 +1,18 @@
+.radar-row { grid-template-columns: 42px 42px minmax(0, 1fr) auto auto; }
+.radar-actions { display: flex; align-items: center; gap: 7px; }
+.radar-actions button { padding: 6px 9px; font-size: 12px; }
+.radar-actions .icon-link { min-width: 28px; min-height: 28px; border: 1px solid #2c4261; border-radius: 8px; }
+
+.candidate-panel { display: grid; gap: 16px; margin-bottom: 24px; }
+.candidate-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.candidate-card { text-align: left; padding: 12px; background: #0a1424; }
+.candidate-card img { width: 52px; height: 52px; border-radius: 11px; object-fit: cover; }
+.candidate-card > span { min-width: 0; display: grid; gap: 3px; }
+.candidate-card strong, .candidate-card small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.candidate-card small { color: #8ea1bd; }
+
+@media (max-width: 760px) {
+  .candidate-grid { grid-template-columns: 1fr; }
+  .radar-row { grid-template-columns: 36px 38px minmax(0, 1fr) auto; }
+  .radar-actions { grid-column: 3 / -1; justify-content: flex-end; }
+}
