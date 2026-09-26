@@ -4,6 +4,7 @@ import { analyzeGame, isDirectAppleInput, searchGameCandidates } from './api';
 import type { AnalysisResult, Finding, ReviewState, StoreCandidate } from './domain';
 import { decideOpportunity, type Scorecard, type ScoreDimension, type ScoreValue } from './decision';
 import { hasSupabaseConfig } from './lib/supabase';
+import './candidate.css';
 
 const dimensionMeta: Record<ScoreDimension, { label: string; help: string }> = {
   momentum: { label: 'Momentum', help: 'Needs chart history, velocity and cross-market persistence.' },
