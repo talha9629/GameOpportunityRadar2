@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+// Daily public-chart collector. Each market persists independently so one failure never discards the others.
 const markets = { us: 'United States', gb: 'United Kingdom', ca: 'Canada', au: 'Australia' };
 const root = path.resolve('public/data/radar');
 const latestPath = path.join(root, 'latest.json');
