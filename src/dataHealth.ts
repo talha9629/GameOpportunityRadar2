@@ -48,6 +48,14 @@ export const DataHealthSchema = z.object({
 
 export type DataHealth = z.infer<typeof DataHealthSchema>;
 
+export function normalizeDataHealthAction(action: string) {
+  return action.trim().toUpperCase();
+}
+
+export function isDeepVerifyTopCandidateAction(action: string) {
+  return normalizeDataHealthAction(action) === 'DEEP_VERIFY_TOP_CANDIDATE';
+}
+
 export async function loadDataHealth(): Promise<DataHealth> {
   const response = await fetch(`${import.meta.env.BASE_URL}data/health/latest.json`, { cache: 'no-store' });
   if (!response.ok) throw new Error(`Data health request failed (${response.status}).`);
