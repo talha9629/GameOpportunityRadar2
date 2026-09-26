@@ -6,6 +6,7 @@ const latestPath = path.join(outDir, 'latest.json');
 const radar = read('public/data/radar/latest.json');
 const radarIndex = read('public/data/radar/index.json');
 const queue = read('public/data/research/latest.json');
+const verification = read('public/data/verification/latest.json');
 const digest = read('public/data/research/digest.json');
 const policy = read('public/data/policy/index.json');
 
@@ -55,6 +56,33 @@ const queueState = queue.__readError || queueAgeHours == null || queueAgeHours >
     ? 'degraded'
     : 'healthy';
 
+const verificationAgeHours = hoursSince(verification.generatedAt, now);
+const verificationCandidateCap = Number.isInteger(verification.method?.candidateCap) ? verification.method.candidateCap : 0;
+const expectedVerificationUnknowns = verificationCandidateCap > 0
+  ? (queue.candidates ?? []).slice(0, verificationCandidateCap).reduce((sum, candidate) => sum + (candidate.analysisEvidence?.unknowns?.length ?? 0), 0)
+  : 0;
+const verificationDerivedFromCurrentQueue = !verification.__readError
+  && verification.researchGeneratedAt === queue.generatedAt
+  && verification.radarDate === queue.radarDate;
+const verificationRawTasks = verification.summary?.rawTaskCount ?? null;
+const verificationTasks = verification.summary?.taskCount ?? null;
+const verificationOmitted = verification.summary?.omittedTaskCount ?? null;
+const verificationComplete = Number.isInteger(verificationRawTasks)
+  && Number.isInteger(verificationTasks)
+  && Number.isInteger(verificationOmitted)
+  && verificationRawTasks === expectedVerificationUnknowns
+  && verificationTasks === verificationRawTasks
+  && verificationOmitted === 0;
+const verificationState = verification.__readError
+  || verificationAgeHours == null
+  || verificationAgeHours > 72
+  || !verificationDerivedFromCurrentQueue
+  || !verificationComplete
+    ? 'blocked'
+    : verificationAgeHours > 36
+      ? 'degraded'
+      : 'healthy';
+
 const maturityDays = consecutiveDays(radarIndex);
 const historyState = maturityDays >= 7 ? 'healthy' : 'maturing';
 
@@ -90,6 +118,12 @@ const components = [
     `live evidence ${liveAnalyzer?.status ?? 'not-run'} (${liveAnalyzer?.succeeded ?? 0}/${liveAnalyzer?.attempted ?? 0})`,
     queueAgeHours == null ? 'queue age unknown' : `${queueAgeHours.toFixed(1)}h queue age`,
   ], queueState === 'healthy' ? null : 'Do not promote queue candidates until first-party enrichment returns healthy.'),
+  component('verification_queue', 'Automated Verification Queue', verificationState, [
+    `${verificationTasks ?? 0}/${verificationRawTasks ?? expectedVerificationUnknowns} explicit unknown(s) routed`,
+    `${verificationOmitted ?? 'unknown'} omitted task(s)`,
+    verificationDerivedFromCurrentQueue ? 'derived from current research queue' : 'research provenance mismatch',
+    verificationAgeHours == null ? 'verification age unknown' : `${verificationAgeHours.toFixed(1)}h verification age`,
+  ], verificationState === 'healthy' ? null : 'Rebuild Verification Queue before using its evidence-routing actions; stale or incomplete routing is a hard evidence-coverage failure.'),
   component('history_maturity', 'Exact Rank History', historyState, [
     `${maturityDays}/7 consecutive exact dated snapshot(s)`,
     '1d/3d/7d comparisons never interpolate missing dates',
@@ -123,6 +157,7 @@ const topCandidate = queue.candidates?.[0] ?? null;
 const recommendedActions = [];
 if (radarState !== 'healthy') recommendedActions.push({ priority: 1, action: 'FIX_RADAR_SOURCE_HEALTH', why: 'Core rank evidence is degraded or blocked.' });
 if (queueState !== 'healthy') recommendedActions.push({ priority: 2, action: 'FIX_RESEARCH_ENRICHMENT', why: 'Automated candidate evidence is degraded or blocked.' });
+if (verificationState !== 'healthy') recommendedActions.push({ priority: 2, action: 'FIX_VERIFICATION_COVERAGE', why: 'Verification routing is stale, incomplete, or no longer derived from the current research queue.' });
 if (topCandidate?.analysisEvidence?.unknowns?.some((value) => /core mechanic has not been gameplay-verified/i.test(value))) {
   recommendedActions.push({ priority: 3, action: 'DEEP_VERIFY_TOP_CANDIDATE', appId: topCandidate.appId, name: topCandidate.name, why: 'The highest-priority candidate still has an explicit gameplay-verification unknown.' });
 }
@@ -144,6 +179,10 @@ const output = {
     radarDate: dateOnly(radar.generatedAt),
     researchQueueDate: queue.radarDate ?? null,
     exactHistoryDays: maturityDays,
+    verificationTaskCount: verificationTasks ?? 0,
+    verificationRawTaskCount: verificationRawTasks ?? 0,
+    verificationOmittedTaskCount: verificationOmitted ?? 0,
+    verificationDerivedFromCurrentQueue,
     policyDetectedChangeCount: confirmedPolicyChanges,
     confirmedPolicyChanges,
     pendingPolicyCandidates,
@@ -154,4 +193,4 @@ const output = {
 
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(latestPath, `${JSON.stringify(output, null, 2)}\n`);
-console.log(`[data-health] ${overall} · essential ${output.essentialHealthy}/${output.essentialCount} healthy · history ${maturityDays}/7 · confirmed-policy ${confirmedPolicyChanges} · pending-policy ${pendingPolicyCandidates} · actions ${recommendedActions.length}`);
+console.log(`[data-health] ${overall} · essential ${output.essentialHealthy}/${output.essentialCount} healthy · verification ${verificationTasks ?? 0}/${verificationRawTasks ?? 0} routed, omitted ${verificationOmitted ?? 'unknown'} · history ${maturityDays}/7 · confirmed-policy ${confirmedPolicyChanges} · pending-policy ${pendingPolicyCandidates} · actions ${recommendedActions.length}`);
