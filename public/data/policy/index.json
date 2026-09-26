@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-26T17:24:00.000Z",
+  "runStatus": "failed",
+  "sourceCount": 8,
+  "freshCount": 0,
+  "failureCount": 8,
+  "sources": [
+    {"id":"apple-app-review-guidelines","vendor":"apple","title":"Apple App Review Guidelines","category":"store_review","critical":true,"url":"https://developer.apple.com/app-store/review/guidelines/","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
+    {"id":"apple-kids-safety","vendor":"apple","title":"Apple kids and age-appropriate experiences","category":"kids_privacy","critical":true,"url":"https://developer.apple.com/kids/","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
+    {"id":"apple-age-ratings","vendor":"apple","title":"Apple age ratings values and definitions","category":"age_rating","critical":true,"url":"https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
+    {"id":"google-play-policy-index","vendor":"google","title":"Google Play Central Policy Resource","category":"policy_index","critical":true,"url":"https://support.google.com/googleplay/android-developer/answer/15759508?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
+    {"id":"google-play-families","vendor":"google","title":"Google Play Families policies","category":"kids_privacy","critical":true,"url":"https://support.google.com/googleplay/android-developer/answer/9893335?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
+    {"id":"google-play-ads","vendor":"google","title":"Google Play Ads policy","category":"ads_monetization","critical":true,"url":"https://support.google.com/googleplay/android-developer/answer/9857753?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
+    {"id":"google-play-spam","vendor":"google","title":"Google Play Spam and repetitive content policy","category":"copycat_quality","critical":true,"url":"https://support.google.com/googleplay/android-developer/answer/9899034?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]},
+    {"id":"google-play-policy-deadlines","vendor":"google","title":"Google Play Policy Deadlines","category":"deadlines","critical":true,"url":"https://support.google.com/googleplay/android-developer/table/12921780?hl=en","fetchStatus":"unavailable","lastAttemptAt":"2026-09-26T17:24:00.000Z","error":"Baseline collection pending.","current":null,"history":[],"changes":[]}
+  ]
+}

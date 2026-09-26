@@ -3,13 +3,14 @@ import type { User } from '@supabase/supabase-js';
 import { Analyze } from './Analyze';
 import { Competitors } from './Competitors';
 import { DeepVerifyWorkspace } from './DeepVerifyWorkspace';
+import { PolicyWatch } from './PolicyWatch';
 import { ReviewSamples } from './ReviewSamples';
 import { SavedDossiers } from './SavedDossiers';
 import { Today } from './Today';
 import { OwnerAccess } from './OwnerAccess';
 import { getOwnerUser, subscribeOwnerAuth } from './auth';
 
-type View = 'today' | 'analyze' | 'competitors' | 'reviews' | 'deep-verify' | 'saved';
+type View = 'today' | 'analyze' | 'competitors' | 'reviews' | 'deep-verify' | 'policy' | 'saved';
 
 export function App() {
   const [view, setView] = useState<View>('today');
@@ -55,6 +56,7 @@ export function App() {
           <button className={view === 'competitors' ? 'active' : ''} onClick={() => setView('competitors')}>Competitors</button>
           <button className={view === 'reviews' ? 'active' : ''} onClick={() => setView('reviews')}>Reviews</button>
           <button className={view === 'deep-verify' ? 'active' : ''} onClick={() => setView('deep-verify')}>Deep Verify</button>
+          <button className={view === 'policy' ? 'active' : ''} onClick={() => setView('policy')}>Policy Watch</button>
         </div>
         <OwnerAccess user={owner} />
       </nav>
@@ -64,6 +66,7 @@ export function App() {
       {view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
       {view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
       {view === 'deep-verify' && <DeepVerifyWorkspace ownerEmail={owner?.email ?? null} />}
+      {view === 'policy' && <PolicyWatch ownerEmail={owner?.email ?? null} />}
     </main>
   );
 }

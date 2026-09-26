@@ -1,0 +1,53 @@
+name: Policy Watch
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/collect-policy-watch.mjs'
+      - 'scripts/validate-policy-watch.mjs'
+      - '.github/workflows/policy-watch.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: policy-watch
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Collect official policy snapshots
+        run: node scripts/collect-policy-watch.mjs
+
+      - name: Validate policy evidence
+        run: node scripts/validate-policy-watch.mjs
+
+      - name: Commit policy evidence when changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- public/data/policy; then
+            echo 'No policy evidence changes to commit.'
+            exit 0
+          fi
+          git config user.name 'game-opportunity-radar-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/data/policy
+          git commit -m 'data: refresh official policy snapshots'
+          git push
