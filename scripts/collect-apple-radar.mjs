@@ -4,6 +4,7 @@ import path from 'node:path';
 // Daily public-chart collector. Each market persists independently so one failure never discards the others.
 // The scheduled run is the source of truth for rank observations; same-day reruns are idempotent.
 const markets = { us: 'United States', gb: 'United Kingdom', ca: 'Canada', au: 'Australia' };
+const chartDepth = 100;
 const root = path.resolve('public/data/radar');
 const latestPath = path.join(root, 'latest.json');
 const indexPath = path.join(root, 'index.json');
@@ -36,9 +37,9 @@ function legacyEntry(entry, index) {
 }
 
 async function fetchMarket(country) {
-  const legacyUrl = `https://itunes.apple.com/${country}/rss/topfreeapplications/limit=50/genre=6014/json`;
+  const legacyUrl = `https://itunes.apple.com/${country}/rss/topfreeapplications/limit=${chartDepth}/genre=6014/json`;
   try {
-    const response = await fetch(legacyUrl, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.3' } });
+    const response = await fetch(legacyUrl, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.8' } });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const json = await response.json();
     const entries = Array.isArray(json?.feed?.entry) ? json.feed.entry : [];
@@ -47,8 +48,8 @@ async function fetchMarket(country) {
     }
     throw new Error(`Only ${entries.length} entries returned`);
   } catch (legacyError) {
-    const fallbackUrl = `https://rss.marketingtools.apple.com/api/v2/${country}/apps/top-free/50/apps.json`;
-    const response = await fetch(fallbackUrl, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.3' } });
+    const fallbackUrl = `https://rss.marketingtools.apple.com/api/v2/${country}/apps/top-free/${chartDepth}/apps.json`;
+    const response = await fetch(fallbackUrl, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.8' } });
     if (!response.ok) throw new Error(`${country}: legacy failed (${legacyError}); fallback HTTP ${response.status}`);
     const json = await response.json();
     const results = Array.isArray(json?.feed?.results) ? json.feed.results : [];
@@ -98,10 +99,11 @@ const previous = readPrevious();
 const previousDate = typeof previous.generatedAt === 'string' ? previous.generatedAt.slice(0, 10) : null;
 const sameDay = previousDate === today;
 const output = {
-  schemaVersion: 2,
+  schemaVersion: 3,
   generatedAt,
   chart: 'top-free',
   category: 'Games',
+  chartDepth,
   runStatus: 'failed',
   successfulMarkets: 0,
   freshMarkets: 0,
@@ -181,7 +183,7 @@ const snapshots = [
 const index = { schemaVersion: 1, updatedAt: generatedAt, snapshots };
 fs.writeFileSync(indexPath, JSON.stringify(index, null, 2) + '\n');
 
-console.log(`Radar snapshot written for ${today} (sameDay=${sameDay}, runStatus=${output.runStatus})`);
+console.log(`Radar snapshot written for ${today} (depth=${chartDepth}, sameDay=${sameDay}, runStatus=${output.runStatus})`);
 for (const market of Object.values(output.markets)) {
   console.log(`${market.country}: ${market.status} ${market.entries.length} entries ${market.sourceMode ?? ''} ${market.refreshStatus ?? ''}`);
 }
