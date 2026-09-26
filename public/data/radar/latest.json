@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T07:47:39.827Z",
+  "generatedAt": "2026-09-26T07:51:31.082Z",
   "chart": "top-free",
   "category": "Games",
   "markets": {
@@ -14,7 +14,7 @@
       "warning": null,
       "entries": [
         {
-          "rank": 0,
+          "rank": 1,
           "appId": "6761760135",
           "name": "Meowdoku!",
           "publisher": "Oakever Games",
@@ -30,7 +30,7 @@
           ]
         },
         {
-          "rank": 1,
+          "rank": 2,
           "appId": "6752672568",
           "name": "Block Out! - Color Sort Puzzle",
           "publisher": "Grand Games A.Ş.",
@@ -46,7 +46,7 @@
           ]
         },
         {
-          "rank": 2,
+          "rank": 3,
           "appId": "6748084174",
           "name": "Smash Fest!",
           "publisher": "Flow Games Bilisim Yazilim ve Pazarlama Anonim Sirketi",
@@ -62,7 +62,7 @@
           ]
         },
         {
-          "rank": 3,
+          "rank": 4,
           "appId": "596402997",
           "name": "Minion Rush: Running game",
           "publisher": "Gameloft",
@@ -78,7 +78,7 @@
           ]
         },
         {
-          "rank": 4,
+          "rank": 5,
           "appId": "6468921495",
           "name": "Vita Mahjong",
           "publisher": "Vita Studio",
@@ -94,7 +94,7 @@
           ]
         },
         {
-          "rank": 5,
+          "rank": 6,
           "appId": "6760325543",
           "name": "CubeAway - 3DPuzzle",
           "publisher": "GOODROID,Inc.",
@@ -110,7 +110,7 @@
           ]
         },
         {
-          "rank": 6,
+          "rank": 7,
           "appId": "6779167923",
           "name": "Colony Flow!",
           "publisher": "ABI GLOBAL LTD.",
@@ -126,7 +126,7 @@
           ]
         },
         {
-          "rank": 7,
+          "rank": 8,
           "appId": "6499209744",
           "name": "Magic Sort!",
           "publisher": "Grand Games A.Ş.",
@@ -142,7 +142,7 @@
           ]
         },
         {
-          "rank": 8,
+          "rank": 9,
           "appId": "1498019884",
           "name": "Castlevania: 40th Anniversary",
           "publisher": "KONAMI",
@@ -158,7 +158,7 @@
           ]
         },
         {
-          "rank": 9,
+          "rank": 10,
           "appId": "431946152",
           "name": "Roblox",
           "publisher": "Roblox Corporation",
@@ -174,7 +174,7 @@
           ]
         },
         {
-          "rank": 10,
+          "rank": 11,
           "appId": "6746743297",
           "name": "Bus Fever Party!",
           "publisher": "Lumi Games",
@@ -190,7 +190,7 @@
           ]
         },
         {
-          "rank": 11,
+          "rank": 12,
           "appId": "6756482832",
           "name": "Brain Puzzle 3: Crazy Mind",
           "publisher": "SmallStep Dev Team",
@@ -206,7 +206,7 @@
           ]
         },
         {
-          "rank": 12,
+          "rank": 13,
           "appId": "6759763476",
           "name": "Bus Traffic Fever!",
           "publisher": "GOODROID,Inc.",
@@ -222,7 +222,7 @@
           ]
         },
         {
-          "rank": 13,
+          "rank": 14,
           "appId": "1617391485",
           "name": "Block Blast！",
           "publisher": "Hungry Studio",
@@ -238,7 +238,7 @@
           ]
         },
         {
-          "rank": 14,
+          "rank": 15,
           "appId": "6761757565",
           "name": "Colorever: Gem Art Puzzle",
           "publisher": "Oakever Games",
@@ -254,7 +254,7 @@
           ]
         },
         {
-          "rank": 15,
+          "rank": 16,
           "appId": "6747492600",
           "name": "Mahjong Blast",
           "publisher": "Nebula Studio",
@@ -270,7 +270,7 @@
           ]
         },
         {
-          "rank": 16,
+          "rank": 17,
           "appId": "1623318294",
           "name": "Gossip Harbor®: Merge & Story",
           "publisher": "Microfun Limited",
@@ -286,7 +286,7 @@
           ]
         },
         {
-          "rank": 17,
+          "rank": 18,
           "appId": "6758326278",
           "name": "Amaze GO!",
           "publisher": "Oakever Games",
@@ -302,7 +302,7 @@
           ]
         },
         {
-          "rank": 18,
+          "rank": 19,
           "appId": "638689075",
           "name": "Township",
           "publisher": "Playrix",
@@ -318,7 +318,7 @@
           ]
         },
         {
-          "rank": 19,
+          "rank": 20,
           "appId": "6793924927",
           "name": "Rotate Rings",
           "publisher": "Nebula Studio",
@@ -334,7 +334,7 @@
           ]
         },
         {
-          "rank": 20,
+          "rank": 21,
           "appId": "6769314786",
           "name": "Food Hunt: Pixel Puzzle",
           "publisher": "FUNFINITY PTE. LTD",
@@ -350,7 +350,7 @@
           ]
         },
         {
-          "rank": 21,
+          "rank": 22,
           "appId": "1482155847",
           "name": "Royal Match",
           "publisher": "Dream Games",
@@ -366,7 +366,7 @@
           ]
         },
         {
-          "rank": 22,
+          "rank": 23,
           "appId": "6780891673",
           "name": "Royal Smash! - Physics Puzzle",
           "publisher": "Cypher Games",
@@ -382,7 +382,7 @@
           ]
         },
         {
-          "rank": 23,
+          "rank": 24,
           "appId": "1621328561",
           "name": "MONOPOLY GO!",
           "publisher": "Scopely, Inc.",
@@ -398,7 +398,7 @@
           ]
         },
         {
-          "rank": 24,
+          "rank": 25,
           "appId": "6754464806",
           "name": "Car Evolve",
           "publisher": "Heseri Games Inc",
@@ -414,7 +414,7 @@
           ]
         },
         {
-          "rank": 25,
+          "rank": 26,
           "appId": "6759098797",
           "name": "Aniimo",
           "publisher": "PAWPRINT INTERACTIVE ENTERTAINMENT PTE. LTD",
@@ -430,7 +430,7 @@
           ]
         },
         {
-          "rank": 26,
+          "rank": 27,
           "appId": "1638139403",
           "name": "Block Crush！",
           "publisher": "Wonderful Studio",
@@ -446,7 +446,7 @@
           ]
         },
         {
-          "rank": 27,
+          "rank": 28,
           "appId": "6771681639",
           "name": "Fish Sort Puzzle - Bubble Jam",
           "publisher": "Shycheese",
@@ -462,7 +462,7 @@
           ]
         },
         {
-          "rank": 28,
+          "rank": 29,
           "appId": "6748950306",
           "name": "Solitaire Associations Journey",
           "publisher": "Hitapps Games LTD",
@@ -478,7 +478,7 @@
           ]
         },
         {
-          "rank": 29,
+          "rank": 30,
           "appId": "6483539426",
           "name": "Fortnite",
           "publisher": "Epic Games Inc.",
@@ -494,7 +494,7 @@
           ]
         },
         {
-          "rank": 30,
+          "rank": 31,
           "appId": "6762010774",
           "name": "CrownCards - Trading Cards",
           "publisher": "CrownCards",
@@ -510,7 +510,7 @@
           ]
         },
         {
-          "rank": 31,
+          "rank": 32,
           "appId": "6746328263",
           "name": "Castle Busters",
           "publisher": "Voodoo",
@@ -526,7 +526,7 @@
           ]
         },
         {
-          "rank": 32,
+          "rank": 33,
           "appId": "6744975195",
           "name": "Sled Surfers",
           "publisher": "Crazy Labs",
@@ -542,7 +542,7 @@
           ]
         },
         {
-          "rank": 33,
+          "rank": 34,
           "appId": "1443446174",
           "name": "Magic Tiles 3™: Piano Game",
           "publisher": "Amanotes Pte. Ltd.",
@@ -558,7 +558,7 @@
           ]
         },
         {
-          "rank": 34,
+          "rank": 35,
           "appId": "512939461",
           "name": "Subway Surfers",
           "publisher": "Sybo Games ApS",
@@ -574,7 +574,7 @@
           ]
         },
         {
-          "rank": 35,
+          "rank": 36,
           "appId": "6471045672",
           "name": "Tasty Travels: Merge Game",
           "publisher": "Century Games Pte. Ltd.",
@@ -590,7 +590,7 @@
           ]
         },
         {
-          "rank": 36,
+          "rank": 37,
           "appId": "6443575749",
           "name": "Whiteout Survival",
           "publisher": "Century Games Pte. Ltd.",
@@ -606,7 +606,7 @@
           ]
         },
         {
-          "rank": 37,
+          "rank": 38,
           "appId": "6748397500",
           "name": "Arrows – Puzzle Escape",
           "publisher": "Lessmore GmbH",
@@ -622,7 +622,7 @@
           ]
         },
         {
-          "rank": 38,
+          "rank": 39,
           "appId": "6767091927",
           "name": "Jigsaw Drop: Solitaire Puzzle",
           "publisher": "Runyou Game",
@@ -638,7 +638,7 @@
           ]
         },
         {
-          "rank": 39,
+          "rank": 40,
           "appId": "1193508329",
           "name": "Sudoku.com - Number Games",
           "publisher": "Easybrain Ltd",
@@ -654,7 +654,7 @@
           ]
         },
         {
-          "rank": 40,
+          "rank": 41,
           "appId": "1602508478",
           "name": "Word Search Explorer®",
           "publisher": "PlaySimple Games Pte Ltd",
@@ -670,7 +670,7 @@
           ]
         },
         {
-          "rank": 41,
+          "rank": 42,
           "appId": "1608987929",
           "name": "Triumph Arcade",
           "publisher": "Triumph Arcade",
@@ -686,7 +686,7 @@
           ]
         },
         {
-          "rank": 42,
+          "rank": 43,
           "appId": "6804464432",
           "name": "Songless: Guess the Song!",
           "publisher": "Calico Studio Inc.",
@@ -702,7 +702,7 @@
           ]
         },
         {
-          "rank": 43,
+          "rank": 44,
           "appId": "6746437378",
           "name": "Tang Luck: Casino Slots",
           "publisher": "SpinShift Limited",
@@ -718,7 +718,7 @@
           ]
         },
         {
-          "rank": 44,
+          "rank": 45,
           "appId": "1287282214",
           "name": "Call of Duty®: Mobile",
           "publisher": "Activision Publishing, Inc.",
@@ -734,7 +734,7 @@
           ]
         },
         {
-          "rank": 45,
+          "rank": 46,
           "appId": "1094930513",
           "name": "EA SPORTS FC Soccer Mobile 27",
           "publisher": "Electronic Arts",
@@ -750,7 +750,7 @@
           ]
         },
         {
-          "rank": 46,
+          "rank": 47,
           "appId": "543186831",
           "name": "8 Ball Pool™",
           "publisher": "Miniclip.com",
@@ -766,7 +766,7 @@
           ]
         },
         {
-          "rank": 47,
+          "rank": 48,
           "appId": "1546690510",
           "name": "NoomiClone",
           "publisher": "Matthew Jones",
@@ -782,7 +782,7 @@
           ]
         },
         {
-          "rank": 48,
+          "rank": 49,
           "appId": "6751056652",
           "name": "Pixel Flow!",
           "publisher": "Loom Games Oyun Yazilim ve Pazarlama Anonim Sirketi",
@@ -798,7 +798,7 @@
           ]
         },
         {
-          "rank": 49,
+          "rank": 50,
           "appId": "1423046460",
           "name": "Paper.io 2",
           "publisher": "Voodoo",
@@ -825,7 +825,7 @@
       "warning": null,
       "entries": [
         {
-          "rank": 0,
+          "rank": 1,
           "appId": "6761760135",
           "name": "Meowdoku!",
           "publisher": "Oakever Games",
@@ -841,7 +841,7 @@
           ]
         },
         {
-          "rank": 1,
+          "rank": 2,
           "appId": "1623318294",
           "name": "Gossip Harbor®: Merge & Story",
           "publisher": "Microfun Limited",
@@ -857,7 +857,7 @@
           ]
         },
         {
-          "rank": 2,
+          "rank": 3,
           "appId": "6752672568",
           "name": "Block Out! - Color Sort Puzzle",
           "publisher": "Grand Games A.Ş.",
@@ -873,7 +873,7 @@
           ]
         },
         {
-          "rank": 3,
+          "rank": 4,
           "appId": "596402997",
           "name": "Minion Rush: Running game",
           "publisher": "Gameloft",
@@ -889,7 +889,7 @@
           ]
         },
         {
-          "rank": 4,
+          "rank": 5,
           "appId": "6748084174",
           "name": "Smash Fest!",
           "publisher": "Flow Games Bilisim Yazilim ve Pazarlama Anonim Sirketi",
@@ -905,7 +905,7 @@
           ]
         },
         {
-          "rank": 5,
+          "rank": 6,
           "appId": "6804464432",
           "name": "Songless: Guess the Song!",
           "publisher": "Calico Studio Inc.",
@@ -921,7 +921,7 @@
           ]
         },
         {
-          "rank": 6,
+          "rank": 7,
           "appId": "6760325543",
           "name": "CubeAway - 3DPuzzle",
           "publisher": "GOODROID,Inc.",
@@ -937,7 +937,7 @@
           ]
         },
         {
-          "rank": 7,
+          "rank": 8,
           "appId": "6759763476",
           "name": "Bus Traffic Fever!",
           "publisher": "GOODROID,Inc.",
@@ -953,7 +953,7 @@
           ]
         },
         {
-          "rank": 8,
+          "rank": 9,
           "appId": "6468921495",
           "name": "Vita Mahjong",
           "publisher": "Vita Studio",
@@ -969,7 +969,7 @@
           ]
         },
         {
-          "rank": 9,
+          "rank": 10,
           "appId": "6779167923",
           "name": "Colony Flow!",
           "publisher": "ABI GLOBAL LTD.",
@@ -985,7 +985,7 @@
           ]
         },
         {
-          "rank": 10,
+          "rank": 11,
           "appId": "1482155847",
           "name": "Royal Match",
           "publisher": "Dream Games",
@@ -1001,7 +1001,7 @@
           ]
         },
         {
-          "rank": 11,
+          "rank": 12,
           "appId": "6499209744",
           "name": "Magic Sort!",
           "publisher": "Grand Games A.Ş.",
@@ -1017,7 +1017,7 @@
           ]
         },
         {
-          "rank": 12,
+          "rank": 13,
           "appId": "6756482832",
           "name": "Brain Puzzle 3: Crazy Mind",
           "publisher": "SmallStep Dev Team",
@@ -1033,7 +1033,7 @@
           ]
         },
         {
-          "rank": 13,
+          "rank": 14,
           "appId": "1617391485",
           "name": "Block Blast!",
           "publisher": "Hungry Studio",
@@ -1049,7 +1049,7 @@
           ]
         },
         {
-          "rank": 14,
+          "rank": 15,
           "appId": "6758326278",
           "name": "Amaze GO!",
           "publisher": "Oakever Games",
@@ -1065,7 +1065,7 @@
           ]
         },
         {
-          "rank": 15,
+          "rank": 16,
           "appId": "6793924927",
           "name": "Rotate Rings",
           "publisher": "Nebula Studio",
@@ -1081,7 +1081,7 @@
           ]
         },
         {
-          "rank": 16,
+          "rank": 17,
           "appId": "6483539426",
           "name": "Fortnite",
           "publisher": "Epic Games Inc.",
@@ -1097,7 +1097,7 @@
           ]
         },
         {
-          "rank": 17,
+          "rank": 18,
           "appId": "431946152",
           "name": "Roblox",
           "publisher": "Roblox Corporation",
@@ -1113,7 +1113,7 @@
           ]
         },
         {
-          "rank": 18,
+          "rank": 19,
           "appId": "1521236603",
           "name": "Travel Town - Merge Adventure",
           "publisher": "Moon Active",
@@ -1129,7 +1129,7 @@
           ]
         },
         {
-          "rank": 19,
+          "rank": 20,
           "appId": "6471045672",
           "name": "Tasty Travels: Merge Game",
           "publisher": "Century Games Pte. Ltd.",
@@ -1145,7 +1145,7 @@
           ]
         },
         {
-          "rank": 20,
+          "rank": 21,
           "appId": "6746743297",
           "name": "Bus Fever Party!",
           "publisher": "Lumi Games",
@@ -1161,7 +1161,7 @@
           ]
         },
         {
-          "rank": 21,
+          "rank": 22,
           "appId": "1546690510",
           "name": "NoomiClone",
           "publisher": "Matthew Jones",
@@ -1177,7 +1177,7 @@
           ]
         },
         {
-          "rank": 22,
+          "rank": 23,
           "appId": "638689075",
           "name": "Township",
           "publisher": "Playrix",
@@ -1193,7 +1193,7 @@
           ]
         },
         {
-          "rank": 23,
+          "rank": 24,
           "appId": "1484468651",
           "name": "Dice Dreams™",
           "publisher": "SuperPlay",
@@ -1209,7 +1209,7 @@
           ]
         },
         {
-          "rank": 24,
+          "rank": 25,
           "appId": "1621328561",
           "name": "MONOPOLY GO!",
           "publisher": "Scopely, Inc.",
@@ -1225,7 +1225,7 @@
           ]
         },
         {
-          "rank": 25,
+          "rank": 26,
           "appId": "6748950306",
           "name": "Solitaire Associations Journey",
           "publisher": "Hitapps Games LTD",
@@ -1241,7 +1241,7 @@
           ]
         },
         {
-          "rank": 26,
+          "rank": 27,
           "appId": "6739554056",
           "name": "Kingshot",
           "publisher": "Century Games Pte. Ltd.",
@@ -1257,7 +1257,7 @@
           ]
         },
         {
-          "rank": 27,
+          "rank": 28,
           "appId": "1606549505",
           "name": "Royal Kingdom",
           "publisher": "Dream Games",
@@ -1273,7 +1273,7 @@
           ]
         },
         {
-          "rank": 28,
+          "rank": 29,
           "appId": "6754464806",
           "name": "Car Evolve",
           "publisher": "Heseri Games Inc",
@@ -1289,7 +1289,7 @@
           ]
         },
         {
-          "rank": 29,
+          "rank": 30,
           "appId": "6475757306",
           "name": "Disney Solitaire",
           "publisher": "SuperPlay",
@@ -1305,7 +1305,7 @@
           ]
         },
         {
-          "rank": 30,
+          "rank": 31,
           "appId": "6771681639",
           "name": "Fish Sort Puzzle:Bubble Triple",
           "publisher": "Shycheese",
@@ -1321,7 +1321,7 @@
           ]
         },
         {
-          "rank": 31,
+          "rank": 32,
           "appId": "1602508478",
           "name": "Word Search Explorer®",
           "publisher": "PlaySimple Games Pte Ltd",
@@ -1337,7 +1337,7 @@
           ]
         },
         {
-          "rank": 32,
+          "rank": 33,
           "appId": "6769314786",
           "name": "Food Hunt: Pixel Puzzle",
           "publisher": "FUNFINITY PTE. LTD",
@@ -1353,7 +1353,7 @@
           ]
         },
         {
-          "rank": 33,
+          "rank": 34,
           "appId": "6748397500",
           "name": "Arrows – Puzzle Escape",
           "publisher": "Lessmore GmbH",
@@ -1369,7 +1369,7 @@
           ]
         },
         {
-          "rank": 34,
+          "rank": 35,
           "appId": "6742809194",
           "name": "Warline: Sniper Strike",
           "publisher": "Powerfantasy",
@@ -1385,7 +1385,7 @@
           ]
         },
         {
-          "rank": 35,
+          "rank": 36,
           "appId": "6747063674",
           "name": "Brain Puzzle 2: Logic Twist",
           "publisher": "SmallStep Dev Team",
@@ -1401,7 +1401,7 @@
           ]
         },
         {
-          "rank": 36,
+          "rank": 37,
           "appId": "6760377931",
           "name": "Mahjong Rumble: Win Real Cash",
           "publisher": "Aviagames Inc.",
@@ -1417,7 +1417,7 @@
           ]
         },
         {
-          "rank": 37,
+          "rank": 38,
           "appId": "6742410648",
           "name": "WhoLiked? - Guess Who Liked it",
           "publisher": "IRL Apps",
@@ -1433,7 +1433,7 @@
           ]
         },
         {
-          "rank": 38,
+          "rank": 39,
           "appId": "6755183085",
           "name": "Yarn Loop: Knit Puzzle",
           "publisher": "Combo Games",
@@ -1449,7 +1449,7 @@
           ]
         },
         {
-          "rank": 39,
+          "rank": 40,
           "appId": "6746328263",
           "name": "Castle Busters",
           "publisher": "Voodoo",
@@ -1465,7 +1465,7 @@
           ]
         },
         {
-          "rank": 40,
+          "rank": 41,
           "appId": "6751056652",
           "name": "Pixel Flow!",
           "publisher": "Loom Games Oyun Yazilim ve Pazarlama Anonim Sirketi",
@@ -1481,7 +1481,7 @@
           ]
         },
         {
-          "rank": 41,
+          "rank": 42,
           "appId": "6761757565",
           "name": "Colorever: Gem Art Puzzle",
           "publisher": "Oakever Games",
@@ -1497,7 +1497,7 @@
           ]
         },
         {
-          "rank": 42,
+          "rank": 43,
           "appId": "1498019884",
           "name": "Castlevania: 40th Anniversary",
           "publisher": "KONAMI",
@@ -1513,7 +1513,7 @@
           ]
         },
         {
-          "rank": 43,
+          "rank": 44,
           "appId": "512939461",
           "name": "Subway Surfers",
           "publisher": "Sybo Games ApS",
@@ -1529,7 +1529,7 @@
           ]
         },
         {
-          "rank": 44,
+          "rank": 45,
           "appId": "6760530627",
           "name": "Mahjong Clash: Win Real Cash",
           "publisher": "Aviagames Inc.",
@@ -1545,7 +1545,7 @@
           ]
         },
         {
-          "rank": 45,
+          "rank": 46,
           "appId": "6762268182",
           "name": "Z Route: Redemption",
           "publisher": "BUILDING-BLOCKS NETWORK TECHNOLOGY CO.,LIMITED",
@@ -1561,7 +1561,7 @@
           ]
         },
         {
-          "rank": 46,
+          "rank": 47,
           "appId": "6752886832",
           "name": "Hotel Legacy: Merge Game",
           "publisher": "Century Games Innovation Pte. Ltd.",
@@ -1577,7 +1577,7 @@
           ]
         },
         {
-          "rank": 47,
+          "rank": 48,
           "appId": "6756058501",
           "name": "Jelly Busters: Puzzle Game",
           "publisher": "Moon Active",
@@ -1593,7 +1593,7 @@
           ]
         },
         {
-          "rank": 48,
+          "rank": 49,
           "appId": "6747492600",
           "name": "Mahjong Blast",
           "publisher": "Nebula Studio",
@@ -1609,7 +1609,7 @@
           ]
         },
         {
-          "rank": 49,
+          "rank": 50,
           "appId": "329218549",
           "name": "Chess.com - Play and Learn",
           "publisher": "Chess.com",
@@ -1636,7 +1636,7 @@
       "warning": null,
       "entries": [
         {
-          "rank": 0,
+          "rank": 1,
           "appId": "6761760135",
           "name": "Meowdoku!",
           "publisher": "Oakever Games",
@@ -1652,7 +1652,7 @@
           ]
         },
         {
-          "rank": 1,
+          "rank": 2,
           "appId": "6752672568",
           "name": "Block Out! - Color Sort Puzzle",
           "publisher": "Grand Games A.Ş.",
@@ -1668,7 +1668,7 @@
           ]
         },
         {
-          "rank": 2,
+          "rank": 3,
           "appId": "6760325543",
           "name": "CubeAway - 3DPuzzle",
           "publisher": "GOODROID,Inc.",
@@ -1684,7 +1684,7 @@
           ]
         },
         {
-          "rank": 3,
+          "rank": 4,
           "appId": "1498019884",
           "name": "Castlevania: 40th Anniversary",
           "publisher": "KONAMI",
@@ -1700,7 +1700,7 @@
           ]
         },
         {
-          "rank": 4,
+          "rank": 5,
           "appId": "6748084174",
           "name": "Smash Fest!",
           "publisher": "Flow Games Bilisim Yazilim ve Pazarlama Anonim Sirketi",
@@ -1716,7 +1716,7 @@
           ]
         },
         {
-          "rank": 5,
+          "rank": 6,
           "appId": "596402997",
           "name": "Minion Rush: Running game",
           "publisher": "Gameloft",
@@ -1732,7 +1732,7 @@
           ]
         },
         {
-          "rank": 6,
+          "rank": 7,
           "appId": "6759763476",
           "name": "Bus Traffic Fever!",
           "publisher": "GOODROID,Inc.",
@@ -1748,7 +1748,7 @@
           ]
         },
         {
-          "rank": 7,
+          "rank": 8,
           "appId": "6779167923",
           "name": "Colony Flow!",
           "publisher": "ABI GLOBAL LTD.",
@@ -1764,7 +1764,7 @@
           ]
         },
         {
-          "rank": 8,
+          "rank": 9,
           "appId": "6793924927",
           "name": "Rotate Rings",
           "publisher": "Nebula Studio",
@@ -1780,7 +1780,7 @@
           ]
         },
         {
-          "rank": 9,
+          "rank": 10,
           "appId": "6499209744",
           "name": "Magic Sort!",
           "publisher": "Grand Games A.Ş.",
@@ -1796,7 +1796,7 @@
           ]
         },
         {
-          "rank": 10,
+          "rank": 11,
           "appId": "6746743297",
           "name": "Bus Fever Party!",
           "publisher": "Lumi Games",
@@ -1812,7 +1812,7 @@
           ]
         },
         {
-          "rank": 11,
+          "rank": 12,
           "appId": "1617391485",
           "name": "Block Blast!",
           "publisher": "Hungry Studio",
@@ -1828,7 +1828,7 @@
           ]
         },
         {
-          "rank": 12,
+          "rank": 13,
           "appId": "6769314786",
           "name": "Food Hunt: Pixel Puzzle",
           "publisher": "FUNFINITY PTE. LTD",
@@ -1844,7 +1844,7 @@
           ]
         },
         {
-          "rank": 13,
+          "rank": 14,
           "appId": "6756482832",
           "name": "Brain Puzzle 3: Crazy Mind",
           "publisher": "SmallStep Dev Team",
@@ -1860,7 +1860,7 @@
           ]
         },
         {
-          "rank": 14,
+          "rank": 15,
           "appId": "6468921495",
           "name": "Vita Mahjong",
           "publisher": "Vita Studio",
@@ -1876,7 +1876,7 @@
           ]
         },
         {
-          "rank": 15,
+          "rank": 16,
           "appId": "6762010774",
           "name": "CrownCards - Trading Cards",
           "publisher": "CrownCards",
@@ -1892,7 +1892,7 @@
           ]
         },
         {
-          "rank": 16,
+          "rank": 17,
           "appId": "6483539426",
           "name": "Fortnite",
           "publisher": "Epic Games Inc.",
@@ -1908,7 +1908,7 @@
           ]
         },
         {
-          "rank": 17,
+          "rank": 18,
           "appId": "1623318294",
           "name": "Gossip Harbor®: Merge & Story",
           "publisher": "Microfun Limited",
@@ -1924,7 +1924,7 @@
           ]
         },
         {
-          "rank": 18,
+          "rank": 19,
           "appId": "431946152",
           "name": "Roblox",
           "publisher": "Roblox Corporation",
@@ -1940,7 +1940,7 @@
           ]
         },
         {
-          "rank": 19,
+          "rank": 20,
           "appId": "6771681639",
           "name": "Fish Sort Puzzle:Bubble Triple",
           "publisher": "Shycheese",
@@ -1956,7 +1956,7 @@
           ]
         },
         {
-          "rank": 20,
+          "rank": 21,
           "appId": "6758326278",
           "name": "Amaze GO!",
           "publisher": "Oakever Games",
@@ -1972,7 +1972,7 @@
           ]
         },
         {
-          "rank": 21,
+          "rank": 22,
           "appId": "6748950306",
           "name": "Solitaire Associations Journey",
           "publisher": "Hitapps Games LTD",
@@ -1988,7 +1988,7 @@
           ]
         },
         {
-          "rank": 22,
+          "rank": 23,
           "appId": "6743212841",
           "name": "Betty Casino: Real Money Slots",
           "publisher": "Betty.ca",
@@ -2004,7 +2004,7 @@
           ]
         },
         {
-          "rank": 23,
+          "rank": 24,
           "appId": "6747492600",
           "name": "Mahjong Blast",
           "publisher": "Nebula Studio",
@@ -2020,7 +2020,7 @@
           ]
         },
         {
-          "rank": 24,
+          "rank": 25,
           "appId": "6759098797",
           "name": "Aniimo",
           "publisher": "PAWPRINT INTERACTIVE ENTERTAINMENT PTE. LTD",
@@ -2036,7 +2036,7 @@
           ]
         },
         {
-          "rank": 25,
+          "rank": 26,
           "appId": "1482155847",
           "name": "Royal Match",
           "publisher": "Dream Games",
@@ -2052,7 +2052,7 @@
           ]
         },
         {
-          "rank": 26,
+          "rank": 27,
           "appId": "638689075",
           "name": "Township",
           "publisher": "Playrix",
@@ -2068,7 +2068,7 @@
           ]
         },
         {
-          "rank": 27,
+          "rank": 28,
           "appId": "6754464806",
           "name": "Car Evolve",
           "publisher": "Heseri Games Inc",
@@ -2084,7 +2084,7 @@
           ]
         },
         {
-          "rank": 28,
+          "rank": 29,
           "appId": "6804464432",
           "name": "Songless: Guess the Song!",
           "publisher": "Calico Studio Inc.",
@@ -2100,7 +2100,7 @@
           ]
         },
         {
-          "rank": 29,
+          "rank": 30,
           "appId": "1638139403",
           "name": "Block Crush!",
           "publisher": "Wonderful Studio",
@@ -2116,7 +2116,7 @@
           ]
         },
         {
-          "rank": 30,
+          "rank": 31,
           "appId": "6744975195",
           "name": "Sled Surfers",
           "publisher": "Crazy Labs",
@@ -2132,7 +2132,7 @@
           ]
         },
         {
-          "rank": 31,
+          "rank": 32,
           "appId": "1621328561",
           "name": "MONOPOLY GO!",
           "publisher": "Scopely, Inc.",
@@ -2148,7 +2148,7 @@
           ]
         },
         {
-          "rank": 32,
+          "rank": 33,
           "appId": "1442749804",
           "name": "Sudoku - Classic Sudoku",
           "publisher": "Oakever Games",
@@ -2164,7 +2164,7 @@
           ]
         },
         {
-          "rank": 33,
+          "rank": 34,
           "appId": "329218549",
           "name": "Chess.com - Play and Learn",
           "publisher": "Chess.com",
@@ -2180,7 +2180,7 @@
           ]
         },
         {
-          "rank": 34,
+          "rank": 35,
           "appId": "6746328263",
           "name": "Castle Busters",
           "publisher": "Voodoo",
@@ -2196,7 +2196,7 @@
           ]
         },
         {
-          "rank": 35,
+          "rank": 36,
           "appId": "6742809194",
           "name": "Warline: Sniper Strike",
           "publisher": "Powerfantasy",
@@ -2212,7 +2212,7 @@
           ]
         },
         {
-          "rank": 36,
+          "rank": 37,
           "appId": "1583193717",
           "name": "FanDuel Online Casino",
           "publisher": "FanDuel, Inc.",
@@ -2228,7 +2228,7 @@
           ]
         },
         {
-          "rank": 37,
+          "rank": 38,
           "appId": "1193508329",
           "name": "Sudoku.com - Number Games",
           "publisher": "Easybrain Ltd",
@@ -2244,7 +2244,7 @@
           ]
         },
         {
-          "rank": 38,
+          "rank": 39,
           "appId": "6780195090",
           "name": "82-0.com",
           "publisher": "Vaulty Studios Inc.",
@@ -2260,7 +2260,7 @@
           ]
         },
         {
-          "rank": 39,
+          "rank": 40,
           "appId": "6446197181",
           "name": "Glow Fashion Idol",
           "publisher": "Crazy Labs",
@@ -2276,7 +2276,7 @@
           ]
         },
         {
-          "rank": 40,
+          "rank": 41,
           "appId": "6739554056",
           "name": "Kingshot",
           "publisher": "Century Games Pte. Ltd.",
@@ -2292,7 +2292,7 @@
           ]
         },
         {
-          "rank": 41,
+          "rank": 42,
           "appId": "6757140488",
           "name": "Sand Blocks: Drop Puzzle",
           "publisher": "Rollic Games",
@@ -2308,7 +2308,7 @@
           ]
         },
         {
-          "rank": 42,
+          "rank": 43,
           "appId": "6443575749",
           "name": "Whiteout Survival",
           "publisher": "Century Games Pte. Ltd.",
@@ -2324,7 +2324,7 @@
           ]
         },
         {
-          "rank": 43,
+          "rank": 44,
           "appId": "1443446174",
           "name": "Magic Tiles 3™: Piano Game",
           "publisher": "Amanotes Pte. Ltd.",
@@ -2340,7 +2340,7 @@
           ]
         },
         {
-          "rank": 44,
+          "rank": 45,
           "appId": "512939461",
           "name": "Subway Surfers",
           "publisher": "Sybo Games ApS",
@@ -2356,7 +2356,7 @@
           ]
         },
         {
-          "rank": 45,
+          "rank": 46,
           "appId": "6471045672",
           "name": "Tasty Travels: Merge Game",
           "publisher": "Century Games Pte. Ltd.",
@@ -2372,7 +2372,7 @@
           ]
         },
         {
-          "rank": 46,
+          "rank": 47,
           "appId": "1229016807",
           "name": "Brawl Stars",
           "publisher": "Supercell",
@@ -2388,7 +2388,7 @@
           ]
         },
         {
-          "rank": 47,
+          "rank": 48,
           "appId": "6762268182",
           "name": "Z Route: Redemption",
           "publisher": "BUILDING-BLOCKS NETWORK TECHNOLOGY CO.,LIMITED",
@@ -2404,7 +2404,7 @@
           ]
         },
         {
-          "rank": 48,
+          "rank": 49,
           "appId": "1197354394",
           "name": "Daily Themed Crossword Puzzles",
           "publisher": "PlaySimple Games Pte Ltd",
@@ -2420,7 +2420,7 @@
           ]
         },
         {
-          "rank": 49,
+          "rank": 50,
           "appId": "6780891673",
           "name": "Royal Smash! - Physics Puzzle",
           "publisher": "Cypher Games",
@@ -2447,7 +2447,7 @@
       "warning": null,
       "entries": [
         {
-          "rank": 0,
+          "rank": 1,
           "appId": "6761760135",
           "name": "Meowdoku!",
           "publisher": "Oakever Games",
@@ -2463,7 +2463,7 @@
           ]
         },
         {
-          "rank": 1,
+          "rank": 2,
           "appId": "6752672568",
           "name": "Block Out! - Color Sort Puzzle",
           "publisher": "Grand Games A.Ş.",
@@ -2479,7 +2479,7 @@
           ]
         },
         {
-          "rank": 2,
+          "rank": 3,
           "appId": "596402997",
           "name": "Minion Rush: Running game",
           "publisher": "Gameloft",
@@ -2495,7 +2495,7 @@
           ]
         },
         {
-          "rank": 3,
+          "rank": 4,
           "appId": "6760325543",
           "name": "CubeAway - 3DPuzzle",
           "publisher": "GOODROID,Inc.",
@@ -2511,7 +2511,7 @@
           ]
         },
         {
-          "rank": 4,
+          "rank": 5,
           "appId": "6779167923",
           "name": "Colony Flow!",
           "publisher": "ABI GLOBAL LTD.",
@@ -2527,7 +2527,7 @@
           ]
         },
         {
-          "rank": 5,
+          "rank": 6,
           "appId": "6759763476",
           "name": "Bus Traffic Fever!",
           "publisher": "GOODROID,Inc.",
@@ -2543,7 +2543,7 @@
           ]
         },
         {
-          "rank": 6,
+          "rank": 7,
           "appId": "1617391485",
           "name": "Block Blast!",
           "publisher": "Hungry Studio",
@@ -2559,7 +2559,7 @@
           ]
         },
         {
-          "rank": 7,
+          "rank": 8,
           "appId": "6748084174",
           "name": "Smash Fest!",
           "publisher": "Flow Games Bilisim Yazilim ve Pazarlama Anonim Sirketi",
@@ -2575,7 +2575,7 @@
           ]
         },
         {
-          "rank": 8,
+          "rank": 9,
           "appId": "1498019884",
           "name": "Castlevania: 40th Anniversary",
           "publisher": "KONAMI",
@@ -2591,7 +2591,7 @@
           ]
         },
         {
-          "rank": 9,
+          "rank": 10,
           "appId": "1623318294",
           "name": "Gossip Harbor®: Merge & Story",
           "publisher": "Microfun Limited",
@@ -2607,7 +2607,7 @@
           ]
         },
         {
-          "rank": 10,
+          "rank": 11,
           "appId": "431946152",
           "name": "Roblox",
           "publisher": "Roblox Corporation",
@@ -2623,7 +2623,7 @@
           ]
         },
         {
-          "rank": 11,
+          "rank": 12,
           "appId": "6793924927",
           "name": "Rotate Rings",
           "publisher": "Nebula Studio",
@@ -2639,7 +2639,7 @@
           ]
         },
         {
-          "rank": 12,
+          "rank": 13,
           "appId": "6771681639",
           "name": "Fish Sort Puzzle:Bubble Triple",
           "publisher": "Shycheese",
@@ -2655,7 +2655,7 @@
           ]
         },
         {
-          "rank": 13,
+          "rank": 14,
           "appId": "6746743297",
           "name": "Bus Fever Party!",
           "publisher": "Lumi Games",
@@ -2671,7 +2671,7 @@
           ]
         },
         {
-          "rank": 14,
+          "rank": 15,
           "appId": "6756482832",
           "name": "Brain Puzzle 3: Crazy Mind",
           "publisher": "SmallStep Dev Team",
@@ -2687,7 +2687,7 @@
           ]
         },
         {
-          "rank": 15,
+          "rank": 16,
           "appId": "1482155847",
           "name": "Royal Match",
           "publisher": "Dream Games",
@@ -2703,7 +2703,7 @@
           ]
         },
         {
-          "rank": 16,
+          "rank": 17,
           "appId": "6769314786",
           "name": "Food Hunt: Pixel Puzzle",
           "publisher": "FUNFINITY PTE. LTD",
@@ -2719,7 +2719,7 @@
           ]
         },
         {
-          "rank": 17,
+          "rank": 18,
           "appId": "6746328263",
           "name": "Castle Busters",
           "publisher": "Voodoo",
@@ -2735,7 +2735,7 @@
           ]
         },
         {
-          "rank": 18,
+          "rank": 19,
           "appId": "6742809194",
           "name": "Warline: Sniper Strike",
           "publisher": "Powerfantasy",
@@ -2751,7 +2751,7 @@
           ]
         },
         {
-          "rank": 19,
+          "rank": 20,
           "appId": "6448104157",
           "name": "Offline Games - No Wifi Games",
           "publisher": "Moreno Maio",
@@ -2767,7 +2767,7 @@
           ]
         },
         {
-          "rank": 20,
+          "rank": 21,
           "appId": "1423046460",
           "name": "Paper.io 2",
           "publisher": "Voodoo",
@@ -2783,7 +2783,7 @@
           ]
         },
         {
-          "rank": 21,
+          "rank": 22,
           "appId": "6748950306",
           "name": "Solitaire Associations Journey",
           "publisher": "Hitapps Games LTD",
@@ -2799,7 +2799,7 @@
           ]
         },
         {
-          "rank": 22,
+          "rank": 23,
           "appId": "6468921495",
           "name": "Vita Mahjong",
           "publisher": "Vita Studio",
@@ -2815,7 +2815,7 @@
           ]
         },
         {
-          "rank": 23,
+          "rank": 24,
           "appId": "1606549505",
           "name": "Royal Kingdom",
           "publisher": "Dream Games",
@@ -2831,7 +2831,7 @@
           ]
         },
         {
-          "rank": 24,
+          "rank": 25,
           "appId": "6739554056",
           "name": "Kingshot",
           "publisher": "Century Games Pte. Ltd.",
@@ -2847,7 +2847,7 @@
           ]
         },
         {
-          "rank": 25,
+          "rank": 26,
           "appId": "638689075",
           "name": "Township",
           "publisher": "Playrix",
@@ -2863,7 +2863,7 @@
           ]
         },
         {
-          "rank": 26,
+          "rank": 27,
           "appId": "512939461",
           "name": "Subway Surfers",
           "publisher": "Sybo Games ApS",
@@ -2879,7 +2879,7 @@
           ]
         },
         {
-          "rank": 27,
+          "rank": 28,
           "appId": "6443575749",
           "name": "Whiteout Survival",
           "publisher": "Century Games Pte. Ltd.",
@@ -2895,7 +2895,7 @@
           ]
         },
         {
-          "rank": 28,
+          "rank": 29,
           "appId": "6767834940",
           "name": "Top Lords",
           "publisher": "GAME SPARK PTE. LTD.",
@@ -2911,7 +2911,7 @@
           ]
         },
         {
-          "rank": 29,
+          "rank": 30,
           "appId": "6759098797",
           "name": "Aniimo",
           "publisher": "PAWPRINT INTERACTIVE ENTERTAINMENT PTE. LTD",
@@ -2927,7 +2927,7 @@
           ]
         },
         {
-          "rank": 30,
+          "rank": 31,
           "appId": "1094591345",
           "name": "Pokémon GO",
           "publisher": "Scopely Explore, Inc.",
@@ -2943,7 +2943,7 @@
           ]
         },
         {
-          "rank": 31,
+          "rank": 32,
           "appId": "6758326278",
           "name": "Amaze GO!",
           "publisher": "Oakever Games",
@@ -2959,7 +2959,7 @@
           ]
         },
         {
-          "rank": 32,
+          "rank": 33,
           "appId": "1443446174",
           "name": "Magic Tiles 3™: Piano Game",
           "publisher": "Amanotes Pte. Ltd.",
@@ -2975,7 +2975,7 @@
           ]
         },
         {
-          "rank": 33,
+          "rank": 34,
           "appId": "6754464806",
           "name": "Car Evolve",
           "publisher": "Heseri Games Inc",
@@ -2991,7 +2991,7 @@
           ]
         },
         {
-          "rank": 34,
+          "rank": 35,
           "appId": "6757350661",
           "name": "Police Chief",
           "publisher": "VoyagerOne",
@@ -3007,7 +3007,7 @@
           ]
         },
         {
-          "rank": 35,
+          "rank": 36,
           "appId": "1486214495",
           "name": "Brain Test: Tricky Puzzles",
           "publisher": "UNICO STUDIO",
@@ -3023,7 +3023,7 @@
           ]
         },
         {
-          "rank": 36,
+          "rank": 37,
           "appId": "6499209744",
           "name": "Magic Sort!",
           "publisher": "Grand Games A.Ş.",
@@ -3039,7 +3039,7 @@
           ]
         },
         {
-          "rank": 37,
+          "rank": 38,
           "appId": "6760377931",
           "name": "Mahjong Rumble: Win Real Cash",
           "publisher": "Aviagames Inc.",
@@ -3055,7 +3055,7 @@
           ]
         },
         {
-          "rank": 38,
+          "rank": 39,
           "appId": "6762268182",
           "name": "Z Route: Redemption",
           "publisher": "BUILDING-BLOCKS NETWORK TECHNOLOGY CO.,LIMITED",
@@ -3071,7 +3071,7 @@
           ]
         },
         {
-          "rank": 39,
+          "rank": 40,
           "appId": "6744975195",
           "name": "Sled Surfers",
           "publisher": "Crazy Labs",
@@ -3087,7 +3087,7 @@
           ]
         },
         {
-          "rank": 40,
+          "rank": 41,
           "appId": "6757140488",
           "name": "Sand Blocks: Drop Puzzle",
           "publisher": "Rollic Games",
@@ -3103,7 +3103,7 @@
           ]
         },
         {
-          "rank": 41,
+          "rank": 42,
           "appId": "6471045672",
           "name": "Tasty Travels: Merge Game",
           "publisher": "Century Games Pte. Ltd.",
@@ -3119,7 +3119,7 @@
           ]
         },
         {
-          "rank": 42,
+          "rank": 43,
           "appId": "329218549",
           "name": "Chess.com - Play and Learn",
           "publisher": "Chess.com",
@@ -3135,7 +3135,7 @@
           ]
         },
         {
-          "rank": 43,
+          "rank": 44,
           "appId": "1562817072",
           "name": "Mob Control",
           "publisher": "Voodoo",
@@ -3151,7 +3151,7 @@
           ]
         },
         {
-          "rank": 44,
+          "rank": 45,
           "appId": "6752886832",
           "name": "Hotel Legacy: Merge Game",
           "publisher": "Century Games Innovation Pte. Ltd.",
@@ -3167,7 +3167,7 @@
           ]
         },
         {
-          "rank": 45,
+          "rank": 46,
           "appId": "307569751",
           "name": "NYT Games: Crossword & Sudoku",
           "publisher": "The New York Times Company",
@@ -3183,7 +3183,7 @@
           ]
         },
         {
-          "rank": 46,
+          "rank": 47,
           "appId": "1193508329",
           "name": "Sudoku.com - Number Games",
           "publisher": "Easybrain Ltd",
@@ -3199,7 +3199,7 @@
           ]
         },
         {
-          "rank": 47,
+          "rank": 48,
           "appId": "543186831",
           "name": "8 Ball Pool™ - 3D Online Pool",
           "publisher": "Miniclip.com",
@@ -3215,7 +3215,7 @@
           ]
         },
         {
-          "rank": 48,
+          "rank": 49,
           "appId": "1442749804",
           "name": "Sudoku - Brain Puzzle Game",
           "publisher": "Oakever Games",
@@ -3231,7 +3231,7 @@
           ]
         },
         {
-          "rank": 49,
+          "rank": 50,
           "appId": "1638139403",
           "name": "Block Crush: Block Puzzle Game",
           "publisher": "Wonderful Studio",
