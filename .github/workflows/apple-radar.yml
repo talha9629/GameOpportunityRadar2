@@ -86,7 +86,7 @@ jobs:
           console.log('');
           console.log(`Data health: **${h.overall}** · essential pipelines **${h.essentialHealthy}/${h.essentialCount} healthy** · exact history **${h.facts.exactHistoryDays}/7 days**`);
           console.log(`Radar date: **${q.radarDate}** · Apple charts: **${q.sources.appleCharts.status}** · live evidence: **${q.sources.liveAnalyzer?.status ?? 'not-run'}** · AppBrain: **${q.sources.appBrain.status}**`);
-          console.log(`Verification queue: **${v.summary.taskCount}/${v.summary.rawTaskCount} explicit unknown(s) routed** · omitted ${v.summary.omittedTaskCount} · ${v.summary.readyForHumanEvidence} evidence-ready · ${v.summary.readyForHumanReview} human-review · ${v.summary.autoWaiting} auto-waiting · ${v.summary.optionalExternal} optional external`);
+          console.log(`Verification queue: **${v.summary.taskCount}/${v.summary.rawTaskCount} explicit unknown(s) routed** · omitted ${v.summary.omittedTaskCount} · **${v.summary.captureSessionCount} capture session(s)** cover ${v.summary.groupedEvidenceTaskCount} gameplay evidence task(s) · ${v.summary.readyForHumanReview} human-review · ${v.summary.autoWaiting} auto-waiting · ${v.summary.optionalExternal} optional external`);
           console.log(`Daily digest: **${d.status}** · ${d.summary.changeCount} exact-date change(s) · ${d.summary.attentionCount} attention item(s)`);
           console.log('');
           console.log('| # | Title | Priority | Listing facts | Unknowns | First-party reasons |');
@@ -96,7 +96,7 @@ jobs:
           console.log('### Next factual actions');
           for (const action of h.recommendedActions.slice(0, 5)) console.log(`- **${action.action}**${action.name ? ` · ${action.name}` : ''}: ${action.why}`);
           console.log('');
-          console.log('Priority is deterministic research ordering from Apple chart evidence, not a success probability or build recommendation. Verification tasks are routes to evidence, not resolved facts.');
+          console.log('Priority is deterministic research ordering from Apple chart evidence, not a success probability or build recommendation. Verification tasks are routes to evidence, not resolved facts; capture sessions only reduce duplicate evidence collection.');
           NODE
       - name: Commit snapshot, queue, verification, digest and health safely
         run: |
