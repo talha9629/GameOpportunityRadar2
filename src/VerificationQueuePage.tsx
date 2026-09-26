@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { RefreshCw } from 'lucide-react';
 import { VerificationQueuePanel } from './VerificationQueuePanel';
-import { loadVerificationQueue, type VerificationQueue } from './verificationQueue';
+import { loadVerificationQueue, type VerificationCaptureSession, type VerificationQueue } from './verificationQueue';
 
 export function VerificationQueuePage({
   onDeepVerify,
   onCompetitors,
 }: {
-  onDeepVerify: (appId: string, name: string) => void;
+  onDeepVerify: (session: VerificationCaptureSession) => void;
   onCompetitors: () => void;
 }) {
   const [queue, setQueue] = useState<VerificationQueue | null>(null);
