@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Analyze } from './Analyze';
+import { Competitors } from './Competitors';
 import { Today } from './Today';
 
-type View = 'today' | 'analyze';
+type View = 'today' | 'analyze' | 'competitors';
 
 export function App() {
   const [view, setView] = useState<View>('today');
@@ -23,13 +24,13 @@ export function App() {
         <div className="nav-tabs">
           <button className={view === 'today' ? 'active' : ''} onClick={() => setView('today')}>Today</button>
           <button className={view === 'analyze' ? 'active' : ''} onClick={() => openAnalyze()}>Analyze Game</button>
-          <button disabled title="Next milestone">Competitors</button>
+          <button className={view === 'competitors' ? 'active' : ''} onClick={() => setView('competitors')}>Competitors</button>
           <button disabled title="Next milestone">Deep Verify</button>
         </div>
       </nav>
-      {view === 'today'
-        ? <Today onAnalyze={(appId) => openAnalyze(appId)} />
-        : <Analyze key={analyzeSeed ?? 'manual'} initialInput={analyzeSeed ?? ''} />}
+      {view === 'today' && <Today onAnalyze={(appId) => openAnalyze(appId)} />}
+      {view === 'analyze' && <Analyze key={analyzeSeed ?? 'manual'} initialInput={analyzeSeed ?? ''} />}
+      {view === 'competitors' && <Competitors />}
     </main>
   );
 }
