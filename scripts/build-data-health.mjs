@@ -7,6 +7,7 @@ const radar = read('public/data/radar/latest.json');
 const radarIndex = read('public/data/radar/index.json');
 const queue = read('public/data/research/latest.json');
 const verification = read('public/data/verification/latest.json');
+const discovery = read('public/data/discovery/latest.json');
 const digest = read('public/data/research/digest.json');
 const policy = read('public/data/policy/index.json');
 
@@ -96,6 +97,19 @@ const verificationState = verification.__readError
       ? 'degraded'
       : 'healthy';
 
+const discoveryStatus = discovery.provider?.status ?? 'unconfigured';
+const discoveryAgeHours = hoursSince(discovery.generatedAt, now);
+const discoveryDerivedFromCurrentVerification = !discovery.__readError
+  && discovery.verificationGeneratedAt === verification.generatedAt;
+const discoverySessions = Array.isArray(discovery.sessions) ? discovery.sessions : [];
+const discoveryFoundSessions = discoverySessions.filter((session) => session?.status === 'found' && Array.isArray(session?.candidates) && session.candidates.length > 0).length;
+const discoveryCandidateCount = discoverySessions.reduce((sum, session) => sum + (Array.isArray(session?.candidates) ? session.candidates.length : 0), 0);
+const discoveryState = discovery.__readError || discoveryStatus === 'unconfigured'
+  ? 'optional'
+  : discoveryStatus === 'complete' && discoveryDerivedFromCurrentVerification && discoveryAgeHours != null && discoveryAgeHours <= 72
+    ? 'healthy'
+    : 'degraded';
+
 const maturityDays = consecutiveDays(radarIndex);
 const historyState = maturityDays >= 7 ? 'healthy' : 'maturing';
 
@@ -138,6 +152,18 @@ const components = [
     verificationDerivedFromCurrentQueue ? 'derived from current research queue' : 'research provenance mismatch',
     verificationAgeHours == null ? 'verification age unknown' : `${verificationAgeHours.toFixed(1)}h verification age`,
   ], verificationState === 'healthy' ? null : 'Rebuild Verification Queue before using its evidence-routing actions; stale, incomplete, or incorrectly grouped routing is a hard evidence-coverage failure.'),
+  component('gameplay_discovery', 'Public Gameplay Source Discovery', discoveryState, [
+    `Tavily status ${discoveryStatus}`,
+    `${discoveryFoundSessions}/${verificationCaptureSessions ?? 0} capture session(s) have public source suggestion(s)`,
+    `${discoveryCandidateCount} suggested YouTube source(s)`,
+    `${discovery.provider?.creditsUsedThisRun ?? 0}/${discovery.provider?.dailyCreditCap ?? 8} Basic-search credit budget used`,
+    discoveryDerivedFromCurrentVerification ? 'derived from current verification queue' : 'verification provenance unavailable or stale',
+    'Search candidates are not verified gameplay evidence.',
+  ], discoveryState === 'healthy'
+    ? null
+    : discoveryState === 'optional'
+      ? 'Optional only: configure TAVILY_API_KEY for bounded public gameplay source suggestions.'
+      : 'Use the Verification Queue without search suggestions until the next healthy discovery run.'),
   component('history_maturity', 'Exact Rank History', historyState, [
     `${maturityDays}/7 consecutive exact dated snapshot(s)`,
     '1d/3d/7d comparisons never interpolate missing dates',
@@ -162,21 +188,32 @@ const components = [
   ], appBrainStatus === 'unconfigured' ? 'Optional only: configure APPBRAIN_API_KEY for capped estimate enrichment.' : null),
 ];
 
-const essential = components.filter((item) => !['appbrain', 'history_maturity', 'research_digest'].includes(item.id));
+const essentialIds = new Set(['apple_radar', 'research_queue', 'verification_queue', 'policy_watch']);
+const essential = components.filter((item) => essentialIds.has(item.id));
 const blocked = essential.filter((item) => item.state === 'blocked').length;
 const degraded = essential.filter((item) => item.state === 'degraded').length;
 const overall = blocked > 0 ? 'blocked' : degraded > 0 ? 'degraded' : maturityDays < 7 ? 'ready_with_maturing_history' : 'ready';
 
 const topCandidate = queue.candidates?.[0] ?? null;
+const topDiscovery = topCandidate ? discoverySessions.find((session) => session?.appId === topCandidate.appId) : null;
 const recommendedActions = [];
 if (radarState !== 'healthy') recommendedActions.push({ priority: 1, action: 'FIX_RADAR_SOURCE_HEALTH', why: 'Core rank evidence is degraded or blocked.' });
 if (queueState !== 'healthy') recommendedActions.push({ priority: 2, action: 'FIX_RESEARCH_ENRICHMENT', why: 'Automated candidate evidence is degraded or blocked.' });
 if (verificationState !== 'healthy') recommendedActions.push({ priority: 2, action: 'FIX_VERIFICATION_COVERAGE', why: 'Verification routing is stale, incomplete, incorrectly grouped, or no longer derived from the current research queue.' });
 if (topCandidate?.analysisEvidence?.unknowns?.some((value) => /core mechanic has not been gameplay-verified/i.test(value))) {
-  recommendedActions.push({ priority: 3, action: 'DEEP_VERIFY_TOP_CANDIDATE', appId: topCandidate.appId, name: topCandidate.name, why: 'The highest-priority candidate still has an explicit gameplay-verification unknown.' });
+  recommendedActions.push({
+    priority: 3,
+    action: 'DEEP_VERIFY_TOP_CANDIDATE',
+    appId: topCandidate.appId,
+    name: topCandidate.name,
+    why: topDiscovery?.status === 'found'
+      ? `The highest-priority candidate still has an explicit gameplay-verification unknown; ${topDiscovery.candidates.length} public source suggestion(s) are available for inspection.`
+      : 'The highest-priority candidate still has an explicit gameplay-verification unknown.',
+  });
 }
 if (maturityDays < 3) recommendedActions.push({ priority: 4, action: 'KEEP_COLLECTING_EXACT_HISTORY', why: `Only ${maturityDays} exact daily snapshot(s) exist; no 3-day direction should be claimed yet.` });
 if (confirmedPolicyChanges > 0) recommendedActions.push({ priority: 5, action: 'CHECK_CONFIRMED_POLICY_REVIEW_STATE', why: `${confirmedPolicyChanges} stability-confirmed official-source transition(s) exist; the public health report cannot infer whether the owner already reviewed them.` });
+if (discoveryState === 'optional') recommendedActions.push({ priority: 8, action: 'OPTIONAL_CONFIGURE_GAMEPLAY_DISCOVERY', why: 'Tavily can propose bounded public gameplay sources for Deep Verify without changing first-party research priority or resolving evidence automatically.' });
 if (appBrainStatus === 'unconfigured') recommendedActions.push({ priority: 9, action: 'OPTIONAL_CONFIGURE_APPBRAIN', why: 'Adds capped third-party estimate context but is not required for first-party triage.' });
 recommendedActions.sort((a, b) => a.priority - b.priority);
 
@@ -199,6 +236,9 @@ const output = {
     verificationCaptureSessionCount: verificationCaptureSessions ?? 0,
     verificationGroupedEvidenceTaskCount: verificationGroupedEvidenceTasks ?? 0,
     verificationDerivedFromCurrentQueue,
+    gameplayDiscoveryConfigured: discoveryStatus !== 'unconfigured' && !discovery.__readError,
+    gameplayDiscoveryCandidateCount: discoveryCandidateCount,
+    gameplayDiscoveryDerivedFromCurrentVerification: discoveryDerivedFromCurrentVerification,
     policyDetectedChangeCount: confirmedPolicyChanges,
     confirmedPolicyChanges,
     pendingPolicyCandidates,
@@ -209,4 +249,4 @@ const output = {
 
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(latestPath, `${JSON.stringify(output, null, 2)}\n`);
-console.log(`[data-health] ${overall} · essential ${output.essentialHealthy}/${output.essentialCount} healthy · verification ${verificationTasks ?? 0}/${verificationRawTasks ?? 0} routed, omitted ${verificationOmitted ?? 'unknown'} · sessions ${verificationCaptureSessions ?? 0}/${verificationGroupedEvidenceTasks ?? 0} video tasks · history ${maturityDays}/7 · confirmed-policy ${confirmedPolicyChanges} · pending-policy ${pendingPolicyCandidates} · actions ${recommendedActions.length}`);
+console.log(`[data-health] ${overall} · essential ${output.essentialHealthy}/${output.essentialCount} healthy · verification ${verificationTasks ?? 0}/${verificationRawTasks ?? 0} routed, omitted ${verificationOmitted ?? 'unknown'} · discovery ${discoveryStatus} ${discoveryCandidateCount} suggestion(s) · sessions ${verificationCaptureSessions ?? 0}/${verificationGroupedEvidenceTasks ?? 0} video tasks · history ${maturityDays}/7 · confirmed-policy ${confirmedPolicyChanges} · pending-policy ${pendingPolicyCandidates} · actions ${recommendedActions.length}`);
