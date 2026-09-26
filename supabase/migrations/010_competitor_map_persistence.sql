@@ -118,20 +118,23 @@ language sql
 security invoker
 set search_path = public
 as $$
-  select case when count(*)=0 then null else jsonb_build_object(
-    'primary', max(cr.primary_analysis),
-    'competitors', jsonb_agg(jsonb_build_object(
-      'id', cr.id,
-      'analysis', cr.competitor_analysis,
-      'relationship', cr.relationship,
-      'differentiation', cr.differentiation,
-      'confirmedAt', cr.confirmed_at,
-      'updatedAt', cr.updated_at
-    ) order by cr.confirmed_at)
-  ) end
-  from public.competitor_relations cr
-  join public.store_apps sa on sa.game_id=cr.primary_game_id and sa.owner_id=cr.owner_id
-  where cr.owner_id=auth.uid() and sa.store_id=p_primary_store_id;
+  with rows as (
+    select cr.*
+    from public.competitor_relations cr
+    join public.store_apps sa on sa.game_id=cr.primary_game_id and sa.owner_id=cr.owner_id
+    where cr.owner_id=auth.uid() and sa.store_id=p_primary_store_id
+  )
+  select case when not exists(select 1 from rows) then null else jsonb_build_object(
+    'primary', (select primary_analysis from rows order by confirmed_at limit 1),
+    'competitors', (select jsonb_agg(jsonb_build_object(
+      'id', id,
+      'analysis', competitor_analysis,
+      'relationship', relationship,
+      'differentiation', differentiation,
+      'confirmedAt', confirmed_at,
+      'updatedAt', updated_at
+    ) order by confirmed_at) from rows)
+  ) end;
 $$;
 
 revoke all on function public.save_competitor_map(jsonb,jsonb) from public, anon;
