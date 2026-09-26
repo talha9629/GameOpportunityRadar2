@@ -1,4 +1,5 @@
-import type { AnalysisResult } from './domain';
+import { z } from 'zod';
+import { AnalysisResultSchema, type AnalysisResult } from './domain';
 
 export const relationshipTypes = [
   'PREDECESSOR',
@@ -11,7 +12,8 @@ export const relationshipTypes = [
   'NOT_RELEVANT',
 ] as const;
 
-export type RelationshipType = typeof relationshipTypes[number];
+export const RelationshipTypeSchema = z.enum(relationshipTypes);
+export type RelationshipType = z.infer<typeof RelationshipTypeSchema>;
 
 export const differentiationDimensions = [
   'Core mechanic',
@@ -29,7 +31,8 @@ export const differentiationDimensions = [
 ] as const;
 
 export type DifferentiationDimension = typeof differentiationDimensions[number];
-export type DifferenceState = 'unknown' | 'similar' | 'meaningfully_different';
+export const DifferenceStateSchema = z.enum(['unknown', 'similar', 'meaningfully_different']);
+export type DifferenceState = z.infer<typeof DifferenceStateSchema>;
 
 export interface DifferentiationJudgment {
   state: DifferenceState;
@@ -37,6 +40,26 @@ export interface DifferentiationJudgment {
 }
 
 export type DifferentiationMap = Record<DifferentiationDimension, DifferentiationJudgment>;
+
+const DifferentiationJudgmentSchema = z.object({ state: DifferenceStateSchema, note: z.string() });
+export const DifferentiationMapSchema = z.object(Object.fromEntries(
+  differentiationDimensions.map((dimension) => [dimension, DifferentiationJudgmentSchema]),
+) as Record<DifferentiationDimension, typeof DifferentiationJudgmentSchema>);
+
+export const PersistedCompetitorSchema = z.object({
+  id: z.string().uuid(),
+  analysis: AnalysisResultSchema,
+  relationship: RelationshipTypeSchema,
+  differentiation: DifferentiationMapSchema,
+  confirmedAt: z.string().optional(),
+  updatedAt: z.string().optional(),
+});
+
+export const CompetitorMapPayloadSchema = z.object({
+  primary: AnalysisResultSchema,
+  competitors: z.array(PersistedCompetitorSchema),
+});
+export type CompetitorMapPayload = z.infer<typeof CompetitorMapPayloadSchema>;
 
 export interface ListingProfile {
   mechanics: string;
