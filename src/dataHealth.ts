@@ -1,0 +1,43 @@
+import { z } from 'zod';
+
+const HealthComponentSchema = z.object({
+  id: z.string().min(3),
+  label: z.string().min(3),
+  state: z.enum(['healthy', 'degraded', 'blocked', 'maturing', 'optional']),
+  facts: z.array(z.string()).min(1),
+  action: z.string().nullable(),
+});
+
+const RecommendedActionSchema = z.object({
+  priority: z.number().int().nonnegative(),
+  action: z.string().min(5),
+  why: z.string().min(12),
+  appId: z.string().optional(),
+  name: z.string().optional(),
+});
+
+export const DataHealthSchema = z.object({
+  schemaVersion: z.literal(1),
+  generatedAt: z.string(),
+  overall: z.enum(['ready', 'ready_with_maturing_history', 'degraded', 'blocked']),
+  statement: z.string(),
+  essentialHealthy: z.number().int().nonnegative(),
+  essentialCount: z.number().int().positive(),
+  components: z.array(HealthComponentSchema).min(5),
+  recommendedActions: z.array(RecommendedActionSchema),
+  facts: z.object({
+    radarDate: z.string().nullable(),
+    researchQueueDate: z.string().nullable(),
+    exactHistoryDays: z.number().int().nonnegative(),
+    policyDetectedChangeCount: z.number().int().nonnegative(),
+    appBrainConfigured: z.boolean(),
+  }),
+});
+
+export type DataHealth = z.infer<typeof DataHealthSchema>;
+
+export async function loadDataHealth(): Promise<DataHealth> {
+  const response = await fetch(`${import.meta.env.BASE_URL}data/health/latest.json`, { cache: 'no-store' });
+  if (!response.ok) throw new Error(`Data health request failed (${response.status}).`);
+  return DataHealthSchema.parse(await response.json());
+}
