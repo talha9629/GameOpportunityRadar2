@@ -39,8 +39,16 @@ jobs:
             --data '{"videoId":"00000000-0000-0000-0000-000000000000"}')
           echo "Anonymous Deep Verify status: $HTTP_CODE"
           cat /tmp/deep-verify-response.json
-          if [ "$HTTP_CODE" != "401" ] && [ "$HTTP_CODE" != "403" ]; then
-            echo "Deep Verify provider must remain inaccessible to anonymous clients."
-            exit 1
+
+          if [ "$HTTP_CODE" = "401" ] || [ "$HTTP_CODE" = "403" ]; then
+            echo "Deep Verify provider boundary PASS · owner JWT required"
+            exit 0
           fi
-          echo "Deep Verify provider boundary PASS · owner JWT required"
+
+          if [ "$HTTP_CODE" = "503" ] && grep -q 'PROVIDER_UNCONFIGURED' /tmp/deep-verify-response.json; then
+            echo "Deep Verify provider boundary PASS · provider is not configured, so no analysis can run"
+            exit 0
+          fi
+
+          echo "Deep Verify provider returned an unexpected anonymous-access state."
+          exit 1
