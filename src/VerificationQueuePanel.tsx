@@ -5,6 +5,10 @@ import {
   latestEvidenceForSession,
   type VerificationSessionEvidence,
 } from './verificationEvidence';
+import {
+  resolvedTaskCount,
+  type VerificationTaskResolution,
+} from './verificationResolution';
 import './verificationQueue.css';
 
 function TaskIcon({ task }: { task: VerificationTask }) {
@@ -25,30 +29,47 @@ function stateLabel(task: VerificationTask) {
 function CaptureSession({
   session,
   evidence,
+  resolutions,
   onDeepVerify,
 }: {
   session: VerificationCaptureSession;
   evidence: VerificationSessionEvidence[];
+  resolutions: VerificationTaskResolution[];
   onDeepVerify: (session: VerificationCaptureSession, videoId?: string) => void;
 }) {
   const latest = latestEvidenceForSession(evidence, session.sessionId);
   const evidenceCount = evidenceCountForSession(evidence, session.sessionId);
+  const resolvedCount = resolvedTaskCount(resolutions, session.taskIds);
+  const fullyResolved = resolvedCount === session.taskCount;
 
-  return <div className={`verification-session impact-${session.impact} ${latest ? 'has-evidence' : ''}`}>
+  return <div className={`verification-session impact-${session.impact} ${latest ? 'has-evidence' : ''} ${fullyResolved ? 'is-resolved' : ''}`}>
     <div className="verification-order">S{session.sessionOrder}</div>
     <div className="verification-icon"><Video size={16} /></div>
     <div className="verification-copy">
       <div className="verification-title">
         <strong>{session.name}</strong>
-        <span>{latest ? `EVIDENCE COLLECTED · ${evidenceCount} SOURCE${evidenceCount === 1 ? '' : 'S'}` : `ONE CAPTURE · ${session.taskCount} GAPS`}</span>
+        <span>{fullyResolved
+          ? `HUMAN RESOLVED · ${resolvedCount}/${session.taskCount} GAPS`
+          : latest
+            ? `EVIDENCE COLLECTED · ${resolvedCount}/${session.taskCount} RESOLVED`
+            : `ONE CAPTURE · ${session.taskCount} GAPS`}</span>
       </div>
-      <b>{latest ? 'Source saved; evidence review still required' : session.actionLabel}</b>
+      <b>{fullyResolved
+        ? 'All atomic gaps were explicitly resolved from human-confirmed findings'
+        : latest
+          ? 'Source saved; unresolved gaps still require human review'
+          : session.actionLabel}</b>
       <ul className="verification-session-unknowns">
-        {session.unknowns.map((unknown, index) => <li key={session.taskIds[index]}>{unknown}</li>)}
+        {session.unknowns.map((unknown, index) => {
+          const resolved = resolutions.find((row) => row.taskId === session.taskIds[index] && row.state === 'resolved');
+          return <li key={session.taskIds[index]}>{resolved ? `Resolved: ${unknown}` : unknown}</li>;
+        })}
       </ul>
-      <small>{latest
-        ? `Latest linked source saved ${new Date(latest.createdAt).toLocaleString()}. Saving a source does not establish that any listed claim is supported or disproven.`
-        : session.why}</small>
+      <small>{fullyResolved
+        ? 'This is an owner review overlay. The canonical generated queue remains unchanged and the cited source/findings remain the evidence authority.'
+        : latest
+          ? `Latest linked source saved ${new Date(latest.createdAt).toLocaleString()}. Saving a source alone never resolves a gap.`
+          : session.why}</small>
     </div>
     <div className="verification-action">
       <span>{session.impact} impact</span>
@@ -61,13 +82,17 @@ function CaptureSession({
 export function VerificationQueuePanel({
   queue,
   evidence,
+  resolutions,
   evidenceError = null,
+  resolutionError = null,
   onDeepVerify,
   onCompetitors,
 }: {
   queue: VerificationQueue;
   evidence: VerificationSessionEvidence[];
+  resolutions: VerificationTaskResolution[];
   evidenceError?: string | null;
+  resolutionError?: string | null;
   onDeepVerify: (session: VerificationCaptureSession, videoId?: string) => void;
   onCompetitors: () => void;
 }) {
@@ -75,6 +100,8 @@ export function VerificationQueuePanel({
     .filter((task) => task.evidenceType !== 'deep_verify_video' && task.automationState !== 'optional_external')
     .slice(0, 12);
   const sessionsWithEvidence = queue.captureSessions.filter((session) => evidenceCountForSession(evidence, session.sessionId) > 0).length;
+  const fullyResolvedSessions = queue.captureSessions.filter((session) => resolvedTaskCount(resolutions, session.taskIds) === session.taskCount).length;
+  const resolvedVideoTasks = resolvedTaskCount(resolutions, queue.captureSessions.flatMap((session) => session.taskIds));
 
   return <section className="panel verification-queue-panel">
     <div className="section-heading">
@@ -87,21 +114,22 @@ export function VerificationQueuePanel({
 
     <div className="verification-summary">
       <span><b>{queue.summary.captureSessionCount}</b> capture sessions</span>
-      <span><b>{queue.summary.groupedEvidenceTaskCount}</b> gameplay gaps covered</span>
-      <span><b>{sessionsWithEvidence}</b> sessions with saved evidence</span>
-      <span><b>{queue.summary.readyForHumanReview}</b> human-review</span>
+      <span><b>{queue.summary.groupedEvidenceTaskCount}</b> gameplay gaps</span>
+      <span><b>{resolvedVideoTasks}</b> human-resolved video tasks</span>
+      <span><b>{fullyResolvedSessions}</b> fully resolved sessions</span>
+      <span><b>{sessionsWithEvidence}</b> sessions with evidence</span>
       <span><b>{queue.summary.autoWaiting}</b> automated waiting</span>
-      <span><b>{queue.summary.optionalExternal}</b> optional external</span>
     </div>
 
     {evidenceError && <div className="verification-progress-warning">Generated verification work is still available, but owner evidence progress could not be loaded: {evidenceError}</div>}
+    {resolutionError && <div className="verification-progress-warning">Generated verification work and saved evidence are still available, but human task resolutions could not be loaded: {resolutionError}</div>}
 
     <div className="verification-session-heading">
-      <div><strong>Evidence collection sessions</strong><span>One representative gameplay/menu capture can be reviewed against every atomic gap listed in that session. Saved evidence is owner-scoped and does not alter the generated queue.</span></div>
-      <b>{queue.captureSessions.length - sessionsWithEvidence} capture action{queue.captureSessions.length - sessionsWithEvidence === 1 ? '' : 's'} still need evidence</b>
+      <div><strong>Evidence collection sessions</strong><span>One representative gameplay/menu capture can be reviewed against every atomic gap listed in that session. Owner evidence and resolution overlays never rewrite the generated queue.</span></div>
+      <b>{queue.captureSessions.length - fullyResolvedSessions} session{queue.captureSessions.length - fullyResolvedSessions === 1 ? '' : 's'} still have open gaps</b>
     </div>
     <div className="verification-list verification-session-list">
-      {queue.captureSessions.map((session) => <CaptureSession key={session.sessionId} session={session} evidence={evidence} onDeepVerify={onDeepVerify} />)}
+      {queue.captureSessions.map((session) => <CaptureSession key={session.sessionId} session={session} evidence={evidence} resolutions={resolutions} onDeepVerify={onDeepVerify} />)}
     </div>
 
     <div className="verification-session-heading secondary">
@@ -125,6 +153,6 @@ export function VerificationQueuePanel({
       </div>)}
     </div>
 
-    <p className="verification-boundary">Evidence collected means only that an owner-linked source exists for the exact capture session. It does not resolve, support, or disprove the underlying unknowns. All {queue.summary.taskCount} atomic tasks remain canonical until their evidence is explicitly reviewed.</p>
+    <p className="verification-boundary">Human resolved means an owner explicitly cited a category-matched timestamped finding already marked human-confirmed. Evidence collection alone never resolves a task. The canonical generated queue remains immutable and all resolution state is stored separately with source provenance.</p>
   </section>;
 }
