@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T18:47:45.936Z",
+  "generatedAt": "2026-09-26T18:51:46.193Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
-  "essentialHealthy": 3,
-  "essentialCount": 3,
+  "essentialHealthy": 4,
+  "essentialCount": 4,
   "components": [
     {
       "id": "apple_radar",
@@ -14,7 +14,7 @@
         "4/4 healthy Games markets",
         "0 failed market(s)",
         "0 overall-chart fallback market(s)",
-        "0.0h snapshot age"
+        "0.1h snapshot age"
       ],
       "action": null
     },
@@ -26,7 +26,19 @@
         "12 candidates",
         "Apple lookup complete",
         "live evidence complete (8/8)",
-        "0.0h queue age"
+        "0.1h queue age"
+      ],
+      "action": null
+    },
+    {
+      "id": "verification_queue",
+      "label": "Automated Verification Queue",
+      "state": "healthy",
+      "facts": [
+        "48/48 explicit unknown(s) routed",
+        "0 omitted task(s)",
+        "derived from current research queue",
+        "0.1h verification age"
       ],
       "action": null
     },
@@ -60,7 +72,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "5 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "0.2h policy-index age",
+        "0.0h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -100,6 +112,10 @@
     "radarDate": "2026-09-26",
     "researchQueueDate": "2026-09-26",
     "exactHistoryDays": 1,
+    "verificationTaskCount": 48,
+    "verificationRawTaskCount": 48,
+    "verificationOmittedTaskCount": 0,
+    "verificationDerivedFromCurrentQueue": true,
     "policyDetectedChangeCount": 0,
     "confirmedPolicyChanges": 0,
     "pendingPolicyCandidates": 5,
