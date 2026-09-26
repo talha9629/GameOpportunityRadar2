@@ -34,7 +34,7 @@ for (let index = 0; index < (queue.candidates ?? []).length; index += 1) {
   assert(candidate.evidence?.sourceOrigin === 'official_public', `${candidate.appId} rank evidence must be official_public`);
   assert(candidate.evidence?.chartCategory === 'Games', `${candidate.appId} queue evidence must be Games chart evidence`);
   assert(Number.isInteger(candidate.evidence?.marketCount) && candidate.evidence.marketCount >= 1 && candidate.evidence.marketCount <= 4, `${candidate.appId} invalid marketCount`);
-  assert(Number.isInteger(candidate.evidence?.bestRank) && candidate.evidence.bestRank >= 1 && candidate.evidence.bestRank <= 50, `${candidate.appId} invalid bestRank`);
+  assert(Number.isInteger(candidate.evidence?.bestRank) && candidate.evidence.bestRank >= 1 && candidate.evidence.bestRank <= 100, `${candidate.appId} invalid bestRank`);
   assert(Array.isArray(candidate.evidence?.markets) && candidate.evidence.markets.length === candidate.evidence.marketCount, `${candidate.appId} market evidence mismatch`);
   assert(candidate.appleMetadata == null || candidate.appleMetadata.sourceOrigin === 'official_public', `${candidate.appId} Apple metadata provenance missing`);
   if (candidate.appBrainEstimate != null) {

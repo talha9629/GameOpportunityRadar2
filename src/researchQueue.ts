@@ -92,7 +92,7 @@ export const ResearchCandidateSchema = z.object({
     sourceOrigin: z.literal('official_public'),
     chartCategory: z.literal('Games'),
     marketCount: z.number().int().min(1).max(4),
-    bestRank: z.number().int().min(1).max(50),
+    bestRank: z.number().int().min(1).max(100),
     averageRank: z.number().positive(),
     maxObservedDays: z.number().int().positive(),
     newEntry: z.boolean(),

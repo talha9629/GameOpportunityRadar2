@@ -1,7 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { crossMarketLeaders, historyMaturity, rankWindowChange, type RadarSnapshot } from './radar';
+import {
+  assessRadarTrend,
+  crossMarketLeaders,
+  historyMaturity,
+  rankVisibility,
+  rankWindowChange,
+  type RadarSnapshot,
+} from './radar';
 
-function entry(appId: string, rank: number) {
+function entry(appId: string, rank: number, daysObserved = 1) {
   return {
     rank,
     priorRank: null,
@@ -12,18 +19,24 @@ function entry(appId: string, rank: number) {
     iconUrl: null,
     storeUrl: null,
     firstObserved: '2026-09-20',
-    daysObserved: 1,
+    daysObserved,
     bestObservedRank: rank,
     events: [],
   };
 }
 
-function snapshot(date: string, rank: number | null, status: 'ok' | 'failed' = 'ok'): RadarSnapshot {
+function snapshot(
+  date: string,
+  rank: number | null,
+  status: 'ok' | 'failed' = 'ok',
+  options: { daysObserved?: number; gameFocused?: boolean } = {},
+): RadarSnapshot {
   return {
-    schemaVersion: 2,
+    schemaVersion: 3,
     generatedAt: `${date}T03:05:00.000Z`,
     chart: 'top-free',
     category: 'Games',
+    chartDepth: 100,
     runStatus: status === 'ok' ? 'complete' : 'partial',
     successfulMarkets: status === 'ok' ? 1 : 0,
     markets: {
@@ -31,8 +44,8 @@ function snapshot(date: string, rank: number | null, status: 'ok' | 'failed' = '
         country: 'us',
         label: 'United States',
         status,
-        gameFocused: true,
-        entries: rank == null ? [] : [entry('game-a', rank)],
+        gameFocused: options.gameFocused ?? true,
+        entries: rank == null ? [] : [entry('game-a', rank, options.daysObserved ?? 1)],
       },
     },
   };
@@ -76,6 +89,70 @@ describe('Radar exact-date trend semantics', () => {
     expect(maturity.observedDays).toBe(5);
     expect(maturity.consecutiveDays).toBe(4);
     expect(maturity.label).toBe('BUILDING');
+  });
+});
+
+describe('rankVisibility', () => {
+  it('implements the bounded log-rank heuristic inside the observed chart only', () => {
+    expect(rankVisibility(1, 100)).toBeCloseTo(1, 10);
+    expect(rankVisibility(10, 100)).toBeGreaterThan(rankVisibility(50, 100) ?? 0);
+    expect(rankVisibility(50, 100)).toBeGreaterThan(rankVisibility(100, 100) ?? 0);
+    expect(rankVisibility(100, 100)).toBeGreaterThanOrEqual(0);
+    expect(rankVisibility(100, 100)).toBeLessThanOrEqual(1);
+  });
+
+  it('rejects ranks outside the observed chart depth', () => {
+    expect(rankVisibility(0, 100)).toBeNull();
+    expect(rankVisibility(101, 100)).toBeNull();
+    expect(rankVisibility(1, 0)).toBeNull();
+  });
+});
+
+describe('assessRadarTrend', () => {
+  it('keeps a first observation insufficient rather than inventing momentum', () => {
+    const current = snapshot('2026-09-27', 5);
+    expect(assessRadarTrend(current, [current], 'us', 'game-a').state).toBe('INSUFFICIENT_DATA');
+  });
+
+  it('marks an exact prior-day tracked-range entry as emerging when it enters high', () => {
+    const current = snapshot('2026-09-27', 12);
+    const prior = snapshot('2026-09-26', null);
+    expect(assessRadarTrend(current, [current, prior], 'us', 'game-a')).toMatchObject({
+      state: 'EMERGING',
+      evidenceDays: [1],
+    });
+  });
+
+  it('requires exact movement evidence for rising and declining states', () => {
+    const rising = snapshot('2026-09-27', 10, 'ok', { daysObserved: 4 });
+    const risingPrior = snapshot('2026-09-24', 30);
+    expect(assessRadarTrend(rising, [rising, risingPrior], 'us', 'game-a').state).toBe('RISING');
+
+    const declining = snapshot('2026-09-27', 30, 'ok', { daysObserved: 8 });
+    const decliningPrior = snapshot('2026-09-20', 10);
+    expect(assessRadarTrend(declining, [declining, decliningPrior], 'us', 'game-a').state).toBe('DECLINING');
+  });
+
+  it('requires persistence plus an exact seven-day comparison for established', () => {
+    const current = snapshot('2026-09-27', 12, 'ok', { daysObserved: 8 });
+    const prior = snapshot('2026-09-20', 13);
+    expect(assessRadarTrend(current, [current, prior], 'us', 'game-a')).toMatchObject({
+      state: 'ESTABLISHED',
+      evidenceDays: [7],
+    });
+  });
+
+  it('never infers saturation states from rank evidence alone', () => {
+    const current = snapshot('2026-09-27', 1, 'ok', { daysObserved: 30 });
+    const prior = snapshot('2026-09-20', 1);
+    const state = assessRadarTrend(current, [current, prior], 'us', 'game-a').state;
+    expect(['CROWDED', 'WINDOW_CLOSING']).not.toContain(state);
+  });
+
+  it('does not classify an overall Top Free fallback as a Games trend', () => {
+    const current = snapshot('2026-09-27', 3, 'ok', { daysObserved: 8, gameFocused: false });
+    const prior = snapshot('2026-09-20', 40);
+    expect(assessRadarTrend(current, [current, prior], 'us', 'game-a').state).toBe('INSUFFICIENT_DATA');
   });
 });
 

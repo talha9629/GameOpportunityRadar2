@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AlertTriangle, ArrowDown, ArrowUp, ExternalLink, RefreshCw, Search } from 'lucide-react';
 import {
+  assessRadarTrend,
   crossMarketLeaders,
   fastestMovers,
   historyMaturity,
   loadRadarWindow,
   newEntrants,
+  rankVisibility,
   rankWindowChange,
   type RadarEntry,
   type RadarSnapshot,
+  type RadarTrendAssessment,
   type RankWindowChange,
 } from './radar';
 import { loadResearchQueue, primaryMomentum, type ResearchQueue } from './researchQueue';
@@ -29,11 +32,24 @@ function RankWindow({ change }: { change: RankWindowChange }) {
   const prefix = `${change.days}d`;
   if (change.status === 'history_missing') return <span className="window-pill unknown" title={`No exact ${change.days}-day snapshot exists. No movement is inferred.`}>{prefix} ?</span>;
   if (change.status === 'market_failed') return <span className="window-pill unknown" title={`The ${change.days}-day comparison market failed collection.`}>{prefix} !</span>;
-  if (change.status === 'not_ranked') return <span className="window-pill entered" title={`Not present in the tracked Top 50 exactly ${change.days} day(s) ago.`}>{prefix} IN</span>;
+  if (change.status === 'not_ranked') return <span className="window-pill entered" title={`Not present in the tracked range exactly ${change.days} day(s) ago.`}>{prefix} IN</span>;
   const delta = change.delta ?? 0;
   const label = delta > 0 ? `+${delta}` : String(delta);
   const className = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat';
   return <span className={`window-pill ${className}`} title={`Exact ${change.days}-day rank change: #${change.priorRank} → #${change.currentRank}`}>{prefix} {label}</span>;
+}
+
+function TrendPill({ assessment }: { assessment: RadarTrendAssessment }) {
+  const className = assessment.state === 'RISING'
+    ? 'up'
+    : assessment.state === 'DECLINING'
+      ? 'down'
+      : assessment.state === 'EMERGING'
+        ? 'entered'
+        : assessment.state === 'INSUFFICIENT_DATA'
+          ? 'unknown'
+          : 'flat';
+  return <span className={`window-pill ${className}`} title={assessment.reason}>{assessment.state.replaceAll('_', ' ')}</span>;
 }
 
 function EntryRow({
@@ -54,6 +70,13 @@ function EntryRow({
   const windows = snapshot && history && marketCode
     ? ([1, 3, 7] as const).map((days) => rankWindowChange(snapshot, history, marketCode, entry.appId, days))
     : [];
+  const trend = snapshot && history && marketCode
+    ? assessRadarTrend(snapshot, history, marketCode, entry.appId)
+    : null;
+  const observedDepth = snapshot && marketCode
+    ? snapshot.chartDepth ?? snapshot.markets[marketCode]?.entries.length ?? 0
+    : 0;
+  const visibility = observedDepth > 0 ? rankVisibility(entry.rank, observedDepth) : null;
 
   return (
     <div className={`radar-row ${windows.length ? 'with-windows' : ''}`}>
@@ -61,7 +84,11 @@ function EntryRow({
       {entry.iconUrl && <img src={entry.iconUrl} alt="" />}
       <div className="radar-game"><strong>{entry.name}</strong><span>{entry.publisher}{market ? ` · ${market}` : ''}</span></div>
       <Movement entry={entry} />
-      {windows.length > 0 && <div className="window-trend">{windows.map((change) => <RankWindow key={change.days} change={change} />)}</div>}
+      {windows.length > 0 && <div className="window-trend">
+        {windows.map((change) => <RankWindow key={change.days} change={change} />)}
+        {visibility != null && <span className="window-pill flat" title={`Bounded log-rank visibility within the observed Top ${observedDepth}: ln((N+1)/rank) / ln(N+1). This is not download share, revenue share, or probability.`}>VIS {Math.round(visibility * 100)}%</span>}
+        {trend && <TrendPill assessment={trend} />}
+      </div>}
       <div className="radar-actions">
         <button onClick={() => onAnalyze(entry.appId)} title={`Analyze ${entry.name}`}><Search size={14} /> Analyze</button>
         {entry.storeUrl && <a href={entry.storeUrl} target="_blank" rel="noreferrer" className="icon-link" title="Open App Store"><ExternalLink size={15} /></a>}
@@ -195,7 +222,7 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
   return (
     <section className="today-shell">
       <div className="today-heading">
-        <div><div className="eyebrow">RADAR · TODAY</div><h1>What is moving now?</h1><p>Daily Apple chart observations. Rank movement is evidence; it is not download share or revenue.</p></div>
+        <div><div className="eyebrow">RADAR · TODAY</div><h1>What is moving now?</h1><p>Daily Apple chart observations. Rank movement and rank visibility describe the observed chart only; they are not download share, revenue, or success probability.</p></div>
         <button onClick={() => void refresh()} disabled={loading}><RefreshCw size={16} /> {loading ? 'Refreshing…' : 'Refresh'}</button>
       </div>
 
@@ -207,11 +234,11 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
           <div className="panel kpi"><span>Markets healthy</span><strong>{successfulMarkets}/4</strong></div>
           <div className="panel kpi"><span>History maturity</span><strong>{maturity.consecutiveDays}/7 days</strong><small>{maturity.label.replaceAll('_', ' ')}</small></div>
           <div className="panel kpi"><span>Fast movers</span><strong>{movers.length}</strong></div>
-          <div className="panel kpi"><span>Snapshot</span><strong>{new Date(snapshot.generatedAt).toLocaleDateString()}</strong><small>{new Date(snapshot.generatedAt).toLocaleTimeString()}</small></div>
+          <div className="panel kpi"><span>Tracked depth</span><strong>Top {snapshot.chartDepth ?? Math.max(0, ...Object.values(snapshot.markets).map((item) => item.entries.length))}</strong><small>per available market</small></div>
         </div>
 
         {maturity.consecutiveDays < 7 && (
-          <div className="history-banner"><strong>History is still maturing.</strong><span>1d / 3d / 7d comparisons use exact dated snapshots only. “?” means the required date does not exist yet; Radar never smooths or invents the missing rank.</span></div>
+          <div className="history-banner"><strong>History is still maturing.</strong><span>1d / 3d / 7d comparisons use exact dated snapshots only. “?” means the required date does not exist yet; Radar never smooths or invents the missing rank. Trend states remain insufficient until their evidence gate is met.</span></div>
         )}
 
         {(snapshot.runStatus === 'partial' || hasPreservedMarket) && (
@@ -237,13 +264,13 @@ export function Today({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
         </div>
 
         <section className="panel cross-market-panel">
-          <div className="section-heading"><div><h2>Cross-Market Presence</h2><p>Titles simultaneously present in more than one healthy Games Top 50 market.</p></div><span>descriptive rank evidence only</span></div>
+          <div className="section-heading"><div><h2>Cross-Market Presence</h2><p>Titles simultaneously present in more than one healthy Games-category tracked market.</p></div><span>descriptive rank evidence only</span></div>
           {crossMarket.length ? crossMarket.map((item) => <CrossMarketRow key={item.appId} item={item} onAnalyze={onAnalyze} />) : <p>No multi-market overlap is available in the current healthy Games-category observations.</p>}
         </section>
 
         <section className="panel market-panel">
-          <div className="market-toolbar"><div><h2>Tracked Chart</h2><p>Top 20 shown from the latest tracked range. Exact 1d / 3d / 7d changes appear beside each title when those dated snapshots exist.</p></div><div className="market-tabs">{Object.entries(snapshot.markets).map(([code, item]) => <button key={code} className={selectedMarket === code ? 'active' : ''} onClick={() => setSelectedMarket(code)}>{item.label}{item.status === 'failed' ? ' ⚠' : ''}</button>)}</div></div>
-          {market && <div className="source-strip"><span>{market.gameFocused ? 'Games-category chart' : 'Overall Top Free fallback'}</span><span>{market.sourceMode ?? 'source unavailable'}</span>{market.observedAt && <span>Observed {new Date(market.observedAt).toLocaleString()}</span>}{market.refreshStatus === 'preserved_same_day' && <span className="source-warning">Earlier same-day observation preserved</span>}{market.warning && <span className="source-warning">{market.warning}</span>}</div>}
+          <div className="market-toolbar"><div><h2>Tracked Chart</h2><p>Top 20 shown from the latest tracked range. Exact 1d / 3d / 7d changes, bounded rank visibility, and evidence-gated trend state appear beside each title when supported.</p></div><div className="market-tabs">{Object.entries(snapshot.markets).map(([code, item]) => <button key={code} className={selectedMarket === code ? 'active' : ''} onClick={() => setSelectedMarket(code)}>{item.label}{item.status === 'failed' ? ' ⚠' : ''}</button>)}</div></div>
+          {market && <div className="source-strip"><span>{market.gameFocused ? 'Games-category chart' : 'Overall Top Free fallback'}</span><span>{market.sourceMode ?? 'source unavailable'}</span><span>Tracked {market.entries.length} rows</span>{market.observedAt && <span>Observed {new Date(market.observedAt).toLocaleString()}</span>}{market.refreshStatus === 'preserved_same_day' && <span className="source-warning">Earlier same-day observation preserved</span>}{market.warning && <span className="source-warning">{market.warning}</span>}</div>}
           {market?.status === 'failed' ? <div className="error-box">{market.error}</div> : marketEntries.map((entry) => <EntryRow key={entry.appId} entry={entry} marketCode={selectedMarket} snapshot={snapshot} history={history} onAnalyze={onAnalyze} />)}
         </section>
       </>}
