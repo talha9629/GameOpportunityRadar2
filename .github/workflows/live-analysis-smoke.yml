@@ -27,7 +27,7 @@ jobs:
             -X POST "$ENDPOINT" \
             -H 'Content-Type: application/json' \
             -H "apikey: $KEY" \
-            --data '{"input":"6761760135"}' \
+            --data '{"input":"6761760135","mode":"analyze"}' \
             -o ios-response.json
           node <<'NODE'
           const fs = require('fs');
@@ -51,6 +51,47 @@ jobs:
           }, null, 2));
           NODE
 
+      - name: Test title search returns explicit candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENDPOINT='https://gajkwzgxfjlvdbzrvdqn.supabase.co/functions/v1/analyze-game'
+          KEY='sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg'
+          curl --fail-with-body --silent --show-error \
+            -X POST "$ENDPOINT" \
+            -H 'Content-Type: application/json' \
+            -H "apikey: $KEY" \
+            --data '{"input":"Meowdoku","mode":"search"}' \
+            -o search-response.json
+          node <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('search-response.json', 'utf8'));
+          if (!Array.isArray(data.candidates) || data.candidates.length < 1) throw new Error('Expected candidate results.');
+          if (!data.candidates.some((candidate) => candidate.storeId === '6761760135')) throw new Error('Expected Meowdoku candidate was not returned.');
+          console.log(`Candidate selection confirmed with ${data.candidates.length} result(s).`);
+          NODE
+
+      - name: Reject direct analysis of unresolved title text
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENDPOINT='https://gajkwzgxfjlvdbzrvdqn.supabase.co/functions/v1/analyze-game'
+          KEY='sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg'
+          STATUS=$(curl --silent --show-error \
+            -X POST "$ENDPOINT" \
+            -H 'Content-Type: application/json' \
+            -H "apikey: $KEY" \
+            --data '{"input":"Meowdoku","mode":"analyze"}' \
+            -o unresolved-response.json \
+            -w '%{http_code}')
+          test "$STATUS" = '409'
+          node <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('unresolved-response.json', 'utf8'));
+          if (data?.error !== 'SELECTION_REQUIRED') throw new Error(`Unexpected unresolved-title error: ${data?.error}`);
+          console.log('Unresolved title cannot be silently analyzed.');
+          NODE
+
       - name: Test Android assisted-evidence boundary
         shell: bash
         run: |
@@ -61,7 +102,7 @@ jobs:
             -X POST "$ENDPOINT" \
             -H 'Content-Type: application/json' \
             -H "apikey: $KEY" \
-            --data '{"input":"com.oakever.meowdoku"}' \
+            --data '{"input":"com.oakever.meowdoku","mode":"analyze"}' \
             -o android-response.json \
             -w '%{http_code}')
           test "$STATUS" = '422'
