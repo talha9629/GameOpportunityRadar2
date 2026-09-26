@@ -2,12 +2,12 @@ services:
   - type: web
     name: game-opportunity-radar2
     runtime: static
-    buildCommand: npm install && npm run build
+    buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
     envVars:
       - key: VITE_SUPABASE_URL
         sync: false
-      - key: VITE_SUPABASE_ANON_KEY
+      - key: VITE_SUPABASE_PUBLISHABLE_KEY
         sync: false
     routes:
       - type: rewrite
