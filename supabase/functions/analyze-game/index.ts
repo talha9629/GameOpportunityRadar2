@@ -1,6 +1,9 @@
 import { z } from 'npm:zod@4.1.11';
 
-const InputSchema = z.object({ input: z.string().trim().min(2).max(500) });
+const InputSchema = z.object({
+  input: z.string().trim().min(2).max(500),
+  mode: z.enum(['analyze', 'search']).default('analyze'),
+});
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -62,6 +65,17 @@ function listingFindings(description: string) {
   }));
 }
 
+function toCandidate(item: Record<string, unknown>) {
+  if (!item.trackId || !item.trackName || !item.trackViewUrl) return null;
+  return {
+    storeId: String(item.trackId),
+    canonicalName: String(item.trackName),
+    publisher: typeof item.sellerName === 'string' ? item.sellerName : typeof item.artistName === 'string' ? item.artistName : null,
+    storeUrl: String(item.trackViewUrl),
+    iconUrl: typeof item.artworkUrl100 === 'string' ? item.artworkUrl100 : null,
+  };
+}
+
 Deno.serve(async (request) => {
   if (request.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
 
@@ -75,11 +89,30 @@ Deno.serve(async (request) => {
     }
 
     const appleId = appleIdFromInput(body.input);
-    const endpoint = appleId
-      ? `https://itunes.apple.com/lookup?id=${encodeURIComponent(appleId)}&country=us`
-      : `https://itunes.apple.com/search?term=${encodeURIComponent(body.input)}&entity=software&country=us&limit=5`;
 
-    const appleResponse = await fetch(endpoint, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.2' } });
+    if (body.mode === 'search') {
+      const endpoint = appleId
+        ? `https://itunes.apple.com/lookup?id=${encodeURIComponent(appleId)}&country=us`
+        : `https://itunes.apple.com/search?term=${encodeURIComponent(body.input)}&entity=software&country=us&limit=8`;
+      const searchResponse = await fetch(endpoint, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.3' } });
+      if (!searchResponse.ok) throw new Error(`Apple search request failed (${searchResponse.status}).`);
+      const payload = await searchResponse.json();
+      const candidates = (Array.isArray(payload?.results) ? payload.results : [])
+        .map((item: Record<string, unknown>) => toCandidate(item))
+        .filter(Boolean);
+      if (candidates.length === 0) throw new Error('No matching iOS game was found.');
+      return Response.json({ query: body.input, candidates }, { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
+
+    if (!appleId) {
+      return Response.json({
+        error: 'SELECTION_REQUIRED',
+        message: 'Title text must be resolved through candidate search before analysis. Paste an App Store URL/Apple ID or choose a search result.',
+      }, { status: 409, headers: corsHeaders });
+    }
+
+    const endpoint = `https://itunes.apple.com/lookup?id=${encodeURIComponent(appleId)}&country=us`;
+    const appleResponse = await fetch(endpoint, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.3' } });
     if (!appleResponse.ok) throw new Error(`Apple metadata request failed (${appleResponse.status}).`);
     const payload = await appleResponse.json();
     const item = payload?.results?.[0];
