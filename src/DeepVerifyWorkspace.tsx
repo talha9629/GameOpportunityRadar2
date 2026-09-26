@@ -30,6 +30,7 @@ import {
   formatTimestamp,
   parseTimestampInput,
   validateUploadEvidence,
+  type DeepVerifyVerificationSession,
   type DeepVerifyVideoPayload,
   type DeepVerifyVideoSummary,
 } from './deepVerify';
@@ -119,14 +120,29 @@ function EventReviewButtons({
   </div>;
 }
 
+function VerificationSessionBlock({ session, saved = false }: { session: DeepVerifyVerificationSession; saved?: boolean }) {
+  return <div className="deep-analysis-unknowns">
+    <strong>{saved ? 'Linked verification session' : 'Verification session to link'} · {session.sessionId}</strong>
+    <p>{saved
+      ? 'This evidence record preserves the exact queue snapshot below. The gaps remain unresolved until findings from this source are reviewed against them.'
+      : 'Saving this source will preserve the exact queue snapshot below. Collecting footage does not by itself resolve any gap.'}</p>
+    <ul>{session.unknowns.map((unknown, index) => <li key={session.taskIds[index]}>
+      {unknown} <code>{session.taskIds[index]}</code>
+    </li>)}</ul>
+    <small>Research queue snapshot: {new Date(session.researchGeneratedAt).toLocaleString()}</small>
+  </div>;
+}
+
 export function DeepVerifyWorkspace({
   ownerEmail = null,
   initialStoreId = '',
   initialLabel = '',
+  verificationSession = null,
 }: {
   ownerEmail?: string | null;
   initialStoreId?: string;
   initialLabel?: string;
+  verificationSession?: DeepVerifyVerificationSession | null;
 }) {
   const [sourceMode, setSourceMode] = useState<'upload' | 'youtube'>('upload');
   const [label, setLabel] = useState(initialLabel);
@@ -262,11 +278,11 @@ export function DeepVerifyWorkspace({
       let videoId: string;
       if (sourceMode === 'upload') {
         if (!file || fileDuration == null) throw new Error('Choose a validated video first.');
-        videoId = await uploadDeepVerifyVideo(label, storeId, file, fileDuration);
+        videoId = await uploadDeepVerifyVideo(label, storeId, file, fileDuration, verificationSession);
       } else {
-        videoId = await registerDeepVerifyYoutube(label, storeId, youtubeUrl);
+        videoId = await registerDeepVerifyYoutube(label, storeId, youtubeUrl, verificationSession);
       }
-      setMessage(`Evidence saved · ${videoId.slice(0, 8)}`);
+      setMessage(`Evidence saved${verificationSession ? ' with verification-session provenance' : ''} · ${videoId.slice(0, 8)}`);
       await refreshSaved(false);
       await openEvidence(videoId);
     } catch (err) {
@@ -396,6 +412,11 @@ export function DeepVerifyWorkspace({
       </div>
     </div>
 
+    {verificationSession && <div className="deep-boundary-banner">
+      <Clock3 size={19} />
+      <VerificationSessionBlock session={verificationSession} />
+    </div>}
+
     <section className="panel deep-ingest-panel">
       <div className="deep-source-tabs">
         <button className={sourceMode === 'upload' ? 'active' : ''} onClick={() => setSourceMode('upload')}><FileVideo2 size={16} /> Private upload</button>
@@ -403,7 +424,7 @@ export function DeepVerifyWorkspace({
       </div>
       <div className="deep-fields two-up">
         <label><span>Evidence label</span><input value={label} maxLength={160} onChange={(event) => setLabel(event.target.value)} placeholder="e.g. Colony Flow gameplay verification" /></label>
-        <label><span>Apple ID / saved game link (optional)</span><input value={storeId} onChange={(event) => setStoreId(event.target.value)} placeholder="6761760135" /></label>
+        <label><span>Apple ID / saved game link {verificationSession ? '(session target)' : '(optional)'}</span><input value={storeId} readOnly={Boolean(verificationSession)} onChange={(event) => setStoreId(event.target.value)} placeholder="6761760135" /></label>
       </div>
       {sourceMode === 'upload'
         ? <div className="deep-upload-row">
@@ -412,7 +433,11 @@ export function DeepVerifyWorkspace({
           </div>
         : <label className="deep-url-field"><span>Public YouTube URL</span><input value={youtubeUrl} onChange={(event) => setYoutubeUrl(event.target.value)} placeholder="https://www.youtube.com/watch?v=..." /></label>}
       <div className="deep-ingest-footer">
-        <p>{ownerEmail ? `Evidence will be stored for ${ownerEmail}.` : 'Owner sign-in is required before evidence can be persisted.'}</p>
+        <p>{ownerEmail
+          ? verificationSession
+            ? `Evidence will be stored for ${ownerEmail} and linked to ${verificationSession.taskIds.length} exact verification task${verificationSession.taskIds.length === 1 ? '' : 's'}.`
+            : `Evidence will be stored for ${ownerEmail}.`
+          : 'Owner sign-in is required before evidence can be persisted.'}</p>
         <button className="primary" disabled={!ownerEmail || savingEvidence || !label.trim() || (sourceMode === 'upload' ? !file || fileDuration == null : !youtubeUrl.trim())} onClick={() => void saveEvidence()}>{savingEvidence ? 'Saving…' : sourceMode === 'upload' ? 'Upload evidence' : 'Save YouTube source'}</button>
       </div>
       {error && <div className="error-box">{error}</div>}
@@ -442,6 +467,7 @@ export function DeepVerifyWorkspace({
           <div><span>Duration</span><strong>{selected.durationSeconds != null ? formatTimestamp(selected.durationSeconds) : 'Unknown'}</strong></div>
           <div><span>Size</span><strong>{humanBytes(selected.sizeBytes)}</strong></div>
         </div>
+        {selected.verificationSession && <VerificationSessionBlock session={selected.verificationSession} saved />}
         {selected.sourceType === 'upload'
           ? selected.sourceDeletedAt
             ? <div className="deep-source-expired"><ShieldCheck size={20} /><div><strong>Source file expired</strong><span>Removed {new Date(selected.sourceDeletedAt).toLocaleString()}. Timestamped findings and analysis history remain.</span></div></div>
