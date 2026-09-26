@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { Analyze } from './Analyze';
 import { Competitors } from './Competitors';
-import { DeepVerify } from './DeepVerify';
+import { DeepVerifyWorkspace } from './DeepVerifyWorkspace';
 import { ReviewSamples } from './ReviewSamples';
 import { SavedDossiers } from './SavedDossiers';
 import { Today } from './Today';
@@ -63,7 +63,7 @@ export function App() {
       {view === 'saved' && <SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} />}
       {view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
       {view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
-      {view === 'deep-verify' && <DeepVerify ownerEmail={owner?.email ?? null} />}
+      {view === 'deep-verify' && <DeepVerifyWorkspace ownerEmail={owner?.email ?? null} />}
     </main>
   );
 }
