@@ -9,6 +9,8 @@ on:
     paths:
       - 'scripts/collect-apple-radar.mjs'
       - 'scripts/validate-radar-data.mjs'
+      - 'scripts/build-research-queue.mjs'
+      - 'scripts/validate-research-queue.mjs'
       - '.github/workflows/apple-radar.yml'
 
 permissions:
@@ -36,13 +38,36 @@ jobs:
         run: node scripts/collect-apple-radar.mjs
       - name: Validate collected Radar data
         run: npm run validate:radar
-      - name: Commit snapshot safely
+      - name: Build evidence-backed research queue
+        env:
+          APPBRAIN_API_KEY: ${{ secrets.APPBRAIN_API_KEY }}
+          APPBRAIN_DAILY_CREDIT_CAP: '10'
+        run: node scripts/build-research-queue.mjs
+      - name: Validate research queue provenance and budget
+        run: node scripts/validate-research-queue.mjs
+      - name: Write run summary
+        shell: bash
+        run: |
+          node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const fs = require('fs');
+          const q = JSON.parse(fs.readFileSync('public/data/research/latest.json', 'utf8'));
+          console.log('## Automated Research Queue');
+          console.log('');
+          console.log(`Radar date: **${q.radarDate}** · Apple charts: **${q.sources.appleCharts.status}** · AppBrain: **${q.sources.appBrain.status}**`);
+          console.log('');
+          console.log('| # | Title | Priority | First-party reasons |');
+          console.log('|---:|---|---:|---|');
+          for (const c of q.candidates.slice(0, 8)) console.log(`| ${c.queueRank} | ${c.name.replaceAll('|', '\\|')} | ${c.researchPriority} | ${c.reasonCodes.join(', ')} |`);
+          console.log('');
+          console.log('Priority is deterministic research ordering from Apple chart evidence, not a success probability or build recommendation.');
+          NODE
+      - name: Commit snapshot and research queue safely
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add public/data/radar
+          git add public/data/radar public/data/research
           if ! git diff --cached --quiet; then
-            git commit -m 'data: collect daily Apple radar snapshot'
+            git commit -m 'data: collect daily Apple radar and research queue'
             git fetch origin main
             git rebase origin/main
             git push origin HEAD:main
