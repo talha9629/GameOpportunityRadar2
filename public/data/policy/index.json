@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T17:33:24.055Z",
+  "generatedAt": "2026-09-26T17:35:01.683Z",
   "runStatus": "complete",
   "sourceCount": 8,
   "freshCount": 8,
@@ -14,12 +14,12 @@
       "critical": true,
       "url": "https://developer.apple.com/app-store/review/guidelines/",
       "fetchStatus": "fresh",
-      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "lastAttemptAt": "2026-09-26T17:35:01.683Z",
       "error": null,
       "current": {
         "hash": "d957cc623cde14a507aaff047effc7fd6e3fa7607da71da4d32753f5dbb192f2",
         "path": "data/policy/snapshots/apple-app-review-guidelines/d957cc623cde14a507aaff047effc7fd6e3fa7607da71da4d32753f5dbb192f2.json",
-        "fetchedAt": "2026-09-26T17:33:24.055Z"
+        "fetchedAt": "2026-09-26T17:35:01.683Z"
       },
       "history": [
         {
@@ -38,12 +38,12 @@
       "critical": true,
       "url": "https://developer.apple.com/kids/",
       "fetchStatus": "fresh",
-      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "lastAttemptAt": "2026-09-26T17:35:01.683Z",
       "error": null,
       "current": {
         "hash": "9a78038b8d0874c23fb3113d49b973d80d40f97352da7aa945c002f05092a93e",
         "path": "data/policy/snapshots/apple-kids-safety/9a78038b8d0874c23fb3113d49b973d80d40f97352da7aa945c002f05092a93e.json",
-        "fetchedAt": "2026-09-26T17:33:24.055Z"
+        "fetchedAt": "2026-09-26T17:35:01.683Z"
       },
       "history": [
         {
@@ -62,12 +62,12 @@
       "critical": true,
       "url": "https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions",
       "fetchStatus": "fresh",
-      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "lastAttemptAt": "2026-09-26T17:35:01.683Z",
       "error": null,
       "current": {
         "hash": "9dd5a48d9432c9b4863c4fa1b93d20ba558b43df7c198cf377933d82d547dd3d",
         "path": "data/policy/snapshots/apple-age-ratings/9dd5a48d9432c9b4863c4fa1b93d20ba558b43df7c198cf377933d82d547dd3d.json",
-        "fetchedAt": "2026-09-26T17:33:24.055Z"
+        "fetchedAt": "2026-09-26T17:35:01.683Z"
       },
       "history": [
         {
@@ -86,21 +86,35 @@
       "critical": true,
       "url": "https://support.google.com/googleplay/android-developer/answer/15759508?hl=en",
       "fetchStatus": "fresh",
-      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "lastAttemptAt": "2026-09-26T17:35:01.683Z",
       "error": null,
       "current": {
-        "hash": "2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e",
-        "path": "data/policy/snapshots/google-play-policy-index/2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e.json",
-        "fetchedAt": "2026-09-26T17:33:24.055Z"
+        "hash": "c634ad1daea5678ed9336aef312b41ffbd65c81b59cd61de88da08e83948d0ae",
+        "path": "data/policy/snapshots/google-play-policy-index/c634ad1daea5678ed9336aef312b41ffbd65c81b59cd61de88da08e83948d0ae.json",
+        "fetchedAt": "2026-09-26T17:35:01.683Z"
       },
       "history": [
         {
           "hash": "2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e",
           "path": "data/policy/snapshots/google-play-policy-index/2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e.json",
           "fetchedAt": "2026-09-26T17:33:24.055Z"
+        },
+        {
+          "hash": "c634ad1daea5678ed9336aef312b41ffbd65c81b59cd61de88da08e83948d0ae",
+          "path": "data/policy/snapshots/google-play-policy-index/c634ad1daea5678ed9336aef312b41ffbd65c81b59cd61de88da08e83948d0ae.json",
+          "fetchedAt": "2026-09-26T17:35:01.683Z"
         }
       ],
-      "changes": []
+      "changes": [
+        {
+          "id": "3a6524ed53152ddc1898e64c0f2a6d0fb03fd45e9da8295ec246e5259eaf5a6f",
+          "fromHash": "2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e",
+          "toHash": "c634ad1daea5678ed9336aef312b41ffbd65c81b59cd61de88da08e83948d0ae",
+          "detectedAt": "2026-09-26T17:35:01.683Z",
+          "fromPath": "data/policy/snapshots/google-play-policy-index/2d9523610c99950b7fa09e15962d183e4ce550089a9ffc71076b7a71fe938d0e.json",
+          "toPath": "data/policy/snapshots/google-play-policy-index/c634ad1daea5678ed9336aef312b41ffbd65c81b59cd61de88da08e83948d0ae.json"
+        }
+      ]
     },
     {
       "id": "google-play-families",
@@ -110,21 +124,35 @@
       "critical": true,
       "url": "https://support.google.com/googleplay/android-developer/answer/9893335?hl=en",
       "fetchStatus": "fresh",
-      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "lastAttemptAt": "2026-09-26T17:35:01.683Z",
       "error": null,
       "current": {
-        "hash": "9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c",
-        "path": "data/policy/snapshots/google-play-families/9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c.json",
-        "fetchedAt": "2026-09-26T17:33:24.055Z"
+        "hash": "901d45160a6b3c42d001b79743ad1fb30140c27fc111c808e64fa2c79531b128",
+        "path": "data/policy/snapshots/google-play-families/901d45160a6b3c42d001b79743ad1fb30140c27fc111c808e64fa2c79531b128.json",
+        "fetchedAt": "2026-09-26T17:35:01.683Z"
       },
       "history": [
         {
           "hash": "9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c",
           "path": "data/policy/snapshots/google-play-families/9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c.json",
           "fetchedAt": "2026-09-26T17:33:24.055Z"
+        },
+        {
+          "hash": "901d45160a6b3c42d001b79743ad1fb30140c27fc111c808e64fa2c79531b128",
+          "path": "data/policy/snapshots/google-play-families/901d45160a6b3c42d001b79743ad1fb30140c27fc111c808e64fa2c79531b128.json",
+          "fetchedAt": "2026-09-26T17:35:01.683Z"
         }
       ],
-      "changes": []
+      "changes": [
+        {
+          "id": "01fc6091e03f689003a900c17103f518ffc77a3a3bd98e8281946ba0f20cf517",
+          "fromHash": "9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c",
+          "toHash": "901d45160a6b3c42d001b79743ad1fb30140c27fc111c808e64fa2c79531b128",
+          "detectedAt": "2026-09-26T17:35:01.683Z",
+          "fromPath": "data/policy/snapshots/google-play-families/9513f5352f0321a8db319840f57cc0fa35a88c4c512f9e6885b1f0aa71591e2c.json",
+          "toPath": "data/policy/snapshots/google-play-families/901d45160a6b3c42d001b79743ad1fb30140c27fc111c808e64fa2c79531b128.json"
+        }
+      ]
     },
     {
       "id": "google-play-ads",
@@ -134,21 +162,35 @@
       "critical": true,
       "url": "https://support.google.com/googleplay/android-developer/answer/9857753?hl=en",
       "fetchStatus": "fresh",
-      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "lastAttemptAt": "2026-09-26T17:35:01.683Z",
       "error": null,
       "current": {
-        "hash": "068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168",
-        "path": "data/policy/snapshots/google-play-ads/068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168.json",
-        "fetchedAt": "2026-09-26T17:33:24.055Z"
+        "hash": "c8a766065e19ddbadb70758dcc3de0b507784e187e74b95200af3c4b6a3a0609",
+        "path": "data/policy/snapshots/google-play-ads/c8a766065e19ddbadb70758dcc3de0b507784e187e74b95200af3c4b6a3a0609.json",
+        "fetchedAt": "2026-09-26T17:35:01.683Z"
       },
       "history": [
         {
           "hash": "068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168",
           "path": "data/policy/snapshots/google-play-ads/068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168.json",
           "fetchedAt": "2026-09-26T17:33:24.055Z"
+        },
+        {
+          "hash": "c8a766065e19ddbadb70758dcc3de0b507784e187e74b95200af3c4b6a3a0609",
+          "path": "data/policy/snapshots/google-play-ads/c8a766065e19ddbadb70758dcc3de0b507784e187e74b95200af3c4b6a3a0609.json",
+          "fetchedAt": "2026-09-26T17:35:01.683Z"
         }
       ],
-      "changes": []
+      "changes": [
+        {
+          "id": "8b978a26ceacec12334026038f877aaf6f3a677d1909c21546ba9ff12f7d2816",
+          "fromHash": "068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168",
+          "toHash": "c8a766065e19ddbadb70758dcc3de0b507784e187e74b95200af3c4b6a3a0609",
+          "detectedAt": "2026-09-26T17:35:01.683Z",
+          "fromPath": "data/policy/snapshots/google-play-ads/068b9e9b4f8dd5e386984d69b93313dc7f92eecc20102fb493975f062fdcc168.json",
+          "toPath": "data/policy/snapshots/google-play-ads/c8a766065e19ddbadb70758dcc3de0b507784e187e74b95200af3c4b6a3a0609.json"
+        }
+      ]
     },
     {
       "id": "google-play-spam",
@@ -158,21 +200,35 @@
       "critical": true,
       "url": "https://support.google.com/googleplay/android-developer/answer/9899034?hl=en",
       "fetchStatus": "fresh",
-      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "lastAttemptAt": "2026-09-26T17:35:01.683Z",
       "error": null,
       "current": {
-        "hash": "ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8",
-        "path": "data/policy/snapshots/google-play-spam/ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8.json",
-        "fetchedAt": "2026-09-26T17:33:24.055Z"
+        "hash": "184f1e271f9ae7bc29472ea9a3f00c9344ffce414adeb386ed33be9dfa0cd9df",
+        "path": "data/policy/snapshots/google-play-spam/184f1e271f9ae7bc29472ea9a3f00c9344ffce414adeb386ed33be9dfa0cd9df.json",
+        "fetchedAt": "2026-09-26T17:35:01.683Z"
       },
       "history": [
         {
           "hash": "ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8",
           "path": "data/policy/snapshots/google-play-spam/ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8.json",
           "fetchedAt": "2026-09-26T17:33:24.055Z"
+        },
+        {
+          "hash": "184f1e271f9ae7bc29472ea9a3f00c9344ffce414adeb386ed33be9dfa0cd9df",
+          "path": "data/policy/snapshots/google-play-spam/184f1e271f9ae7bc29472ea9a3f00c9344ffce414adeb386ed33be9dfa0cd9df.json",
+          "fetchedAt": "2026-09-26T17:35:01.683Z"
         }
       ],
-      "changes": []
+      "changes": [
+        {
+          "id": "83f1c38b095dceb99f3462876d2c6f95931bb0f6d1955b5ba45856388d8d6751",
+          "fromHash": "ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8",
+          "toHash": "184f1e271f9ae7bc29472ea9a3f00c9344ffce414adeb386ed33be9dfa0cd9df",
+          "detectedAt": "2026-09-26T17:35:01.683Z",
+          "fromPath": "data/policy/snapshots/google-play-spam/ca7aae0aa026c48de461b293c0cf71624de6c82c46cd3ec2be0f6133b782cad8.json",
+          "toPath": "data/policy/snapshots/google-play-spam/184f1e271f9ae7bc29472ea9a3f00c9344ffce414adeb386ed33be9dfa0cd9df.json"
+        }
+      ]
     },
     {
       "id": "google-play-policy-deadlines",
@@ -182,21 +238,35 @@
       "critical": true,
       "url": "https://support.google.com/googleplay/android-developer/table/12921780?hl=en",
       "fetchStatus": "fresh",
-      "lastAttemptAt": "2026-09-26T17:33:24.055Z",
+      "lastAttemptAt": "2026-09-26T17:35:01.683Z",
       "error": null,
       "current": {
-        "hash": "b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3",
-        "path": "data/policy/snapshots/google-play-policy-deadlines/b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3.json",
-        "fetchedAt": "2026-09-26T17:33:24.055Z"
+        "hash": "a330f83fc23089e18ce4aece37719b11d0626e874444f2ebde1382c5e9b89448",
+        "path": "data/policy/snapshots/google-play-policy-deadlines/a330f83fc23089e18ce4aece37719b11d0626e874444f2ebde1382c5e9b89448.json",
+        "fetchedAt": "2026-09-26T17:35:01.683Z"
       },
       "history": [
         {
           "hash": "b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3",
           "path": "data/policy/snapshots/google-play-policy-deadlines/b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3.json",
           "fetchedAt": "2026-09-26T17:33:24.055Z"
+        },
+        {
+          "hash": "a330f83fc23089e18ce4aece37719b11d0626e874444f2ebde1382c5e9b89448",
+          "path": "data/policy/snapshots/google-play-policy-deadlines/a330f83fc23089e18ce4aece37719b11d0626e874444f2ebde1382c5e9b89448.json",
+          "fetchedAt": "2026-09-26T17:35:01.683Z"
         }
       ],
-      "changes": []
+      "changes": [
+        {
+          "id": "1fcc311bf111600f41a3f0aebcb7db9004841fc3f526b916cfdc50edd05794ad",
+          "fromHash": "b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3",
+          "toHash": "a330f83fc23089e18ce4aece37719b11d0626e874444f2ebde1382c5e9b89448",
+          "detectedAt": "2026-09-26T17:35:01.683Z",
+          "fromPath": "data/policy/snapshots/google-play-policy-deadlines/b4305910d19dc8684023fdc2d7b4d67ab24422362dc12adc96d730708be8d8e3.json",
+          "toPath": "data/policy/snapshots/google-play-policy-deadlines/a330f83fc23089e18ce4aece37719b11d0626e874444f2ebde1382c5e9b89448.json"
+        }
+      ]
     }
   ]
 }
