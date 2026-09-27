@@ -22,6 +22,7 @@ import {
 import { PolicyWatch } from './PolicyWatch';
 import { ReviewSamples } from './ReviewSamples';
 import { SavedDossiers } from './SavedDossiers';
+import { storefrontForScope } from './storeIdentity';
 import { TrendSignalsPage } from './TrendSignalsPage';
 import { VerificationQueuePage } from './VerificationQueuePage';
 import { loadVerificationQueue, type VerificationCaptureSession } from './verificationQueue';
@@ -54,10 +55,10 @@ function PlatformPipelineBoundary({ scope, feature, persistence = false }: { sco
       <div className="eyebrow">PLATFORM BOUNDARY</div>
       <h1>{feature} is not available as blended {PLATFORM_META[scope].label} evidence.</h1>
       <p>{persistence
-        ? `The current ${feature} storage contract uses an Apple-oriented store_id without a platform namespace. Radar therefore keeps this persisted workspace Apple-only until a canonical (platform, store ID) identity is added, rather than risking Google/Amazon evidence being saved under an ambiguous Apple-shaped identifier.`
+        ? `Radar now has a storefront-qualified database identity, but the current ${feature} client workflow is still Apple-specific. It remains gated until its upload/register/load path is switched to the storefront-qualified v2 contract; Radar will not relabel an Apple workflow as Google or Amazon in the meantime.`
         : cross
-          ? 'This pipeline currently contains Apple-specific evidence. Cross-platform mode is a coverage overview only, so Radar will not display the Apple pipeline under an All-platform label. Select Apple explicitly to inspect it.'
-          : `Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to ${PLATFORM_META[scope].label}. Select Apple to inspect the existing Apple pipeline, or use Today/Analyze/Competitors for evidence currently available to this platform.`}</p>
+          ? 'This pipeline currently contains store-specific evidence. Cross-platform mode is a coverage overview only, so Radar will not display one store pipeline under an All-platform label. Select a storefront explicitly to inspect it.'
+          : `Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to ${PLATFORM_META[scope].label}. Select Apple to inspect the existing Apple pipeline, or use Today/Analyze/Competitors/Reviews for evidence currently available to this platform.`}</p>
     </section>
   </>;
 }
@@ -176,6 +177,7 @@ export function App() {
 
   const deepVerifySession = deepVerifySeed?.session ?? null;
   const applePipelineVisible = canUseAppleOnlyEvidencePipeline(platformScope);
+  const activeStorefront = storefrontForScope(platformScope);
 
   return <AppShell
     route={route}
@@ -199,9 +201,9 @@ export function App() {
     />}
     {route.view === 'saved' && <><PlatformContextPanel scope="apple" /><SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} /></>}
     {route.view === 'competitors' && <PlatformCompetitorsPage scope={platformScope} ownerEmail={owner?.email ?? null} />}
-    {route.view === 'reviews' && (applePipelineVisible
-      ? <><PlatformContextPanel scope="apple" /><ReviewSamples ownerEmail={owner?.email ?? null} /></>
-      : <PlatformPipelineBoundary scope={platformScope} feature="Review Samples" persistence />)}
+    {route.view === 'reviews' && (activeStorefront
+      ? <><PlatformContextPanel scope={platformScope} /><ReviewSamples storefront={activeStorefront} ownerEmail={owner?.email ?? null} /></>
+      : <PlatformPipelineBoundary scope={platformScope} feature="Review Samples" />)}
     {route.view === 'deep-verify' && (applePipelineVisible ? <>
       <PlatformContextPanel scope="apple" />
       {route.sessionId && deepVerifyHydrating && <div className="history-banner"><strong>Loading verification session…</strong><span>Restoring the exact queue/evidence context from this page URL.</span></div>}
