@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RefreshCw } from 'lucide-react';
+import { EvidenceLegend } from './EvidenceLegend';
 import { TrendSignalsPanel } from './TrendSignalsPanel';
 import { loadTrendSignals, type TrendSignalsPayload } from './trendSignals';
 
@@ -32,6 +33,7 @@ export function TrendSignalsPage({ onAnalyze }: { onAnalyze: (appId: string) => 
       </div>
       <button onClick={() => void refresh()} disabled={loading}><RefreshCw size={16} /> {loading ? 'Refreshing…' : 'Refresh'}</button>
     </div>
+    <EvidenceLegend />
     {error && <div className="error-box">{error}</div>}
     {payload && <TrendSignalsPanel payload={payload} onAnalyze={onAnalyze} />}
   </section>;
