@@ -1,3 +1,4 @@
+.workspace-header-right { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
 .platform-scope-selector { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .platform-scope-selector > span { color: #7187a3; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .platform-scope-buttons { display: flex; gap: 5px; flex-wrap: wrap; }
@@ -13,7 +14,7 @@
 .market-chip { border: 1px solid #2a405d; background: #0b1726; border-radius: 999px; padding: 6px 9px; color: #b8c6d8; font-size: 11px; }
 .market-chip b { color: #eef7ff; margin-right: 4px; }
 .platform-capability-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.platform-capability-card { padding: 14px; border: 1px solid #273b56; border-radius: 12px; background: #0c1726; display: grid; gap: 8px; }
+.platform-capability-card { padding: 14px; border: 1px solid #273b56; border-radius: 12px; background: #0c1726; display: grid; gap: 8px; text-decoration: none; color: inherit; }
 .platform-capability-card h3 { margin: 0; font-size: 14px; }
 .platform-capability-card p { margin: 0; color: #899cb5; font-size: 11px; line-height: 1.5; }
 .platform-capability-card .capability-status { width: fit-content; padding: 3px 6px; border-radius: 999px; font-size: 9px; letter-spacing: .06em; font-weight: 800; text-transform: uppercase; border: 1px solid #315778; color: #91c9e8; }
@@ -25,5 +26,7 @@
 .platform-research-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .platform-research-actions a, .platform-research-actions button { text-decoration: none; }
 .platform-source-note { padding: 10px 12px; border: 1px dashed #344965; border-radius: 10px; color: #91a6bf; font-size: 11px; line-height: 1.5; }
+@media (max-width: 1160px) { .workspace-header-right .workspace-status { display: none; } }
 @media (max-width: 980px) { .platform-capability-grid { grid-template-columns: 1fr; } }
-@media (max-width: 860px) { .platform-scope-selector > span { display: none; } .platform-scope-buttons { max-width: 52vw; } }
+@media (max-width: 860px) { .workspace-header { align-items: flex-start; } .workspace-header-right { max-width: 55vw; } .platform-scope-selector > span { display: none; } .platform-scope-buttons { max-width: 55vw; justify-content: flex-end; } }
+@media (max-width: 620px) { .workspace-header-right { max-width: 58vw; } .platform-scope-buttons button { padding: 6px 7px; font-size: 10px; } }
