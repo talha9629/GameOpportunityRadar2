@@ -19,7 +19,7 @@ export const PLATFORM_META: Record<PlatformScope, {
     label: 'Cross-platform',
     shortLabel: 'All',
     status: 'mixed',
-    description: 'Compare each store using only evidence actually available for that store. No Apple-to-Android inference.',
+    description: 'Coverage overview only. Select a store for store-specific evidence; incomparable ranks and provider positions are never blended.',
   },
   apple: {
     label: 'Apple App Store',
@@ -43,4 +43,8 @@ export const PLATFORM_META: Record<PlatformScope, {
 
 export function isPlatformScope(value: string | null): value is PlatformScope {
   return value === 'cross' || value === 'apple' || value === 'google_play' || value === 'amazon_fire';
+}
+
+export function canUseAppleOnlyEvidencePipeline(scope: PlatformScope): boolean {
+  return scope === 'apple';
 }

@@ -21,7 +21,7 @@ function AndroidIdentity({ entry, label }: { entry: GooglePlayEntry; label: stri
 
 function AndroidFacts({ entry }: { entry: GooglePlayEntry }) {
   return <div className="market-strip">
-    <span className="market-chip">AppBrain rank <b>#{entry.rank}</b></span>
+    <span className="market-chip">AppBrain position <b>#{entry.rank}</b></span>
     <span className="market-chip">Rating <b>{entry.rating?.toFixed(2) ?? '—'}</b></span>
     <span className="market-chip">Ratings <b>{entry.ratingCount?.toLocaleString() ?? '—'}</b></span>
     <span className="market-chip">Recent downloads <b>{entry.estimatedRecentDownloads?.toLocaleString() ?? '—'} est.</b></span>
@@ -86,7 +86,7 @@ function GooglePlayCompetitors() {
       {comparisons.map((item) => <section className="panel competitor-card" key={item.entry.packageName}>
         <div className="competitor-card-head"><AndroidIdentity entry={item.entry} label="Compared title · Google Play" /><div className="relationship-control"><label>Relationship</label><select value={item.relationship} onChange={(event) => setComparisons((current) => current.map((candidate) => candidate.entry.packageName === item.entry.packageName ? { ...candidate, relationship: event.target.value as RelationshipType } : candidate))}>{relationshipTypes.map((value) => <option key={value} value={value}>{value.replaceAll('_', ' ')}</option>)}</select></div><button className="danger-quiet" onClick={() => setComparisons((current) => current.filter((candidate) => candidate.entry.packageName !== item.entry.packageName))}><Trash2 size={14} /> Remove</button></div>
         <AndroidFacts entry={item.entry} />
-        <div className="platform-source-note">Comparison facts shown here are same-provider Android evidence: popularity order/rating from AppBrain market intelligence and downloads as third-party estimates. They are not official Google rankings or country-market claims.</div>
+        <div className="platform-source-note">Comparison facts shown here are same-provider Android evidence: AppBrain popularity position/rating from third-party market intelligence and downloads as third-party estimates. They are not official Google rankings or country-market claims.</div>
       </section>)}
     </>}
   </section>;
@@ -104,7 +104,7 @@ function AmazonCompetitors() {
 }
 
 function CrossCompetitors() {
-  return <section className="competitors-view"><section className="panel platform-research-empty"><div className="eyebrow">CROSS-PLATFORM · COMPETITORS</div><h1>Choose one store before mapping competitors.</h1><p>Apple rank, AppBrain Android popularity, and Amazon Fire listing evidence are different evidence universes. Select a platform in the header first; Radar will not merge them into one competitor rank or winner.</p></section></section>;
+  return <section className="competitors-view"><section className="panel platform-research-empty"><div className="eyebrow">CROSS-PLATFORM · COMPETITORS</div><h1>Choose one store before mapping competitors.</h1><p>Apple rank, AppBrain Android popularity position, and Amazon Fire listing evidence are different evidence universes. Select a platform in the header first; Radar will not merge them into one competitor rank or winner.</p></section></section>;
 }
 
 export function PlatformCompetitorsPage({ scope, ownerEmail }: { scope: PlatformScope; ownerEmail: string | null }) {
