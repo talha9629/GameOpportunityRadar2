@@ -75,27 +75,37 @@ function validateSnapshot(snapshot, file, expectedDate = null) {
     const expectedRunStatus = fresh === expectedMarkets.length ? 'complete' : successful > 0 ? 'partial' : 'failed';
     if (snapshot.runStatus !== expectedRunStatus) fail(`${file} runStatus=${snapshot.runStatus}, expected ${expectedRunStatus}`);
   }
-  return snapshotDate;
+  return { snapshotDate, chartDepth };
 }
 
 const latest = readJson(latestPath);
-const latestDate = validateSnapshot(latest, 'latest.json');
+const latestMeta = validateSnapshot(latest, 'latest.json');
 const index = readJson(indexPath);
 if (!Array.isArray(index.snapshots) || index.snapshots.length === 0) fail('index.json has no snapshots');
-if (index.snapshots[0]?.date !== latestDate) fail(`index head ${index.snapshots[0]?.date} does not match latest ${latestDate}`);
+if (index.snapshots[0]?.date !== latestMeta.snapshotDate) fail(`index head ${index.snapshots[0]?.date} does not match latest ${latestMeta.snapshotDate}`);
 
 const seenDates = new Set();
 for (const item of index.snapshots) {
   if (!item?.date || !/^\d{4}-\d{2}-\d{2}$/.test(item.date)) fail('index contains invalid date');
   if (seenDates.has(item.date)) fail(`index contains duplicate date ${item.date}`);
   seenDates.add(item.date);
+  if (item.chartDepth != null && (!Number.isInteger(item.chartDepth) || item.chartDepth < 10 || item.chartDepth > maxChartDepth)) {
+    fail(`index ${item.date} has invalid chartDepth ${item.chartDepth}`);
+  }
   const historyPath = path.join(root, 'history', `${item.date}.json`);
   if (!fs.existsSync(historyPath)) fail(`index references missing history/${item.date}.json`);
   const history = readJson(historyPath);
-  validateSnapshot(history, `history/${item.date}.json`, item.date);
+  const historyMeta = validateSnapshot(history, `history/${item.date}.json`, item.date);
+  if (item.chartDepth != null && item.chartDepth !== historyMeta.chartDepth) {
+    fail(`index ${item.date} chartDepth=${item.chartDepth} but history declares ${historyMeta.chartDepth}`);
+  }
 }
 
-const latestHistory = readJson(path.join(root, 'history', `${latestDate}.json`));
-if (JSON.stringify(latestHistory) !== JSON.stringify(latest)) fail(`latest.json differs from history/${latestDate}.json`);
+if (index.snapshots[0]?.chartDepth != null && index.snapshots[0].chartDepth !== latestMeta.chartDepth) {
+  fail(`index head chartDepth=${index.snapshots[0].chartDepth} does not match latest ${latestMeta.chartDepth}`);
+}
 
-console.log(`Radar data OK: ${index.snapshots.length} dated snapshot(s), latest=${latestDate}`);
+const latestHistory = readJson(path.join(root, 'history', `${latestMeta.snapshotDate}.json`));
+if (JSON.stringify(latestHistory) !== JSON.stringify(latest)) fail(`latest.json differs from history/${latestMeta.snapshotDate}.json`);
+
+console.log(`Radar data OK: ${index.snapshots.length} dated snapshot(s), latest=${latestMeta.snapshotDate}, depth=${latestMeta.chartDepth}`);
