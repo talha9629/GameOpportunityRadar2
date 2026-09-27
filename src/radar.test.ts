@@ -77,6 +77,15 @@ describe('Radar exact-date trend semantics', () => {
     expect(change.delta).toBeNull();
   });
 
+  it('refuses to compare a Games-category rank with an overall Top Free fallback', () => {
+    const current = snapshot('2026-09-27', 10, 'ok', { gameFocused: true });
+    const prior = snapshot('2026-09-26', 40, 'ok', { gameFocused: false });
+    const change = rankWindowChange(current, [current, prior], 'us', 'game-a', 1);
+    expect(change.status).toBe('source_mismatch');
+    expect(change.priorRank).toBeNull();
+    expect(change.delta).toBeNull();
+  });
+
   it('requires consecutive daily observations for maturity', () => {
     const history = [
       snapshot('2026-09-26', 10),
@@ -153,6 +162,14 @@ describe('assessRadarTrend', () => {
     const current = snapshot('2026-09-27', 3, 'ok', { daysObserved: 8, gameFocused: false });
     const prior = snapshot('2026-09-20', 40);
     expect(assessRadarTrend(current, [current, prior], 'us', 'game-a').state).toBe('INSUFFICIENT_DATA');
+  });
+
+  it('keeps a Games trend insufficient when the exact comparison comes from an overall fallback', () => {
+    const current = snapshot('2026-09-27', 3, 'ok', { daysObserved: 2, gameFocused: true });
+    const prior = snapshot('2026-09-26', 40, 'ok', { gameFocused: false });
+    const assessment = assessRadarTrend(current, [current, prior], 'us', 'game-a');
+    expect(assessment.state).toBe('INSUFFICIENT_DATA');
+    expect(assessment.reason).toMatch(/incompatible chart source/i);
   });
 });
 

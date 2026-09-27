@@ -1,18 +1,31 @@
 import { z } from 'zod';
 
+const WindowStatusSchema = z.enum(['available', 'history_missing', 'market_failed', 'not_ranked', 'source_mismatch']);
+
 const WindowSignalSchema = z.object({
   days: z.number().int().positive(),
-  status: z.enum(['available', 'history_missing', 'market_failed', 'not_ranked']),
+  status: WindowStatusSchema,
   bestUpwardDelta: z.number().int().nullable(),
   perMarket: z.array(z.object({
     market: z.string(),
     days: z.number().int().positive(),
     targetDate: z.string(),
-    status: z.enum(['available', 'history_missing', 'market_failed', 'not_ranked']),
+    status: WindowStatusSchema,
     priorRank: z.number().int().positive().nullable(),
     currentRank: z.number().int().positive().nullable(),
     delta: z.number().int().nullable(),
-  })),
+  })).superRefine((signals, context) => {
+    for (let index = 0; index < signals.length; index += 1) {
+      const signal = signals[index];
+      if (signal.status !== 'available' && (signal.priorRank != null || signal.currentRank != null || signal.delta != null)) {
+        context.addIssue({ code: z.ZodIssueCode.custom, path: [index], message: 'Non-comparable exact-window signals cannot carry rank deltas.' });
+      }
+    }
+  }),
+}).superRefine((signal, context) => {
+  if (signal.status !== 'available' && signal.bestUpwardDelta != null) {
+    context.addIssue({ code: z.ZodIssueCode.custom, path: ['bestUpwardDelta'], message: 'Only available exact windows can carry a best upward delta.' });
+  }
 });
 
 const AppleMetadataSchema = z.object({
@@ -183,5 +196,7 @@ export function primaryMomentum(candidate: ResearchCandidate) {
     return signal.bestUpwardDelta > 0 ? `+${signal.bestUpwardDelta} best 1d move` : `${signal.bestUpwardDelta} best 1d move`;
   }
   if (signal.status === 'not_ranked') return 'entered tracked range';
+  if (signal.status === 'source_mismatch') return '1d source mismatch';
+  if (signal.status === 'market_failed') return '1d market unavailable';
   return '1d history pending';
 }

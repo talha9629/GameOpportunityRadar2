@@ -4,6 +4,7 @@ import path from 'node:path';
 const file = path.resolve('public/data/research/latest.json');
 const queue = JSON.parse(fs.readFileSync(file, 'utf8'));
 const errors = [];
+const allowedWindowStatuses = new Set(['available', 'history_missing', 'market_failed', 'not_ranked', 'source_mismatch']);
 
 function assert(condition, message) {
   if (!condition) errors.push(message);
@@ -36,6 +37,32 @@ for (let index = 0; index < (queue.candidates ?? []).length; index += 1) {
   assert(Number.isInteger(candidate.evidence?.marketCount) && candidate.evidence.marketCount >= 1 && candidate.evidence.marketCount <= 4, `${candidate.appId} invalid marketCount`);
   assert(Number.isInteger(candidate.evidence?.bestRank) && candidate.evidence.bestRank >= 1 && candidate.evidence.bestRank <= 100, `${candidate.appId} invalid bestRank`);
   assert(Array.isArray(candidate.evidence?.markets) && candidate.evidence.markets.length === candidate.evidence.marketCount, `${candidate.appId} market evidence mismatch`);
+
+  for (const key of ['1d', '3d', '7d']) {
+    const window = candidate.evidence?.exactWindows?.[key];
+    assert(window && allowedWindowStatuses.has(window.status), `${candidate.appId} ${key} has invalid exact-window status`);
+    assert(Array.isArray(window?.perMarket) && window.perMarket.length === candidate.evidence.marketCount, `${candidate.appId} ${key} per-market evidence mismatch`);
+    if (window?.status === 'available') {
+      assert(Number.isInteger(window.bestUpwardDelta), `${candidate.appId} ${key} available window needs a bestUpwardDelta`);
+      assert(window.perMarket.some((signal) => signal.status === 'available'), `${candidate.appId} ${key} summary says available without an available market`);
+    } else {
+      assert(window?.bestUpwardDelta == null, `${candidate.appId} ${key} non-available window cannot carry bestUpwardDelta`);
+    }
+    for (const signal of window?.perMarket ?? []) {
+      assert(allowedWindowStatuses.has(signal.status), `${candidate.appId} ${key} ${signal.market} has invalid status`);
+      if (signal.status === 'available') {
+        assert(Number.isInteger(signal.priorRank) && Number.isInteger(signal.currentRank) && Number.isInteger(signal.delta), `${candidate.appId} ${key} ${signal.market} available signal must carry integer ranks/delta`);
+        assert(signal.delta === signal.priorRank - signal.currentRank, `${candidate.appId} ${key} ${signal.market} delta mismatch`);
+      } else {
+        assert(signal.priorRank == null && signal.currentRank == null && signal.delta == null, `${candidate.appId} ${key} ${signal.market} non-comparable signal must not carry ranks/delta`);
+      }
+    }
+  }
+
+  const oneDayAvailable = candidate.evidence?.exactWindows?.['1d']?.status === 'available';
+  const hasUpwardReason = candidate.reasonCodes.some((reason) => /^UP_\d+_PLUS_1D$/.test(reason));
+  if (hasUpwardReason) assert(oneDayAvailable, `${candidate.appId} has 1d movement priority without comparable 1d evidence`);
+
   assert(candidate.appleMetadata == null || candidate.appleMetadata.sourceOrigin === 'official_public', `${candidate.appId} Apple metadata provenance missing`);
   if (candidate.appBrainEstimate != null) {
     assert(candidate.appBrainEstimate.sourceOrigin === 'third_party_estimate', `${candidate.appId} AppBrain data must be labeled third_party_estimate`);
