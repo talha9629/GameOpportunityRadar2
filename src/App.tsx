@@ -46,16 +46,18 @@ function initialPlatformScope(): PlatformScope {
   return isPlatformScope(stored) ? stored : 'cross';
 }
 
-function PlatformPipelineBoundary({ scope, feature }: { scope: PlatformScope; feature: string }) {
+function PlatformPipelineBoundary({ scope, feature, persistence = false }: { scope: PlatformScope; feature: string; persistence?: boolean }) {
   const cross = scope === 'cross';
   return <>
     <PlatformContextPanel scope={scope} />
     <section className="panel platform-research-empty">
       <div className="eyebrow">PLATFORM BOUNDARY</div>
       <h1>{feature} is not available as blended {PLATFORM_META[scope].label} evidence.</h1>
-      <p>{cross
-        ? 'This pipeline currently contains Apple-specific evidence. Cross-platform mode is a coverage overview only, so Radar will not display the Apple pipeline under an All-platform label. Select Apple explicitly to inspect it.'
-        : `Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to ${PLATFORM_META[scope].label}. Select Apple to inspect the existing Apple pipeline, or use Today/Analyze/Competitors for evidence currently available to this platform.`}</p>
+      <p>{persistence
+        ? `The current ${feature} storage contract uses an Apple-oriented store_id without a platform namespace. Radar therefore keeps this persisted workspace Apple-only until a canonical (platform, store ID) identity is added, rather than risking Google/Amazon evidence being saved under an ambiguous Apple-shaped identifier.`
+        : cross
+          ? 'This pipeline currently contains Apple-specific evidence. Cross-platform mode is a coverage overview only, so Radar will not display the Apple pipeline under an All-platform label. Select Apple explicitly to inspect it.'
+          : `Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to ${PLATFORM_META[scope].label}. Select Apple to inspect the existing Apple pipeline, or use Today/Analyze/Competitors for evidence currently available to this platform.`}</p>
     </section>
   </>;
 }
@@ -97,7 +99,7 @@ export function App() {
 
   useEffect(() => {
     let active = true;
-    if (route.view !== 'deep-verify' || !route.sessionId) {
+    if (route.view !== 'deep-verify' || !route.sessionId || !canUseAppleOnlyEvidencePipeline(platformScope)) {
       setDeepVerifySeed(null);
       setDeepVerifyHydrating(false);
       return () => { active = false; };
@@ -118,7 +120,7 @@ export function App() {
       });
 
     return () => { active = false; };
-  }, [route.sessionId, route.videoId, route.view]);
+  }, [platformScope, route.sessionId, route.videoId, route.view]);
 
   function changePlatformScope(scope: PlatformScope) {
     setPlatformScope(scope);
@@ -139,6 +141,7 @@ export function App() {
   }
 
   function openDeepVerify(session: VerificationCaptureSession, videoId?: string) {
+    setPlatformScope('apple');
     navigateAppRoute({
       view: 'deep-verify',
       sessionId: session.sessionId,
@@ -151,6 +154,7 @@ export function App() {
       const queue = await loadVerificationQueue();
       const session = queue.captureSessions.find((item) => item.appId === appId);
       if (!session) {
+        setPlatformScope('apple');
         navigateAppRoute({ view: 'verification' });
         return;
       }
@@ -165,6 +169,7 @@ export function App() {
       }
       openDeepVerify(session, videoId);
     } catch {
+      setPlatformScope('apple');
       navigateAppRoute({ view: 'verification' });
     }
   }
@@ -194,8 +199,11 @@ export function App() {
     />}
     {route.view === 'saved' && <><PlatformContextPanel scope="apple" /><SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} /></>}
     {route.view === 'competitors' && <PlatformCompetitorsPage scope={platformScope} ownerEmail={owner?.email ?? null} />}
-    {route.view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
-    {route.view === 'deep-verify' && <>
+    {route.view === 'reviews' && (applePipelineVisible
+      ? <><PlatformContextPanel scope="apple" /><ReviewSamples ownerEmail={owner?.email ?? null} /></>
+      : <PlatformPipelineBoundary scope={platformScope} feature="Review Samples" persistence />)}
+    {route.view === 'deep-verify' && (applePipelineVisible ? <>
+      <PlatformContextPanel scope="apple" />
       {route.sessionId && deepVerifyHydrating && <div className="history-banner"><strong>Loading verification session…</strong><span>Restoring the exact queue/evidence context from this page URL.</span></div>}
       {route.sessionId && !deepVerifyHydrating && !deepVerifySession && <div className="warning-banner"><span>This verification session is no longer present in the current generated queue. Open Verify Queue to choose a current evidence session.</span></div>}
       {deepVerifySession && <div className="history-banner">
@@ -218,7 +226,7 @@ export function App() {
           researchGeneratedAt: deepVerifySession.source.researchGeneratedAt,
         } : null}
       />}
-    </>}
+    </> : <PlatformPipelineBoundary scope={platformScope} feature="Deep Verify" persistence />)}
     {route.view === 'policy' && <PolicyWatch ownerEmail={owner?.email ?? null} />}
   </AppShell>;
 }
