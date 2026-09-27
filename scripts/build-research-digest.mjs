@@ -37,6 +37,25 @@ function reasonDelta(currentReasons, previousReasons) {
   };
 }
 
+function reasonLabel(reason) {
+  if (/^CROSS_MARKET_(\d+)$/.test(reason)) return `${reason.match(/^CROSS_MARKET_(\d+)$/)[1]}-market presence`;
+  if (/^TOP_(\d+)$/.test(reason)) return `Top ${reason.match(/^TOP_(\d+)$/)[1]} best rank`;
+  if (/^UP_(\d+)_PLUS_1D$/.test(reason)) return `1-day move of at least +${reason.match(/^UP_(\d+)_PLUS_1D$/)[1]} ranks`;
+  if (/^NEW_ENTRY_TOP_(\d+)$/.test(reason)) return `new tracked entry inside Top ${reason.match(/^NEW_ENTRY_TOP_(\d+)$/)[1]}`;
+  if (/^PERSISTED_(\d+)D$/.test(reason)) return `${reason.match(/^PERSISTED_(\d+)D$/)[1]}-day observed persistence`;
+  return reason.replaceAll('_', ' ').toLowerCase();
+}
+
+function presentation(currentCandidate, previousCandidate = null) {
+  const source = currentCandidate ?? previousCandidate ?? {};
+  return {
+    iconUrl: source.iconUrl ?? null,
+    publisher: source.publisher ?? null,
+    previousQueueRank: previousCandidate?.queueRank ?? null,
+    currentQueueRank: currentCandidate?.queueRank ?? null,
+  };
+}
+
 const current = readJson(latestPath);
 if (!current?.radarDate || !Array.isArray(current?.candidates)) throw new Error('A valid research queue is required before digest generation.');
 const comparisonDate = subtractUtcDays(current.radarDate, 1);
@@ -54,8 +73,16 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         type: 'NEW_TO_RESEARCH_QUEUE',
         appId: candidate.appId,
         name: candidate.name,
+        ...presentation(candidate),
         significance: 'attention',
-        evidence: [`Not present in the exact ${comparisonDate} queue.`, `Current deterministic research priority ${candidate.researchPriority}.`, `Current best Games rank #${candidate.evidence.bestRank} across ${candidate.evidence.marketCount} market(s).`],
+        current: candidate.researchPriority,
+        currentBestRank: candidate.evidence.bestRank,
+        currentMarketCount: candidate.evidence.marketCount,
+        evidence: [
+          `Not present in the exact ${comparisonDate} queue.`,
+          `Current deterministic research priority ${candidate.researchPriority}.`,
+          `Current best Games rank #${candidate.evidence.bestRank} across ${candidate.evidence.marketCount} market(s).`,
+        ],
       });
       continue;
     }
@@ -67,18 +94,23 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         `Deterministic research priority changed ${prior.researchPriority} → ${candidate.researchPriority}.`,
         `Priority delta ${priorityDelta > 0 ? '+' : ''}${priorityDelta}.`,
       ];
-      if (reasons.added.length > 0) evidence.push(`Added rank-evidence reason codes: ${reasons.added.join(', ')}.`);
-      if (reasons.removed.length > 0) evidence.push(`Removed rank-evidence reason codes: ${reasons.removed.join(', ')}.`);
-      if (reasons.added.length === 0 && reasons.removed.length === 0) evidence.push('Reason-code set is unchanged; the numeric priority changed within the same deterministic evidence rules.');
+      if (reasons.added.length > 0) evidence.push(`Added rank-evidence signals: ${reasons.added.map(reasonLabel).join(', ')}.`);
+      if (reasons.removed.length > 0) evidence.push(`Removed rank-evidence signals: ${reasons.removed.map(reasonLabel).join(', ')}.`);
+      if (reasons.added.length === 0 && reasons.removed.length === 0) evidence.push('Evidence-signal set is unchanged; the numeric priority changed within the same deterministic rules.');
 
       changes.push({
         type: priorityDelta > 0 ? 'PRIORITY_INCREASED' : 'PRIORITY_DECREASED',
         appId: candidate.appId,
         name: candidate.name,
+        ...presentation(candidate, prior),
         significance: 'attention',
         previous: prior.researchPriority,
         current: candidate.researchPriority,
         delta: priorityDelta,
+        previousBestRank: prior.evidence.bestRank,
+        currentBestRank: candidate.evidence.bestRank,
+        previousMarketCount: prior.evidence.marketCount,
+        currentMarketCount: candidate.evidence.marketCount,
         reasonCodesAdded: reasons.added,
         reasonCodesRemoved: reasons.removed,
         evidence,
@@ -91,11 +123,14 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         type: marketDelta > 0 ? 'CROSS_MARKET_EXPANDED' : 'CROSS_MARKET_CONTRACTED',
         appId: candidate.appId,
         name: candidate.name,
+        ...presentation(candidate, prior),
         significance: 'attention',
         previous: prior.evidence.marketCount,
         current: candidate.evidence.marketCount,
         delta: marketDelta,
-        evidence: [`Healthy Games-chart market presence changed ${prior.evidence.marketCount} → ${candidate.evidence.marketCount}.`],
+        previousBestRank: prior.evidence.bestRank,
+        currentBestRank: candidate.evidence.bestRank,
+        evidence: [`Healthy Games-chart market presence changed ${prior.evidence.marketCount} → ${candidate.evidence.marketCount}.`, `Best rank is now #${candidate.evidence.bestRank}.`],
       });
     }
 
@@ -105,11 +140,14 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         type: rankDelta > 0 ? 'BEST_RANK_IMPROVED' : 'BEST_RANK_DECLINED',
         appId: candidate.appId,
         name: candidate.name,
+        ...presentation(candidate, prior),
         significance: 'info',
         previous: prior.evidence.bestRank,
         current: candidate.evidence.bestRank,
         delta: rankDelta,
-        evidence: [`Best observed current Games rank changed #${prior.evidence.bestRank} → #${candidate.evidence.bestRank}.`],
+        previousMarketCount: prior.evidence.marketCount,
+        currentMarketCount: candidate.evidence.marketCount,
+        evidence: [`Best observed Games rank changed #${prior.evidence.bestRank} → #${candidate.evidence.bestRank}.`, `Currently present in ${candidate.evidence.marketCount} healthy Games market(s).`],
       });
     }
 
@@ -122,8 +160,11 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
           type: `EXACT_${days}D_HISTORY_MATURED`,
           appId: candidate.appId,
           name: candidate.name,
+          ...presentation(candidate, prior),
           significance: 'attention',
-          evidence: [`Exact ${days}-day comparison is now available.`, `Best upward delta: ${currentSignal.bestUpwardDelta ?? 'unknown'}.`],
+          current: currentSignal.bestUpwardDelta,
+          currentBestRank: candidate.evidence.bestRank,
+          evidence: [`Exact ${days}-day comparison is now available.`, `Best upward delta: ${currentSignal.bestUpwardDelta ?? 'no positive move'}.`, `Current best Games rank #${candidate.evidence.bestRank}.`],
         });
       }
     }
@@ -135,8 +176,16 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         type: 'DROPPED_FROM_RESEARCH_QUEUE',
         appId: candidate.appId,
         name: candidate.name,
+        ...presentation(null, candidate),
         significance: 'attention',
-        evidence: [`Present in the exact ${comparisonDate} queue but absent from the current queue.`, 'This records only a deterministic triage cutoff change; no product-performance conclusion is made.'],
+        previous: candidate.researchPriority,
+        previousBestRank: candidate.evidence.bestRank,
+        previousMarketCount: candidate.evidence.marketCount,
+        evidence: [
+          `Present in the exact ${comparisonDate} queue at queue #${candidate.queueRank}, priority ${candidate.researchPriority}, best rank #${candidate.evidence.bestRank}.`,
+          'Absent from the current deterministic top-12 research queue.',
+          'This records only a triage cutoff change; no product-performance conclusion is made.',
+        ],
       });
     }
   }
@@ -145,6 +194,8 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
 const states = current.candidates.map((candidate) => ({
   appId: candidate.appId,
   name: candidate.name,
+  iconUrl: candidate.iconUrl ?? null,
+  publisher: candidate.publisher ?? null,
   queueRank: candidate.queueRank,
   researchPriority: candidate.researchPriority,
   ...lifecycle(candidate),
