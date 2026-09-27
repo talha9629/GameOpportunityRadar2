@@ -6,7 +6,6 @@ import {
   ArrowLeft,
   ArrowRight,
   BarChart3,
-  FileSearch,
   FlaskConical,
   ListChecks,
   Menu,
@@ -19,6 +18,8 @@ import {
 } from 'lucide-react';
 import { OwnerAccess } from './OwnerAccess';
 import { APP_PAGE_META, type AppRoute, type AppView } from './appRouter';
+import { PlatformScopeSelector } from './PlatformScopeSelector';
+import type { PlatformScope } from './platformScope';
 import './app-shell.css';
 
 const groups: Array<{
@@ -54,11 +55,15 @@ const groups: Array<{
 export function AppShell({
   route,
   owner,
+  platformScope,
+  onPlatformScopeChange,
   onNavigate,
   children,
 }: {
   route: AppRoute;
   owner: User | null;
+  platformScope: PlatformScope;
+  onPlatformScopeChange: (scope: PlatformScope) => void;
   onNavigate: (view: AppView) => void;
   children: ReactNode;
 }) {
@@ -129,9 +134,12 @@ export function AppShell({
             <p>{meta.description}</p>
           </div>
         </div>
-        <div className="workspace-status">
-          <span className="status-dot" />
-          <span>Live workspace</span>
+        <div className="workspace-header-right">
+          <PlatformScopeSelector value={platformScope} onChange={onPlatformScopeChange} />
+          <div className="workspace-status">
+            <span className="status-dot" />
+            <span>Live workspace</span>
+          </div>
         </div>
       </header>
 
