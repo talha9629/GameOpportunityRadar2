@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { StorefrontSchema } from './storeIdentity';
 
 export const ReviewClusterKeySchema = z.enum([
   'positive',
@@ -39,6 +40,7 @@ export const SavedReviewSummaryRowSchema = z.object({
   sample_id: z.string().uuid(),
   label: z.string(),
   canonical_name: z.string().nullable(),
+  storefront: StorefrontSchema.nullable(),
   store_id: z.string().nullable(),
   analysis_method: z.string(),
   entry_count: z.coerce.number().int().nonnegative(),
@@ -49,6 +51,7 @@ export const SavedReviewSummarySchema = z.object({
   sampleId: z.string().uuid(),
   label: z.string(),
   canonicalName: z.string().nullable(),
+  storefront: StorefrontSchema.nullable(),
   storeId: z.string().nullable(),
   analysisMethod: z.string(),
   entryCount: z.number().int().nonnegative(),
@@ -58,6 +61,7 @@ export const SavedReviewSummarySchema = z.object({
 export const SavedReviewPayloadSchema = z.object({
   sampleId: z.string().uuid(),
   label: z.string(),
+  storefront: StorefrontSchema.nullable(),
   storeId: z.string().nullable(),
   canonicalName: z.string().nullable(),
   analysisMethod: z.string(),
