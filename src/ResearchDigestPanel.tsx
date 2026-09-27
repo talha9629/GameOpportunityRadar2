@@ -104,7 +104,7 @@ export function ResearchDigestPanel({ digest, onAnalyze }: { digest: ResearchDig
           <strong>{metricLine(change)}</strong>
           <div className="digest-evidence-list">{change.evidence.slice(0, 2).map((evidence, evidenceIndex) => <span key={evidenceIndex}>{evidence}</span>)}</div>
         </div>
-        <button onClick={() => onAnalyze(change.appId)} title={`Analyze ${change.name}`}><Search size={14} /> Analyze</button>
+        <button onClick={() => onAnalyze(change.appId)} aria-label={`Analyze ${change.name}`}><Search size={14} /> Analyze</button>
       </article>)}
     </div>}
   </section>;

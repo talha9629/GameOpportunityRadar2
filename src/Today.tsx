@@ -30,14 +30,14 @@ function Movement({ entry }: { entry: RadarEntry }) {
 
 function RankWindow({ change }: { change: RankWindowChange }) {
   const prefix = `${change.days}d`;
-  if (change.status === 'history_missing') return <span className="window-pill unknown" title={`No exact ${change.days}-day snapshot exists. No movement is inferred.`}>{prefix} ?</span>;
-  if (change.status === 'market_failed') return <span className="window-pill unknown" title={`The ${change.days}-day comparison market failed collection.`}>{prefix} !</span>;
-  if (change.status === 'source_mismatch') return <span className="window-pill unknown" title={`The exact ${change.days}-day snapshots use incompatible chart sources (Games category vs overall Top Free). No rank movement is inferred.`}>{prefix} SRC</span>;
-  if (change.status === 'not_ranked') return <span className="window-pill entered" title={`Not present in the same tracked Games range exactly ${change.days} day(s) ago.`}>{prefix} IN</span>;
+  if (change.status === 'history_missing') return <span className="window-pill unknown" aria-label={`No exact ${change.days}-day snapshot exists. No movement is inferred.`}>{prefix} ?</span>;
+  if (change.status === 'market_failed') return <span className="window-pill unknown" aria-label={`The ${change.days}-day comparison market failed collection.`}>{prefix} !</span>;
+  if (change.status === 'source_mismatch') return <span className="window-pill unknown" aria-label={`The exact ${change.days}-day snapshots use incompatible chart sources. No rank movement is inferred.`}>{prefix} SRC</span>;
+  if (change.status === 'not_ranked') return <span className="window-pill entered" aria-label={`Not present in the same tracked Games range exactly ${change.days} day(s) ago.`}>{prefix} IN</span>;
   const delta = change.delta ?? 0;
   const label = delta > 0 ? `+${delta}` : String(delta);
   const className = delta > 0 ? 'up' : delta < 0 ? 'down' : 'flat';
-  return <span className={`window-pill ${className}`} title={`Exact comparable ${change.days}-day Games rank change: #${change.priorRank} → #${change.currentRank}`}>{prefix} {label}</span>;
+  return <span className={`window-pill ${className}`} aria-label={`Exact comparable ${change.days}-day Games rank change: #${change.priorRank} to #${change.currentRank}`}>{prefix} {label}</span>;
 }
 
 function TrendPill({ assessment }: { assessment: RadarTrendAssessment }) {
@@ -50,7 +50,10 @@ function TrendPill({ assessment }: { assessment: RadarTrendAssessment }) {
         : assessment.state === 'INSUFFICIENT_DATA'
           ? 'unknown'
           : 'flat';
-  return <span className={`window-pill ${className}`} title={assessment.reason}>{assessment.state.replaceAll('_', ' ')}</span>;
+  return <details className="signal-detail">
+    <summary className={`window-pill ${className}`}>{assessment.state.replaceAll('_', ' ')}</summary>
+    <span>{assessment.reason}</span>
+  </details>;
 }
 
 function EntryRow({
@@ -87,12 +90,12 @@ function EntryRow({
       <Movement entry={entry} />
       {windows.length > 0 && <div className="window-trend">
         {windows.map((change) => <RankWindow key={change.days} change={change} />)}
-        {visibility != null && <span className="window-pill flat" title={`Bounded log-rank visibility within the observed Top ${observedDepth}: ln((N+1)/rank) / ln(N+1). This is not download share, revenue share, or probability.`}>VIS {Math.round(visibility * 100)}%</span>}
+        {visibility != null && <span className="window-pill flat" aria-label={`Bounded rank visibility within the observed Top ${observedDepth}. Not download share, revenue share, or probability.`}>VIS {Math.round(visibility * 100)}%</span>}
         {trend && <TrendPill assessment={trend} />}
       </div>}
       <div className="radar-actions">
-        <button onClick={() => onAnalyze(entry.appId)} title={`Analyze ${entry.name}`}><Search size={14} /> Analyze</button>
-        {entry.storeUrl && <a href={entry.storeUrl} target="_blank" rel="noreferrer" className="icon-link" title="Open App Store"><ExternalLink size={15} /></a>}
+        <button onClick={() => onAnalyze(entry.appId)} aria-label={`Analyze ${entry.name}`}><Search size={14} /> Analyze</button>
+        {entry.storeUrl && <a href={entry.storeUrl} target="_blank" rel="noreferrer" className="icon-link store-link" aria-label={`Open ${entry.name} in the App Store`}><ExternalLink size={15} /><span>Store</span></a>}
       </div>
     </div>
   );
@@ -131,7 +134,7 @@ function ResearchQueuePanel({ queue, onAnalyze }: { queue: ResearchQueue; onAnal
         const listingFacts = candidate.analysisEvidence?.findings.filter((finding) => finding.key.startsWith('listing_')).slice(0, 3) ?? [];
         return <div className="research-queue-row" key={candidate.appId}>
           {candidate.iconUrl ? <img src={candidate.iconUrl} alt="" /> : <div />}
-          <div className="queue-priority" title={candidate.priorityMeaning}><strong>{candidate.researchPriority}</strong><small>priority</small></div>
+          <div className="queue-priority"><strong>{candidate.researchPriority}</strong><small>priority</small></div>
           <div className="queue-game">
             <strong>#{candidate.queueRank} {candidate.name}</strong>
             <span>{candidate.publisher}</span>
@@ -142,7 +145,9 @@ function ResearchQueuePanel({ queue, onAnalyze }: { queue: ResearchQueue; onAnal
               {candidate.appleMetadata?.releaseAgeDays != null && <span>{candidate.appleMetadata.releaseAgeDays}d since release</span>}
               {candidate.analysisEvidence && <span className="unknown-count">{candidate.analysisEvidence.unknownCount} unresolved unknowns</span>}
             </div>
-            {listingFacts.length > 0 && <div className="queue-listing-evidence" title="Publisher-listing-derived; not gameplay verified">
+            <details className="queue-priority-detail"><summary>Why priority {candidate.researchPriority}?</summary><span>{candidate.priorityMeaning}</span></details>
+            {listingFacts.length > 0 && <div className="queue-listing-evidence">
+              <small>Publisher listing · not gameplay verified</small>
               {listingFacts.map((finding) => <span key={finding.key}><b>{finding.label}:</b> {finding.value}</span>)}
             </div>}
           </div>
@@ -157,7 +162,7 @@ function ResearchQueuePanel({ queue, onAnalyze }: { queue: ResearchQueue; onAnal
               ? <><strong>{candidate.appBrainEstimate.estimatedRecentDownloads.toLocaleString()}</strong><small>AppBrain recent est.</small></>
               : <><strong>—</strong><small>estimate not used</small></>}
           </div>
-          <button onClick={() => onAnalyze(candidate.appId)} title={`Analyze ${candidate.name}`}><Search size={14} /> Analyze</button>
+          <button onClick={() => onAnalyze(candidate.appId)} aria-label={`Analyze ${candidate.name}`}><Search size={14} /> Analyze</button>
         </div>;
       })}
     </div>}
