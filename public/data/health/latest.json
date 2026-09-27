@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T14:47:10.881Z",
+  "generatedAt": "2026-09-27T17:38:25.234Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -14,7 +14,7 @@
         "4/4 healthy Games markets",
         "0 failed market(s)",
         "0 overall-chart fallback market(s)",
-        "0.4h snapshot age"
+        "3.3h snapshot age"
       ],
       "action": null
     },
@@ -26,7 +26,7 @@
         "12 candidates",
         "Apple lookup complete",
         "live evidence complete (8/8)",
-        "0.4h queue age"
+        "3.3h queue age"
       ],
       "action": null
     },
@@ -39,7 +39,7 @@
         "0 omitted task(s)",
         "8 capture session(s) cover 24 gameplay evidence task(s)",
         "derived from current research queue",
-        "0.4h verification age"
+        "3.3h verification age"
       ],
       "action": null
     },
@@ -114,7 +114,7 @@
         "chart depth matches Top 100",
         "derived from current Apple Radar snapshot",
         "INSUFFICIENT_DATA 400",
-        "0.4h trend-signal age",
+        "3.3h trend-signal age",
         "Visibility is a bounded chart-position heuristic; it is not downloads, revenue, market share, probability, or a build recommendation."
       ],
       "action": null
