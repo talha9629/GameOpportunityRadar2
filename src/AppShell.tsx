@@ -1,0 +1,141 @@
+import { useEffect, useState, type ReactNode } from 'react';
+import type { User } from '@supabase/supabase-js';
+import {
+  Activity,
+  Archive,
+  ArrowLeft,
+  ArrowRight,
+  BarChart3,
+  FileSearch,
+  FlaskConical,
+  ListChecks,
+  Menu,
+  MessageSquareText,
+  Network,
+  Search,
+  ShieldCheck,
+  Video,
+  X,
+} from 'lucide-react';
+import { OwnerAccess } from './OwnerAccess';
+import { APP_PAGE_META, type AppRoute, type AppView } from './appRouter';
+import './app-shell.css';
+
+const groups: Array<{
+  label: string;
+  items: Array<{ view: AppView; label: string; icon: typeof Activity }>;
+}> = [
+  {
+    label: 'Discover',
+    items: [
+      { view: 'today', label: 'Today', icon: Activity },
+      { view: 'trends', label: 'Trend Signals', icon: BarChart3 },
+      { view: 'verification', label: 'Verify Queue', icon: ListChecks },
+    ],
+  },
+  {
+    label: 'Research',
+    items: [
+      { view: 'analyze', label: 'Analyze Game', icon: Search },
+      { view: 'saved', label: 'Saved Dossiers', icon: Archive },
+      { view: 'competitors', label: 'Competitors', icon: Network },
+      { view: 'reviews', label: 'Review Samples', icon: MessageSquareText },
+    ],
+  },
+  {
+    label: 'Evidence & policy',
+    items: [
+      { view: 'deep-verify', label: 'Deep Verify', icon: Video },
+      { view: 'policy', label: 'Policy Watch', icon: ShieldCheck },
+    ],
+  },
+];
+
+export function AppShell({
+  route,
+  owner,
+  onNavigate,
+  children,
+}: {
+  route: AppRoute;
+  owner: User | null;
+  onNavigate: (view: AppView) => void;
+  children: ReactNode;
+}) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const meta = APP_PAGE_META[route.view];
+
+  useEffect(() => {
+    document.title = `${meta.title} · Game Opportunity Radar`;
+    setMobileOpen(false);
+  }, [meta.title, route.view]);
+
+  function navigate(view: AppView) {
+    onNavigate(view);
+    setMobileOpen(false);
+  }
+
+  return <div className="app-frame">
+    {mobileOpen && <button className="sidebar-scrim" aria-label="Close navigation" onClick={() => setMobileOpen(false)} />}
+
+    <aside className={`app-sidebar ${mobileOpen ? 'mobile-open' : ''}`} aria-label="Primary navigation">
+      <div className="sidebar-brand">
+        <div className="brand-mark">R2</div>
+        <div>
+          <strong>Game Opportunity Radar</strong>
+          <span>Studio intelligence</span>
+        </div>
+        <button className="sidebar-close" aria-label="Close navigation" onClick={() => setMobileOpen(false)}><X size={18} /></button>
+      </div>
+
+      <nav className="sidebar-nav">
+        {groups.map((group) => <div className="sidebar-group" key={group.label}>
+          <div className="sidebar-group-label">{group.label}</div>
+          {group.items.map((item) => {
+            const Icon = item.icon;
+            return <button
+              key={item.view}
+              className={`sidebar-link ${route.view === item.view ? 'active' : ''}`}
+              aria-current={route.view === item.view ? 'page' : undefined}
+              onClick={() => navigate(item.view)}
+            >
+              <Icon size={17} />
+              <span>{item.label}</span>
+            </button>;
+          })}
+        </div>)}
+      </nav>
+
+      <div className="sidebar-footer">
+        <div className="sidebar-principle">
+          <FlaskConical size={15} />
+          <span>Evidence before automation</span>
+        </div>
+        <OwnerAccess user={owner} />
+      </div>
+    </aside>
+
+    <section className="app-workspace">
+      <header className="workspace-header">
+        <div className="workspace-header-left">
+          <button className="mobile-nav-toggle" aria-label="Open navigation" onClick={() => setMobileOpen(true)}><Menu size={18} /></button>
+          <div className="history-controls" aria-label="Page history">
+            <button title="Back" aria-label="Back" onClick={() => window.history.back()}><ArrowLeft size={16} /></button>
+            <button title="Forward" aria-label="Forward" onClick={() => window.history.forward()}><ArrowRight size={16} /></button>
+          </div>
+          <div className="page-context">
+            <span>{meta.section}</span>
+            <strong>{meta.title}</strong>
+            <p>{meta.description}</p>
+          </div>
+        </div>
+        <div className="workspace-status">
+          <span className="status-dot" />
+          <span>Live workspace</span>
+        </div>
+      </header>
+
+      <main className="page-shell app-page-shell">{children}</main>
+    </section>
+  </div>;
+}
