@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T02:21:44.882Z",
+  "generatedAt": "2026-09-27T02:50:56.708Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -48,14 +48,15 @@
       "label": "Public Gameplay Source Discovery",
       "state": "optional",
       "facts": [
-        "Tavily status unconfigured",
+        "None status unconfigured",
         "0/8 capture session(s) have public source suggestion(s)",
         "0 suggested YouTube source(s)",
-        "0/8 Basic-search credit budget used",
+        "0/8 provider request cap used",
+        "0 search queries reported by provider",
         "derived from current verification queue",
-        "Search candidates are not verified gameplay evidence."
+        "Search candidates are not verified gameplay evidence; new v2 candidates are independently checked for public YouTube availability."
       ],
-      "action": "Optional only: configure TAVILY_API_KEY for bounded public gameplay source suggestions."
+      "action": "Optional only: configure TAVILY_API_KEY or GEMINI_API_KEY in GitHub Actions for bounded public gameplay source suggestions."
     },
     {
       "id": "history_maturity",
@@ -87,7 +88,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "5 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "0.4h policy-index age",
+        "0.9h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -135,7 +136,7 @@
     {
       "priority": 8,
       "action": "OPTIONAL_CONFIGURE_GAMEPLAY_DISCOVERY",
-      "why": "Tavily can propose bounded public gameplay sources for Deep Verify without changing first-party research priority or resolving evidence automatically."
+      "why": "Tavily or Gemini Search can propose bounded public gameplay sources for Deep Verify without changing first-party research priority or resolving evidence automatically."
     },
     {
       "priority": 9,
@@ -154,7 +155,10 @@
     "verificationGroupedEvidenceTaskCount": 24,
     "verificationDerivedFromCurrentQueue": true,
     "gameplayDiscoveryConfigured": false,
+    "gameplayDiscoveryProvider": "none",
     "gameplayDiscoveryCandidateCount": 0,
+    "gameplayDiscoveryRequestsUsed": 0,
+    "gameplayDiscoverySearchQueriesUsed": 0,
     "gameplayDiscoveryDerivedFromCurrentVerification": true,
     "policyDetectedChangeCount": 0,
     "confirmedPolicyChanges": 0,
