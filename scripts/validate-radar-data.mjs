@@ -57,7 +57,9 @@ function validateSnapshot(snapshot, file, expectedDate = null) {
 
     if (market.status === 'ok') {
       successful += 1;
-      if (market.entries.length < 10 || market.entries.length > chartDepth) fail(`${file} ${code} successful market has ${market.entries.length} entries for chartDepth ${chartDepth}`);
+      if (market.entries.length !== chartDepth) {
+        fail(`${file} ${code} is marked ok with ${market.entries.length} observed ranks while the snapshot declares Top ${chartDepth}; successful historical coverage must be complete`);
+      }
       const ids = new Set();
       market.entries.forEach((entry, index) => {
         validateEntry(entry, index + 1, code, file, chartDepth);
