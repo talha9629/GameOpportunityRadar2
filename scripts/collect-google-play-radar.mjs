@@ -15,10 +15,12 @@ function readJson(file, fallback = null) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; }
 }
 
-function yesterdayOf(date) {
-  const value = new Date(`${date}T00:00:00Z`);
-  value.setUTCDate(value.getUTCDate() - 1);
-  return value.toISOString().slice(0, 10);
+function daysBetweenDates(older, newer) {
+  if (!older || !newer) return null;
+  const start = new Date(`${older}T00:00:00Z`);
+  const end = new Date(`${newer}T00:00:00Z`);
+  if (!Number.isFinite(start.valueOf()) || !Number.isFinite(end.valueOf())) return null;
+  return Math.max(0, Math.round((end.valueOf() - start.valueOf()) / 86_400_000));
 }
 
 function playUrl(packageName) {
@@ -27,8 +29,8 @@ function playUrl(packageName) {
 
 const previous = readJson(latestPath, null);
 const previousDate = typeof previous?.generatedAt === 'string' ? previous.generatedAt.slice(0, 10) : null;
-const previousIsYesterday = previousDate === yesterdayOf(today);
 const sameDay = previousDate === today;
+const observationGapDays = daysBetweenDates(previousDate, today);
 
 const base = {
   schemaVersion: 1,
@@ -53,6 +55,7 @@ const base = {
     'Google Play Developer API is not used for competitor discovery because it is designed for apps in the developer account.',
     'estimatedDownloads and estimatedRecentDownloads are third-party estimates, never first-party Google figures.',
     'This provider browse endpoint is not labeled as a country storefront ranking; Radar does not attach US/UK/CA/AU market claims to it.',
+    'Movement compares the previous observed AppBrain snapshot and always records the observation gap; it is not called a 1-day move unless the gap is exactly one day.',
   ],
 };
 
@@ -89,18 +92,16 @@ try {
     const packageName = String(app.package ?? '').trim();
     if (!packageName) throw new Error(`AppBrain result at rank ${index + 1} has no package name.`);
     const prior = priorByPackage.get(packageName);
-    const comparablePriorRank = sameDay ? prior?.priorRank ?? null : previousIsYesterday ? prior?.rank ?? null : null;
+    const previousObservedRank = sameDay ? prior?.previousObservedRank ?? null : prior?.rank ?? null;
     const firstObserved = prior?.firstObserved ?? today;
-    const daysObserved = sameDay
-      ? prior?.daysObserved ?? 1
-      : previousIsYesterday && prior
-        ? (prior.daysObserved ?? 1) + 1
-        : 1;
+    const observations = sameDay ? prior?.observations ?? 1 : prior ? (prior.observations ?? 1) + 1 : 1;
 
     return {
       rank: index + 1,
-      priorRank: comparablePriorRank,
-      delta: comparablePriorRank == null ? null : comparablePriorRank - (index + 1),
+      previousObservedRank,
+      observedDelta: previousObservedRank == null ? null : previousObservedRank - (index + 1),
+      previousObservedAt: prior ? previous?.generatedAt ?? null : null,
+      observationGapDays: prior ? (sameDay ? prior.observationGapDays ?? observationGapDays : observationGapDays) : null,
       packageName,
       name: app.name ?? packageName,
       publisher: app.developerName ?? 'Publisher unknown',
@@ -113,7 +114,7 @@ try {
       estimatedDownloads: Number.isFinite(app.estimatedDownloads) ? app.estimatedDownloads : null,
       estimatedRecentDownloads: Number.isFinite(app.estimatedRecentDownloads) ? app.estimatedRecentDownloads : null,
       firstObserved,
-      daysObserved,
+      observations,
       evidence: {
         rank: 'third_party_public',
         rating: 'third_party_public',
