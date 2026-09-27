@@ -168,6 +168,7 @@ const previousIndex = readIndex();
 const indexEntry = {
   date: today,
   generatedAt,
+  chartDepth,
   successfulMarkets: output.successfulMarkets,
   freshMarkets: output.freshMarkets,
   gameFocusedMarkets: marketValues.filter((market) => market.status === 'ok' && market.gameFocused === true).length,
