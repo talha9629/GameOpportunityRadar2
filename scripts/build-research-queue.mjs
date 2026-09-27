@@ -55,15 +55,26 @@ function loadRadarHistory(latest) {
   return snapshots;
 }
 
-function exactWindow(history, currentDate, marketCode, appId, days) {
+function exactWindow(history, currentDate, marketCode, appId, days, currentGameFocused = true) {
   const targetDate = subtractUtcDays(currentDate, days);
   const prior = history.get(targetDate);
   if (!prior) return { days, targetDate, status: 'history_missing', priorRank: null, currentRank: null, delta: null };
   const market = prior.markets?.[marketCode];
   if (!market || market.status !== 'ok') return { days, targetDate, status: 'market_failed', priorRank: null, currentRank: null, delta: null };
+  if (typeof market.gameFocused === 'boolean' && market.gameFocused !== currentGameFocused) {
+    return { days, targetDate, status: 'source_mismatch', priorRank: null, currentRank: null, delta: null };
+  }
   const entry = Array.isArray(market.entries) ? market.entries.find((item) => String(item.appId) === String(appId)) : null;
   if (!entry) return { days, targetDate, status: 'not_ranked', priorRank: null, currentRank: null, delta: null };
   return { days, targetDate, status: 'available', priorRank: entry.rank, currentRank: null, delta: null };
+}
+
+function summarizeWindowStatus(perMarket) {
+  if (perMarket.some((signal) => signal.status === 'available')) return 'available';
+  if (perMarket.some((signal) => signal.status === 'source_mismatch')) return 'source_mismatch';
+  if (perMarket.some((signal) => signal.status === 'not_ranked')) return 'not_ranked';
+  if (perMarket.some((signal) => signal.status === 'market_failed')) return 'market_failed';
+  return 'history_missing';
 }
 
 function buildAggregates(latest, history) {
@@ -110,7 +121,7 @@ function buildAggregates(latest, history) {
 
     const exactWindows = Object.fromEntries(LOOKBACK_DAYS.map((days) => {
       const perMarket = item.markets.map((market) => {
-        const prior = exactWindow(history, currentDate, market.country, item.appId, days);
+        const prior = exactWindow(history, currentDate, market.country, item.appId, days, true);
         if (prior.status !== 'available') return { market: market.country, ...prior };
         return {
           market: market.country,
@@ -120,15 +131,16 @@ function buildAggregates(latest, history) {
         };
       });
       const available = perMarket.filter((signal) => signal.status === 'available');
+      const status = summarizeWindowStatus(perMarket);
       return [`${days}d`, {
         days,
-        status: available.length > 0 ? 'available' : perMarket.some((signal) => signal.status === 'not_ranked') ? 'not_ranked' : 'history_missing',
-        bestUpwardDelta: available.length ? Math.max(...available.map((signal) => signal.delta)) : null,
+        status,
+        bestUpwardDelta: status === 'available' ? Math.max(...available.map((signal) => signal.delta)) : null,
         perMarket,
       }];
     }));
 
-    const oneDayUp = exactWindows['1d'].bestUpwardDelta;
+    const oneDayUp = exactWindows['1d'].status === 'available' ? exactWindows['1d'].bestUpwardDelta : null;
     const reasons = [];
     let priority = 0;
 
@@ -291,7 +303,7 @@ const candidates = aggregates.map((candidate, index) => ({
   appleMetadata: apple.metadata.get(candidate.appId) ?? null,
   appBrainEstimate: appBrainResults.get(candidate.appId) ?? null,
   nextVerification: [
-    candidate.exactWindows['7d'].status === 'available' ? null : 'Wait for exact 7-day rank history before making a mature momentum claim.',
+    candidate.exactWindows['7d'].status === 'available' ? null : 'Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.',
     'Open Analyze Game to inspect official listing evidence and unknowns.',
     'Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.',
     APPBRAIN_KEY ? null : 'Optional: configure APPBRAIN_API_KEY for capped third-party download-estimate enrichment.',
@@ -305,8 +317,8 @@ const output = {
   radarGeneratedAt: latest.generatedAt,
   method: {
     name: 'deterministic_research_priority_v1',
-    inputs: ['Apple Games chart rank', 'cross-market presence', 'exact observed rank movement', 'new-entry status', 'observed persistence'],
-    exclusions: ['downloads', 'revenue', 'rating', 'publisher size', 'AI opinion'],
+    inputs: ['Apple Games chart rank', 'cross-market presence', 'exact comparable observed rank movement', 'new-entry status', 'consecutive observed persistence'],
+    exclusions: ['downloads', 'revenue', 'rating', 'publisher size', 'AI opinion', 'incompatible chart-source comparisons'],
     statement: 'Priority orders what to investigate first. It is not an opportunity score, prediction, recommendation or causal claim.',
   },
   sources: {
@@ -336,6 +348,7 @@ const output = {
     'App Store chart rank is an observed ordinal position; it is not a download count, download share, revenue figure or causal measure of demand.',
     'The queue currently covers Apple Games charts in US, UK, Canada and Australia; Android is not inferred from iOS.',
     'A missing exact historical date remains UNKNOWN. The queue never interpolates missing rank history.',
+    'Games-category and overall Top Free fallback ranks are incompatible chart universes and are never compared for movement.',
     'AppBrain values, when configured, are third-party estimates and are displayed separately from official Apple evidence.',
     'Gameplay mechanics, monetization placement, retention systems and production burden require deeper evidence before a prototype decision.',
   ],
