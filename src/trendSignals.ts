@@ -24,6 +24,8 @@ export const TrendSignalSchema = z.object({
   appId: z.string().min(1),
   name: z.string().min(1),
   publisher: z.string(),
+  iconUrl: z.string().nullable().optional(),
+  storeUrl: z.string().nullable().optional(),
   rank: z.number().int().positive(),
   chartDepth: z.number().int().positive().max(100),
   visibility: z.number().min(0).max(1),
@@ -66,6 +68,7 @@ export const TrendSignalsPayloadSchema = z.object({
     statesEmitted: z.array(TrendStateSchema),
     statesReservedForOtherEvidence: z.array(z.enum(['CROWDED', 'WINDOW_CLOSING'])),
     missingHistoryRule: z.string().min(20),
+    directionalStateRule: z.string().min(20).optional(),
   }),
   summary: z.object({
     marketCount: z.number().int().nonnegative(),
@@ -122,5 +125,18 @@ export function strongestTrendSignals(payload: TrendSignalsPayload, limit = 12) 
       || b.visibility - a.visibility
       || a.rank - b.rank,
     )
+    .slice(0, limit);
+}
+
+export function strongestOneDayMovers(payload: TrendSignalsPayload, limit = 12) {
+  return Object.values(payload.markets)
+    .filter((market) => market.status === 'ok' && market.gameFocused)
+    .flatMap((market) => market.signals.map((signal) => ({ ...signal, market: market.label, country: market.country })))
+    .filter((signal) => signal.exactWindows['1d'].status === 'available' && signal.exactWindows['1d'].delta !== 0)
+    .sort((a, b) => {
+      const aDelta = a.exactWindows['1d'].delta ?? 0;
+      const bDelta = b.exactWindows['1d'].delta ?? 0;
+      return Math.abs(bDelta) - Math.abs(aDelta) || b.visibility - a.visibility || a.rank - b.rank;
+    })
     .slice(0, limit);
 }

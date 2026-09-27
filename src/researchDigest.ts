@@ -4,16 +4,28 @@ const ResearchChangeSchema = z.object({
   type: z.string().min(3),
   appId: z.string().min(5),
   name: z.string().min(1),
+  iconUrl: z.string().nullable().optional(),
+  publisher: z.string().nullable().optional(),
+  previousQueueRank: z.number().int().positive().nullable().optional(),
+  currentQueueRank: z.number().int().positive().nullable().optional(),
+  previousBestRank: z.number().int().positive().nullable().optional(),
+  currentBestRank: z.number().int().positive().nullable().optional(),
+  previousMarketCount: z.number().int().nonnegative().nullable().optional(),
+  currentMarketCount: z.number().int().nonnegative().nullable().optional(),
   significance: z.enum(['info', 'attention']),
   previous: z.number().optional(),
   current: z.number().optional(),
   delta: z.number().optional(),
+  reasonCodesAdded: z.array(z.string()).optional(),
+  reasonCodesRemoved: z.array(z.string()).optional(),
   evidence: z.array(z.string()).min(1),
 });
 
 const ResearchStateSchema = z.object({
   appId: z.string().min(5),
   name: z.string().min(1),
+  iconUrl: z.string().nullable().optional(),
+  publisher: z.string().nullable().optional(),
   queueRank: z.number().int().positive(),
   researchPriority: z.number().int().min(0).max(100),
   state: z.enum(['INSUFFICIENT_HISTORY', 'PERSISTING_3D', 'PERSISTING_7D', 'RISING_EXACT_3D', 'FALLING_EXACT_3D', 'FLAT_EXACT_3D']),
@@ -42,6 +54,7 @@ export const ResearchDigestSchema = z.object({
 });
 
 export type ResearchDigest = z.infer<typeof ResearchDigestSchema>;
+export type ResearchChange = z.infer<typeof ResearchChangeSchema>;
 
 export async function loadResearchDigest(): Promise<ResearchDigest> {
   const response = await fetch(`${import.meta.env.BASE_URL}data/research/digest.json`, { cache: 'no-store' });
