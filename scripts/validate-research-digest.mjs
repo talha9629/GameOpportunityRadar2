@@ -25,6 +25,15 @@ for (const change of digest.changes ?? []) {
   assert(Array.isArray(change.evidence) && change.evidence.length > 0, `change ${change.type} has no evidence`);
   assert(!/success probability|estimated downloads from rank|revenue from rank/i.test(JSON.stringify(change)), `change ${change.type} contains unsafe inference`);
 
+  if (change.iconUrl !== undefined) assert(change.iconUrl == null || typeof change.iconUrl === 'string', `${change.type} iconUrl invalid`);
+  if (change.publisher !== undefined) assert(change.publisher == null || typeof change.publisher === 'string', `${change.type} publisher invalid`);
+  for (const key of ['previousQueueRank', 'currentQueueRank', 'previousBestRank', 'currentBestRank']) {
+    if (change[key] !== undefined && change[key] !== null) assert(Number.isInteger(change[key]) && change[key] > 0, `${change.type} ${key} invalid`);
+  }
+  for (const key of ['previousMarketCount', 'currentMarketCount']) {
+    if (change[key] !== undefined && change[key] !== null) assert(Number.isInteger(change[key]) && change[key] >= 0 && change[key] <= 4, `${change.type} ${key} invalid`);
+  }
+
   if (change.type === 'PRIORITY_INCREASED' || change.type === 'PRIORITY_DECREASED') {
     assert(Number.isInteger(change.previous) && change.previous >= 0 && change.previous <= 100, `${change.type} previous priority invalid`);
     assert(Number.isInteger(change.current) && change.current >= 0 && change.current <= 100, `${change.type} current priority invalid`);
@@ -41,6 +50,8 @@ const allowedStates = new Set(['INSUFFICIENT_HISTORY', 'PERSISTING_3D', 'PERSIST
 for (const state of digest.states ?? []) {
   assert(allowedStates.has(state.state), `invalid lifecycle state ${state.state}`);
   assert(typeof state.evidence === 'string' && state.evidence.length >= 10, `state ${state.appId} missing evidence`);
+  if (state.iconUrl !== undefined) assert(state.iconUrl == null || typeof state.iconUrl === 'string', `state ${state.appId} iconUrl invalid`);
+  if (state.publisher !== undefined) assert(state.publisher == null || typeof state.publisher === 'string', `state ${state.appId} publisher invalid`);
   if (/RISING|FALLING|FLAT/.test(state.state)) assert(/exact 3d/i.test(state.evidence), `directional state ${state.appId} must cite exact 3d evidence`);
   if (/PERSISTING_[37]D/.test(state.state)) assert(/consecutive day/i.test(state.evidence), `persistence state ${state.appId} must cite consecutive-day evidence`);
 }
@@ -53,4 +64,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`[research-digest] validation PASS · ${digest.status} · ${digest.changes.length} changes · ${digest.states.length} states`);
+console.log(`[research-digest] validation PASS · ${digest.status} · ${digest.changes.length} changes · ${digest.states.length} states · presentation context checked`);
