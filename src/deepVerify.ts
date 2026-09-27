@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { CoverageSchema, InterpretationSchema, OriginSchema, ReviewStateSchema } from './domain';
+import { StorefrontSchema } from './storeIdentity';
 
 export const DEEP_VERIFY_MAX_BYTES = 524_288_000;
 export const DEEP_VERIFY_MAX_SECONDS = 1_800;
@@ -51,6 +52,7 @@ export const DeepVerifyVideoSummaryRowSchema = z.object({
   video_id: z.string().uuid(),
   label: z.string().min(1),
   canonical_name: z.string().nullable(),
+  storefront: StorefrontSchema.nullable().optional(),
   store_id: z.string().nullable(),
   source_type: DeepVerifySourceTypeSchema,
   status: DeepVerifyStatusSchema,
@@ -69,6 +71,7 @@ export const DeepVerifyVideoSummarySchema = z.object({
   videoId: z.string().uuid(),
   label: z.string().min(1),
   canonicalName: z.string().nullable(),
+  storefront: StorefrontSchema.nullable().optional(),
   storeId: z.string().nullable(),
   sourceType: DeepVerifySourceTypeSchema,
   status: DeepVerifyStatusSchema,
@@ -121,6 +124,7 @@ export const DeepVerifyVideoPayloadSchema = z.object({
   videoId: z.string().uuid(),
   label: z.string().min(1),
   canonicalName: z.string().nullable(),
+  storefront: StorefrontSchema.nullable().optional(),
   storeId: z.string().nullable(),
   sourceType: DeepVerifySourceTypeSchema,
   storagePath: z.string().nullable(),
