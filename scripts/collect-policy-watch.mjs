@@ -3,11 +3,17 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { normalizePolicySourceHtml, POLICY_NORMALIZATION_VERSION } from './policy-normalization.mjs';
+import {
+  POLICY_CONFIRMATION_MIN_MS,
+  POLICY_CONFIRMATION_OBSERVATIONS_REQUIRED,
+  POLICY_CONFIRMATION_VERSION,
+  advancePolicyConfirmation,
+  interruptPolicyCandidate,
+} from './policy-confirmation.mjs';
 
 const OUTPUT_DIR = path.resolve('public/data/policy');
 const SNAPSHOT_DIR = path.join(OUTPUT_DIR, 'snapshots');
 const INDEX_PATH = path.join(OUTPUT_DIR, 'index.json');
-const CONFIRMATION_MIN_MS = 60 * 60 * 1000;
 
 const SOURCES = [
   { id: 'apple-app-review-guidelines', vendor: 'apple', title: 'Apple App Review Guidelines', category: 'store_review', critical: true, url: 'https://developer.apple.com/app-store/review/guidelines/' },
@@ -39,7 +45,7 @@ async function fetchSource(source) {
   const response = await fetch(source.url, {
     redirect: 'follow',
     headers: {
-      'User-Agent': 'GameOpportunityRadar2-PolicyWatch/1.2 (+https://github.com/talha9629/GameOpportunityRadar2)',
+      'User-Agent': 'GameOpportunityRadar2-PolicyWatch/1.3 (+https://github.com/talha9629/GameOpportunityRadar2)',
       Accept: 'text/html,application/xhtml+xml',
       'Accept-Language': 'en-US,en;q=0.9',
     },
@@ -57,10 +63,11 @@ function migrateChanges(changes) {
   }));
 }
 
-function elapsedMs(firstSeenAt, now) {
-  const first = Date.parse(firstSeenAt ?? '');
-  const current = Date.parse(now);
-  return Number.isFinite(first) && Number.isFinite(current) ? Math.max(0, current - first) : 0;
+function addInterruption(list, interruption) {
+  if (!interruption) return list;
+  const id = sha256(`${interruption.hash}:${interruption.firstSeenAt}:${interruption.interruptedAt}:${interruption.reason}`);
+  if (list.some((entry) => entry.id === id)) return list;
+  return [...list, { id, ...interruption }];
 }
 
 await mkdir(SNAPSHOT_DIR, { recursive: true });
@@ -71,15 +78,20 @@ const nextSources = [];
 let freshCount = 0;
 let failureCount = 0;
 let confirmedChangeCount = 0;
-let pendingCandidateCount = 0;
 let normalizationRebaselineCount = 0;
+let interruptedCandidateCount = 0;
 
 for (const source of SOURCES) {
   const old = oldSources.get(source.id);
+  const changes = migrateChanges(old?.changes);
+  const history = Array.isArray(old?.history) ? [...old.history] : [];
+  const normalizationRebaselines = Array.isArray(old?.normalizationRebaselines) ? [...old.normalizationRebaselines] : [];
+  let candidateInterruptions = Array.isArray(old?.candidateInterruptions) ? [...old.candidateInterruptions] : [];
+
   try {
     const normalizedText = await fetchSource(source);
     const hash = sha256(normalizedText);
-    const snapshotRelativePath = `data/policy/snapshots/${source.id}/${hash}.json`;
+    const snapshotRelativePath = `data/policy/snapshots/${source.id}/v${POLICY_NORMALIZATION_VERSION}/${hash}.json`;
     const snapshotFilePath = path.resolve('public', snapshotRelativePath);
     if (!existsSync(snapshotFilePath)) {
       await writeJson(snapshotFilePath, {
@@ -95,22 +107,17 @@ for (const source of SOURCES) {
     }
 
     const fetchedRef = { hash, path: snapshotRelativePath, fetchedAt: now, normalizationVersion: POLICY_NORMALIZATION_VERSION };
-    const history = Array.isArray(old?.history) ? [...old.history] : [];
-    if (!history.some((entry) => entry.hash === hash)) history.push(fetchedRef);
-    const changes = migrateChanges(old?.changes);
-    const normalizationRebaselines = Array.isArray(old?.normalizationRebaselines) ? [...old.normalizationRebaselines] : [];
+    if (!history.some((entry) => entry.path === snapshotRelativePath)) history.push(fetchedRef);
 
     let current = old?.current ?? fetchedRef;
     let pendingCandidate = old?.pendingCandidate ?? null;
     const oldCurrentNormalizationVersion = old?.current?.normalizationVersion ?? oldIndex?.normalizationVersion ?? 1;
-    const normalizationChangedContent = Boolean(old?.current)
-      && oldCurrentNormalizationVersion !== POLICY_NORMALIZATION_VERSION
-      && hash !== old.current.hash;
+    const normalizationChanged = Boolean(old?.current) && oldCurrentNormalizationVersion !== POLICY_NORMALIZATION_VERSION;
 
     if (!old?.current) {
       current = fetchedRef;
       pendingCandidate = null;
-    } else if (normalizationChangedContent) {
+    } else if (normalizationChanged) {
       const rebaselineId = sha256(`${source.id}:normalization:${old.current.hash}:${hash}:${oldCurrentNormalizationVersion}:${POLICY_NORMALIZATION_VERSION}`);
       if (!normalizationRebaselines.some((entry) => entry.id === rebaselineId)) {
         normalizationRebaselines.push({
@@ -118,60 +125,41 @@ for (const source of SOURCES) {
           at: now,
           fromHash: old.current.hash,
           toHash: hash,
+          fromPath: old.current.path,
+          toPath: snapshotRelativePath,
           fromNormalizationVersion: oldCurrentNormalizationVersion,
           toNormalizationVersion: POLICY_NORMALIZATION_VERSION,
+          contentHashChanged: hash !== old.current.hash,
           reason: 'normalizer_upgrade',
         });
         normalizationRebaselineCount += 1;
       }
-      current = fetchedRef;
-      pendingCandidate = null;
-    } else if (hash === old.current.hash) {
-      current = fetchedRef;
-      pendingCandidate = null;
-    } else if (old.pendingCandidate?.hash === hash && (old.pendingCandidate.normalizationVersion ?? oldCurrentNormalizationVersion) === POLICY_NORMALIZATION_VERSION) {
-      const observations = (old.pendingCandidate.observations ?? 1) + 1;
-      const ageMs = elapsedMs(old.pendingCandidate.firstSeenAt, now);
-      if (ageMs >= CONFIRMATION_MIN_MS) {
-        const changeId = sha256(`${source.id}:${old.current.hash}:${hash}`);
-        if (!changes.some((change) => change.id === changeId && change.confirmationStatus === 'confirmed_repeat')) {
-          changes.push({
-            id: changeId,
-            fromHash: old.current.hash,
-            toHash: hash,
-            detectedAt: old.pendingCandidate.firstSeenAt,
-            confirmedAt: now,
-            observations,
-            confirmationStatus: 'confirmed_repeat',
-            normalizationVersion: POLICY_NORMALIZATION_VERSION,
-            fromPath: old.current.path,
-            toPath: snapshotRelativePath,
-          });
-          confirmedChangeCount += 1;
-        }
-        current = fetchedRef;
-        pendingCandidate = null;
-      } else {
-        pendingCandidate = {
-          ...old.pendingCandidate,
-          lastSeenAt: now,
-          observations,
-          normalizationVersion: POLICY_NORMALIZATION_VERSION,
-          minimumConfirmationAt: new Date(Date.parse(old.pendingCandidate.firstSeenAt) + CONFIRMATION_MIN_MS).toISOString(),
-        };
-        pendingCandidateCount += 1;
+      if (pendingCandidate) {
+        const interrupted = interruptPolicyCandidate(pendingCandidate, now, 'normalizer_upgrade').interruption;
+        candidateInterruptions = addInterruption(candidateInterruptions, interrupted);
+        interruptedCandidateCount += interrupted ? 1 : 0;
       }
+      current = fetchedRef;
+      pendingCandidate = null;
     } else {
-      pendingCandidate = {
-        hash,
-        path: snapshotRelativePath,
-        firstSeenAt: now,
-        lastSeenAt: now,
-        observations: 1,
+      const result = advancePolicyConfirmation({
+        sourceId: source.id,
+        current: old.current,
+        pendingCandidate,
+        fetchedRef,
+        now,
         normalizationVersion: POLICY_NORMALIZATION_VERSION,
-        minimumConfirmationAt: new Date(Date.parse(now) + CONFIRMATION_MIN_MS).toISOString(),
-      };
-      pendingCandidateCount += 1;
+      });
+      current = result.current;
+      pendingCandidate = result.pendingCandidate;
+      if (result.interruption) {
+        candidateInterruptions = addInterruption(candidateInterruptions, result.interruption);
+        interruptedCandidateCount += 1;
+      }
+      if (result.confirmedChange && !changes.some((change) => change.id === result.confirmedChange.id && change.confirmationStatus === 'confirmed_repeat')) {
+        changes.push(result.confirmedChange);
+        confirmedChangeCount += 1;
+      }
     }
 
     nextSources.push({
@@ -185,12 +173,20 @@ for (const source of SOURCES) {
       history,
       changes,
       normalizationRebaselines,
+      candidateInterruptions,
     });
     freshCount += 1;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error(`[policy-watch] ${source.id}: ${message}`);
     failureCount += 1;
+    let pendingCandidate = old?.pendingCandidate ?? null;
+    if (pendingCandidate) {
+      const interrupted = interruptPolicyCandidate(pendingCandidate, now, 'fetch_failure').interruption;
+      candidateInterruptions = addInterruption(candidateInterruptions, interrupted);
+      interruptedCandidateCount += interrupted ? 1 : 0;
+      pendingCandidate = null;
+    }
     nextSources.push({
       ...source,
       fetchStatus: old?.current ? 'stale' : 'unavailable',
@@ -198,10 +194,11 @@ for (const source of SOURCES) {
       error: message.slice(0, 500),
       normalizationVersion: old?.normalizationVersion ?? oldIndex?.normalizationVersion ?? 1,
       current: old?.current ?? null,
-      pendingCandidate: old?.pendingCandidate ?? null,
-      history: Array.isArray(old?.history) ? old.history : [],
-      changes: migrateChanges(old?.changes),
-      normalizationRebaselines: Array.isArray(old?.normalizationRebaselines) ? old.normalizationRebaselines : [],
+      pendingCandidate,
+      history,
+      changes,
+      normalizationRebaselines,
+      candidateInterruptions,
     });
   }
 }
@@ -210,15 +207,18 @@ const runStatus = failureCount === 0 ? 'complete' : freshCount > 0 ? 'partial' :
 const index = {
   schemaVersion: 1,
   normalizationVersion: POLICY_NORMALIZATION_VERSION,
+  confirmationVersion: POLICY_CONFIRMATION_VERSION,
   generatedAt: now,
   runStatus,
   sourceCount: SOURCES.length,
   freshCount,
   failureCount,
   confirmationPolicy: {
-    observationsRequired: 2,
-    minimumElapsedMinutes: CONFIRMATION_MIN_MS / 60_000,
-    statement: 'A changed hash is reviewable only after the same normalized policy content is observed again at least 60 minutes later. One-off hashes remain pending candidates; normalizer upgrades are rebaselined and never counted as policy changes.',
+    observationsRequired: POLICY_CONFIRMATION_OBSERVATIONS_REQUIRED,
+    consecutiveSuccessfulObservationsRequired: true,
+    fetchFailureBreaksContinuity: true,
+    minimumElapsedMinutes: POLICY_CONFIRMATION_MIN_MS / 60_000,
+    statement: 'A changed hash becomes reviewable only after three consecutive successful observations of the same normalized content spanning at least 60 minutes. A fetch failure, a different successful hash, baseline reappearance, or a normalizer upgrade breaks candidate continuity. Normalizer upgrades are rebaselined and never counted as policy changes.',
   },
   sources: nextSources,
 };
@@ -226,5 +226,5 @@ await writeJson(INDEX_PATH, index);
 
 const confirmedTotal = nextSources.reduce((sum, source) => sum + source.changes.filter((change) => change.confirmationStatus === 'confirmed_repeat').length, 0);
 const pendingTotal = nextSources.filter((source) => source.pendingCandidate).length;
-console.log(`[policy-watch] ${runStatus.toUpperCase()} · fresh ${freshCount}/${SOURCES.length} · failures ${failureCount} · confirmed ${confirmedTotal} · pending ${pendingTotal} · newly confirmed ${confirmedChangeCount} · normalization rebaselines ${normalizationRebaselineCount}`);
+console.log(`[policy-watch] ${runStatus.toUpperCase()} · fresh ${freshCount}/${SOURCES.length} · failures ${failureCount} · confirmed ${confirmedTotal} · pending ${pendingTotal} · newly confirmed ${confirmedChangeCount} · normalization rebaselines ${normalizationRebaselineCount} · interrupted candidates ${interruptedCandidateCount}`);
 if (runStatus === 'failed') process.exitCode = 1;
