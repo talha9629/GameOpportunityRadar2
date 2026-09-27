@@ -8,6 +8,7 @@ import {
   type AppView,
 } from './appRouter';
 import { DeepVerifyWorkspace } from './DeepVerifyWorkspace';
+import { StorefrontDeepVerifyWorkspace } from './StorefrontDeepVerifyWorkspace';
 import { PlatformAnalyzePage } from './PlatformAnalyzePage';
 import { PlatformCompetitorsPage } from './PlatformCompetitorsPage';
 import { PlatformContextPanel } from './PlatformContextPanel';
@@ -55,7 +56,9 @@ function PlatformPipelineBoundary({ scope, feature, persistence = false }: { sco
       <div className="eyebrow">PLATFORM BOUNDARY</div>
       <h1>{feature} is not available as blended {PLATFORM_META[scope].label} evidence.</h1>
       <p>{persistence
-        ? `Radar now has a storefront-qualified database identity, but the current ${feature} client workflow is still Apple-specific. It remains gated until its upload/register/load path is switched to the storefront-qualified v2 contract; Radar will not relabel an Apple workflow as Google or Amazon in the meantime.`
+        ? cross
+          ? 'This workflow persists store-qualified evidence. Cross-platform mode has no single storefront identity, so Radar requires you to select Apple App Store, Google Play, or Amazon Appstore before saving or opening evidence.'
+          : `Radar will not relabel evidence from another storefront as ${PLATFORM_META[scope].label}. Select the matching storefront explicitly before using this persisted workflow.`
         : cross
           ? 'This pipeline currently contains store-specific evidence. Cross-platform mode is a coverage overview only, so Radar will not display one store pipeline under an All-platform label. Select a storefront explicitly to inspect it.'
           : `Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to ${PLATFORM_META[scope].label}. Select Apple to inspect the existing Apple pipeline, or use Today/Analyze/Competitors/Reviews for evidence currently available to this platform.`}</p>
@@ -178,6 +181,7 @@ export function App() {
   const deepVerifySession = deepVerifySeed?.session ?? null;
   const applePipelineVisible = canUseAppleOnlyEvidencePipeline(platformScope);
   const activeStorefront = storefrontForScope(platformScope);
+  const generatedDeepVerifyRoute = route.view === 'deep-verify' && Boolean(route.sessionId);
 
   return <AppShell
     route={route}
@@ -204,31 +208,36 @@ export function App() {
     {route.view === 'reviews' && (activeStorefront
       ? <><PlatformContextPanel scope={platformScope} /><ReviewSamples storefront={activeStorefront} ownerEmail={owner?.email ?? null} /></>
       : <PlatformPipelineBoundary scope={platformScope} feature="Review Samples" />)}
-    {route.view === 'deep-verify' && (applePipelineVisible ? <>
-      <PlatformContextPanel scope="apple" />
-      {route.sessionId && deepVerifyHydrating && <div className="history-banner"><strong>Loading verification session…</strong><span>Restoring the exact queue/evidence context from this page URL.</span></div>}
-      {route.sessionId && !deepVerifyHydrating && !deepVerifySession && <div className="warning-banner"><span>This verification session is no longer present in the current generated queue. Open Verify Queue to choose a current evidence session.</span></div>}
-      {deepVerifySession && <div className="history-banner">
-        <strong>Verification session S{deepVerifySession.sessionOrder}: {deepVerifySession.name}</strong>
-        <span>{deepVerifySeed?.initialVideoId
-          ? `Opening the latest saved source linked to ${deepVerifySession.taskCount} atomic evidence gap${deepVerifySession.taskCount === 1 ? '' : 's'}.`
-          : `Apple ID ${deepVerifySession.appId} · ${deepVerifySession.taskCount} atomic evidence gap${deepVerifySession.taskCount === 1 ? '' : 's'} will be linked to this capture when it is saved.`}</span>
-      </div>}
-      {(!route.sessionId || deepVerifySession) && <DeepVerifyWorkspace
-        key={deepVerifySession ? `${deepVerifySession.sessionId}:${deepVerifySession.source.researchGeneratedAt}:${deepVerifySeed?.initialVideoId ?? 'collect'}` : 'manual'}
-        ownerEmail={owner?.email ?? null}
-        initialStoreId={deepVerifySession?.appId ?? ''}
-        initialLabel={deepVerifySession ? `${deepVerifySession.name} gameplay verification` : ''}
-        initialVideoId={deepVerifySeed?.initialVideoId ?? null}
-        verificationSession={deepVerifySession ? {
-          sessionId: deepVerifySession.sessionId,
-          taskIds: deepVerifySession.taskIds,
-          unknowns: deepVerifySession.unknowns,
-          categories: deepVerifySession.categories,
-          researchGeneratedAt: deepVerifySession.source.researchGeneratedAt,
-        } : null}
-      />}
-    </> : <PlatformPipelineBoundary scope={platformScope} feature="Deep Verify" persistence />)}
+    {route.view === 'deep-verify' && (generatedDeepVerifyRoute
+      ? applePipelineVisible ? <>
+          <PlatformContextPanel scope="apple" />
+          {deepVerifyHydrating && <div className="history-banner"><strong>Loading verification session…</strong><span>Restoring the exact queue/evidence context from this page URL.</span></div>}
+          {!deepVerifyHydrating && !deepVerifySession && <div className="warning-banner"><span>This verification session is no longer present in the current generated queue. Open Verify Queue to choose a current evidence session.</span></div>}
+          {deepVerifySession && <div className="history-banner">
+            <strong>Verification session S{deepVerifySession.sessionOrder}: {deepVerifySession.name}</strong>
+            <span>{deepVerifySeed?.initialVideoId
+              ? `Opening the latest saved source linked to ${deepVerifySession.taskCount} atomic evidence gap${deepVerifySession.taskCount === 1 ? '' : 's'}.`
+              : `Apple ID ${deepVerifySession.appId} · ${deepVerifySession.taskCount} atomic evidence gap${deepVerifySession.taskCount === 1 ? '' : 's'} will be linked to this capture when it is saved.`}</span>
+          </div>}
+          {deepVerifySession && <DeepVerifyWorkspace
+            key={`${deepVerifySession.sessionId}:${deepVerifySession.source.researchGeneratedAt}:${deepVerifySeed?.initialVideoId ?? 'collect'}`}
+            ownerEmail={owner?.email ?? null}
+            initialStoreId={deepVerifySession.appId}
+            initialLabel={`${deepVerifySession.name} gameplay verification`}
+            initialVideoId={deepVerifySeed?.initialVideoId ?? null}
+            verificationSession={{
+              sessionId: deepVerifySession.sessionId,
+              taskIds: deepVerifySession.taskIds,
+              unknowns: deepVerifySession.unknowns,
+              categories: deepVerifySession.categories,
+              researchGeneratedAt: deepVerifySession.source.researchGeneratedAt,
+            }}
+          />}
+        </> : <PlatformPipelineBoundary scope={platformScope} feature="Generated Deep Verify session" persistence />
+      : activeStorefront ? <>
+          <PlatformContextPanel scope={platformScope} />
+          <StorefrontDeepVerifyWorkspace key={activeStorefront} storefront={activeStorefront} ownerEmail={owner?.email ?? null} />
+        </> : <PlatformPipelineBoundary scope={platformScope} feature="Manual Deep Verify" persistence />)}
     {route.view === 'policy' && <PolicyWatch ownerEmail={owner?.email ?? null} />}
   </AppShell>;
 }
