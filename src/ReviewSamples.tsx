@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { AlertTriangle, CheckCircle2, CloudUpload, RotateCcw, Search } from 'lucide-react';
-import { listReviewSamples, loadReviewSample, saveReviewSample } from './api';
+import {
+  listStorefrontReviewSamples,
+  loadStorefrontReviewSample,
+  saveStorefrontReviewSample,
+} from './storefrontReviewApi';
 import {
   analyzeReviewSample,
   type ReviewCluster,
@@ -8,6 +12,7 @@ import {
   type ReviewSampleAnalysis,
   type SavedReviewSummary,
 } from './reviews';
+import { STOREFRONT_META, type Storefront } from './storeIdentity';
 import './reviews.css';
 
 function percent(value: number) {
@@ -34,7 +39,14 @@ function ReviewEntryCard({ entry }: { entry: ReviewEntry }) {
   </div>;
 }
 
-export function ReviewSamples({ ownerEmail = null }: { ownerEmail?: string | null }) {
+export function ReviewSamples({
+  storefront,
+  ownerEmail = null,
+}: {
+  storefront: Storefront;
+  ownerEmail?: string | null;
+}) {
+  const storefrontMeta = STOREFRONT_META[storefront];
   const [label, setLabel] = useState('');
   const [storeId, setStoreId] = useState('');
   const [rawText, setRawText] = useState('');
@@ -53,18 +65,24 @@ export function ReviewSamples({ ownerEmail = null }: { ownerEmail?: string | nul
 
   async function refreshSaved() {
     if (!ownerEmail) { setSaved([]); return; }
-    try { setSaved(await listReviewSamples()); }
+    try { setSaved(await listStorefrontReviewSamples(storefront)); }
     catch (err) { setError(err instanceof Error ? err.message : 'Could not load saved review samples.'); }
   }
 
-  useEffect(() => { void refreshSaved(); }, [ownerEmail]);
+  useEffect(() => {
+    setSelectedSampleId(null);
+    setStoreId('');
+    setMessage(null);
+    setError(null);
+    void refreshSaved();
+  }, [ownerEmail, storefront]);
 
   function runAnalysis() {
     setError(null); setMessage(null); setSelectedSampleId(null);
     try {
       const next = analyzeReviewSample(rawText);
       setAnalysis(next);
-      if (!label.trim()) setLabel(`Review sample · ${new Date().toLocaleDateString()}`);
+      if (!label.trim()) setLabel(`${storefrontMeta.shortLabel} review sample · ${new Date().toLocaleDateString()}`);
     } catch (err) {
       setAnalysis(null);
       setError(err instanceof Error ? err.message : 'Could not analyze this review sample.');
@@ -75,9 +93,9 @@ export function ReviewSamples({ ownerEmail = null }: { ownerEmail?: string | nul
     if (!analysis) return;
     setSaving(true); setError(null); setMessage(null);
     try {
-      const sampleId = await saveReviewSample(label, storeId, analysis);
+      const sampleId = await saveStorefrontReviewSample(storefront, label, storeId, analysis);
       setSelectedSampleId(sampleId);
-      setMessage(`Saved review sample · ${sampleId.slice(0, 8)}`);
+      setMessage(`Saved ${storefrontMeta.shortLabel} review sample · ${sampleId.slice(0, 8)}`);
       await refreshSaved();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not save this review sample.');
@@ -87,13 +105,13 @@ export function ReviewSamples({ ownerEmail = null }: { ownerEmail?: string | nul
   async function restoreSample(sampleId: string) {
     setBusy(true); setError(null); setMessage(null);
     try {
-      const payload = await loadReviewSample(sampleId);
+      const payload = await loadStorefrontReviewSample(storefront, sampleId);
       setSelectedSampleId(payload.sampleId);
       setLabel(payload.label);
       setStoreId(payload.storeId ?? '');
       setRawText(payload.entries.map((entry) => `${entry.rating ? `${entry.rating} | ` : ''}${entry.text}`).join('\n'));
       setAnalysis({ analysisMethod: 'keyword_rules_v1', entries: payload.entries, clusters: payload.clusters });
-      setMessage(`Restored exact cloud sample · ${payload.sampleId.slice(0, 8)}`);
+      setMessage(`Restored exact ${storefrontMeta.shortLabel} cloud sample · ${payload.sampleId.slice(0, 8)}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not restore the saved review sample.');
     } finally { setBusy(false); }
@@ -103,9 +121,15 @@ export function ReviewSamples({ ownerEmail = null }: { ownerEmail?: string | nul
     setLabel(''); setStoreId(''); setRawText(''); setAnalysis(null); setSelectedSampleId(null); setError(null); setMessage(null);
   }
 
+  const storePlaceholder = storefront === 'apple_app_store'
+    ? '6761760135'
+    : storefront === 'google_play'
+      ? 'com.example.game'
+      : 'Amazon app ID or Android package';
+
   return <section className="reviews-shell">
     <header className="reviews-heading">
-      <div><div className="eyebrow">REVIEW SAMPLE ANALYZER</div><h1>Find pain points without pretending the sample is the market.</h1><p>Paste deliberately selected competitor reviews. Radar clusters only what you supplied and keeps the denominator visible.</p></div>
+      <div><div className="eyebrow">REVIEW SAMPLE ANALYZER · {storefrontMeta.label.toUpperCase()}</div><h1>Find pain points without pretending the sample is the market.</h1><p>Paste deliberately selected competitor reviews from {storefrontMeta.label}. Radar clusters only what you supplied and keeps the denominator and storefront provenance visible.</p></div>
       <button onClick={clearWorkspace}><RotateCcw size={16} /> New sample</button>
     </header>
 
@@ -113,9 +137,10 @@ export function ReviewSamples({ ownerEmail = null }: { ownerEmail?: string | nul
 
     <section className="panel review-input-panel">
       <div className="review-meta-fields">
-        <label><span>Sample label</span><input value={label} maxLength={160} onChange={(event) => setLabel(event.target.value)} placeholder="e.g. Meowdoku negative reviews · Sep 26" /></label>
-        <label><span>Apple ID / saved game link (optional)</span><input value={storeId} onChange={(event) => setStoreId(event.target.value)} placeholder="6761760135" /></label>
+        <label><span>Sample label</span><input value={label} maxLength={160} onChange={(event) => setLabel(event.target.value)} placeholder={`e.g. ${storefrontMeta.shortLabel} competitor negative reviews · Sep 27`} /></label>
+        <label><span>{storefrontMeta.idLabel} / saved game link (optional)</span><input value={storeId} onChange={(event) => setStoreId(event.target.value)} placeholder={storePlaceholder} /></label>
       </div>
+      <div className="platform-source-note"><strong>Storefront provenance:</strong> this sample will be saved as {storefrontMeta.label}. A saved sample is only shown and restorable inside the same storefront workspace.</div>
       <label className="review-text-field"><span>Reviews · one review per line</span><textarea value={rawText} onChange={(event) => setRawText(event.target.value)} placeholder={'5 | Love the core puzzle, very relaxing\n1 | Too many ads after every level\n2 | Keeps crashing and I uninstalled it'} /></label>
       <div className="review-input-footer"><div><strong>Optional rating prefix:</strong> <code>5 | review text</code>. Maximum 500 reviews; each review is stored as supplied.</div><button className="primary" disabled={!rawText.trim() || busy} onClick={runAnalysis}><Search size={17} /> Analyze sample</button></div>
       {error && <div className="error-box">{error}</div>}
@@ -136,9 +161,9 @@ export function ReviewSamples({ ownerEmail = null }: { ownerEmail?: string | nul
 
       <section className="panel review-entries-panel"><div className="section-heading"><div><h2>Sample evidence</h2><p>Original supplied text with rule labels. No review text is rewritten.</p></div><span>{analysis.entries.length} rows</span></div><div className="review-entry-list">{analysis.entries.map((entry) => <ReviewEntryCard key={entry.sequence} entry={entry} />)}</div></section>
 
-      <section className="panel review-save-panel"><div><div className="eyebrow">CROSS-DEVICE STATE</div><h3>{ownerEmail ? 'Save this exact sample analysis' : 'Sign in as owner to save'}</h3><p>{ownerEmail ? `Saving is available for ${ownerEmail}. Entries, labels, cluster counts and evidence indexes are persisted atomically.` : 'Local analysis works without sign-in. Cloud persistence remains owner-only.'}</p></div><button className="primary" disabled={!ownerEmail || saving || !label.trim()} onClick={() => void saveCurrent()}><CloudUpload size={17} /> {saving ? 'Saving…' : 'Save sample'}</button></section>
+      <section className="panel review-save-panel"><div><div className="eyebrow">CROSS-DEVICE STATE · {storefrontMeta.shortLabel.toUpperCase()}</div><h3>{ownerEmail ? 'Save this exact sample analysis' : 'Sign in as owner to save'}</h3><p>{ownerEmail ? `Saving is available for ${ownerEmail}. Entries, labels, cluster counts, evidence indexes and ${storefrontMeta.label} provenance are persisted atomically.` : 'Local analysis works without sign-in. Cloud persistence remains owner-only.'}</p></div><button className="primary" disabled={!ownerEmail || saving || !label.trim()} onClick={() => void saveCurrent()}><CloudUpload size={17} /> {saving ? 'Saving…' : 'Save sample'}</button></section>
     </>}
 
-    {ownerEmail && <section className="panel saved-review-panel"><div className="section-heading"><div><h2>Saved review samples</h2><p>Open an exact cloud snapshot to audit or continue from another device.</p></div><span>{saved.length} saved</span></div>{saved.length === 0 ? <p>No saved review samples yet.</p> : <div className="saved-review-list">{saved.map((item) => <button key={item.sampleId} className={selectedSampleId === item.sampleId ? 'selected' : ''} disabled={busy} onClick={() => void restoreSample(item.sampleId)}><span><strong>{item.label}</strong><small>{item.canonicalName ?? (item.storeId ? `Apple ID ${item.storeId}` : 'Unlinked sample')}</small></span><span><b>{item.entryCount}</b><small>reviews</small></span><span><small>{new Date(item.createdAt).toLocaleString()}</small></span></button>)}</div>}</section>}
+    {ownerEmail && <section className="panel saved-review-panel"><div className="section-heading"><div><h2>Saved {storefrontMeta.shortLabel} review samples</h2><p>Only {storefrontMeta.label} samples are listed here. Open an exact cloud snapshot to audit or continue from another device.</p></div><span>{saved.length} saved</span></div>{saved.length === 0 ? <p>No saved {storefrontMeta.shortLabel} review samples yet.</p> : <div className="saved-review-list">{saved.map((item) => <button key={item.sampleId} className={selectedSampleId === item.sampleId ? 'selected' : ''} disabled={busy} onClick={() => void restoreSample(item.sampleId)}><span><strong>{item.label}</strong><small>{item.canonicalName ?? (item.storeId ? `${storefrontMeta.idLabel} ${item.storeId}` : `Unlinked ${storefrontMeta.shortLabel} sample`)}</small></span><span><b>{item.entryCount}</b><small>reviews</small></span><span><small>{new Date(item.createdAt).toLocaleString()}</small></span></button>)}</div>}</section>}
   </section>;
 }
