@@ -98,6 +98,13 @@ const verificationState = verification.__readError
       : 'healthy';
 
 const discoveryStatus = discovery.provider?.status ?? 'unconfigured';
+const discoveryProviderKey = discovery.provider?.key
+  ?? (discoveryStatus !== 'unconfigured' && discovery.provider?.name === 'Tavily' ? 'tavily' : 'none');
+const discoveryProviderName = discovery.provider?.name ?? (discoveryProviderKey === 'none' ? 'None' : discoveryProviderKey);
+const discoveryRequestsUsed = discovery.provider?.requestsUsedThisRun ?? discovery.provider?.creditsUsedThisRun ?? 0;
+const discoveryRequestCap = discovery.provider?.dailyRequestCap ?? discovery.provider?.dailyCreditCap ?? 8;
+const discoverySearchQueriesUsed = discovery.provider?.searchQueriesUsedThisRun
+  ?? (discoveryProviderKey === 'tavily' ? discoveryRequestsUsed : 0);
 const discoveryAgeHours = hoursSince(discovery.generatedAt, now);
 const discoveryDerivedFromCurrentVerification = !discovery.__readError
   && discovery.verificationGeneratedAt === verification.generatedAt;
@@ -153,16 +160,17 @@ const components = [
     verificationAgeHours == null ? 'verification age unknown' : `${verificationAgeHours.toFixed(1)}h verification age`,
   ], verificationState === 'healthy' ? null : 'Rebuild Verification Queue before using its evidence-routing actions; stale, incomplete, or incorrectly grouped routing is a hard evidence-coverage failure.'),
   component('gameplay_discovery', 'Public Gameplay Source Discovery', discoveryState, [
-    `Tavily status ${discoveryStatus}`,
+    `${discoveryProviderName} status ${discoveryStatus}`,
     `${discoveryFoundSessions}/${verificationCaptureSessions ?? 0} capture session(s) have public source suggestion(s)`,
     `${discoveryCandidateCount} suggested YouTube source(s)`,
-    `${discovery.provider?.creditsUsedThisRun ?? 0}/${discovery.provider?.dailyCreditCap ?? 8} Basic-search credit budget used`,
+    `${discoveryRequestsUsed}/${discoveryRequestCap} provider request cap used`,
+    `${discoverySearchQueriesUsed} search quer${discoverySearchQueriesUsed === 1 ? 'y' : 'ies'} reported by provider`,
     discoveryDerivedFromCurrentVerification ? 'derived from current verification queue' : 'verification provenance unavailable or stale',
-    'Search candidates are not verified gameplay evidence.',
+    'Search candidates are not verified gameplay evidence; new v2 candidates are independently checked for public YouTube availability.',
   ], discoveryState === 'healthy'
     ? null
     : discoveryState === 'optional'
-      ? 'Optional only: configure TAVILY_API_KEY for bounded public gameplay source suggestions.'
+      ? 'Optional only: configure TAVILY_API_KEY or GEMINI_API_KEY in GitHub Actions for bounded public gameplay source suggestions.'
       : 'Use the Verification Queue without search suggestions until the next healthy discovery run.'),
   component('history_maturity', 'Exact Rank History', historyState, [
     `${maturityDays}/7 consecutive exact dated snapshot(s)`,
@@ -213,7 +221,7 @@ if (topCandidate?.analysisEvidence?.unknowns?.some((value) => /core mechanic has
 }
 if (maturityDays < 3) recommendedActions.push({ priority: 4, action: 'KEEP_COLLECTING_EXACT_HISTORY', why: `Only ${maturityDays} exact daily snapshot(s) exist; no 3-day direction should be claimed yet.` });
 if (confirmedPolicyChanges > 0) recommendedActions.push({ priority: 5, action: 'CHECK_CONFIRMED_POLICY_REVIEW_STATE', why: `${confirmedPolicyChanges} stability-confirmed official-source transition(s) exist; the public health report cannot infer whether the owner already reviewed them.` });
-if (discoveryState === 'optional') recommendedActions.push({ priority: 8, action: 'OPTIONAL_CONFIGURE_GAMEPLAY_DISCOVERY', why: 'Tavily can propose bounded public gameplay sources for Deep Verify without changing first-party research priority or resolving evidence automatically.' });
+if (discoveryState === 'optional') recommendedActions.push({ priority: 8, action: 'OPTIONAL_CONFIGURE_GAMEPLAY_DISCOVERY', why: 'Tavily or Gemini Search can propose bounded public gameplay sources for Deep Verify without changing first-party research priority or resolving evidence automatically.' });
 if (appBrainStatus === 'unconfigured') recommendedActions.push({ priority: 9, action: 'OPTIONAL_CONFIGURE_APPBRAIN', why: 'Adds capped third-party estimate context but is not required for first-party triage.' });
 recommendedActions.sort((a, b) => a.priority - b.priority);
 
@@ -237,7 +245,10 @@ const output = {
     verificationGroupedEvidenceTaskCount: verificationGroupedEvidenceTasks ?? 0,
     verificationDerivedFromCurrentQueue,
     gameplayDiscoveryConfigured: discoveryStatus !== 'unconfigured' && !discovery.__readError,
+    gameplayDiscoveryProvider: discoveryProviderKey,
     gameplayDiscoveryCandidateCount: discoveryCandidateCount,
+    gameplayDiscoveryRequestsUsed: discoveryRequestsUsed,
+    gameplayDiscoverySearchQueriesUsed: discoverySearchQueriesUsed,
     gameplayDiscoveryDerivedFromCurrentVerification: discoveryDerivedFromCurrentVerification,
     policyDetectedChangeCount: confirmedPolicyChanges,
     confirmedPolicyChanges,
@@ -249,4 +260,4 @@ const output = {
 
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(latestPath, `${JSON.stringify(output, null, 2)}\n`);
-console.log(`[data-health] ${overall} · essential ${output.essentialHealthy}/${output.essentialCount} healthy · verification ${verificationTasks ?? 0}/${verificationRawTasks ?? 0} routed, omitted ${verificationOmitted ?? 'unknown'} · discovery ${discoveryStatus} ${discoveryCandidateCount} suggestion(s) · sessions ${verificationCaptureSessions ?? 0}/${verificationGroupedEvidenceTasks ?? 0} video tasks · history ${maturityDays}/7 · confirmed-policy ${confirmedPolicyChanges} · pending-policy ${pendingPolicyCandidates} · actions ${recommendedActions.length}`);
+console.log(`[data-health] ${overall} · essential ${output.essentialHealthy}/${output.essentialCount} healthy · verification ${verificationTasks ?? 0}/${verificationRawTasks ?? 0} routed, omitted ${verificationOmitted ?? 'unknown'} · discovery ${discoveryProviderName} ${discoveryStatus} ${discoveryCandidateCount} suggestion(s), ${discoveryRequestsUsed}/${discoveryRequestCap} request(s), ${discoverySearchQueriesUsed} search query/queries · sessions ${verificationCaptureSessions ?? 0}/${verificationGroupedEvidenceTasks ?? 0} video tasks · history ${maturityDays}/7 · confirmed-policy ${confirmedPolicyChanges} · pending-policy ${pendingPolicyCandidates} · actions ${recommendedActions.length}`);
