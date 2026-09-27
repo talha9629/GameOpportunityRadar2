@@ -18,6 +18,8 @@ jobs:
       - run: npm run validate:radar
       - name: Test policy normalization against dynamic provider chrome
         run: node --test scripts/policy-normalization.node-test.mjs
+      - name: Test policy confirmation continuity
+        run: node --test scripts/policy-confirmation.node-test.mjs
       - name: Validate committed policy evidence
         run: node scripts/validate-policy-watch.mjs
       - name: Build exact-date trend signals from committed Radar evidence
