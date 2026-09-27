@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isPlatformScope, PLATFORM_META, TRACKED_APPLE_MARKETS } from './platformScope';
+import { canUseAppleOnlyEvidencePipeline, isPlatformScope, PLATFORM_META, TRACKED_APPLE_MARKETS } from './platformScope';
 import { GooglePlayRadarSchema } from './googlePlayRadar';
 
 const googleSource = {
@@ -37,6 +37,13 @@ describe('platform scope', () => {
     expect(isPlatformScope('google_play')).toBe(true);
     expect(isPlatformScope('amazon')).toBe(false);
     expect(isPlatformScope('android')).toBe(false);
+  });
+
+  it('allows Apple-only evidence pipelines only under explicit Apple scope', () => {
+    expect(canUseAppleOnlyEvidencePipeline('apple')).toBe(true);
+    expect(canUseAppleOnlyEvidencePipeline('cross')).toBe(false);
+    expect(canUseAppleOnlyEvidencePipeline('google_play')).toBe(false);
+    expect(canUseAppleOnlyEvidencePipeline('amazon_fire')).toBe(false);
   });
 });
 
