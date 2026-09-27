@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T01:59:42.628Z",
+  "generatedAt": "2026-09-27T02:21:44.539Z",
   "radarDate": "2026-09-27",
-  "radarGeneratedAt": "2026-09-27T01:59:37.390Z",
+  "radarGeneratedAt": "2026-09-27T02:21:36.904Z",
   "method": {
     "name": "deterministic_research_priority_v1",
     "inputs": [
@@ -20,13 +20,13 @@
       "AI opinion",
       "incompatible chart-source comparisons"
     ],
-    "statement": "Priority orders what to investigate first. It is not an opportunity score, prediction, recommendation or causal claim."
+    "statement": "Priority orders what to investigate first. Rank visibility and trend state are descriptive chart transforms, not opportunity scores, predictions, download estimates or causal claims."
   },
   "sources": {
     "appleCharts": {
       "status": "complete",
       "origin": "official_public",
-      "observedAt": "2026-09-27T01:59:37.390Z",
+      "observedAt": "2026-09-27T02:21:36.904Z",
       "healthyGameMarkets": 4
     },
     "appleLookup": {
@@ -56,7 +56,9 @@
     }
   },
   "limitations": [
-    "App Store chart rank is an observed ordinal position; it is not a download count, download share, revenue figure or causal measure of demand.",
+    "App Store chart rank and the bounded visibility transform are ordinal chart evidence; neither is a download count, download share, revenue figure or causal measure of demand.",
+    "Trend state uses exact dated rank observations only. CROWDED and WINDOW_CLOSING are intentionally not assigned from rank history alone because they require saturation evidence.",
+    "A shallower historical chart can create a coverage gap for current ranks below the old cutoff; Radar labels that UNKNOWN instead of treating the title as a new entrant.",
     "The queue currently covers Apple Games charts in US, UK, Canada and Australia; Android is not inferred from iOS.",
     "A missing exact historical date remains UNKNOWN. The queue never interpolates missing rank history.",
     "Games-category and overall Top Free fallback ranks are incompatible chart universes and are never compared for movement.",
@@ -81,11 +83,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 5,
         "averageRank": 40.5,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.6513,
+          "average": 0.3004
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "gb",
@@ -97,7 +119,8 @@
             "bestObservedRank": 5,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.6513
           },
           {
             "country": "us",
@@ -109,7 +132,8 @@
             "bestObservedRank": 17,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.3861
           },
           {
             "country": "ca",
@@ -121,7 +145,8 @@
             "bestObservedRank": 59,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.1165
           },
           {
             "country": "au",
@@ -133,7 +158,8 @@
             "bestObservedRank": 81,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.0478
           }
         ],
         "exactWindows": {
@@ -143,7 +169,6 @@
             "bestUpwardDelta": 18,
             "perMarket": [
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -152,7 +177,6 @@
                 "delta": 0
               },
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -161,7 +185,6 @@
                 "delta": 10
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -170,7 +193,6 @@
                 "delta": 18
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -186,7 +208,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -195,7 +216,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -204,7 +224,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -213,7 +232,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -229,7 +247,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -238,7 +255,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -247,7 +263,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -256,7 +271,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -271,7 +285,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1546690510,1623318294,1602508478&country=gb&entity=software",
         "canonicalName": "NoomiClone",
@@ -294,6 +308,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -303,7 +318,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:59:41.120Z",
+        "observedAt": "2026-09-27T02:21:42.926Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "NoomiClone",
         "publisher": "Matthew Jones",
@@ -400,11 +415,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 1,
         "averageRank": 1.25,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 1,
+          "average": 0.9625
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "us",
@@ -416,7 +451,8 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 1
           },
           {
             "country": "ca",
@@ -428,7 +464,8 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 1
           },
           {
             "country": "au",
@@ -440,7 +477,8 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 1
           },
           {
             "country": "gb",
@@ -452,7 +490,8 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.8498
           }
         ],
         "exactWindows": {
@@ -462,7 +501,6 @@
             "bestUpwardDelta": 0,
             "perMarket": [
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -471,7 +509,6 @@
                 "delta": 0
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -480,7 +517,6 @@
                 "delta": 0
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -489,7 +525,6 @@
                 "delta": 0
               },
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -505,7 +540,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -514,7 +548,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -523,7 +556,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -532,7 +564,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -548,7 +579,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -557,7 +587,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -566,7 +595,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -575,7 +603,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -590,7 +617,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Meowdoku!",
@@ -613,6 +640,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -622,7 +650,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:59:41.458Z",
+        "observedAt": "2026-09-27T02:21:43.161Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Meowdoku!",
         "publisher": "OAKEVER GAMES PTE. LTD.",
@@ -644,7 +672,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.80922",
+            "value": "4.80928",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -654,7 +682,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "249366",
+            "value": "250178",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -749,11 +777,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 1,
         "averageRank": 12.75,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 1,
+          "average": 0.5465
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "gb",
@@ -765,7 +813,8 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 1
           },
           {
             "country": "au",
@@ -777,7 +826,8 @@
             "bestObservedRank": 12,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.4616
           },
           {
             "country": "ca",
@@ -789,7 +839,8 @@
             "bestObservedRank": 18,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.3737
           },
           {
             "country": "us",
@@ -801,7 +852,8 @@
             "bestObservedRank": 17,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.3509
           }
         ],
         "exactWindows": {
@@ -811,7 +863,6 @@
             "bestUpwardDelta": 1,
             "perMarket": [
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -820,7 +871,6 @@
                 "delta": 1
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -829,7 +879,6 @@
                 "delta": 0
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -838,7 +887,6 @@
                 "delta": 0
               },
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -854,7 +902,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -863,7 +910,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -872,7 +918,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -881,7 +926,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -897,7 +941,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -906,7 +949,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -915,7 +957,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -924,7 +965,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -939,7 +979,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1546690510,1623318294,1602508478&country=gb&entity=software",
         "canonicalName": "Gossip Harbor®: Merge & Story",
@@ -962,6 +1002,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -971,7 +1012,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:59:41.657Z",
+        "observedAt": "2026-09-27T02:21:43.403Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Gossip Harbor®: Merge & Story",
         "publisher": "Microfun Limited",
@@ -1068,11 +1109,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 2,
         "averageRank": 2.25,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.8498,
+          "average": 0.8278
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "us",
@@ -1084,7 +1145,8 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.8498
           },
           {
             "country": "ca",
@@ -1096,7 +1158,8 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.8498
           },
           {
             "country": "au",
@@ -1108,7 +1171,8 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.8498
           },
           {
             "country": "gb",
@@ -1120,7 +1184,8 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.762
           }
         ],
         "exactWindows": {
@@ -1130,7 +1195,6 @@
             "bestUpwardDelta": 0,
             "perMarket": [
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1139,7 +1203,6 @@
                 "delta": 0
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1148,7 +1211,6 @@
                 "delta": 0
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1157,7 +1219,6 @@
                 "delta": 0
               },
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1173,7 +1234,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1182,7 +1242,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1191,7 +1250,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1200,7 +1258,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1216,7 +1273,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1225,7 +1281,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1234,7 +1289,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1243,7 +1297,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1258,7 +1311,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Block Out! - Color Sort Puzzle",
@@ -1281,6 +1334,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -1290,7 +1344,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:59:41.832Z",
+        "observedAt": "2026-09-27T02:21:43.628Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Block Out! - Color Sort Puzzle",
         "publisher": "GRAND GAMES OYUN VE YAZILIM ANONIM SIRKETI",
@@ -1312,7 +1366,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.72792",
+            "value": "4.72797",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1322,7 +1376,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "264292",
+            "value": "265682",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1397,11 +1451,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 3,
         "averageRank": 3.75,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.762,
+          "average": 0.7187
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "us",
@@ -1413,7 +1487,8 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.762
           },
           {
             "country": "au",
@@ -1425,7 +1500,8 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.762
           },
           {
             "country": "gb",
@@ -1437,7 +1513,8 @@
             "bestObservedRank": 4,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.6996
           },
           {
             "country": "ca",
@@ -1449,7 +1526,8 @@
             "bestObservedRank": 5,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.6513
           }
         ],
         "exactWindows": {
@@ -1459,7 +1537,6 @@
             "bestUpwardDelta": 0,
             "perMarket": [
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1468,7 +1545,6 @@
                 "delta": 0
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1477,7 +1553,6 @@
                 "delta": 0
               },
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1486,7 +1561,6 @@
                 "delta": 0
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1502,7 +1576,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1511,7 +1584,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1520,7 +1592,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1529,7 +1600,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1545,7 +1615,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1554,7 +1623,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1563,7 +1631,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1572,7 +1639,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1587,7 +1653,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Minion Rush: Running game",
@@ -1611,6 +1677,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -1620,7 +1687,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:59:42.046Z",
+        "observedAt": "2026-09-27T02:21:43.877Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Minion Rush: Running game",
         "publisher": "Gameloft",
@@ -1737,11 +1804,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 3,
         "averageRank": 9.5,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.762,
+          "average": 0.5663
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "ca",
@@ -1753,7 +1840,8 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.762
           },
           {
             "country": "us",
@@ -1765,7 +1853,8 @@
             "bestObservedRank": 4,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.6513
           },
           {
             "country": "au",
@@ -1777,7 +1866,8 @@
             "bestObservedRank": 8,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.5011
           },
           {
             "country": "gb",
@@ -1789,7 +1879,8 @@
             "bestObservedRank": 19,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.3509
           }
         ],
         "exactWindows": {
@@ -1799,7 +1890,6 @@
             "bestUpwardDelta": 0,
             "perMarket": [
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1808,7 +1898,6 @@
                 "delta": 0
               },
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1817,7 +1906,6 @@
                 "delta": -1
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1826,7 +1914,6 @@
                 "delta": -2
               },
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -1842,7 +1929,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1851,7 +1937,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1860,7 +1945,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1869,7 +1953,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -1885,7 +1968,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1894,7 +1976,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1903,7 +1984,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1912,7 +1992,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -1927,7 +2006,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "ca",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1498019884,6744975195&country=ca&entity=software",
         "canonicalName": "Castlevania: 40th Anniversary",
@@ -1951,6 +2030,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -1960,7 +2040,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:59:42.256Z",
+        "observedAt": "2026-09-27T02:21:44.105Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Castlevania: 40th Anniversary",
         "publisher": "Konami Digital Entertainment Co., Ltd.",
@@ -1982,7 +2062,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "0",
+            "value": "3.23077",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1992,7 +2072,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "0",
+            "value": "26",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2058,11 +2138,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 7,
         "averageRank": 9,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.5784,
+          "average": 0.5273
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "us",
@@ -2074,7 +2174,8 @@
             "bestObservedRank": 7,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.5784
           },
           {
             "country": "au",
@@ -2086,7 +2187,8 @@
             "bestObservedRank": 8,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.5494
           },
           {
             "country": "ca",
@@ -2098,7 +2200,8 @@
             "bestObservedRank": 10,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.5011
           },
           {
             "country": "gb",
@@ -2110,7 +2213,8 @@
             "bestObservedRank": 11,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.4804
           }
         ],
         "exactWindows": {
@@ -2120,7 +2224,6 @@
             "bestUpwardDelta": 4,
             "perMarket": [
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2129,7 +2232,6 @@
                 "delta": 3
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2138,7 +2240,6 @@
                 "delta": 2
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2147,7 +2248,6 @@
                 "delta": 4
               },
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2163,7 +2263,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2172,7 +2271,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2181,7 +2279,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2190,7 +2287,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2206,7 +2302,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2215,7 +2310,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2224,7 +2318,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2233,7 +2326,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2248,7 +2340,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Roblox",
@@ -2272,6 +2364,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -2281,7 +2374,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:59:42.385Z",
+        "observedAt": "2026-09-27T02:21:44.311Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Roblox",
         "publisher": "Roblox Corporation",
@@ -2303,7 +2396,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.51098",
+            "value": "4.511",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2313,7 +2406,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "20211783",
+            "value": "20211450",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2379,11 +2472,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 9,
         "averageRank": 15.25,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.5239,
+          "average": 0.4341
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "us",
@@ -2395,7 +2508,8 @@
             "bestObservedRank": 9,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.5239
           },
           {
             "country": "ca",
@@ -2407,7 +2521,8 @@
             "bestObservedRank": 11,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.4804
           },
           {
             "country": "gb",
@@ -2419,7 +2534,8 @@
             "bestObservedRank": 12,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.4616
           },
           {
             "country": "au",
@@ -2431,7 +2547,8 @@
             "bestObservedRank": 29,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.2704
           }
         ],
         "exactWindows": {
@@ -2441,7 +2558,6 @@
             "bestUpwardDelta": 5,
             "perMarket": [
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2450,7 +2566,6 @@
                 "delta": 0
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2459,7 +2574,6 @@
                 "delta": 0
               },
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2468,7 +2582,6 @@
                 "delta": 5
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2484,7 +2597,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2493,7 +2605,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2502,7 +2613,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2511,7 +2621,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2527,7 +2636,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2536,7 +2644,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2545,7 +2652,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2554,7 +2660,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2569,7 +2674,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Magic Sort!",
@@ -2592,6 +2697,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -2601,7 +2707,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:59:42.617Z",
+        "observedAt": "2026-09-27T02:21:44.520Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Magic Sort!",
         "publisher": "GRAND GAMES OYUN VE YAZILIM ANONIM SIRKETI",
@@ -2623,7 +2729,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.72133",
+            "value": "4.72132",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2633,7 +2739,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "654980",
+            "value": "655928",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2719,11 +2825,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 15,
         "averageRank": 50.25,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.4132,
+          "average": 0.1943
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "us",
@@ -2735,7 +2861,8 @@
             "bestObservedRank": 15,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.4132
           },
           {
             "country": "gb",
@@ -2747,7 +2874,8 @@
             "bestObservedRank": 36,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.2235
           },
           {
             "country": "au",
@@ -2759,7 +2887,8 @@
             "bestObservedRank": 57,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.1202
           },
           {
             "country": "ca",
@@ -2771,7 +2900,8 @@
             "bestObservedRank": 84,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.0202
           }
         ],
         "exactWindows": {
@@ -2781,7 +2911,6 @@
             "bestUpwardDelta": 14,
             "perMarket": [
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2790,7 +2919,6 @@
                 "delta": 1
               },
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2799,7 +2927,6 @@
                 "delta": 14
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2808,7 +2935,6 @@
                 "delta": -1
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -2824,7 +2950,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2833,7 +2958,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2842,7 +2966,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2851,7 +2974,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -2867,7 +2989,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2876,7 +2997,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2885,7 +3005,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2894,7 +3013,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -2909,7 +3027,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Colorever: Gem Art Puzzle",
@@ -2932,6 +3050,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -2956,11 +3075,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 20,
         "averageRank": 32.75,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.3509,
+          "average": 0.2525
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "ca",
@@ -2972,7 +3111,8 @@
             "bestObservedRank": 20,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.3509
           },
           {
             "country": "us",
@@ -2984,7 +3124,8 @@
             "bestObservedRank": 30,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.263
           },
           {
             "country": "au",
@@ -2996,7 +3137,8 @@
             "bestObservedRank": 40,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.2007
           },
           {
             "country": "gb",
@@ -3008,7 +3150,8 @@
             "bestObservedRank": 41,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.1953
           }
         ],
         "exactWindows": {
@@ -3018,7 +3161,6 @@
             "bestUpwardDelta": 9,
             "perMarket": [
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3027,7 +3169,6 @@
                 "delta": 9
               },
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3036,7 +3177,6 @@
                 "delta": 1
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3045,7 +3185,6 @@
                 "delta": 3
               },
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3061,7 +3200,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3070,7 +3208,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3079,7 +3216,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3088,7 +3224,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3104,7 +3239,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3113,7 +3247,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3122,7 +3255,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3131,7 +3263,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3146,7 +3277,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "ca",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1498019884,6744975195&country=ca&entity=software",
         "canonicalName": "Sled Surfers",
@@ -3170,6 +3301,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -3193,11 +3325,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 39,
         "averageRank": 49.75,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.2062,
+          "average": 0.156
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "au",
@@ -3209,7 +3361,8 @@
             "bestObservedRank": 36,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.2062
           },
           {
             "country": "us",
@@ -3221,7 +3374,8 @@
             "bestObservedRank": 49,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.1567
           },
           {
             "country": "ca",
@@ -3233,7 +3387,8 @@
             "bestObservedRank": 51,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.1481
           },
           {
             "country": "gb",
@@ -3245,7 +3400,8 @@
             "bestObservedRank": 60,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.1128
           }
         ],
         "exactWindows": {
@@ -3255,7 +3411,6 @@
             "bestUpwardDelta": 22,
             "perMarket": [
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3264,7 +3419,6 @@
                 "delta": -3
               },
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3273,7 +3427,6 @@
                 "delta": 8
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3282,7 +3435,6 @@
                 "delta": 5
               },
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3298,7 +3450,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3307,7 +3458,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3316,7 +3466,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3325,7 +3474,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3341,7 +3489,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3350,7 +3497,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3359,7 +3505,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3368,7 +3513,6 @@
                 "delta": null
               },
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3383,7 +3527,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "au",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1351168404&country=au&entity=software",
         "canonicalName": "Among Us!",
@@ -3406,6 +3550,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -3429,11 +3574,31 @@
       "evidence": {
         "sourceOrigin": "official_public",
         "chartCategory": "Games",
+        "chartDepth": 100,
         "marketCount": 4,
         "bestRank": 47,
         "averageRank": 65.75,
         "maxObservedDays": 2,
         "newEntry": false,
+        "visibility": {
+          "method": "bounded_log_rank_visibility_v1",
+          "chartDepth": 100,
+          "best": 0.1658,
+          "average": 0.0985
+        },
+        "trend": {
+          "state": "INSUFFICIENT_DATA",
+          "basis": "exact_rank_history_v1",
+          "comparable3dMarkets": 0,
+          "comparable7dMarkets": 0,
+          "newlyEntered3dMarkets": 0,
+          "coverageGap3dMarkets": 0,
+          "median3dDelta": null,
+          "median7dDelta": null,
+          "rationale": [
+            "Exact 3-day history is not available yet."
+          ]
+        },
         "markets": [
           {
             "country": "gb",
@@ -3445,7 +3610,8 @@
             "bestObservedRank": 47,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.1658
           },
           {
             "country": "us",
@@ -3457,7 +3623,8 @@
             "bestObservedRank": 52,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.124
           },
           {
             "country": "au",
@@ -3469,7 +3636,8 @@
             "bestObservedRank": 74,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.0588
           },
           {
             "country": "ca",
@@ -3481,7 +3649,8 @@
             "bestObservedRank": 72,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:59:37.390Z"
+            "observedAt": "2026-09-27T02:21:36.904Z",
+            "visibility": 0.0452
           }
         ],
         "exactWindows": {
@@ -3491,7 +3660,6 @@
             "bestUpwardDelta": 16,
             "perMarket": [
               {
-                "market": "gb",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3500,7 +3668,6 @@
                 "delta": 16
               },
               {
-                "market": "us",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3509,7 +3676,6 @@
                 "delta": -5
               },
               {
-                "market": "au",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3518,7 +3684,6 @@
                 "delta": -3
               },
               {
-                "market": "ca",
                 "days": 1,
                 "targetDate": "2026-09-26",
                 "status": "available",
@@ -3534,7 +3699,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "gb",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3543,7 +3707,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3552,7 +3715,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3561,7 +3723,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 3,
                 "targetDate": "2026-09-24",
                 "status": "history_missing",
@@ -3577,7 +3738,6 @@
             "bestUpwardDelta": null,
             "perMarket": [
               {
-                "market": "gb",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3586,7 +3746,6 @@
                 "delta": null
               },
               {
-                "market": "us",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3595,7 +3754,6 @@
                 "delta": null
               },
               {
-                "market": "au",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3604,7 +3762,6 @@
                 "delta": null
               },
               {
-                "market": "ca",
                 "days": 7,
                 "targetDate": "2026-09-20",
                 "status": "history_missing",
@@ -3619,7 +3776,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:59:37.390Z",
+        "observedAt": "2026-09-27T02:21:36.904Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1546690510,1623318294,1602508478&country=gb&entity=software",
         "canonicalName": "Word Search Explorer®",
@@ -3642,6 +3799,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
