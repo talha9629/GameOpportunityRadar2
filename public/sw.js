@@ -8,6 +8,7 @@ self.addEventListener('install', (event) => {
     await cache.addAll([
       new URL('./', scopeUrl).href,
       new URL('manifest.webmanifest', scopeUrl).href,
+      new URL('icons/radar-192.png', scopeUrl).href,
       new URL('icons/radar-512.png', scopeUrl).href,
     ]);
   })());
