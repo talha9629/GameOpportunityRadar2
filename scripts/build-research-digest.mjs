@@ -23,9 +23,18 @@ function lifecycle(candidate) {
     if (threeDay.bestUpwardDelta < 0) return { state: 'FALLING_EXACT_3D', evidence: `Best exact 3d rank change is ${threeDay.bestUpwardDelta}.` };
     return { state: 'FLAT_EXACT_3D', evidence: 'Best exact 3d rank change is 0.' };
   }
-  if ((candidate?.evidence?.maxObservedDays ?? 0) >= 7) return { state: 'PERSISTING_7D', evidence: `Observed on tracked chart for ${candidate.evidence.maxObservedDays} day(s).` };
-  if ((candidate?.evidence?.maxObservedDays ?? 0) >= 3) return { state: 'PERSISTING_3D', evidence: `Observed on tracked chart for ${candidate.evidence.maxObservedDays} day(s).` };
-  return { state: 'INSUFFICIENT_HISTORY', evidence: `Only ${candidate?.evidence?.maxObservedDays ?? 0} observed day(s); no 3-day direction is claimed.` };
+  if ((candidate?.evidence?.maxObservedDays ?? 0) >= 7) return { state: 'PERSISTING_7D', evidence: `Observed on tracked chart for ${candidate.evidence.maxObservedDays} consecutive day(s).` };
+  if ((candidate?.evidence?.maxObservedDays ?? 0) >= 3) return { state: 'PERSISTING_3D', evidence: `Observed on tracked chart for ${candidate.evidence.maxObservedDays} consecutive day(s).` };
+  return { state: 'INSUFFICIENT_HISTORY', evidence: `Only ${candidate?.evidence?.maxObservedDays ?? 0} consecutive observed day(s); no 3-day direction is claimed.` };
+}
+
+function reasonDelta(currentReasons, previousReasons) {
+  const current = new Set(Array.isArray(currentReasons) ? currentReasons : []);
+  const previous = new Set(Array.isArray(previousReasons) ? previousReasons : []);
+  return {
+    added: [...current].filter((reason) => !previous.has(reason)).sort(),
+    removed: [...previous].filter((reason) => !current.has(reason)).sort(),
+  };
 }
 
 const current = readJson(latestPath);
@@ -46,13 +55,22 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         appId: candidate.appId,
         name: candidate.name,
         significance: 'attention',
-        evidence: [`Not present in the exact ${comparisonDate} queue.`, `Current priority ${candidate.researchPriority}.`, `Current best Games rank #${candidate.evidence.bestRank} across ${candidate.evidence.marketCount} market(s).`],
+        evidence: [`Not present in the exact ${comparisonDate} queue.`, `Current deterministic research priority ${candidate.researchPriority}.`, `Current best Games rank #${candidate.evidence.bestRank} across ${candidate.evidence.marketCount} market(s).`],
       });
       continue;
     }
 
     const priorityDelta = candidate.researchPriority - prior.researchPriority;
     if (Math.abs(priorityDelta) >= 10) {
+      const reasons = reasonDelta(candidate.reasonCodes, prior.reasonCodes);
+      const evidence = [
+        `Deterministic research priority changed ${prior.researchPriority} → ${candidate.researchPriority}.`,
+        `Priority delta ${priorityDelta > 0 ? '+' : ''}${priorityDelta}.`,
+      ];
+      if (reasons.added.length > 0) evidence.push(`Added rank-evidence reason codes: ${reasons.added.join(', ')}.`);
+      if (reasons.removed.length > 0) evidence.push(`Removed rank-evidence reason codes: ${reasons.removed.join(', ')}.`);
+      if (reasons.added.length === 0 && reasons.removed.length === 0) evidence.push('Reason-code set is unchanged; the numeric priority changed within the same deterministic evidence rules.');
+
       changes.push({
         type: priorityDelta > 0 ? 'PRIORITY_INCREASED' : 'PRIORITY_DECREASED',
         appId: candidate.appId,
@@ -61,7 +79,9 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         previous: prior.researchPriority,
         current: candidate.researchPriority,
         delta: priorityDelta,
-        evidence: [`Research priority changed ${prior.researchPriority} → ${candidate.researchPriority}.`, 'Priority is deterministic triage from Apple rank evidence, not a success probability.'],
+        reasonCodesAdded: reasons.added,
+        reasonCodesRemoved: reasons.removed,
+        evidence,
       });
     }
 
@@ -116,7 +136,7 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         appId: candidate.appId,
         name: candidate.name,
         significance: 'attention',
-        evidence: [`Present in the exact ${comparisonDate} queue but absent from the current queue.`, 'This does not mean the game failed; it only means it no longer meets the current deterministic triage cutoff.'],
+        evidence: [`Present in the exact ${comparisonDate} queue but absent from the current queue.`, 'This records only a deterministic triage cutoff change; no product-performance conclusion is made.'],
       });
     }
   }

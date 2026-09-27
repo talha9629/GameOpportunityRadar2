@@ -24,6 +24,17 @@ for (const change of digest.changes ?? []) {
   assert(['info', 'attention'].includes(change.significance), `change ${change.type} significance invalid`);
   assert(Array.isArray(change.evidence) && change.evidence.length > 0, `change ${change.type} has no evidence`);
   assert(!/success probability|estimated downloads from rank|revenue from rank/i.test(JSON.stringify(change)), `change ${change.type} contains unsafe inference`);
+
+  if (change.type === 'PRIORITY_INCREASED' || change.type === 'PRIORITY_DECREASED') {
+    assert(Number.isInteger(change.previous) && change.previous >= 0 && change.previous <= 100, `${change.type} previous priority invalid`);
+    assert(Number.isInteger(change.current) && change.current >= 0 && change.current <= 100, `${change.type} current priority invalid`);
+    assert(Number.isInteger(change.delta) && change.delta === change.current - change.previous, `${change.type} delta mismatch`);
+    assert(Math.abs(change.delta) >= 10, `${change.type} must meet the 10-point reporting threshold`);
+    assert(Array.isArray(change.reasonCodesAdded), `${change.type} reasonCodesAdded missing`);
+    assert(Array.isArray(change.reasonCodesRemoved), `${change.type} reasonCodesRemoved missing`);
+    assert(change.evidence.some((value) => /deterministic research priority changed/i.test(value)), `${change.type} must state the observed deterministic priority change`);
+    assert(change.evidence.some((value) => /priority delta/i.test(value)), `${change.type} must state the numeric priority delta`);
+  }
 }
 
 const allowedStates = new Set(['INSUFFICIENT_HISTORY', 'PERSISTING_3D', 'PERSISTING_7D', 'RISING_EXACT_3D', 'FALLING_EXACT_3D', 'FLAT_EXACT_3D']);
@@ -31,6 +42,7 @@ for (const state of digest.states ?? []) {
   assert(allowedStates.has(state.state), `invalid lifecycle state ${state.state}`);
   assert(typeof state.evidence === 'string' && state.evidence.length >= 10, `state ${state.appId} missing evidence`);
   if (/RISING|FALLING|FLAT/.test(state.state)) assert(/exact 3d/i.test(state.evidence), `directional state ${state.appId} must cite exact 3d evidence`);
+  if (/PERSISTING_[37]D/.test(state.state)) assert(/consecutive day/i.test(state.evidence), `persistence state ${state.appId} must cite consecutive-day evidence`);
 }
 
 assert(digest.summary?.changeCount === digest.changes.length, 'changeCount mismatch');
