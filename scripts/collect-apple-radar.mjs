@@ -85,13 +85,18 @@ async function fetchMarket(country) {
   }
 }
 
-function addHistory(entry, previousMarket, sameDay, previousIsYesterday, currentGameFocused) {
-  const prior = previousMarket?.entries?.find((item) => item.appId === entry.appId);
+function addHistory(entry, previousMarket, previousCalendarMarket, sameDay, previousIsYesterday, currentGameFocused) {
+  const sameDayPrior = previousMarket?.entries?.find((item) => item.appId === entry.appId);
+  const previousCalendarPrior = previousCalendarMarket?.entries?.find((item) => item.appId === entry.appId);
+  const usePreviousCalendarPrior = sameDay && !sameDayPrior && Boolean(previousCalendarPrior);
+  const prior = sameDayPrior ?? (usePreviousCalendarPrior ? previousCalendarPrior : null);
+  const priorMarket = usePreviousCalendarPrior ? previousCalendarMarket : previousMarket;
+
   if (!prior) {
     return { ...entry, priorRank: null, delta: null, firstObserved: today, daysObserved: 1, bestObservedRank: entry.rank, events: ['NEW ENTRY'] };
   }
 
-  const sourceComparable = previousMarket?.status === 'ok' && previousMarket?.gameFocused === currentGameFocused;
+  const sourceComparable = priorMarket?.status === 'ok' && priorMarket?.gameFocused === currentGameFocused;
   if (!sourceComparable) {
     return {
       ...entry,
@@ -104,17 +109,24 @@ function addHistory(entry, previousMarket, sameDay, previousIsYesterday, current
     };
   }
 
-  const firstDayReplacement = sameDay && prior.firstObserved === today && (prior.daysObserved ?? 1) === 1;
+  const firstDayReplacement = Boolean(sameDayPrior)
+    && sameDay
+    && prior.firstObserved === today
+    && (prior.daysObserved ?? 1) === 1;
   const bestBefore = prior.bestObservedRank ?? prior.rank;
   const bestObservedRank = firstDayReplacement ? entry.rank : Math.min(bestBefore, entry.rank);
-  const comparisonRank = sameDay ? prior.priorRank : prior.rank;
+  const comparisonRank = sameDay
+    ? (sameDayPrior ? prior.priorRank : prior.rank)
+    : prior.rank;
   const events = [];
-  if (sameDay && prior.firstObserved === today && prior.events?.includes('NEW ENTRY')) events.push('NEW ENTRY');
+  if (sameDayPrior && sameDay && prior.firstObserved === today && prior.events?.includes('NEW ENTRY')) events.push('NEW ENTRY');
   if (!firstDayReplacement && entry.rank < bestBefore) events.push('NEW HIGH');
   if (comparisonRank != null && comparisonRank > 10 && entry.rank <= 10) events.push('TOP 10');
 
   const daysObserved = sameDay
-    ? (prior.daysObserved ?? 1)
+    ? sameDayPrior
+      ? (prior.daysObserved ?? 1)
+      : (prior.daysObserved ?? 1) + 1
     : previousIsYesterday
       ? (prior.daysObserved ?? 1) + 1
       : 1;
@@ -133,7 +145,12 @@ function addHistory(entry, previousMarket, sameDay, previousIsYesterday, current
 const previous = readPrevious();
 const previousDate = typeof previous.generatedAt === 'string' ? previous.generatedAt.slice(0, 10) : null;
 const sameDay = previousDate === today;
-const previousIsYesterday = previousDate === subtractUtcDays(today, 1);
+const previousCalendarDate = subtractUtcDays(today, 1);
+const previousCalendarSnapshot = readJson(
+  path.join(root, 'history', `${previousCalendarDate}.json`),
+  { markets: {} },
+);
+const previousIsYesterday = previousDate === previousCalendarDate;
 const output = {
   schemaVersion: 3,
   generatedAt,
@@ -150,6 +167,7 @@ for (const [country, label] of Object.entries(markets)) {
   try {
     const snapshot = await fetchMarket(country);
     const priorMarket = previous.markets?.[country];
+    const previousCalendarMarket = previousCalendarSnapshot.markets?.[country];
     const preserveEarlierGamesObservation = sameDay
       && priorMarket?.status === 'ok'
       && priorMarket.gameFocused === true
@@ -183,6 +201,7 @@ for (const [country, label] of Object.entries(markets)) {
       entries: snapshot.entries.map((entry) => addHistory(
         entry,
         priorMarket,
+        previousCalendarMarket,
         sameDay,
         previousIsYesterday,
         snapshot.gameFocused,
