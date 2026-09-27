@@ -3,14 +3,15 @@ import {
   DeepVerifyVideoPayloadSchema,
   DeepVerifyVideoSummaryRowSchema,
   DeepVerifyVideoSummarySchema,
+  type DeepVerifyVerificationSession,
 } from './deepVerify';
 import { assertDeepVerifySessionStorefront } from './storefrontDeepVerifyApi';
 
-const session = {
+const session: DeepVerifyVerificationSession = {
   sessionId: 'a'.repeat(24),
   taskIds: ['b'.repeat(24)],
   unknowns: ['Verify the core gameplay mechanic from cited footage.'],
-  categories: ['gameplay_mechanic'] as const,
+  categories: ['gameplay_mechanic'],
   researchGeneratedAt: '2026-09-27T12:00:00+00:00',
 };
 
