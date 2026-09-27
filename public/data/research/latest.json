@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T01:51:29.244Z",
+  "generatedAt": "2026-09-27T01:59:42.628Z",
   "radarDate": "2026-09-27",
-  "radarGeneratedAt": "2026-09-27T01:51:22.232Z",
+  "radarGeneratedAt": "2026-09-27T01:59:37.390Z",
   "method": {
     "name": "deterministic_research_priority_v1",
     "inputs": [
@@ -26,7 +26,7 @@
     "appleCharts": {
       "status": "complete",
       "origin": "official_public",
-      "observedAt": "2026-09-27T01:51:22.232Z",
+      "observedAt": "2026-09-27T01:59:37.390Z",
       "healthyGameMarkets": 4
     },
     "appleLookup": {
@@ -97,7 +97,7 @@
             "bestObservedRank": 5,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "us",
@@ -109,7 +109,7 @@
             "bestObservedRank": 17,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -121,7 +121,7 @@
             "bestObservedRank": 59,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -133,7 +133,7 @@
             "bestObservedRank": 81,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -271,7 +271,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1546690510,1623318294,1602508478&country=gb&entity=software",
         "canonicalName": "NoomiClone",
@@ -303,7 +303,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:51:27.498Z",
+        "observedAt": "2026-09-27T01:59:41.120Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "NoomiClone",
         "publisher": "Matthew Jones",
@@ -416,7 +416,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -428,7 +428,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -440,7 +440,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "gb",
@@ -452,7 +452,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -590,7 +590,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Meowdoku!",
@@ -622,7 +622,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:51:27.770Z",
+        "observedAt": "2026-09-27T01:59:41.458Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Meowdoku!",
         "publisher": "OAKEVER GAMES PTE. LTD.",
@@ -644,7 +644,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.80921",
+            "value": "4.80922",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -654,7 +654,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "249526",
+            "value": "249366",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -765,7 +765,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -777,7 +777,7 @@
             "bestObservedRank": 12,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -789,7 +789,7 @@
             "bestObservedRank": 18,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "us",
@@ -801,7 +801,7 @@
             "bestObservedRank": 17,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -939,7 +939,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1546690510,1623318294,1602508478&country=gb&entity=software",
         "canonicalName": "Gossip Harbor®: Merge & Story",
@@ -971,7 +971,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:51:27.998Z",
+        "observedAt": "2026-09-27T01:59:41.657Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Gossip Harbor®: Merge & Story",
         "publisher": "Microfun Limited",
@@ -1084,7 +1084,7 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -1096,7 +1096,7 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -1108,7 +1108,7 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "gb",
@@ -1120,7 +1120,7 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -1258,7 +1258,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Block Out! - Color Sort Puzzle",
@@ -1290,7 +1290,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:51:28.233Z",
+        "observedAt": "2026-09-27T01:59:41.832Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Block Out! - Color Sort Puzzle",
         "publisher": "GRAND GAMES OYUN VE YAZILIM ANONIM SIRKETI",
@@ -1312,7 +1312,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.72804",
+            "value": "4.72792",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1322,7 +1322,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "265219",
+            "value": "264292",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1413,7 +1413,7 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -1425,7 +1425,7 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "gb",
@@ -1437,7 +1437,7 @@
             "bestObservedRank": 4,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -1449,7 +1449,7 @@
             "bestObservedRank": 5,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -1587,7 +1587,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Minion Rush: Running game",
@@ -1620,7 +1620,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:51:28.447Z",
+        "observedAt": "2026-09-27T01:59:42.046Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Minion Rush: Running game",
         "publisher": "Gameloft",
@@ -1642,7 +1642,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.58737",
+            "value": "4.58743",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1652,7 +1652,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "297540",
+            "value": "297605",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1753,7 +1753,7 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "us",
@@ -1765,7 +1765,7 @@
             "bestObservedRank": 4,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -1777,7 +1777,7 @@
             "bestObservedRank": 8,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "gb",
@@ -1789,7 +1789,7 @@
             "bestObservedRank": 19,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -1927,7 +1927,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "ca",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1498019884,6744975195&country=ca&entity=software",
         "canonicalName": "Castlevania: 40th Anniversary",
@@ -1960,7 +1960,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:51:28.688Z",
+        "observedAt": "2026-09-27T01:59:42.256Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Castlevania: 40th Anniversary",
         "publisher": "Konami Digital Entertainment Co., Ltd.",
@@ -1982,7 +1982,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "3",
+            "value": "0",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1992,7 +1992,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "13",
+            "value": "0",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2074,7 +2074,7 @@
             "bestObservedRank": 7,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -2086,7 +2086,7 @@
             "bestObservedRank": 8,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -2098,7 +2098,7 @@
             "bestObservedRank": 10,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "gb",
@@ -2110,7 +2110,7 @@
             "bestObservedRank": 11,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -2248,7 +2248,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Roblox",
@@ -2281,7 +2281,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:51:28.978Z",
+        "observedAt": "2026-09-27T01:59:42.385Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Roblox",
         "publisher": "Roblox Corporation",
@@ -2395,7 +2395,7 @@
             "bestObservedRank": 9,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -2407,7 +2407,7 @@
             "bestObservedRank": 11,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "gb",
@@ -2419,7 +2419,7 @@
             "bestObservedRank": 12,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -2431,7 +2431,7 @@
             "bestObservedRank": 29,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -2569,7 +2569,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Magic Sort!",
@@ -2601,7 +2601,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-27T01:51:29.230Z",
+        "observedAt": "2026-09-27T01:59:42.617Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Magic Sort!",
         "publisher": "GRAND GAMES OYUN VE YAZILIM ANONIM SIRKETI",
@@ -2633,7 +2633,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "655643",
+            "value": "654980",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2735,7 +2735,7 @@
             "bestObservedRank": 15,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "gb",
@@ -2747,7 +2747,7 @@
             "bestObservedRank": 36,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -2759,7 +2759,7 @@
             "bestObservedRank": 57,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -2771,7 +2771,7 @@
             "bestObservedRank": 84,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -2909,7 +2909,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761760135,6752672568,596402997,431946152,6499209744,6761757565&country=us&entity=software",
         "canonicalName": "Colorever: Gem Art Puzzle",
@@ -2972,7 +2972,7 @@
             "bestObservedRank": 20,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "us",
@@ -2984,7 +2984,7 @@
             "bestObservedRank": 30,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -2996,7 +2996,7 @@
             "bestObservedRank": 40,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "gb",
@@ -3008,7 +3008,7 @@
             "bestObservedRank": 41,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -3146,7 +3146,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "ca",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1498019884,6744975195&country=ca&entity=software",
         "canonicalName": "Sled Surfers",
@@ -3209,7 +3209,7 @@
             "bestObservedRank": 36,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "us",
@@ -3221,7 +3221,7 @@
             "bestObservedRank": 49,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -3233,7 +3233,7 @@
             "bestObservedRank": 51,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "gb",
@@ -3245,7 +3245,7 @@
             "bestObservedRank": 60,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -3383,7 +3383,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "au",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1351168404&country=au&entity=software",
         "canonicalName": "Among Us!",
@@ -3445,7 +3445,7 @@
             "bestObservedRank": 47,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "us",
@@ -3457,7 +3457,7 @@
             "bestObservedRank": 52,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "au",
@@ -3469,7 +3469,7 @@
             "bestObservedRank": 74,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           },
           {
             "country": "ca",
@@ -3481,7 +3481,7 @@
             "bestObservedRank": 72,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-27T01:51:22.232Z"
+            "observedAt": "2026-09-27T01:59:37.390Z"
           }
         ],
         "exactWindows": {
@@ -3619,7 +3619,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-27T01:51:22.232Z",
+        "observedAt": "2026-09-27T01:59:37.390Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=1546690510,1623318294,1602508478&country=gb&entity=software",
         "canonicalName": "Word Search Explorer®",

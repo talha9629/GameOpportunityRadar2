@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T01:51:29.667Z",
+  "generatedAt": "2026-09-27T01:59:43.045Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
-  "essentialHealthy": 4,
-  "essentialCount": 4,
+  "essentialHealthy": 5,
+  "essentialCount": 5,
   "components": [
     {
       "id": "apple_radar",
@@ -87,7 +87,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "5 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "6.6h policy-index age",
+        "6.7h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -102,6 +102,21 @@
         "Third-party estimates never affect first-party research priority."
       ],
       "action": "Optional only: configure APPBRAIN_API_KEY for capped estimate enrichment."
+    },
+    {
+      "id": "trend_signals",
+      "label": "Exact-Date Trend Signals",
+      "state": "healthy",
+      "facts": [
+        "400/400 current chart signal(s)",
+        "4/4 healthy Games market(s) represented",
+        "chart depth matches Top 100",
+        "derived from current Apple Radar snapshot",
+        "INSUFFICIENT_DATA 374 · RISING 26",
+        "0.0h trend-signal age",
+        "Visibility is a bounded chart-position heuristic; it is not downloads, revenue, market share, probability, or a build recommendation."
+      ],
+      "action": null
     }
   ],
   "recommendedActions": [
@@ -145,6 +160,16 @@
     "confirmedPolicyChanges": 0,
     "pendingPolicyCandidates": 5,
     "legacyUnconfirmedPolicyChanges": 5,
-    "appBrainConfigured": false
+    "appBrainConfigured": false,
+    "trendSignalCount": 400,
+    "trendExpectedSignalCount": 400,
+    "trendHealthyMarketCount": 4,
+    "trendExpectedMarketCount": 4,
+    "trendDerivedFromCurrentRadar": true,
+    "trendChartDepthMatches": true,
+    "trendStateCounts": {
+      "INSUFFICIENT_DATA": 374,
+      "RISING": 26
+    }
   }
 }
