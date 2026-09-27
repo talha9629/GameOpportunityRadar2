@@ -124,6 +124,10 @@
   .app-sidebar { padding-inline: 10px; }
   .workspace-header { padding-inline: 20px; }
   .app-page-shell { padding-inline: 20px; }
+  .app-page-shell .radar-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .app-page-shell .radar-columns,
+  .app-page-shell .two-column,
+  .app-page-shell .scorecard-heading { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-width: 860px) {
@@ -154,6 +158,10 @@
   .workspace-status { display: none; }
   .page-context p { max-width: 60vw; }
   .app-page-shell { padding: 20px 14px 56px; }
+  .app-page-shell .score-grid { grid-template-columns: minmax(0, 1fr); }
+  .app-page-shell .screenshot-strip { grid-template-columns: repeat(6, minmax(150px, 1fr)); }
+  .app-page-shell .market-toolbar { flex-direction: column; gap: 12px; }
+  .app-page-shell .market-tabs { justify-content: flex-start; }
 }
 
 @media (max-width: 620px) {
@@ -168,6 +176,19 @@
   .app-page-shell h1 { font-size: clamp(28px, 10vw, 38px); }
   .app-page-shell .panel { border-radius: 15px; padding: 16px; }
   .app-page-shell .today-heading { align-items: flex-start; }
+  .app-page-shell .radar-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  .app-page-shell .search-row { grid-template-columns: minmax(0, 1fr); }
+  .app-page-shell .game-header { grid-template-columns: auto minmax(0, 1fr); align-items: start; }
+  .app-page-shell .game-header .review-meter { grid-column: 1 / -1; text-align: left; }
+  .app-page-shell .radar-row,
+  .app-page-shell .radar-row.with-windows { grid-template-columns: 34px 38px minmax(0, 1fr) auto; }
+  .app-page-shell .radar-row img { width: 38px; height: 38px; }
+  .app-page-shell .radar-row .window-trend,
+  .app-page-shell .radar-row .radar-actions { grid-column: 3 / -1; justify-content: flex-start; }
+  .app-page-shell .cross-market-row { grid-template-columns: 40px minmax(0, 1fr) auto; gap: 9px; }
+  .app-page-shell .cross-market-row img { width: 40px; height: 40px; }
+  .app-page-shell .cross-market-row .market-count,
+  .app-page-shell .cross-market-row .average-rank { grid-column: 2; width: fit-content; }
 }
 
 @media (prefers-reduced-motion: reduce) {
