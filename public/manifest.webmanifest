@@ -1,0 +1,20 @@
+{
+  "name": "Game Opportunity Radar 2.0",
+  "short_name": "Radar",
+  "description": "Evidence-first mobile game market intelligence and verification workspace.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#070d18",
+  "theme_color": "#0b1020",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "./icons/radar-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
