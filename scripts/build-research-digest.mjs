@@ -9,13 +9,11 @@ const digestHistoryRoot = path.join(researchRoot, 'digest-history');
 function readJson(file, fallback = null) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; }
 }
-
 function subtractUtcDays(date, days) {
   const value = new Date(`${date}T00:00:00Z`);
   value.setUTCDate(value.getUTCDate() - days);
   return value.toISOString().slice(0, 10);
 }
-
 function lifecycle(candidate) {
   const threeDay = candidate?.evidence?.exactWindows?.['3d'];
   if (threeDay?.status === 'available' && threeDay.bestUpwardDelta != null) {
@@ -27,7 +25,6 @@ function lifecycle(candidate) {
   if ((candidate?.evidence?.maxObservedDays ?? 0) >= 3) return { state: 'PERSISTING_3D', evidence: `Observed on tracked chart for ${candidate.evidence.maxObservedDays} consecutive day(s).` };
   return { state: 'INSUFFICIENT_HISTORY', evidence: `Only ${candidate?.evidence?.maxObservedDays ?? 0} consecutive observed day(s); no 3-day direction is claimed.` };
 }
-
 function reasonDelta(currentReasons, previousReasons) {
   const current = new Set(Array.isArray(currentReasons) ? currentReasons : []);
   const previous = new Set(Array.isArray(previousReasons) ? previousReasons : []);
@@ -35,6 +32,28 @@ function reasonDelta(currentReasons, previousReasons) {
     added: [...current].filter((reason) => !previous.has(reason)).sort(),
     removed: [...previous].filter((reason) => !current.has(reason)).sort(),
   };
+}
+function isNewEntryOnlyReasonChange(added, removed) {
+  const changed = [...added, ...removed];
+  return changed.length > 0 && changed.every((reason) => /^NEW_ENTRY_TOP_(10|20)$/.test(reason));
+}
+function hasStrongExactOneDayReason(candidate) {
+  return (candidate?.reasonCodes ?? []).some((reason) => /^UP_(8|15)_PLUS_1D$/.test(reason));
+}
+function queueEntrySignificance(candidate) {
+  if ((candidate?.queueRank ?? 999) <= 3) {
+    return { significance: 'attention', significanceReason: 'Entered the top three of the deterministic research queue.' };
+  }
+  if (hasStrongExactOneDayReason(candidate)) {
+    return { significance: 'attention', significanceReason: 'Entry is supported by an exact 1-day rank improvement of at least 8 places.' };
+  }
+  return { significance: 'info', significanceReason: 'Entered the bounded top-12 triage queue without a top-three position or strong exact 1-day movement signal.' };
+}
+function queueDropSignificance(candidate) {
+  if ((candidate?.queueRank ?? 999) <= 3) {
+    return { significance: 'attention', significanceReason: 'A prior top-three research-queue candidate dropped out of the bounded top-12 queue.' };
+  }
+  return { significance: 'info', significanceReason: 'Dropped from the bounded top-12 triage queue; this is cutoff churn unless stronger evidence changes separately.' };
 }
 
 const current = readJson(latestPath);
@@ -50,12 +69,21 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
   for (const candidate of current.candidates) {
     const prior = previousById.get(String(candidate.appId));
     if (!prior) {
+      const significance = queueEntrySignificance(candidate);
       changes.push({
         type: 'NEW_TO_RESEARCH_QUEUE',
         appId: candidate.appId,
         name: candidate.name,
-        significance: 'attention',
-        evidence: [`Not present in the exact ${comparisonDate} queue.`, `Current deterministic research priority ${candidate.researchPriority}.`, `Current best Games rank #${candidate.evidence.bestRank} across ${candidate.evidence.marketCount} market(s).`],
+        ...significance,
+        queueRank: candidate.queueRank,
+        researchPriority: candidate.researchPriority,
+        reasonCodes: candidate.reasonCodes ?? [],
+        evidence: [
+          `Not present in the exact ${comparisonDate} queue.`,
+          `Current deterministic research priority ${candidate.researchPriority}.`,
+          `Current best Games rank #${candidate.evidence.bestRank} across ${candidate.evidence.marketCount} market(s).`,
+          significance.significanceReason,
+        ],
       });
       continue;
     }
@@ -63,6 +91,11 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
     const priorityDelta = candidate.researchPriority - prior.researchPriority;
     if (Math.abs(priorityDelta) >= 10) {
       const reasons = reasonDelta(candidate.reasonCodes, prior.reasonCodes);
+      const lifecycleNormalization = isNewEntryOnlyReasonChange(reasons.added, reasons.removed);
+      const significance = lifecycleNormalization ? 'info' : 'attention';
+      const significanceReason = lifecycleNormalization
+        ? 'Only a one-day NEW_ENTRY priority bonus expired; no stronger rank-evidence reason changed.'
+        : 'A 10+ point deterministic priority change includes rank-evidence changes beyond routine NEW_ENTRY bonus expiry.';
       const evidence = [
         `Deterministic research priority changed ${prior.researchPriority} → ${candidate.researchPriority}.`,
         `Priority delta ${priorityDelta > 0 ? '+' : ''}${priorityDelta}.`,
@@ -70,12 +103,14 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
       if (reasons.added.length > 0) evidence.push(`Added rank-evidence reason codes: ${reasons.added.join(', ')}.`);
       if (reasons.removed.length > 0) evidence.push(`Removed rank-evidence reason codes: ${reasons.removed.join(', ')}.`);
       if (reasons.added.length === 0 && reasons.removed.length === 0) evidence.push('Reason-code set is unchanged; the numeric priority changed within the same deterministic evidence rules.');
+      evidence.push(significanceReason);
 
       changes.push({
         type: priorityDelta > 0 ? 'PRIORITY_INCREASED' : 'PRIORITY_DECREASED',
         appId: candidate.appId,
         name: candidate.name,
-        significance: 'attention',
+        significance,
+        significanceReason,
         previous: prior.researchPriority,
         current: candidate.researchPriority,
         delta: priorityDelta,
@@ -92,6 +127,7 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         appId: candidate.appId,
         name: candidate.name,
         significance: 'attention',
+        significanceReason: 'Healthy Games-chart market presence changed on the exact daily comparison.',
         previous: prior.evidence.marketCount,
         current: candidate.evidence.marketCount,
         delta: marketDelta,
@@ -106,6 +142,7 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
         appId: candidate.appId,
         name: candidate.name,
         significance: 'info',
+        significanceReason: 'Best-rank movement is preserved as context; the digest reserves attention for stronger multi-signal or maturity events.',
         previous: prior.evidence.bestRank,
         current: candidate.evidence.bestRank,
         delta: rankDelta,
@@ -123,6 +160,7 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
           appId: candidate.appId,
           name: candidate.name,
           significance: 'attention',
+          significanceReason: `A previously unavailable exact ${days}-day evidence window is now directly comparable.`,
           evidence: [`Exact ${days}-day comparison is now available.`, `Best upward delta: ${currentSignal.bestUpwardDelta ?? 'unknown'}.`],
         });
       }
@@ -131,12 +169,19 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
 
   for (const candidate of previous.candidates) {
     if (!currentById.has(String(candidate.appId))) {
+      const significance = queueDropSignificance(candidate);
       changes.push({
         type: 'DROPPED_FROM_RESEARCH_QUEUE',
         appId: candidate.appId,
         name: candidate.name,
-        significance: 'attention',
-        evidence: [`Present in the exact ${comparisonDate} queue but absent from the current queue.`, 'This records only a deterministic triage cutoff change; no product-performance conclusion is made.'],
+        ...significance,
+        previousQueueRank: candidate.queueRank,
+        previousResearchPriority: candidate.researchPriority,
+        evidence: [
+          `Present in the exact ${comparisonDate} queue but absent from the current queue.`,
+          'This records only a deterministic triage cutoff change; no product-performance conclusion is made.',
+          significance.significanceReason,
+        ],
       });
     }
   }
@@ -156,11 +201,12 @@ const digest = {
   currentDate: current.radarDate,
   comparisonDate,
   status: previous?.radarDate === comparisonDate ? 'complete' : 'history_pending',
-  statement: 'This digest reports exact observed changes between dated research queues. It does not predict success, downloads, revenue, or causal demand.',
+  statement: 'This digest reports exact observed changes between dated research queues. Attention is reserved for evidence changes worth interrupting the owner for; informational changes remain preserved. It does not predict success, downloads, revenue, or causal demand.',
   summary: {
     currentCandidateCount: current.candidates.length,
     changeCount: changes.length,
     attentionCount: changes.filter((change) => change.significance === 'attention').length,
+    informationalCount: changes.filter((change) => change.significance === 'info').length,
     newCandidates: changes.filter((change) => change.type === 'NEW_TO_RESEARCH_QUEUE').length,
     droppedCandidates: changes.filter((change) => change.type === 'DROPPED_FROM_RESEARCH_QUEUE').length,
     marketChanges: changes.filter((change) => change.type.startsWith('CROSS_MARKET_')).length,
@@ -169,6 +215,8 @@ const digest = {
   limitations: [
     'No previous exact-date queue means history_pending, not zero change.',
     'Priority changes reflect deterministic triage inputs, not changes in probability of commercial success.',
+    'New/dropped queue membership is bounded top-12 triage churn unless stronger exact rank evidence independently crosses an attention rule.',
+    'A one-day NEW_ENTRY bonus expiring is informational lifecycle normalization, not a market alert by itself.',
     'Dropped-from-queue is a triage state only and is not a claim about installs, revenue, retention or product quality.',
     'RISING/FALLING lifecycle states are only emitted when an exact 3-day rank comparison exists.',
   ],
@@ -179,4 +227,4 @@ const digest = {
 fs.mkdirSync(digestHistoryRoot, { recursive: true });
 fs.writeFileSync(digestPath, `${JSON.stringify(digest, null, 2)}\n`);
 fs.writeFileSync(path.join(digestHistoryRoot, `${current.radarDate}.json`), `${JSON.stringify(digest, null, 2)}\n`);
-console.log(`[research-digest] ${digest.status} · ${digest.summary.changeCount} changes · ${digest.summary.attentionCount} attention · ${states.length} states`);
+console.log(`[research-digest] ${digest.status} · ${digest.summary.changeCount} changes · ${digest.summary.attentionCount} attention · ${digest.summary.informationalCount} informational · ${states.length} states`);
