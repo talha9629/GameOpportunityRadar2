@@ -4,7 +4,12 @@ import { App } from './App';
 import './styles.css';
 import './integration.css';
 
-function showUpdatePrompt(registration: ServiceWorkerRegistration) {
+const BUILD_VERSION_KEY = 'radar-installed-build-version';
+let pwaRegistration: ServiceWorkerRegistration | null = null;
+let pendingBuildVersion: string | null = null;
+
+function showUpdatePrompt(version?: string) {
+  if (version) pendingBuildVersion = version;
   if (document.getElementById('pwa-update-prompt')) return;
 
   const prompt = document.createElement('div');
@@ -19,7 +24,7 @@ function showUpdatePrompt(registration: ServiceWorkerRegistration) {
     'display:flex',
     'align-items:center',
     'gap:10px',
-    'max-width:min(92vw,520px)',
+    'width:min(92vw,520px)',
     'padding:10px 12px',
     'border:1px solid #315778',
     'border-radius:14px',
@@ -38,17 +43,42 @@ function showUpdatePrompt(registration: ServiceWorkerRegistration) {
   button.textContent = 'Update now';
   button.style.cssText = 'min-height:42px;padding:8px 12px;border-radius:10px;border:1px solid #3b78a5;background:#15314a;color:#ecf8ff;font-weight:800;';
   button.addEventListener('click', () => {
-    if (registration.waiting) {
-      registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-      button.disabled = true;
-      button.textContent = 'Updating…';
-    } else {
-      window.location.reload();
+    if (pendingBuildVersion) localStorage.setItem(BUILD_VERSION_KEY, pendingBuildVersion);
+    button.disabled = true;
+    button.textContent = 'Updating…';
+
+    if (pwaRegistration?.waiting) {
+      pwaRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      return;
     }
+
+    window.location.reload();
   });
 
   prompt.append(text, button);
   document.body.appendChild(prompt);
+}
+
+async function checkPublishedVersion() {
+  try {
+    const url = new URL('version.json', document.baseURI);
+    url.searchParams.set('_', Date.now().toString());
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) return;
+
+    const payload = await response.json() as { buildId?: string };
+    if (!payload.buildId) return;
+
+    const installed = localStorage.getItem(BUILD_VERSION_KEY);
+    if (!installed) {
+      localStorage.setItem(BUILD_VERSION_KEY, payload.buildId);
+      return;
+    }
+
+    if (installed !== payload.buildId) showUpdatePrompt(payload.buildId);
+  } catch {
+    // Version checks are best-effort; offline use should remain uninterrupted.
+  }
 }
 
 async function registerPwa() {
@@ -56,17 +86,19 @@ async function registerPwa() {
 
   try {
     const serviceWorkerUrl = new URL('sw.js', document.baseURI);
-    const registration = await navigator.serviceWorker.register(serviceWorkerUrl, { scope: './' });
+    const registration = await navigator.serviceWorker.register(serviceWorkerUrl, {
+      scope: './',
+      updateViaCache: 'none',
+    });
+    pwaRegistration = registration;
 
-    if (registration.waiting) showUpdatePrompt(registration);
+    if (registration.waiting) showUpdatePrompt();
 
     registration.addEventListener('updatefound', () => {
       const worker = registration.installing;
       if (!worker) return;
       worker.addEventListener('statechange', () => {
-        if (worker.state === 'installed' && navigator.serviceWorker.controller) {
-          showUpdatePrompt(registration);
-        }
+        if (worker.state === 'installed' && navigator.serviceWorker.controller) showUpdatePrompt();
       });
     });
 
@@ -77,11 +109,17 @@ async function registerPwa() {
       window.location.reload();
     });
 
-    const checkForUpdate = () => registration.update().catch(() => undefined);
+    const checkForUpdates = async () => {
+      await registration.update().catch(() => undefined);
+      await checkPublishedVersion();
+    };
+
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') void checkForUpdate();
+      if (document.visibilityState === 'visible') void checkForUpdates();
     });
-    window.setInterval(checkForUpdate, 60 * 60 * 1000);
+    window.setInterval(checkForUpdates, 60 * 60 * 1000);
+
+    await checkForUpdates();
   } catch (error) {
     console.warn('[pwa] Service worker registration failed.', error);
   }
