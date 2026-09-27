@@ -19,7 +19,7 @@ assert(typeof queue.generatedAt === 'string' && !Number.isNaN(Date.parse(queue.g
 assert(/^\d{4}-\d{2}-\d{2}$/.test(queue.radarDate ?? ''), 'radarDate must be YYYY-MM-DD');
 assert(queue.method?.name === 'deterministic_research_priority_v1', 'unexpected queue method');
 assert(/not opportunity|not an opportunity score|not a success probability/i.test(queue.method?.statement ?? ''), 'method must explicitly reject predictive scoring');
-assert(Array.isArray(queue.limitations) && queue.limitations.some((value) => /not a download count/i.test(value)), 'rank/download limitation must be explicit');
+assert(Array.isArray(queue.limitations) && queue.limitations.some((value) => /not a download count|neither is a download count/i.test(value)), 'rank/download limitation must be explicit');
 assert(Array.isArray(queue.candidates), 'candidates must be an array');
 assert(queue.candidates.length <= 12, 'candidate queue must stay capped at 12');
 
