@@ -43,6 +43,9 @@ jobs:
       - name: Rebuild factual data health from updated policy state
         run: node scripts/build-data-health.mjs
 
+      - name: Require current trend signals in Data Health
+        run: node scripts/augment-trend-health.mjs
+
       - name: Validate data health semantics
         run: node scripts/validate-data-health.mjs
 

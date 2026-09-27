@@ -21,6 +21,7 @@ on:
       - 'scripts/build-research-digest.mjs'
       - 'scripts/validate-research-digest.mjs'
       - 'scripts/build-data-health.mjs'
+      - 'scripts/augment-trend-health.mjs'
       - 'scripts/validate-data-health.mjs'
       - '.github/workflows/apple-radar.yml'
 
@@ -85,6 +86,8 @@ jobs:
         run: node scripts/validate-research-digest.mjs
       - name: Build factual data health report
         run: node scripts/build-data-health.mjs
+      - name: Require current trend signals in Data Health
+        run: node scripts/augment-trend-health.mjs
       - name: Validate data health semantics
         run: node scripts/validate-data-health.mjs
       - name: Write run summary

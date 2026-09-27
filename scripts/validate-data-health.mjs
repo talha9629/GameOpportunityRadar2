@@ -9,7 +9,7 @@ assert(health.schemaVersion === 1, 'schemaVersion must be 1');
 assert(['ready', 'ready_with_maturing_history', 'degraded', 'blocked'].includes(health.overall), 'invalid overall health');
 assert(typeof health.generatedAt === 'string' && !Number.isNaN(Date.parse(health.generatedAt)), 'generatedAt invalid');
 assert(typeof health.statement === 'string' && /does not score game opportunities/i.test(health.statement), 'health statement must reject opportunity scoring');
-assert(Array.isArray(health.components) && health.components.length >= 8, 'health components missing');
+assert(Array.isArray(health.components) && health.components.length >= 9, 'health components missing');
 assert(Array.isArray(health.recommendedActions), 'recommendedActions must be an array');
 
 const allowedStates = new Set(['healthy', 'degraded', 'blocked', 'maturing', 'optional']);
@@ -19,13 +19,14 @@ for (const item of health.components ?? []) {
   assert(Array.isArray(item.facts) && item.facts.length > 0, `${item.id} has no facts`);
 }
 const ids = new Set(health.components.map((item) => item.id));
-for (const required of ['apple_radar', 'research_queue', 'verification_queue', 'gameplay_discovery', 'history_maturity', 'research_digest', 'policy_watch', 'appbrain']) {
+for (const required of ['apple_radar', 'trend_signals', 'research_queue', 'verification_queue', 'gameplay_discovery', 'history_maturity', 'research_digest', 'policy_watch', 'appbrain']) {
   assert(ids.has(required), `missing required health component ${required}`);
 }
 
-const essentialIds = new Set(['apple_radar', 'research_queue', 'verification_queue', 'policy_watch']);
+const essentialIds = new Set(['apple_radar', 'trend_signals', 'research_queue', 'verification_queue', 'policy_watch']);
 const essential = health.components.filter((item) => essentialIds.has(item.id));
 assert(health.essentialCount === essential.length, 'essentialCount mismatch');
+assert(health.essentialCount === 5, 'trend signals must be part of the 5 essential pipelines');
 assert(health.essentialHealthy === essential.filter((item) => item.state === 'healthy').length, 'essentialHealthy mismatch');
 if (essential.some((item) => item.state === 'blocked')) assert(health.overall === 'blocked', 'blocked essential component must block overall health');
 if (!essential.some((item) => item.state === 'blocked') && essential.some((item) => item.state === 'degraded')) assert(health.overall === 'degraded', 'degraded essential component must degrade overall health');
@@ -40,6 +41,13 @@ for (const action of health.recommendedActions ?? []) {
 }
 
 assert(Number.isInteger(health.facts?.exactHistoryDays) && health.facts.exactHistoryDays >= 0, 'exactHistoryDays invalid');
+assert(Number.isInteger(health.facts?.trendSignalCount) && health.facts.trendSignalCount >= 0, 'trendSignalCount invalid');
+assert(Number.isInteger(health.facts?.trendExpectedSignalCount) && health.facts.trendExpectedSignalCount >= 0, 'trendExpectedSignalCount invalid');
+assert(Number.isInteger(health.facts?.trendHealthyMarketCount) && health.facts.trendHealthyMarketCount >= 0, 'trendHealthyMarketCount invalid');
+assert(Number.isInteger(health.facts?.trendExpectedMarketCount) && health.facts.trendExpectedMarketCount >= 0, 'trendExpectedMarketCount invalid');
+assert(typeof health.facts?.trendDerivedFromCurrentRadar === 'boolean', 'trendDerivedFromCurrentRadar invalid');
+assert(typeof health.facts?.trendChartDepthMatches === 'boolean', 'trendChartDepthMatches invalid');
+assert(health.facts?.trendStateCounts && typeof health.facts.trendStateCounts === 'object' && !Array.isArray(health.facts.trendStateCounts), 'trendStateCounts invalid');
 assert(Number.isInteger(health.facts?.verificationTaskCount) && health.facts.verificationTaskCount >= 0, 'verificationTaskCount invalid');
 assert(Number.isInteger(health.facts?.verificationRawTaskCount) && health.facts.verificationRawTaskCount >= 0, 'verificationRawTaskCount invalid');
 assert(Number.isInteger(health.facts?.verificationOmittedTaskCount) && health.facts.verificationOmittedTaskCount >= 0, 'verificationOmittedTaskCount invalid');
@@ -52,6 +60,15 @@ assert(typeof health.facts?.gameplayDiscoveryConfigured === 'boolean', 'gameplay
 assert(Number.isInteger(health.facts?.gameplayDiscoveryCandidateCount) && health.facts.gameplayDiscoveryCandidateCount >= 0 && health.facts.gameplayDiscoveryCandidateCount <= 24, 'gameplayDiscoveryCandidateCount invalid');
 assert(typeof health.facts?.gameplayDiscoveryDerivedFromCurrentVerification === 'boolean', 'gameplayDiscoveryDerivedFromCurrentVerification invalid');
 assert(typeof health.facts?.appBrainConfigured === 'boolean', 'appBrainConfigured invalid');
+
+const trendComponent = health.components.find((item) => item.id === 'trend_signals');
+if (trendComponent?.state === 'healthy') {
+  assert(health.facts.trendDerivedFromCurrentRadar === true, 'healthy trend signals must derive from current Radar');
+  assert(health.facts.trendChartDepthMatches === true, 'healthy trend signals must match Radar chart depth');
+  assert(health.facts.trendSignalCount === health.facts.trendExpectedSignalCount, 'healthy trend signals must cover every current chart row');
+  assert(health.facts.trendHealthyMarketCount === health.facts.trendExpectedMarketCount, 'healthy trend signals must cover every healthy Games market');
+}
+assert(trendComponent?.facts?.some((fact) => /not downloads, revenue, market share, probability, or a build recommendation/i.test(fact)), 'trend health must expose the rank-only evidence boundary');
 
 const verificationComponent = health.components.find((item) => item.id === 'verification_queue');
 if (verificationComponent?.state === 'healthy') {
@@ -78,4 +95,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · verification ${health.facts.verificationTaskCount}/${health.facts.verificationRawTaskCount}, omitted ${health.facts.verificationOmittedTaskCount} · discovery ${health.facts.gameplayDiscoveryCandidateCount} candidate(s) · sessions ${health.facts.verificationCaptureSessionCount}/${health.facts.verificationGroupedEvidenceTaskCount} grouped task(s) · ${health.recommendedActions.length} action(s)`);
+console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · trends ${health.facts.trendSignalCount}/${health.facts.trendExpectedSignalCount} · verification ${health.facts.verificationTaskCount}/${health.facts.verificationRawTaskCount}, omitted ${health.facts.verificationOmittedTaskCount} · discovery ${health.facts.gameplayDiscoveryCandidateCount} candidate(s) · sessions ${health.facts.verificationCaptureSessionCount}/${health.facts.verificationGroupedEvidenceTaskCount} grouped task(s) · ${health.recommendedActions.length} action(s)`);
