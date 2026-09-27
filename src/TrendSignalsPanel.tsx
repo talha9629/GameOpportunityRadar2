@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowUp, Search, TrendingUp } from 'lucide-react';
-import { strongestTrendSignals, type TrendSignalsPayload } from './trendSignals';
+import { strongestTrendSignals, trendWindowStatusCounts, type TrendSignalsPayload } from './trendSignals';
 import './trendSignals.css';
 
 function evidenceWindow(signal: ReturnType<typeof strongestTrendSignals>[number]) {
@@ -18,6 +18,8 @@ export function TrendSignalsPanel({ payload, onAnalyze }: {
 }) {
   const strongest = strongestTrendSignals(payload, 12);
   const counts = payload.summary.stateCounts;
+  const windowCounts = trendWindowStatusCounts(payload);
+  const incomparable = windowCounts.coverage_gap + windowCounts.source_mismatch + windowCounts.market_failed;
 
   return <section className="panel trend-signals-panel">
     <div className="section-heading">
@@ -32,6 +34,16 @@ export function TrendSignalsPanel({ payload, onAnalyze }: {
       {(['EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING', 'INSUFFICIENT_DATA'] as const).map((state) => (
         <span key={state} className={`trend-state trend-${state.toLowerCase()}`}><b>{counts[state] ?? 0}</b> {state.replaceAll('_', ' ')}</span>
       ))}
+    </div>
+
+    <div className="trend-window-health" aria-label="Exact comparison health">
+      <span><b>{windowCounts.available}</b> exact comparisons</span>
+      <span><b>{windowCounts.history_missing}</b> missing exact dates</span>
+      <span><b>{windowCounts.not_ranked}</b> comparable prior absences</span>
+      {incomparable > 0 && <span className="warning"><b>{incomparable}</b> incomparable windows</span>}
+      {windowCounts.coverage_gap > 0 && <small>{windowCounts.coverage_gap} window{windowCounts.coverage_gap === 1 ? '' : 's'} fall outside shallower historical chart coverage.</small>}
+      {windowCounts.source_mismatch > 0 && <small>{windowCounts.source_mismatch} window{windowCounts.source_mismatch === 1 ? '' : 's'} use a different chart source and are excluded from direction.</small>}
+      {windowCounts.market_failed > 0 && <small>{windowCounts.market_failed} comparison window{windowCounts.market_failed === 1 ? '' : 's'} could not be evaluated because that market failed collection.</small>}
     </div>
 
     {strongest.length === 0
