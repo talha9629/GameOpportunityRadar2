@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T02:50:56.708Z",
+  "generatedAt": "2026-09-27T03:55:08.727Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -88,7 +88,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "5 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "0.9h policy-index age",
+        "1.9h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -113,7 +113,7 @@
         "4/4 healthy Games market(s) represented",
         "chart depth matches Top 100",
         "derived from current Apple Radar snapshot",
-        "INSUFFICIENT_DATA 374 · RISING 26",
+        "INSUFFICIENT_DATA 400",
         "0.0h trend-signal age",
         "Visibility is a bounded chart-position heuristic; it is not downloads, revenue, market share, probability, or a build recommendation."
       ],
@@ -172,8 +172,7 @@
     "trendDerivedFromCurrentRadar": true,
     "trendChartDepthMatches": true,
     "trendStateCounts": {
-      "INSUFFICIENT_DATA": 374,
-      "RISING": 26
+      "INSUFFICIENT_DATA": 400
     }
   }
 }

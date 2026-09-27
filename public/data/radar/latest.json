@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-09-27T02:50:51.481Z",
+  "generatedAt": "2026-09-27T03:54:59.381Z",
   "chart": "top-free",
   "category": "Games",
   "chartDepth": 100,
@@ -16,7 +16,7 @@
       "sourceUrl": "https://itunes.apple.com/us/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T02:50:51.481Z",
+      "observedAt": "2026-09-27T03:54:59.381Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -1439,7 +1439,7 @@
       "sourceUrl": "https://itunes.apple.com/gb/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T02:50:51.481Z",
+      "observedAt": "2026-09-27T03:54:59.381Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -2866,7 +2866,7 @@
       "sourceUrl": "https://itunes.apple.com/ca/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T02:50:51.481Z",
+      "observedAt": "2026-09-27T03:54:59.381Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -4291,7 +4291,7 @@
       "sourceUrl": "https://itunes.apple.com/au/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T02:50:51.481Z",
+      "observedAt": "2026-09-27T03:54:59.381Z",
       "refreshStatus": "fresh",
       "entries": [
         {
