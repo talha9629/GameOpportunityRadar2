@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T01:45:22.293Z",
-  "verificationGeneratedAt": "2026-09-27T01:45:22.171Z",
+  "generatedAt": "2026-09-27T01:51:29.461Z",
+  "verificationGeneratedAt": "2026-09-27T01:51:29.357Z",
   "statement": "Public gameplay discovery proposes search candidates only. A URL is not gameplay evidence until it is saved into Deep Verify, analyzed or inspected, and its timestamped findings receive explicit human review.",
   "provider": {
     "name": "Tavily",
