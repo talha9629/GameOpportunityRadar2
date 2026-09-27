@@ -28,5 +28,21 @@
 .platform-source-note { padding: 10px 12px; border: 1px dashed #344965; border-radius: 10px; color: #91a6bf; font-size: 11px; line-height: 1.5; }
 @media (max-width: 1160px) { .workspace-header-right .workspace-status { display: none; } }
 @media (max-width: 980px) { .platform-capability-grid { grid-template-columns: 1fr; } }
-@media (max-width: 860px) { .workspace-header { align-items: flex-start; } .workspace-header-right { max-width: 55vw; } .platform-scope-selector > span { display: none; } .platform-scope-buttons { max-width: 55vw; justify-content: flex-end; } }
-@media (max-width: 620px) { .workspace-header-right { max-width: 58vw; } .platform-scope-buttons button { padding: 6px 7px; font-size: 10px; } }
+@media (max-width: 860px) {
+  .workspace-header-right { flex: 0 0 auto; max-width: 50vw; }
+  .platform-scope-selector > span { display: none; }
+  .platform-scope-buttons { flex-wrap: nowrap; justify-content: flex-end; }
+  .platform-scope-buttons button { min-height: 40px; padding: 7px 9px; }
+}
+@media (max-width: 620px) {
+  .workspace-header-right { max-width: 52vw; }
+  .platform-scope-buttons button { min-height: 40px; padding: 6px 8px; font-size: 10px; }
+}
+@media (max-width: 440px) {
+  .workspace-header { flex-wrap: wrap; }
+  .workspace-header-left { width: 100%; }
+  .workspace-header-right { width: 100%; max-width: none; justify-content: flex-start; }
+  .platform-scope-selector { width: 100%; }
+  .platform-scope-buttons { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .platform-scope-buttons button { justify-content: center; min-width: 0; }
+}
