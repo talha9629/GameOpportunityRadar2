@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-09-27T13:32:18.169Z",
+  "generatedAt": "2026-09-27T14:20:55.131Z",
   "chart": "top-free",
   "category": "Games",
   "chartDepth": 100,
@@ -16,7 +16,7 @@
       "sourceUrl": "https://itunes.apple.com/us/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T13:32:18.169Z",
+      "observedAt": "2026-09-27T14:20:55.131Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -1451,7 +1451,7 @@
       "sourceUrl": "https://itunes.apple.com/gb/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T13:32:18.169Z",
+      "observedAt": "2026-09-27T14:20:55.131Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -2315,7 +2315,7 @@
           "appId": "6747028173",
           "name": "Hole Stars: Puzzle Game",
           "publisher": "Moon Active",
-          "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a0/c5/cc/a0c5ccbc-2b12-943d-858e-c4b0f184388a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+          "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/01/fa/01/01fa01b0-d0b6-f63f-a67b-4227ff759314/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
           "storeUrl": "https://apps.apple.com/gb/app/hole-stars-puzzle-game/id6747028173?uo=2",
           "priorRank": 41,
           "delta": -21,
@@ -2878,7 +2878,7 @@
       "sourceUrl": "https://itunes.apple.com/ca/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T13:32:18.169Z",
+      "observedAt": "2026-09-27T14:20:55.131Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -4311,7 +4311,7 @@
       "sourceUrl": "https://itunes.apple.com/au/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T13:32:18.169Z",
+      "observedAt": "2026-09-27T14:20:55.131Z",
       "refreshStatus": "fresh",
       "entries": [
         {

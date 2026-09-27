@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T13:32:26.129Z",
+  "generatedAt": "2026-09-27T14:21:17.916Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -46,17 +46,17 @@
     {
       "id": "gameplay_discovery",
       "label": "Public Gameplay Source Discovery",
-      "state": "optional",
+      "state": "healthy",
       "facts": [
-        "None status unconfigured",
-        "0/8 capture session(s) have public source suggestion(s)",
-        "0 suggested YouTube source(s)",
-        "0/8 provider request cap used",
-        "0 search queries reported by provider",
+        "Tavily status complete",
+        "6/8 capture session(s) have public source suggestion(s)",
+        "18 suggested YouTube source(s)",
+        "8/8 provider request cap used",
+        "8 search queries reported by provider",
         "derived from current verification queue",
         "Search candidates are not verified gameplay evidence; new v2 candidates are independently checked for public YouTube availability."
       ],
-      "action": "Optional only: configure TAVILY_API_KEY or GEMINI_API_KEY in GitHub Actions for bounded public gameplay source suggestions."
+      "action": null
     },
     {
       "id": "history_maturity",
@@ -88,7 +88,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "5 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "3.0h policy-index age",
+        "3.8h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -126,17 +126,12 @@
       "action": "DEEP_VERIFY_TOP_CANDIDATE",
       "appId": "6793924927",
       "name": "Rotate Rings",
-      "why": "The highest-priority candidate still has an explicit gameplay-verification unknown."
+      "why": "The highest-priority candidate still has an explicit gameplay-verification unknown; 3 public source suggestion(s) are available for inspection."
     },
     {
       "priority": 4,
       "action": "KEEP_COLLECTING_EXACT_HISTORY",
       "why": "Only 2 exact daily snapshot(s) exist; no 3-day direction should be claimed yet."
-    },
-    {
-      "priority": 8,
-      "action": "OPTIONAL_CONFIGURE_GAMEPLAY_DISCOVERY",
-      "why": "Tavily or Gemini Search can propose bounded public gameplay sources for Deep Verify without changing first-party research priority or resolving evidence automatically."
     },
     {
       "priority": 9,
@@ -154,11 +149,11 @@
     "verificationCaptureSessionCount": 8,
     "verificationGroupedEvidenceTaskCount": 24,
     "verificationDerivedFromCurrentQueue": true,
-    "gameplayDiscoveryConfigured": false,
-    "gameplayDiscoveryProvider": "none",
-    "gameplayDiscoveryCandidateCount": 0,
-    "gameplayDiscoveryRequestsUsed": 0,
-    "gameplayDiscoverySearchQueriesUsed": 0,
+    "gameplayDiscoveryConfigured": true,
+    "gameplayDiscoveryProvider": "tavily",
+    "gameplayDiscoveryCandidateCount": 18,
+    "gameplayDiscoveryRequestsUsed": 8,
+    "gameplayDiscoverySearchQueriesUsed": 8,
     "gameplayDiscoveryDerivedFromCurrentVerification": true,
     "policyDetectedChangeCount": 0,
     "confirmedPolicyChanges": 0,

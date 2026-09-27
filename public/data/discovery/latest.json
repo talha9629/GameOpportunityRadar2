@@ -1,24 +1,24 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-27T13:32:25.971Z",
-  "verificationGeneratedAt": "2026-09-27T13:32:25.896Z",
+  "generatedAt": "2026-09-27T14:21:02.782Z",
+  "verificationGeneratedAt": "2026-09-27T14:21:02.401Z",
   "statement": "Public gameplay discovery proposes search candidates only. A URL is not gameplay evidence until it is saved into Deep Verify, analyzed or inspected, and its timestamped findings receive explicit human review.",
   "provider": {
-    "key": "none",
-    "name": "None",
-    "status": "unconfigured",
+    "key": "tavily",
+    "name": "Tavily",
+    "status": "complete",
     "sourceOrigin": "third_party_public_search",
     "sourceMode": "assisted",
-    "mode": "unconfigured",
+    "mode": "tavily_basic",
     "model": null,
-    "costModel": "unconfigured",
+    "costModel": "tavily_basic_search_1_credit_per_request",
     "dailyRequestCap": 8,
-    "requestsUsedThisRun": 0,
-    "searchQueriesUsedThisRun": 0,
-    "attemptedSessions": 0,
-    "successfulSearches": 0,
+    "requestsUsedThisRun": 8,
+    "searchQueriesUsedThisRun": 8,
+    "attemptedSessions": 8,
+    "successfulSearches": 8,
     "failedSearches": 0,
-    "note": "Neither TAVILY_API_KEY nor GEMINI_API_KEY is configured in GitHub Actions. Gameplay discovery is optional and the verification queue remains usable without it."
+    "note": "Tavily Basic search is domain-filtered to YouTube. Every stored candidate is then confirmed public through YouTube oEmbed; discovery never verifies gameplay content."
   },
   "sessions": [
     {
@@ -27,11 +27,59 @@
       "name": "Rotate Rings",
       "queueRank": 1,
       "query": "\"Rotate Rings\" gameplay walkthrough menu monetization progression",
-      "providerKey": "none",
-      "searchQueries": [],
-      "searchedAt": null,
-      "status": "unconfigured",
-      "candidates": [],
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Rotate Rings\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-27T14:21:02.782Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=yRxkndTfRN0",
+          "title": "The ULTIMATE Guide to the WorldBox 0.50 Update (Mobile Too)",
+          "snippet": "[0:24] there's something that you want to see, just watch until you see it, then click off if you want. I'm going to try to showcase literally everything about the [0:31] new update. So, let's begin. And if you like this video, you should join my Discord in case you want to point out anything I may have missed in this video [0:40] or if there's anything else that you need further explaining on. So, go check it out. The very first thing I'm going to do is unlock everything because, as [...] #worldbox #worldboxupdate #worldboxnewupdate #worldboxgameplay #worldboxgodsimulator #newworldboxupdate #worldboxsimulation #simulation #simulator #evolution #worldboxspecies #newworldboxspecies #evolution",
+          "score": 0.017060088,
+          "channelName": "Jackal",
+          "thumbnailUrl": "https://i.ytimg.com/vi/yRxkndTfRN0/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:04.981Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=INUdPETwnOE",
+          "title": "EVERYTHING You NEED To KNOW About Pixel Quest FULL Guide",
+          "snippet": "As promised I have finished a guide on Pixel Quest that gives you a basic understanding how certain things work in the game, tread carefully",
+          "score": 0.012432874,
+          "channelName": "Vaporbaby",
+          "thumbnailUrl": "https://i.ytimg.com/vi/INUdPETwnOE/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:05.052Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=D7JNXpoBACI",
+          "title": "How To Change Age On TikTok",
+          "snippet": "Here's how to change your age on TikTok if it doesn't have your correct date of birth on your account. How To Make More Money While Working 40",
+          "score": 0.009747066,
+          "channelName": "Trevor Nace",
+          "thumbnailUrl": "https://i.ytimg.com/vi/D7JNXpoBACI/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:05.119Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
       "error": null
     },
     {
@@ -40,11 +88,59 @@
       "name": "NoomiClone",
       "queueRank": 2,
       "query": "\"NoomiClone\" gameplay walkthrough menu monetization progression",
-      "providerKey": "none",
-      "searchQueries": [],
-      "searchedAt": null,
-      "status": "unconfigured",
-      "candidates": [],
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"NoomiClone\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-27T14:21:05.119Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=ar8mmiWz89Y",
+          "title": "Rise of Angels – Character Progression, New Gameplay & Walkthrough! (ROA)",
+          "snippet": "mes 4790 subscribers 6 likes 56 views 22 Oct 2025 Rise of Angels – Character Progression, New Gameplay & Walkthrough! (ROA) #riseofangels #riseofangelsgameplay #roa 🔷Djef Games https://www.youtube.com/c/DjefGames 🔷Video in youtube https://youtu.be/ar8mmiWz89Y 🔷Recomended Video https://www.youtube.com/watch?v=9kxxFQCwZv0 https://www.youtube.com/watch?v=9kxxFQCwZv0 https://www.youtube.com/watch?v=4vypA4JSgWI 🔷Music By Still Calling Signal Lost Tidal Call! Sunrise Pulse Elevate 🔷Photo by and edit Rise of Angels canva.com photoshop This channel is created to promote splendid game. If there is any problem with uploaded content, please contact us and we will resolve the issue as soon as possi",
+          "score": 0.07694017,
+          "channelName": "Djef Games",
+          "thumbnailUrl": "https://i.ytimg.com/vi/ar8mmiWz89Y/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:07.719Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=EBb3bN_npWc",
+          "title": "Pixel Blade Roblox Gameplay Walkthrough | Early Progression",
+          "snippet": "lox 983 subscribers 3 likes 92 views 29 Nov 2025 🚀 Just raw Pixel Blade gameplay — me loading in, fighting everything that moves, and pretending I know what I’m doing. If you want to see the full progression, the struggles, the wins, and the moments where I question my life choices… this is the video. Gameplay includes: – Full early-game run – Gear upgrades, drops, and zone clears – Boss fights that disrespect my sanity – Real progression with zero cuts, zero lies Sit back. Watch the chaos. Learn something by accident. Tags pixel blade, pixel blade gameplay, pixel blade walkthrough, pixel blade playthrough, roblox pixel blade gameplay, pixel blade roblox, pixel blade full run, pixel blade p",
+          "score": 0.06738094,
+          "channelName": "KiraX Blox",
+          "thumbnailUrl": "https://i.ytimg.com/vi/EBb3bN_npWc/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:07.863Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=hWLzQwDLxPk",
+          "title": "Honkai: Nexus Anima Gameplay Walkthrough | Missions, Fights & Level 5-11 Progression",
+          "snippet": "Title: Honkai: Nexus Anima Gameplay Walkthrough | Missions, Fights & Level 5-11 Progression # Honkai: Nexus Anima Gameplay Walkthrough | Missions, Fights & Level 5-11 Progression. Step into the world of Honkai: Nexus Anima and join me as I play through missions, tasks, and epic fights up to Level 11! 🚀 In this gameplay walkthrough, you’ll see how the early progression works, what challenges await, and how combat feels in the latest Honkai universe experience. If you’re curious about the mechanics, missions, and battle flow, this video gives you a clear look at the start of the adventure. Perfect for both newcomers and long-time Honkai fans looking to see what Nexus Anima has to offer. 👉 Do",
+          "score": 0.057966188,
+          "channelName": "ValencianistasPL",
+          "thumbnailUrl": "https://i.ytimg.com/vi/hWLzQwDLxPk/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:07.923Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
       "error": null
     },
     {
@@ -53,11 +149,59 @@
       "name": "CrownCards - Trading Cards",
       "queueRank": 3,
       "query": "\"CrownCards - Trading Cards\" gameplay walkthrough menu monetization progression",
-      "providerKey": "none",
-      "searchQueries": [],
-      "searchedAt": null,
-      "status": "unconfigured",
-      "candidates": [],
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"CrownCards - Trading Cards\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-27T14:21:07.923Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=fjNruk_szo4",
+          "title": "Card Evolution: TCG hyper game - Gameplay Walkthrough Part 5 - Android Gameplay",
+          "snippet": "Gameplay 13100 subscribers 19 views 4 Dec 2024 Card Evolution: TCG hyper game - Gameplay Walkthrough Part 5 - Android Gameplay 👍Like and Subscribe for more video games 📱Game Description: Grow and evolve your trading cards collection: collect cards, unlock new character series - ranging from sports to monsters - and build the most powerful hyper cards collection in one of your favorite trading card games. Battle against other tcg card thrower players, like cards against humanity to become the greatest card collector and earn money to unlock card stack, collect cards and make cards combos, just like card animation throwdown and card shuffle sort. Be the owner of the world's rarest and most e",
+          "score": 0.21718012,
+          "channelName": "Mobile Gameplay",
+          "thumbnailUrl": "https://i.ytimg.com/vi/fjNruk_szo4/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:09.344Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=nCVdhUhonKs",
+          "title": "Pokémon Trading Card Game Part 1 THE LEGENDARY CARDS Gameplay Walkthrough Nintendo Switch",
+          "snippet": "[28:14] [Music] [28:18] go for another emblem we can finish you off the lightning on you [28:26] and then we'll just have to attack we got a fire energy I don't know if we can pitch any energy oops it's fine it's fine [28:34] [Music] [28:36] price card come on give me a good prize potion I'll take that if we draw a fire energy oh that Oddish is super duper dead [28:44] [Music] [28:47] oh to jinx okay stun Spore please don't get heads please don't get heads [...] [8:31] into Starmie so we're probably gonna draw Starmie next turn to do that and then we'll attach that water energy sweets that's free and then we are going [8:40] to attack with slap that's 20 damage [8:48] I'm gonna evolve to mat",
+          "score": 0.1779683,
+          "channelName": "HeroVoltsyTCG",
+          "thumbnailUrl": "https://i.ytimg.com/vi/nCVdhUhonKs/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:09.424Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=TISmNwasvCw",
+          "title": "$10,000 MAX WIN on CrownCards! (100X PULL)",
+          "snippet": "755000 subscribers 8 likes 455 views 12 Jul 2026 I loaded $10,000 into CrownCards the BEST Pokemon Trading Cards App and went ALL IN on the biggest packs! Only $500, $1,000, and $2,500 pulls, no small packs, chasing the $100,000 MAX WIN! I almost lost my ENTIRE balance down to nothing... then hit a crazy comeback with some of the craziest grails l've ever pulled... 🪎GET A FREE PACK (worth up to $100) + enter my monthly giveaway for up to $10,000: 👉- https://apps.apple.com/app/crowncards-trading-cards/id6762010774 💎Use code “JOSH” for your free pack! This app is super similar to Rips by Triumph, which creators like TrueCeloLive and ObsidianX23 create videos on. If you love pack opening, ca",
+          "score": 0.14404073,
+          "channelName": "Whoods",
+          "thumbnailUrl": "https://i.ytimg.com/vi/TISmNwasvCw/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:09.496Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
       "error": null
     },
     {
@@ -66,11 +210,59 @@
       "name": "Colorever: Gem Art Puzzle",
       "queueRank": 4,
       "query": "\"Colorever: Gem Art Puzzle\" gameplay walkthrough menu monetization progression",
-      "providerKey": "none",
-      "searchQueries": [],
-      "searchedAt": null,
-      "status": "unconfigured",
-      "candidates": [],
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Colorever: Gem Art Puzzle\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-27T14:21:09.496Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=4nt6whbxmFg",
+          "title": "Colorever (by Oakever Games) IOS Gameplay Video (HD)",
+          "snippet": "hplayHD 71900 subscribers 281 views 2 Jun 2026 App description: Enter a relaxing world where puzzle, sort, and art come together. Sort sparkling gems/gem by color and shape, plan your moves, and watch beautiful pixel art come to life—one satisfying placement at a time. Easy to learn, calming to play, and rewarding to master. How to play Sort and place: Drag and sort gems into the right spots to solve each puzzle. Plan your space: Use shelves/slots wisely to organize, clear, and progress. Reveal pixel art: Every correct move fills the canvas and completes the artwork. Features you’ll love Pixel art puzzles with gem sorting: A soothing blend of puzzle, sort, and art. Growing gallery: A broad l",
+          "score": 0.62633044,
+          "channelName": "IOSTouchplayHD",
+          "thumbnailUrl": "https://i.ytimg.com/vi/4nt6whbxmFg/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:11.180Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=iqYbIsVvis4",
+          "title": "Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS",
+          "snippet": "Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS - YouTube. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS. 361 views 2 years ago#bubbleshooter#puzzle#games. 361 views • Premiered Oct 20, 2023 • #bubbleshooter #puzzle #games. Bubble Gem is a peaceful and calm puzzle pop game. Welcome to the Bubble Shooter Gem Pop puzzle shooting game world!…...more. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android I",
+          "score": 0.13648199,
+          "channelName": "Fazie Gamer",
+          "thumbnailUrl": "https://i.ytimg.com/vi/iqYbIsVvis4/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:11.254Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=cD3JrFPWS_I",
+          "title": "Colony Flow! Level 454 Solution/ Hard Puzzle Walkthrough",
+          "snippet": "Colony Flow offers hundreds of increasingly challenging levels with charming animations and no time pressure. In this video: • Full Colony Flow gameplay • Early level walkthrough • Puzzle-solving strategies • Relaxing no-commentary gameplay • Ant colony mechanics • Pixel art puzzle progression Whether you’re looking for a walkthrough, tips before downloading the game, or simply enjoy satisfying mobile puzzle games, I hope you enjoy watching! 👍 If you enjoyed this video, please Like, [...] Colony Flow Gameplay Walkthrough – Relaxing Ant Puzzle Game (No Commentary) Welcome to my full gameplay walkthrough of Colony Flow, a relaxing puzzle game where tiny worker ants transport colorful cubes to",
+          "score": 0.11288363,
+          "channelName": "Nova’s Puzzle Den",
+          "thumbnailUrl": "https://i.ytimg.com/vi/cD3JrFPWS_I/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:11.338Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
       "error": null
     },
     {
@@ -79,11 +271,59 @@
       "name": "Meowdoku!",
       "queueRank": 5,
       "query": "\"Meowdoku!\" gameplay walkthrough menu monetization progression",
-      "providerKey": "none",
-      "searchQueries": [],
-      "searchedAt": null,
-      "status": "unconfigured",
-      "candidates": [],
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Meowdoku!\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-27T14:21:11.338Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=qlv3OzlMdkI",
+          "title": "Meowdoku Puzzle Game Levels 1–100 Complete Solution | Full Gameplay Walkthrough",
+          "snippet": "🔥 All Levels Covered: Meowdoku Level 1 Meowdoku Level 2 Meowdoku Level 3 Meowdoku Level 4 Meowdoku Level 5 Meowdoku Level 6 Meowdoku Level 7 Meowdoku Level 8 Meowdoku Level 9 Meowdoku Level 10 Meowdoku Level 11 Meowdoku Level 12 Meowdoku Level 13 Meowdoku Level 14 Meowdoku Level 15 Meowdoku Level 16 Meowdoku Level 17 Meowdoku Level 18 Meowdoku Level 19 Meowdoku Level 20 Meowdoku Level 21 Meowdoku Level 22 Meowdoku Level 23 Meowdoku Level 24 Meowdoku Level 25 Meowdoku Level 26 Meowdoku Level 27 [...] Meowdoku Level 79 Meowdoku Level 80 Meowdoku Level 81 Meowdoku Level 82 Meowdoku Level 83 Meowdoku Level 84 Meowdoku Level 85 Meowdoku Level 86 Meowdoku Level 87 Meowdoku Level 88 Meowdoku Level",
+          "score": 0.45769477,
+          "channelName": "Rock Gaming Channel",
+          "thumbnailUrl": "https://i.ytimg.com/vi/qlv3OzlMdkI/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:12.402Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=3EiSxVM0FAo",
+          "title": "Meowdoku: Brain Puzzle Games All Levels 1-100 Full Walkthrough Solution | Complete Gameplay",
+          "snippet": "N ARENA 95800 subscribers 403 views 16 Jul 2026 Welcome to Meowdoku: Brain Puzzle Games! In this video, you'll find the complete walkthrough for Levels 1-100 with full gameplay solutions. If you're stuck on any level, this guide will help you solve every puzzle step by step. Meowdoku is a fun and relaxing logic puzzle game where you place one cat in each colored region while making sure no two cats share the same row, column, or touch diagonally. This video includes: All Levels 1-100 Complete Walkthrough Full Puzzle Solutions Brain Puzzle Guide Easy-to-Follow Solutions If you enjoy puzzle game walkthroughs, don't forget to Like, Subscribe, and Turn on Notifications for more complete game sol",
+          "score": 0.39515805,
+          "channelName": "GAMISTAN ARENA",
+          "thumbnailUrl": "https://i.ytimg.com/vi/3EiSxVM0FAo/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:12.469Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=my7pX7FELfg",
+          "title": "Meowdoku Level 61 walkthrough | full solution",
+          "snippet": "sh 8670 subscribers 24 views 10 Aug 2026 meowdoku level 61 walkthrough and full gameplay solution. watch step-by-step logic puzzle cat placement to pass this level of meowdoku: brain puzzle games by oakever games with zero mistakes. watch all levels walkthrough playlist: https://www.youtube.com/playlist?list=PLHjWbdWSc3jk in this video, learn how to clear the puzzle easily by following the correct row, column, diagonal, and colored region placement strategy. 📌 original content disclaimer: this gameplay video was recorded live on my own mobile device while playing the game myself and was fully edited by me. no third-party clips, reused footage, or other creator content was used in this video",
+          "score": 0.38456595,
+          "channelName": "Game Rush",
+          "thumbnailUrl": "https://i.ytimg.com/vi/my7pX7FELfg/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:12.541Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
       "error": null
     },
     {
@@ -92,11 +332,59 @@
       "name": "Gossip Harbor®: Merge & Story",
       "queueRank": 6,
       "query": "\"Gossip Harbor®: Merge & Story\" gameplay walkthrough menu monetization progression",
-      "providerKey": "none",
-      "searchQueries": [],
-      "searchedAt": null,
-      "status": "unconfigured",
-      "candidates": [],
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Gossip Harbor®: Merge & Story\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-27T14:21:12.542Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=fIZqtLFNs3M",
+          "title": "Gossip Harbor®: Merge & Story First Gameplay Walkthrough | Android / iOS",
+          "snippet": "Whip Up Tasty Dishes🥪 Serve coffee, sandwiches, seafood, and a range of other dishes, to your customers. The more you play, the more dishes you’ll find to add to your menu! Restore the Restaurant🧰 Rebuild and design the best beach restaurant around! Choose the flooring, wallpaper and furniture to restore restaurant to its former glory! Build Relationships💞 Converse with customers and hang out with old friends. Or explore the possibility of a new budding romance. [...] Welcome to Gossip Harbor 🌊 Follow Quinn Castillo as her picture perfect life on Brimwave Island crumbles around her. Divorce, sabotage and secrets. Help answer the question everyone's thinking: Who's trying to ruin her life",
+          "score": 0.72184175,
+          "channelName": "TA Plays Games",
+          "thumbnailUrl": "https://i.ytimg.com/vi/fIZqtLFNs3M/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:14.358Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=UGOJ_bSvTHU",
+          "title": "Gossip Harbor®: Merge & Story - Gameplay Walkthrough Part 1 - Android Gameplay",
+          "snippet": "Gameplay 13100 subscribers 4 likes 580 views 27 Nov 2025 Gossip Harbor®: Merge & Story - Gameplay Walkthrough Part 1 | Android Gameplay Welcome to Gossip Harbor®! 🍰✨ Dive into an exciting merge adventure filled with mystery, love, drama, and juicy gossip! In this Part 1 walkthrough, we’ll explore the beginning of the story, unlock new areas, and discover secrets hidden around the harbor! 🌊💕 🔥 Watch till the end for surprises! 👍 Don’t forget to LIKE, COMMENT, and SUBSCRIBE for more episodes! 📱 Game: Gossip Harbor®: Merge & Story 🎮 Platform: Android (Mobile Gameplay) 🎯 Genre: Merge Puzzle, Story Adventure ✨ What you’ll see in this video: ✔️ First look gameplay ✔️ How to merge items eff",
+          "score": 0.6202772,
+          "channelName": "Mobile Gameplay",
+          "thumbnailUrl": "https://i.ytimg.com/vi/UGOJ_bSvTHU/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:14.431Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=ldDxMg09sx0",
+          "title": "Gossip Harbor®: Merge & Story - Gameplay Walkthrough Part 8 - Android Gameplay",
+          "snippet": "Gameplay 13000 subscribers 47 views 18 Dec 2025 Gossip Harbor®: Merge & Story - Gameplay Walkthrough Part 8 | Android Gameplay Welcome to Gossip Harbor®! 🍰✨ Dive into an exciting merge adventure filled with mystery, love, drama, and juicy gossip! In this Part 8 walkthrough, we’ll explore the beginning of the story, unlock new areas, and discover secrets hidden around the harbor! 🌊💕 🔥 Watch till the end for surprises! 👍 Don’t forget to LIKE, COMMENT, and SUBSCRIBE for more episodes! 📱 Game: Gossip Harbor®: Merge & Story 🎮 Platform: Android (Mobile Gameplay) 🎯 Genre: Merge Puzzle, Story Adventure ✨ What you’ll see in this video: ✔️ First look gameplay ✔️ How to merge items efficiently",
+          "score": 0.5954225,
+          "channelName": "Mobile Gameplay",
+          "thumbnailUrl": "https://i.ytimg.com/vi/ldDxMg09sx0/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-27T14:21:14.499Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
       "error": null
     },
     {
@@ -105,10 +393,12 @@
       "name": "Block Out! - Color Sort Puzzle",
       "queueRank": 7,
       "query": "\"Block Out! - Color Sort Puzzle\" gameplay walkthrough menu monetization progression",
-      "providerKey": "none",
-      "searchQueries": [],
-      "searchedAt": null,
-      "status": "unconfigured",
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Block Out! - Color Sort Puzzle\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-27T14:21:14.499Z",
+      "status": "no_result",
       "candidates": [],
       "error": null
     },
@@ -118,10 +408,12 @@
       "name": "Minion Rush: Running game",
       "queueRank": 8,
       "query": "\"Minion Rush: Running game\" gameplay walkthrough menu monetization progression",
-      "providerKey": "none",
-      "searchQueries": [],
-      "searchedAt": null,
-      "status": "unconfigured",
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Minion Rush: Running game\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-27T14:21:16.061Z",
+      "status": "no_result",
       "candidates": [],
       "error": null
     }
