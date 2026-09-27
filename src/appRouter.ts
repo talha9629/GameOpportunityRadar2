@@ -113,48 +113,48 @@ export function navigateAppRoute(route: AppRoute, options: { replace?: boolean }
 
 export const APP_PAGE_META: Record<AppView, { title: string; section: string; description: string }> = {
   today: {
-    title: 'Today',
-    section: 'Discover',
+    title: 'Radar',
+    section: 'Radar',
     description: 'Current market evidence, data health, research queue, and exact-date changes.',
   },
   trends: {
     title: 'Trend Signals',
-    section: 'Discover',
+    section: 'Radar',
     description: 'Observed cross-market rank signals with explicit history maturity.',
   },
   verification: {
     title: 'Verify Queue',
-    section: 'Discover',
+    section: 'Verify',
     description: 'Route unresolved unknowns to the cheapest admissible evidence source.',
   },
   analyze: {
     title: 'Analyze Game',
-    section: 'Research',
+    section: 'Analyze',
     description: 'Build an evidence-backed store dossier and decision scorecard.',
   },
   saved: {
     title: 'Saved Dossiers',
-    section: 'Research',
+    section: 'Library',
     description: 'Reopen owner-saved analyses and their durable evidence snapshots.',
   },
   competitors: {
     title: 'Competitors',
-    section: 'Research',
+    section: 'Analyze',
     description: 'Map human-confirmed relationships and differentiation evidence.',
   },
   reviews: {
     title: 'Review Samples',
-    section: 'Research',
+    section: 'Analyze',
     description: 'Analyze supplied review samples without generalizing beyond the sample.',
   },
   'deep-verify': {
     title: 'Deep Verify',
-    section: 'Evidence',
+    section: 'Verify',
     description: 'Turn gameplay footage into timestamped, reviewable evidence.',
   },
   policy: {
     title: 'Policy Watch',
-    section: 'Governance',
+    section: 'Library',
     description: 'Track stability-confirmed changes on official Apple and Google policy sources.',
   },
 };
