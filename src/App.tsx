@@ -7,6 +7,7 @@ import { PolicyWatch } from './PolicyWatch';
 import { ReviewSamples } from './ReviewSamples';
 import { SavedDossiers } from './SavedDossiers';
 import { Today } from './Today';
+import { TrendSignalsPage } from './TrendSignalsPage';
 import { VerificationQueuePage } from './VerificationQueuePage';
 import { loadVerificationQueue, type VerificationCaptureSession } from './verificationQueue';
 import { latestEvidenceForSession } from './verificationEvidence';
@@ -15,7 +16,7 @@ import { subscribeDeepVerifyRequests } from './navigation';
 import { OwnerAccess } from './OwnerAccess';
 import { getOwnerUser, subscribeOwnerAuth } from './auth';
 
-type View = 'today' | 'verification' | 'analyze' | 'competitors' | 'reviews' | 'deep-verify' | 'policy' | 'saved';
+type View = 'today' | 'trends' | 'verification' | 'analyze' | 'competitors' | 'reviews' | 'deep-verify' | 'policy' | 'saved';
 
 type DeepVerifySeed = {
   session: VerificationCaptureSession;
@@ -98,6 +99,7 @@ export function App() {
         </div>
         <div className="nav-tabs">
           <button className={view === 'today' ? 'active' : ''} onClick={() => setView('today')}>Today</button>
+          <button className={view === 'trends' ? 'active' : ''} onClick={() => setView('trends')}>Trends</button>
           <button className={view === 'verification' ? 'active' : ''} onClick={() => setView('verification')}>Verify Queue</button>
           <button className={view === 'analyze' ? 'active' : ''} onClick={() => openAnalyze()}>Analyze Game</button>
           <button className={view === 'saved' ? 'active' : ''} onClick={() => setView('saved')}>Saved Dossiers</button>
@@ -109,6 +111,7 @@ export function App() {
         <OwnerAccess user={owner} />
       </nav>
       {view === 'today' && <Today onAnalyze={(appId) => openAnalyze(appId)} />}
+      {view === 'trends' && <TrendSignalsPage onAnalyze={(appId) => openAnalyze(appId)} />}
       {view === 'verification' && <VerificationQueuePage onDeepVerify={openDeepVerify} onCompetitors={() => setView('competitors')} />}
       {view === 'analyze' && <Analyze key={savedRunId ?? analyzeSeed ?? 'manual'} initialInput={analyzeSeed ?? ''} initialRunId={savedRunId} ownerEmail={owner?.email ?? null} />}
       {view === 'saved' && <SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} />}
