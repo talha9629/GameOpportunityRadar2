@@ -7,7 +7,7 @@ const errors = [];
 const assert = (condition, message) => { if (!condition) errors.push(message); };
 
 const allowedStates = new Set(['EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING', 'INSUFFICIENT_DATA']);
-const allowedWindowStates = new Set(['available', 'history_missing', 'not_ranked', 'market_failed']);
+const allowedWindowStates = new Set(['available', 'history_missing', 'not_ranked', 'market_failed', 'source_mismatch']);
 
 assert(signals.schemaVersion === 1, 'schemaVersion must be 1');
 assert(signals.radarGeneratedAt === radar.generatedAt, 'trend signals must derive from the current Radar snapshot');
@@ -17,6 +17,7 @@ assert(Number.isInteger(signals.chartDepth) && signals.chartDepth >= 10 && signa
 assert(signals.chartDepth === radar.chartDepth, 'trend chartDepth must match Radar chartDepth');
 assert(signals.method?.name === 'exact_rank_trend_signals_v1', 'unexpected trend method');
 assert(signals.method?.visibilityFormula === 'ln((N+1)/rank)/ln(N+1)', 'visibility formula changed');
+assert(/source_mismatch/i.test(signals.method?.sourceCompatibilityRule ?? ''), 'source compatibility rule must be explicit');
 assert(/not download share/i.test(signals.statement), 'statement must reject download-share interpretation');
 assert(/not.*build recommendation/i.test(signals.statement), 'statement must reject build recommendation');
 assert(!signals.method?.statesEmitted?.includes('CROWDED'), 'CROWDED cannot be emitted from rank evidence alone');
@@ -54,6 +55,8 @@ for (const [marketCode, market] of Object.entries(signals.markets ?? {})) {
       assert(Boolean(window), `${marketCode} ${signal.appId} missing ${key} window`);
       assert(allowedWindowStates.has(window?.status), `${marketCode} ${signal.appId} invalid ${key} status`);
       if (window?.status !== 'available') {
+        assert(window?.priorRank == null, `${marketCode} ${signal.appId} ${key} cannot carry priorRank for ${window?.status}`);
+        assert(window?.currentRank == null, `${marketCode} ${signal.appId} ${key} cannot carry currentRank for ${window?.status}`);
         assert(window?.delta == null, `${marketCode} ${signal.appId} ${key} cannot invent delta for ${window?.status}`);
       } else {
         assert(Number.isInteger(window?.priorRank) && Number.isInteger(window?.currentRank), `${marketCode} ${signal.appId} ${key} available window requires ranks`);
@@ -88,4 +91,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`[trend-signals] validation PASS · ${signalCount} exact chart signal(s) · ${JSON.stringify(stateCounts)}`);
+console.log(`[trend-signals] validation PASS · ${signalCount} exact chart signal(s) · source-safe windows · ${JSON.stringify(stateCounts)}`);
