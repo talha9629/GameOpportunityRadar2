@@ -6,6 +6,7 @@ import {
   ArrowLeft,
   ArrowRight,
   BarChart3,
+  Download,
   FlaskConical,
   ListChecks,
   Menu,
@@ -22,6 +23,11 @@ import { APP_PAGE_META, type AppRoute, type AppView } from './appRouter';
 import { PlatformScopeSelector } from './PlatformScopeSelector';
 import type { PlatformScope } from './platformScope';
 import './app-shell.css';
+
+type BeforeInstallPromptEvent = Event & {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+};
 
 const groups: Array<{
   label: string;
@@ -78,6 +84,7 @@ export function AppShell({
   children: ReactNode;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const meta = APP_PAGE_META[route.view];
   const moreActive = !mobilePrimaryViews.has(route.view);
 
@@ -95,9 +102,36 @@ export function AppShell({
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    const nav = navigator as Navigator & { standalone?: boolean };
+    const alreadyInstalled = window.matchMedia('(display-mode: standalone)').matches || nav.standalone === true;
+    if (alreadyInstalled) return;
+
+    const onBeforeInstall = (event: Event) => {
+      event.preventDefault();
+      setInstallPrompt(event as BeforeInstallPromptEvent);
+    };
+    const onInstalled = () => setInstallPrompt(null);
+
+    window.addEventListener('beforeinstallprompt', onBeforeInstall);
+    window.addEventListener('appinstalled', onInstalled);
+    return () => {
+      window.removeEventListener('beforeinstallprompt', onBeforeInstall);
+      window.removeEventListener('appinstalled', onInstalled);
+    };
+  }, []);
+
   function navigate(view: AppView) {
     onNavigate(view);
     setMobileOpen(false);
+  }
+
+  async function installApp() {
+    if (!installPrompt) return;
+    const prompt = installPrompt;
+    setInstallPrompt(null);
+    await prompt.prompt();
+    await prompt.userChoice.catch(() => undefined);
   }
 
   return <div className="app-frame">
@@ -132,6 +166,13 @@ export function AppShell({
       </nav>
 
       <div className="sidebar-footer">
+        {installPrompt && <button className="install-app-button" onClick={() => void installApp()}>
+          <Download size={17} />
+          <span>
+            <strong>Install Radar</strong>
+            <small>Keep the auto-updating app on this device</small>
+          </span>
+        </button>}
         <div className="sidebar-principle">
           <FlaskConical size={15} />
           <span>Evidence before automation</span>

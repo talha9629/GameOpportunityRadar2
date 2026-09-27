@@ -62,6 +62,24 @@
 .sidebar-link.active svg { color: #67d4ff; }
 
 .sidebar-footer { margin-top: auto; display: grid; gap: 10px; }
+.install-app-button {
+  width: 100%;
+  min-height: 54px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 10px 11px;
+  text-align: left;
+  color: #eaf8ff;
+  border-color: #315778;
+  background: linear-gradient(135deg, #14324a, #0d2236);
+}
+.install-app-button:hover { border-color: #4a8bb7; background: linear-gradient(135deg, #173a55, #102942); }
+.install-app-button svg { color: #67d4ff; }
+.install-app-button span { min-width: 0; display: grid; gap: 2px; }
+.install-app-button strong { font-size: 12px; }
+.install-app-button small { color: #8ea5bf; font-size: 9px; line-height: 1.35; font-weight: 600; }
 .sidebar-principle {
   display: flex;
   align-items: center;
