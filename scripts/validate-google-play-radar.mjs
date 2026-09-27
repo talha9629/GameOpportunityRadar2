@@ -18,7 +18,7 @@ if (data.source?.origin !== 'third_party_public') fail('rank origin must be thir
 if (data.source?.estimateOrigin !== 'third_party_estimate') fail('estimate origin must be third_party_estimate');
 if (data.source?.countryScope !== 'provider_global_not_country_specific') fail('country scope must not imply a storefront market');
 if (data.source?.creditsPerRun !== 12) fail('creditsPerRun must remain 12 for the 50-result browse budget');
-if (!Array.isArray(data.limitations) || data.limitations.length < 3) fail('limitations are required');
+if (!Array.isArray(data.limitations) || data.limitations.length < 4) fail('limitations are required');
 
 if (data.status === 'ok') {
   if (!Array.isArray(data.entries) || data.entries.length < 10 || data.entries.length > 50) fail('ok state must contain 10-50 entries');
@@ -30,12 +30,16 @@ if (data.status === 'ok') {
     if (!entry.storeUrl?.startsWith('https://play.google.com/store/apps/details?id=')) fail(`invalid Google Play URL for ${entry.packageName}`);
     if (entry.evidence?.rank !== 'third_party_public') fail(`rank provenance missing for ${entry.packageName}`);
     if (entry.evidence?.downloads !== 'third_party_estimate') fail(`download estimate provenance missing for ${entry.packageName}`);
-    if (!Number.isInteger(entry.daysObserved) || entry.daysObserved < 1) fail(`invalid daysObserved for ${entry.packageName}`);
+    if (!Number.isInteger(entry.observations) || entry.observations < 1) fail(`invalid observations for ${entry.packageName}`);
+    if (entry.previousObservedRank != null && (!Number.isInteger(entry.previousObservedRank) || entry.previousObservedRank < 1)) fail(`invalid previousObservedRank for ${entry.packageName}`);
+    if (entry.observedDelta != null && !Number.isInteger(entry.observedDelta)) fail(`invalid observedDelta for ${entry.packageName}`);
+    if (entry.observationGapDays != null && (!Number.isInteger(entry.observationGapDays) || entry.observationGapDays < 0)) fail(`invalid observationGapDays for ${entry.packageName}`);
+    if (entry.previousObservedRank == null && entry.observedDelta != null) fail(`delta without previous observation for ${entry.packageName}`);
   });
 } else if (Array.isArray(data.entries) && data.entries.length !== 0) {
   fail(`${data.status} state must not expose fresh entries`);
 }
 
 const raw = JSON.stringify(data);
-if (/official google (rank|downloads)|google download count/i.test(raw)) fail('unsafe first-party Google claim detected');
+if (/official google (rank|downloads)|google download count|1d delta/i.test(raw)) fail('unsafe Google claim or daily-cadence claim detected');
 console.log(`[google-play] validation PASS · status=${data.status} · entries=${data.entries?.length ?? 0}`);
