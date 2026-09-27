@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T04:26:29.352Z",
+  "generatedAt": "2026-09-27T17:38:07.275Z",
   "platform": "google_play",
   "platformLabel": "Google Play",
   "source": {
@@ -8,8 +8,11 @@
     "endpoint": "https://api.appbrain.com/v2/info/browse",
     "origin": "third_party_public",
     "estimateOrigin": "third_party_estimate",
-    "method": "POPULAR Android apps filtered to Google Play GAME category by provider query",
+    "orderingSemantics": "provider_popularity_position",
+    "method": "AppBrain POPULAR browse ordering for Android apps filtered to the provider GAME category",
     "countryScope": "provider_global_not_country_specific",
+    "requestedDepth": 50,
+    "completenessPolicy": "exact_requested_depth_required",
     "creditsPerRun": 12,
     "freeMonthlyCreditBudget": 500
   },
@@ -18,10 +21,12 @@
   "entries": [],
   "limitations": [
     "This is AppBrain market intelligence, not an official Google Play top-chart API.",
+    "The displayed position is AppBrain provider ordering, not a Google Play storefront chart rank.",
     "Google Play Developer API is not used for competitor discovery because it is designed for apps in the developer account.",
     "estimatedDownloads and estimatedRecentDownloads are third-party estimates, never first-party Google figures.",
     "This provider browse endpoint is not labeled as a country storefront ranking; Radar does not attach US/UK/CA/AU market claims to it.",
-    "Movement compares the previous observed AppBrain snapshot and always records the observation gap; it is not called a 1-day move unless the gap is exactly one day."
+    "A successful snapshot requires exactly the requested 50 unique provider results. Partial provider responses fail closed.",
+    "Movement compares the previous successful observed AppBrain snapshot and always records the observation gap; it is not called a 1-day move unless the gap is exactly one day."
   ],
   "message": "APPBRAIN_API_KEY is not configured. Google Play hunting remains unavailable rather than inferred from Apple data.",
   "previousSuccessfulAt": null
