@@ -145,12 +145,14 @@ export function PolicyWatch({ ownerEmail = null }: { ownerEmail?: string | null 
     }
   }
 
+  const requiredObservations = index?.confirmationPolicy?.observationsRequired ?? 2;
+
   return <section className="policy-shell">
     <header className="policy-heading">
       <div>
         <div className="eyebrow">POLICY WATCH · OFFICIAL SOURCES ONLY</div>
         <h1>See what changed before policy risk reaches a prototype.</h1>
-        <p>Radar snapshots official Apple and Google policy pages, hashes normalized text, and only promotes a changed hash after the same content is observed again at least 60 minutes later.</p>
+        <p>Radar snapshots official Apple and Google policy pages and hashes normalized text. Under the current contract, a change becomes reviewable only after three consecutive successful observations of the same changed content spanning at least 60 minutes; a failed fetch or conflicting observation resets that candidate.</p>
       </div>
       <button disabled={loading} onClick={() => void refresh()}><RefreshCw size={16} /> Refresh evidence</button>
     </header>
@@ -164,27 +166,27 @@ export function PolicyWatch({ ownerEmail = null }: { ownerEmail?: string | null 
       <section className="policy-kpis">
         <div className="panel kpi"><span>Collector</span><strong className="method-kpi">{humanize(index.runStatus)}</strong><small>{index.freshCount}/{index.sourceCount} fresh</small></div>
         <div className="panel kpi"><span>Official sources</span><strong>{index.sourceCount}</strong><small>Apple + Google</small></div>
-        <div className="panel kpi"><span>Confirmed changes</span><strong>{stability.confirmed}</strong><small>repeat-observed ≥60m</small></div>
+        <div className="panel kpi"><span>Confirmed changes</span><strong>{stability.confirmed}</strong><small>{requiredObservations} consecutive observations · ≥60m</small></div>
         <div className="panel kpi"><span>Pending stability</span><strong>{stability.pending}</strong><small>not reviewable yet</small></div>
         <div className="panel kpi"><span>Needs review</span><strong>{unreviewedCount}</strong><small>confirmed owner queue</small></div>
       </section>
 
-      {stability.legacyUnconfirmed > 0 && <div className="policy-warning"><Clock3 size={18} /><div><strong>{stability.legacyUnconfirmed} setup-era transition{stability.legacyUnconfirmed === 1 ? '' : 's'} quarantined</strong><span>These were detected before stability confirmation existed. They remain in immutable history but are excluded from the review queue and cannot trigger impact classification.</span></div></div>}
+      {stability.legacyUnconfirmed > 0 && <div className="policy-warning"><Clock3 size={18} /><div><strong>{stability.legacyUnconfirmed} setup-era transition{stability.legacyUnconfirmed === 1 ? '' : 's'} quarantined</strong><span>These were detected before the current stability confirmation existed. They remain in immutable history but are excluded from the review queue and cannot trigger impact classification.</span></div></div>}
 
-      {index.runStatus !== 'complete' && <div className="policy-warning"><AlertTriangle size={18} /><div><strong>Partial policy collection</strong><span>Failed sources keep their last-known-good snapshot. Radar does not fabricate a fresh policy state.</span></div></div>}
+      {index.runStatus !== 'complete' && <div className="policy-warning"><AlertTriangle size={18} /><div><strong>Partial policy collection</strong><span>Failed sources keep their last-known-good snapshot. Radar does not fabricate a fresh policy state, and an interrupted pending candidate does not carry through a failed fetch.</span></div></div>}
 
       <section className="panel policy-sources-panel">
         <div className="section-heading"><div><h2>Source health</h2><p>Critical policy pages monitored by the scheduled GitHub collector.</p></div><span>{index.generatedAt ? new Date(index.generatedAt).toLocaleString() : 'Not collected'}</span></div>
         <div className="policy-source-list">{index.sources.map((source) => <article key={source.id} className={`policy-source ${source.fetchStatus}`}>
           <div><span className="policy-vendor">{source.vendor.toUpperCase()}</span><strong>{source.title}</strong><small>{source.category.replaceAll('_', ' ')} · {source.history.length} snapshot{source.history.length === 1 ? '' : 's'}</small></div>
-          <div className="policy-source-state"><b>{statusLabel(source.fetchStatus)}</b><small>{source.pendingCandidate ? `candidate ${source.pendingCandidate.hash.slice(0, 10)} · ${source.pendingCandidate.observations} observation(s)` : source.error ?? (source.current ? `stable hash ${source.current.hash.slice(0, 10)}` : 'No baseline yet')}</small></div>
+          <div className="policy-source-state"><b>{statusLabel(source.fetchStatus)}</b><small>{source.pendingCandidate ? `candidate ${source.pendingCandidate.hash.slice(0, 10)} · ${source.pendingCandidate.observations}/${requiredObservations} consecutive observation(s)` : source.error ?? (source.current ? `stable hash ${source.current.hash.slice(0, 10)}` : 'No baseline yet')}</small></div>
           <a href={source.url} target="_blank" rel="noreferrer" aria-label={`Open ${source.title}`}><ExternalLink size={16} /></a>
         </article>)}</div>
       </section>
 
       <section className="panel policy-changes-panel">
-        <div className="section-heading"><div><h2>Stability-confirmed changes</h2><p>A reviewable change requires the same changed normalized hash to be observed again at least 60 minutes later.</p></div><span>{changes.length} confirmed</span></div>
-        {changes.length === 0 ? <div className="policy-empty"><FileDiff size={28} /><strong>No confirmed policy transition yet</strong><span>One-off or setup-era hash changes are deliberately excluded. Stable future transitions will appear here after confirmation.</span></div> : <div className="policy-change-list">{changes.map((item) => {
+        <div className="section-heading"><div><h2>Stability-confirmed changes</h2><p>A reviewable change requires {requiredObservations} consecutive successful observations of the same changed normalized hash spanning at least 60 minutes. Fetch failures, conflicting hashes, baseline reappearance, and normalizer upgrades break continuity.</p></div><span>{changes.length} confirmed</span></div>
+        {changes.length === 0 ? <div className="policy-empty"><FileDiff size={28} /><strong>No confirmed policy transition yet</strong><span>One-off, interrupted, or setup-era hash changes are deliberately excluded. Stable future transitions will appear here only after the full confirmation contract is satisfied.</span></div> : <div className="policy-change-list">{changes.map((item) => {
           const review = reviews[item.change.id];
           return <button key={item.change.id} className={selected?.change.id === item.change.id ? 'selected' : ''} onClick={() => void inspectChange(item)}>
             <span><b>{item.source.vendor.toUpperCase()}</b><strong>{item.source.title}</strong><small>Confirmed {new Date(item.change.confirmedAt ?? item.change.detectedAt).toLocaleString()}</small></span>
