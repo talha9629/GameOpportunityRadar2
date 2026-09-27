@@ -7,9 +7,9 @@ import {
   type AppRoute,
   type AppView,
 } from './appRouter';
-import { Competitors } from './Competitors';
 import { DeepVerifyWorkspace } from './DeepVerifyWorkspace';
 import { PlatformAnalyzePage } from './PlatformAnalyzePage';
+import { PlatformCompetitorsPage } from './PlatformCompetitorsPage';
 import { PlatformContextPanel } from './PlatformContextPanel';
 import { PlatformResearchHome } from './PlatformResearchHome';
 import {
@@ -51,7 +51,7 @@ function PlatformPipelineBoundary({ scope, feature }: { scope: PlatformScope; fe
     <section className="panel platform-research-empty">
       <div className="eyebrow">PLATFORM BOUNDARY</div>
       <h1>{feature} is not yet automated for {PLATFORM_META[scope].label}.</h1>
-      <p>Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to this platform. Switch the platform selector to Apple to inspect the existing pipeline, or use Today/Analyze for the platform-specific source coverage that is currently available.</p>
+      <p>Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to this platform. Switch the platform selector to Apple to inspect the existing pipeline, or use Today/Analyze/Competitors for the platform-specific source coverage that is currently available.</p>
     </section>
   </>;
 }
@@ -189,7 +189,7 @@ export function App() {
       ownerEmail={owner?.email ?? null}
     />}
     {route.view === 'saved' && <><PlatformContextPanel scope="apple" /><SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} /></>}
-    {route.view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
+    {route.view === 'competitors' && <PlatformCompetitorsPage scope={platformScope} ownerEmail={owner?.email ?? null} />}
     {route.view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
     {route.view === 'deep-verify' && <>
       {route.sessionId && deepVerifyHydrating && <div className="history-banner"><strong>Loading verification session…</strong><span>Restoring the exact queue/evidence context from this page URL.</span></div>}
