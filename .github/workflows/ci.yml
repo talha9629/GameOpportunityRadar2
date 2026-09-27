@@ -30,6 +30,10 @@ jobs:
         run: node scripts/discover-gameplay-sources.mjs
       - name: Validate zero-credit discovery fallback
         run: node scripts/validate-gameplay-discovery.mjs
+      - name: Exercise Google Play discovery without AppBrain credentials
+        run: node scripts/collect-google-play-radar.mjs
+      - name: Validate Google Play zero-provider boundary
+        run: node scripts/validate-google-play-radar.mjs
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build
