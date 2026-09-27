@@ -1,5 +1,6 @@
 import type { User } from '@supabase/supabase-js';
 import { hasSupabaseConfig, supabase } from './lib/supabase';
+import { resolveAuthRedirectUrl } from './authRedirect';
 
 function requireSupabase() {
   if (!hasSupabaseConfig || !supabase) {
@@ -25,7 +26,7 @@ export function subscribeOwnerAuth(onChange: (user: User | null) => void) {
 
 export async function requestOwnerMagicLink(email: string) {
   const client = requireSupabase();
-  const redirectTo = new URL(import.meta.env.BASE_URL, window.location.origin).toString();
+  const redirectTo = resolveAuthRedirectUrl(import.meta.env.BASE_URL, window.location.href);
   const { error } = await client.auth.signInWithOtp({
     email: email.trim(),
     options: {
