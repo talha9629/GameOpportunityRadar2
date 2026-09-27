@@ -36,11 +36,16 @@ function SourceSuggestions({ discovery }: { discovery: GameplayDiscoverySession 
   return <div className="verification-source-suggestions">
     <div>
       <strong>Suggested public gameplay sources</strong>
-      <span>Search candidates only · not verified evidence</span>
+      <span>Search candidates only · public availability checked · content not yet verified</span>
     </div>
     {discovery.candidates.map((candidate) => <a key={candidate.url} href={candidate.url} target="_blank" rel="noreferrer">
       <ExternalLink size={14} />
-      <span><b>{candidate.title}</b>{candidate.snippet && <small>{candidate.snippet}</small>}</span>
+      <span>
+        <b>{candidate.title}</b>
+        {candidate.channelName && <small>{candidate.channelName}</small>}
+        {candidate.snippet && <small>{candidate.snippet}</small>}
+        {candidate.availabilityVerifiedAt && <small>Public availability checked {new Date(candidate.availabilityVerifiedAt).toLocaleString()}</small>}
+      </span>
     </a>)}
   </div>;
 }
@@ -102,6 +107,17 @@ function CaptureSession({
   </div>;
 }
 
+function discoveryBudgetLabel(discovery: GameplayDiscovery) {
+  const provider = discovery.provider;
+  if (provider.key === 'tavily') {
+    return `Tavily Basic · ${provider.requestsUsedThisRun}/${provider.dailyRequestCap} request cap`;
+  }
+  if (provider.key === 'gemini_google_search') {
+    return `${provider.name}${provider.model ? ` · ${provider.model}` : ''} · ${provider.requestsUsedThisRun}/${provider.dailyRequestCap} grounded prompts · ${provider.searchQueriesUsedThisRun} Google Search quer${provider.searchQueriesUsedThisRun === 1 ? 'y' : 'ies'} reported`;
+  }
+  return 'No discovery provider configured';
+}
+
 export function VerificationQueuePanel({
   queue,
   evidence,
@@ -152,10 +168,10 @@ export function VerificationQueuePanel({
 
     {discovery && <div className="verification-discovery-status">
       <span>Public gameplay discovery · <b>{discovery.provider.status}</b></span>
-      <span>Tavily Basic · {discovery.provider.creditsUsedThisRun}/{discovery.provider.dailyCreditCap} credit budget this run</span>
+      <span>{discoveryBudgetLabel(discovery)}</span>
       <span>Suggestions never resolve evidence gaps automatically.</span>
     </div>}
-    {discovery?.provider.status === 'unconfigured' && <div className="verification-progress-warning">Optional public gameplay discovery is not configured. Add the GitHub Actions secret <code>TAVILY_API_KEY</code> to enable bounded source suggestions; the Verification Queue and Deep Verify remain fully usable without it.</div>}
+    {discovery?.provider.status === 'unconfigured' && <div className="verification-progress-warning">Optional public gameplay discovery is not configured in GitHub Actions. Add <code>TAVILY_API_KEY</code>, or reuse the existing Gemini credential as a GitHub Actions secret named <code>GEMINI_API_KEY</code>. Radar will prefer Tavily when both exist and otherwise use Gemini Google Search grounding. The Verification Queue and Deep Verify remain usable without either.</div>}
     {discovery && ['partial', 'failed'].includes(discovery.provider.status) && <div className="verification-progress-warning">Public gameplay discovery was {discovery.provider.status}. Existing verification work remains valid; failed searches did not create or resolve evidence.</div>}
     {evidenceError && <div className="verification-progress-warning">Generated verification work is still available, but owner evidence progress could not be loaded: {evidenceError}</div>}
     {resolutionError && <div className="verification-progress-warning">Generated verification work and saved evidence are still available, but human task resolutions could not be loaded: {resolutionError}</div>}
@@ -197,6 +213,6 @@ export function VerificationQueuePanel({
       </div>)}
     </div>
 
-    <p className="verification-boundary">Search candidates are third-party public source suggestions, not gameplay findings. Human resolved means an owner explicitly cited a category-matched timestamped finding already marked human-confirmed. Evidence collection alone never resolves a task. The canonical generated queue remains immutable and all resolution state is stored separately with source provenance.</p>
+    <p className="verification-boundary">Search candidates are third-party public source suggestions, not gameplay findings. Public availability checks only prove that the YouTube URL was reachable through oEmbed at collection time; they do not verify what the video contains. Human resolved means an owner explicitly cited a category-matched timestamped finding already marked human-confirmed. Evidence collection alone never resolves a task. The canonical generated queue remains immutable and all resolution state is stored separately with source provenance.</p>
   </section>;
 }

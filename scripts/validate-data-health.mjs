@@ -57,7 +57,10 @@ assert(health.facts.verificationGroupedEvidenceTaskCount <= health.facts.verific
 assert(health.facts.verificationGroupedEvidenceTaskCount === 0 || health.facts.verificationCaptureSessionCount > 0, 'grouped evidence tasks require at least one capture session');
 assert(typeof health.facts?.verificationDerivedFromCurrentQueue === 'boolean', 'verificationDerivedFromCurrentQueue invalid');
 assert(typeof health.facts?.gameplayDiscoveryConfigured === 'boolean', 'gameplayDiscoveryConfigured invalid');
+assert(['tavily', 'gemini_google_search', 'none'].includes(health.facts?.gameplayDiscoveryProvider), 'gameplayDiscoveryProvider invalid');
 assert(Number.isInteger(health.facts?.gameplayDiscoveryCandidateCount) && health.facts.gameplayDiscoveryCandidateCount >= 0 && health.facts.gameplayDiscoveryCandidateCount <= 24, 'gameplayDiscoveryCandidateCount invalid');
+assert(Number.isInteger(health.facts?.gameplayDiscoveryRequestsUsed) && health.facts.gameplayDiscoveryRequestsUsed >= 0 && health.facts.gameplayDiscoveryRequestsUsed <= 8, 'gameplayDiscoveryRequestsUsed invalid');
+assert(Number.isInteger(health.facts?.gameplayDiscoverySearchQueriesUsed) && health.facts.gameplayDiscoverySearchQueriesUsed >= 0, 'gameplayDiscoverySearchQueriesUsed invalid');
 assert(typeof health.facts?.gameplayDiscoveryDerivedFromCurrentVerification === 'boolean', 'gameplayDiscoveryDerivedFromCurrentVerification invalid');
 assert(typeof health.facts?.appBrainConfigured === 'boolean', 'appBrainConfigured invalid');
 
@@ -82,12 +85,18 @@ if (verificationComponent?.state === 'healthy') {
 const discoveryComponent = health.components.find((item) => item.id === 'gameplay_discovery');
 if (discoveryComponent?.state === 'healthy') {
   assert(health.facts.gameplayDiscoveryConfigured === true, 'healthy gameplay discovery must be configured');
+  assert(health.facts.gameplayDiscoveryProvider !== 'none', 'healthy gameplay discovery must identify a configured provider');
   assert(health.facts.gameplayDiscoveryDerivedFromCurrentVerification === true, 'healthy gameplay discovery must match the current verification queue');
 }
 if (discoveryComponent?.state === 'optional') {
   assert(health.facts.gameplayDiscoveryConfigured === false, 'optional gameplay discovery should represent an unconfigured provider');
+  assert(health.facts.gameplayDiscoveryProvider === 'none', 'optional gameplay discovery should identify no configured provider');
+  assert(health.facts.gameplayDiscoveryRequestsUsed === 0, 'unconfigured gameplay discovery cannot consume requests');
+  assert(health.facts.gameplayDiscoverySearchQueriesUsed === 0, 'unconfigured gameplay discovery cannot report search queries');
 }
 assert(discoveryComponent?.facts?.some((fact) => /not verified gameplay evidence/i.test(fact)), 'gameplay discovery must expose the search-candidate evidence boundary');
+assert(discoveryComponent?.facts?.some((fact) => /provider request cap used/i.test(fact)), 'gameplay discovery must expose provider request usage');
+assert(discoveryComponent?.facts?.some((fact) => /search quer/i.test(fact)), 'gameplay discovery must expose provider-reported search query usage');
 assert(!/success probability|revenue estimate from rank|downloads? from rank/i.test(JSON.stringify(health)), 'health report contains unsafe inference');
 
 if (errors.length) {
@@ -95,4 +104,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · trends ${health.facts.trendSignalCount}/${health.facts.trendExpectedSignalCount} · verification ${health.facts.verificationTaskCount}/${health.facts.verificationRawTaskCount}, omitted ${health.facts.verificationOmittedTaskCount} · discovery ${health.facts.gameplayDiscoveryCandidateCount} candidate(s) · sessions ${health.facts.verificationCaptureSessionCount}/${health.facts.verificationGroupedEvidenceTaskCount} grouped task(s) · ${health.recommendedActions.length} action(s)`);
+console.log(`[data-health] validation PASS · ${health.overall} · ${health.essentialHealthy}/${health.essentialCount} essential healthy · trends ${health.facts.trendSignalCount}/${health.facts.trendExpectedSignalCount} · verification ${health.facts.verificationTaskCount}/${health.facts.verificationRawTaskCount}, omitted ${health.facts.verificationOmittedTaskCount} · discovery ${health.facts.gameplayDiscoveryProvider} ${health.facts.gameplayDiscoveryCandidateCount} candidate(s), ${health.facts.gameplayDiscoveryRequestsUsed} request(s), ${health.facts.gameplayDiscoverySearchQueriesUsed} search query/queries · sessions ${health.facts.verificationCaptureSessionCount}/${health.facts.verificationGroupedEvidenceTaskCount} grouped task(s) · ${health.recommendedActions.length} action(s)`);
