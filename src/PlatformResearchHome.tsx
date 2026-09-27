@@ -64,14 +64,33 @@ function AmazonFireHome() {
 }
 
 function CrossPlatformHome({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
+  const [google, setGoogle] = useState<GooglePlayRadar | null>(null);
+  const [googleError, setGoogleError] = useState<string | null>(null);
+
+  useEffect(() => {
+    void loadGooglePlayRadar()
+      .then(setGoogle)
+      .catch((err) => setGoogleError(err instanceof Error ? err.message : 'Google Play status unavailable.'));
+  }, []);
+
+  const googleStatus = google?.status ?? (googleError ? 'failed' : 'loading');
+  const googleStatusClass = googleStatus === 'ok' ? 'live' : 'assisted';
+  const googleCopy = googleStatus === 'ok'
+    ? `${google.entries.length} Android candidates from AppBrain · last refresh ${new Date(google.generatedAt).toLocaleString()}.`
+    : googleStatus === 'unconfigured'
+      ? 'Automation ready, but APPBRAIN_API_KEY is not configured; 0 Android candidates are shown rather than Apple substitutes.'
+      : googleStatus === 'failed'
+        ? `Provider state failed${google?.error ? `: ${google.error}` : googleError ? `: ${googleError}` : '.'}`
+        : 'Reading current Google Play automation state…';
+
   return <section className="today-shell">
     <div className="today-heading"><div><div className="eyebrow">CROSS-PLATFORM · RESEARCH</div><h1>Compare coverage before comparing games.</h1><p>Each platform keeps its own evidence quality and source boundaries.</p></div></div>
     <div className="platform-capability-grid">
-      <div className="platform-capability-card"><span className="capability-status live">Live</span><h3>Apple App Store</h3><p>Official Games charts + Apple metadata across US, UK, Canada and Australia.</p></div>
-      <div className="platform-capability-card"><span className="capability-status">Conditional</span><h3>Google Play</h3><p>AppBrain-powered Android discovery once configured; estimates remain labeled third-party.</p></div>
-      <div className="platform-capability-card"><span className="capability-status assisted">Assisted</span><h3>Amazon Appstore · Fire</h3><p>No automated competitor chart integrated yet; Fire-specific research remains assisted/manual.</p></div>
+      <div className="platform-capability-card"><span className="capability-status live">Live · 4 storefronts</span><h3>Apple App Store</h3><p>Official Games charts + Apple metadata across <strong>US, UK, Canada and Australia</strong>. Current exact history is kept per storefront.</p></div>
+      <div className="platform-capability-card"><span className={`capability-status ${googleStatusClass}`}>{googleStatus}</span><h3>Google Play</h3><p>{googleCopy}</p></div>
+      <div className="platform-capability-card"><span className="capability-status assisted">Assisted · Fire</span><h3>Amazon Appstore · Fire</h3><p>No automated competitor chart integrated yet; Fire-specific research remains assisted/manual and never borrows an Apple/Google rank.</p></div>
     </div>
-    <div className="platform-source-note">Cross-platform mode never merges incomparable ranks into one score. Apple, Google Play, and Amazon evidence stay side-by-side until a comparable fact actually exists.</div>
+    <div className="platform-source-note"><strong>Coverage is not equal across stores.</strong> Cross-platform mode never merges incomparable ranks into one score. Apple, Google Play, and Amazon evidence stay side-by-side until a comparable fact actually exists.</div>
     <Today onAnalyze={onAnalyze} />
   </section>;
 }
