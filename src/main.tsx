@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App';
+import './design-tokens.css';
 import './styles.css';
 import './integration.css';
 
@@ -26,11 +27,11 @@ function showUpdatePrompt(version?: string) {
     'gap:10px',
     'width:min(92vw,520px)',
     'padding:10px 12px',
-    'border:1px solid #315778',
-    'border-radius:14px',
+    'border:1px solid var(--color-border-strong)',
+    'border-radius:var(--radius-lg)',
     'background:rgba(8,15,27,.97)',
     'box-shadow:0 16px 42px rgba(0,0,0,.35)',
-    'color:#eaf8ff',
+    'color:var(--color-text-strong)',
     'font:600 13px/1.35 system-ui,sans-serif',
   ].join(';');
 
@@ -41,7 +42,7 @@ function showUpdatePrompt(version?: string) {
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = 'Update now';
-  button.style.cssText = 'min-height:42px;padding:8px 12px;border-radius:10px;border:1px solid #3b78a5;background:#15314a;color:#ecf8ff;font-weight:800;';
+  button.style.cssText = 'min-height:42px;padding:8px 12px;border-radius:var(--radius-md);border:1px solid var(--color-border-strong);background:var(--color-accent-bg);color:var(--color-text-strong);font-weight:800;';
   button.addEventListener('click', () => {
     if (pendingBuildVersion) localStorage.setItem(BUILD_VERSION_KEY, pendingBuildVersion);
     button.disabled = true;
