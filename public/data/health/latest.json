@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T01:59:43.045Z",
+  "generatedAt": "2026-09-27T01:59:54.733Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -87,7 +87,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "5 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "6.7h policy-index age",
+        "0.0h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
