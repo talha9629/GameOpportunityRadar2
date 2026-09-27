@@ -52,6 +52,15 @@ const groups: Array<{
   },
 ];
 
+const mobilePrimary: Array<{ view: AppView; label: string; icon: typeof Activity }> = [
+  { view: 'today', label: 'Today', icon: Activity },
+  { view: 'trends', label: 'Trends', icon: BarChart3 },
+  { view: 'verification', label: 'Verify', icon: ListChecks },
+  { view: 'analyze', label: 'Analyze', icon: Search },
+];
+
+const mobilePrimaryViews = new Set<AppView>(mobilePrimary.map((item) => item.view));
+
 export function AppShell({
   route,
   owner,
@@ -75,6 +84,15 @@ export function AppShell({
     setMobileOpen(false);
   }, [meta.title, route.view]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMobileOpen(false);
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [mobileOpen]);
+
   function navigate(view: AppView) {
     onNavigate(view);
     setMobileOpen(false);
@@ -90,7 +108,7 @@ export function AppShell({
           <strong>Game Opportunity Radar</strong>
           <span>Studio intelligence</span>
         </div>
-        <button className="sidebar-close" aria-label="Close navigation" onClick={() => setMobileOpen(false)}><X size={18} /></button>
+        <button className="sidebar-close" aria-label="Close navigation" onClick={() => setMobileOpen(false)}><X size={20} /></button>
       </div>
 
       <nav className="sidebar-nav">
@@ -104,7 +122,7 @@ export function AppShell({
               aria-current={route.view === item.view ? 'page' : undefined}
               onClick={() => navigate(item.view)}
             >
-              <Icon size={17} />
+              <Icon size={18} />
               <span>{item.label}</span>
             </button>;
           })}
@@ -123,10 +141,10 @@ export function AppShell({
     <section className="app-workspace">
       <header className="workspace-header">
         <div className="workspace-header-left">
-          <button className="mobile-nav-toggle" aria-label="Open navigation" onClick={() => setMobileOpen(true)}><Menu size={18} /></button>
+          <button className="mobile-nav-toggle" aria-label="Open navigation" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
           <div className="history-controls" aria-label="Page history">
-            <button title="Back" aria-label="Back" onClick={() => window.history.back()}><ArrowLeft size={16} /></button>
-            <button title="Forward" aria-label="Forward" onClick={() => window.history.forward()}><ArrowRight size={16} /></button>
+            <button title="Back" aria-label="Back" onClick={() => window.history.back()}><ArrowLeft size={17} /></button>
+            <button title="Forward" aria-label="Forward" onClick={() => window.history.forward()}><ArrowRight size={17} /></button>
           </div>
           <div className="page-context">
             <span>{meta.section}</span>
@@ -145,5 +163,30 @@ export function AppShell({
 
       <main className="page-shell app-page-shell">{children}</main>
     </section>
+
+    <nav className="mobile-bottom-nav" aria-label="Mobile primary navigation">
+      {mobilePrimary.map((item) => {
+        const Icon = item.icon;
+        const active = route.view === item.view;
+        return <button
+          key={item.view}
+          className={`mobile-bottom-link ${active ? 'active' : ''}`}
+          aria-current={active ? 'page' : undefined}
+          onClick={() => navigate(item.view)}
+        >
+          <Icon size={21} />
+          <span>{item.label}</span>
+        </button>;
+      })}
+      <button
+        className={`mobile-bottom-link ${!mobilePrimaryViews.has(route.view) ? 'active' : ''}`}
+        aria-label="More navigation options"
+        aria-expanded={mobileOpen}
+        onClick={() => setMobileOpen(true)}
+      >
+        <Menu size={21} />
+        <span>More</span>
+      </button>
+    </nav>
   </div>;
 }
