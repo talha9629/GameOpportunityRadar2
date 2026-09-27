@@ -1,16 +1,11 @@
 .candidate-panel {
-  margin-bottom: 24px;
+  margin-bottom: var(--space-6);
   display: grid;
-  gap: 16px;
+  gap: var(--space-4);
 }
 
-.candidate-panel h3 {
-  margin-top: 6px;
-}
-
-.candidate-panel p {
-  margin-bottom: 0;
-}
+.candidate-panel h3 { margin-top: 6px; }
+.candidate-panel p { margin-bottom: 0; }
 
 .candidate-grid {
   display: grid;
@@ -24,24 +19,24 @@
   text-align: left;
   display: grid;
   grid-template-columns: 52px minmax(0, 1fr);
-  gap: 12px;
+  gap: var(--space-3);
   align-items: center;
-  padding: 12px;
-  background: #0a1424;
-  border-color: #2b405e;
+  padding: var(--space-3);
+  background: var(--color-surface-subtle);
+  border-color: var(--color-border);
 }
 
 .candidate-card:hover {
-  background: #11243b;
-  border-color: #38bdf8;
+  background: var(--color-surface-raised);
+  border-color: var(--color-accent);
 }
 
 .candidate-card img {
   width: 52px;
   height: 52px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   object-fit: cover;
-  background: #08111f;
+  background: var(--color-bg-deep);
 }
 
 .candidate-card > span {
@@ -58,12 +53,10 @@
 }
 
 .candidate-card small {
-  color: #8ea1bd;
+  color: var(--color-text-subtle);
   font-size: 12px;
 }
 
 @media (max-width: 560px) {
-  .candidate-grid {
-    grid-template-columns: 1fr;
-  }
+  .candidate-grid { grid-template-columns: 1fr; }
 }
