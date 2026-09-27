@@ -3,6 +3,7 @@ import path from 'node:path';
 
 // Daily public-chart collector. Each market persists independently so one failure never discards the others.
 // The scheduled run is the source of truth for rank observations; same-day reruns are idempotent.
+// daysObserved means the current uninterrupted exact-calendar-day streak, not the number of workflow runs.
 const markets = { us: 'United States', gb: 'United Kingdom', ca: 'Canada', au: 'Australia' };
 const chartDepth = 100;
 const root = path.resolve('public/data/radar');
@@ -22,6 +23,12 @@ function readPrevious() {
 
 function readIndex() {
   return readJson(indexPath, { schemaVersion: 1, updatedAt: generatedAt, snapshots: [] });
+}
+
+function subtractUtcDays(date, days) {
+  const value = new Date(`${date}T00:00:00Z`);
+  value.setUTCDate(value.getUTCDate() - days);
+  return value.toISOString().slice(0, 10);
 }
 
 function legacyEntry(entry, index) {
@@ -69,10 +76,23 @@ async function fetchMarket(country) {
   }
 }
 
-function addHistory(entry, previousMarket, sameDay) {
+function addHistory(entry, previousMarket, sameDay, previousIsYesterday, currentGameFocused) {
   const prior = previousMarket?.entries?.find((item) => item.appId === entry.appId);
   if (!prior) {
     return { ...entry, priorRank: null, delta: null, firstObserved: today, daysObserved: 1, bestObservedRank: entry.rank, events: ['NEW ENTRY'] };
+  }
+
+  const sourceComparable = previousMarket?.status === 'ok' && previousMarket?.gameFocused === currentGameFocused;
+  if (!sourceComparable) {
+    return {
+      ...entry,
+      priorRank: null,
+      delta: null,
+      firstObserved: today,
+      daysObserved: 1,
+      bestObservedRank: entry.rank,
+      events: ['SOURCE RESET'],
+    };
   }
 
   const firstDayReplacement = sameDay && prior.firstObserved === today && (prior.daysObserved ?? 1) === 1;
@@ -84,12 +104,18 @@ function addHistory(entry, previousMarket, sameDay) {
   if (!firstDayReplacement && entry.rank < bestBefore) events.push('NEW HIGH');
   if (comparisonRank != null && comparisonRank > 10 && entry.rank <= 10) events.push('TOP 10');
 
+  const daysObserved = sameDay
+    ? (prior.daysObserved ?? 1)
+    : previousIsYesterday
+      ? (prior.daysObserved ?? 1) + 1
+      : 1;
+
   return {
     ...entry,
     priorRank: comparisonRank ?? null,
     delta: comparisonRank != null ? comparisonRank - entry.rank : null,
     firstObserved: prior.firstObserved ?? today,
-    daysObserved: sameDay ? (prior.daysObserved ?? 1) : (prior.daysObserved ?? 1) + 1,
+    daysObserved,
     bestObservedRank,
     events,
   };
@@ -98,6 +124,7 @@ function addHistory(entry, previousMarket, sameDay) {
 const previous = readPrevious();
 const previousDate = typeof previous.generatedAt === 'string' ? previous.generatedAt.slice(0, 10) : null;
 const sameDay = previousDate === today;
+const previousIsYesterday = previousDate === subtractUtcDays(today, 1);
 const output = {
   schemaVersion: 3,
   generatedAt,
@@ -123,7 +150,13 @@ for (const [country, label] of Object.entries(markets)) {
       warning: snapshot.warning ?? null,
       observedAt: generatedAt,
       refreshStatus: 'fresh',
-      entries: snapshot.entries.map((entry) => addHistory(entry, previous.markets?.[country], sameDay)),
+      entries: snapshot.entries.map((entry) => addHistory(
+        entry,
+        previous.markets?.[country],
+        sameDay,
+        previousIsYesterday,
+        snapshot.gameFocused,
+      )),
     };
   } catch (error) {
     const priorMarket = previous.markets?.[country];
@@ -183,7 +216,7 @@ const snapshots = [
 const index = { schemaVersion: 1, updatedAt: generatedAt, snapshots };
 fs.writeFileSync(indexPath, JSON.stringify(index, null, 2) + '\n');
 
-console.log(`Radar snapshot written for ${today} (depth=${chartDepth}, sameDay=${sameDay}, runStatus=${output.runStatus})`);
+console.log(`Radar snapshot written for ${today} (depth=${chartDepth}, sameDay=${sameDay}, previousIsYesterday=${previousIsYesterday}, runStatus=${output.runStatus})`);
 for (const market of Object.values(output.markets)) {
   console.log(`${market.country}: ${market.status} ${market.entries.length} entries ${market.sourceMode ?? ''} ${market.refreshStatus ?? ''}`);
 }

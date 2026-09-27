@@ -20,6 +20,12 @@ function dateKey(value) {
   return typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(value) ? value.slice(0, 10) : null;
 }
 
+function subtractUtcDays(date, days) {
+  const value = new Date(`${date}T00:00:00Z`);
+  value.setUTCDate(value.getUTCDate() - days);
+  return value.toISOString().slice(0, 10);
+}
+
 function validateEntry(entry, expectedRank, market, file, chartDepth) {
   if (entry?.rank !== expectedRank) fail(`${file} ${market} rank sequence expected ${expectedRank}, got ${entry?.rank}`);
   if (entry.rank > chartDepth) fail(`${file} ${market} rank ${entry.rank} exceeds declared chart depth ${chartDepth}`);
@@ -78,6 +84,35 @@ function validateSnapshot(snapshot, file, expectedDate = null) {
   return snapshotDate;
 }
 
+function validateConsecutivePersistence(historyByDate) {
+  const dates = [...historyByDate.keys()].sort();
+  for (const date of dates) {
+    const current = historyByDate.get(date);
+    const prior = historyByDate.get(subtractUtcDays(date, 1));
+
+    for (const code of expectedMarkets) {
+      const currentMarket = current?.markets?.[code];
+      if (!currentMarket || currentMarket.status !== 'ok') continue;
+
+      const priorMarket = prior?.markets?.[code];
+      const comparablePriorMarket = priorMarket
+        && priorMarket.status === 'ok'
+        && priorMarket.gameFocused === currentMarket.gameFocused
+        ? priorMarket
+        : null;
+      const priorEntries = new Map((comparablePriorMarket?.entries ?? []).map((entry) => [String(entry.appId), entry]));
+
+      for (const entry of currentMarket.entries) {
+        const priorEntry = priorEntries.get(String(entry.appId));
+        const expectedDays = priorEntry ? (priorEntry.daysObserved ?? 1) + 1 : 1;
+        if (entry.daysObserved !== expectedDays) {
+          fail(`history/${date}.json ${code} ${entry.appId} daysObserved=${entry.daysObserved}, expected consecutive streak ${expectedDays}`);
+        }
+      }
+    }
+  }
+}
+
 const latest = readJson(latestPath);
 const latestDate = validateSnapshot(latest, 'latest.json');
 const index = readJson(indexPath);
@@ -85,6 +120,7 @@ if (!Array.isArray(index.snapshots) || index.snapshots.length === 0) fail('index
 if (index.snapshots[0]?.date !== latestDate) fail(`index head ${index.snapshots[0]?.date} does not match latest ${latestDate}`);
 
 const seenDates = new Set();
+const historyByDate = new Map();
 for (const item of index.snapshots) {
   if (!item?.date || !/^\d{4}-\d{2}-\d{2}$/.test(item.date)) fail('index contains invalid date');
   if (seenDates.has(item.date)) fail(`index contains duplicate date ${item.date}`);
@@ -93,9 +129,12 @@ for (const item of index.snapshots) {
   if (!fs.existsSync(historyPath)) fail(`index references missing history/${item.date}.json`);
   const history = readJson(historyPath);
   validateSnapshot(history, `history/${item.date}.json`, item.date);
+  historyByDate.set(item.date, history);
 }
+
+validateConsecutivePersistence(historyByDate);
 
 const latestHistory = readJson(path.join(root, 'history', `${latestDate}.json`));
 if (JSON.stringify(latestHistory) !== JSON.stringify(latest)) fail(`latest.json differs from history/${latestDate}.json`);
 
-console.log(`Radar data OK: ${index.snapshots.length} dated snapshot(s), latest=${latestDate}`);
+console.log(`Radar data OK: ${index.snapshots.length} dated snapshot(s), latest=${latestDate}, consecutive persistence validated`);
