@@ -2,8 +2,10 @@ import { z } from 'zod';
 
 const GooglePlayEntrySchema = z.object({
   rank: z.number().int().positive(),
-  priorRank: z.number().int().positive().nullable(),
-  delta: z.number().int().nullable(),
+  previousObservedRank: z.number().int().positive().nullable(),
+  observedDelta: z.number().int().nullable(),
+  previousObservedAt: z.string().nullable(),
+  observationGapDays: z.number().int().nonnegative().nullable(),
   packageName: z.string().min(3),
   name: z.string().min(1),
   publisher: z.string(),
@@ -16,7 +18,7 @@ const GooglePlayEntrySchema = z.object({
   estimatedDownloads: z.number().nonnegative().nullable(),
   estimatedRecentDownloads: z.number().nonnegative().nullable(),
   firstObserved: z.string().min(10),
-  daysObserved: z.number().int().positive(),
+  observations: z.number().int().positive(),
   evidence: z.object({
     rank: z.literal('third_party_public'),
     rating: z.literal('third_party_public'),
