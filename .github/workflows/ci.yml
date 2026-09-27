@@ -16,6 +16,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run validate:radar
+      - name: Test policy normalization against dynamic provider chrome
+        run: node --test scripts/policy-normalization.test.mjs
+      - name: Validate committed policy evidence
+        run: node scripts/validate-policy-watch.mjs
       - name: Build exact-date trend signals from committed Radar evidence
         run: node scripts/build-trend-signals.mjs
       - name: Validate trend-signal semantics
