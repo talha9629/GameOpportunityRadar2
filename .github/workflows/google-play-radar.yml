@@ -1,0 +1,76 @@
+name: Google Play Radar
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '25 4 * * 1,3,5'
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/collect-google-play-radar.mjs'
+      - 'scripts/validate-google-play-radar.mjs'
+      - '.github/workflows/google-play-radar.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: radar-generated-data-writer
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current canonical main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Collect Google Play discovery feed
+        env:
+          APPBRAIN_API_KEY: ${{ secrets.APPBRAIN_API_KEY }}
+        run: node scripts/collect-google-play-radar.mjs
+
+      - name: Validate Google Play provenance and cadence
+        run: node scripts/validate-google-play-radar.mjs
+
+      - name: Write run summary
+        shell: bash
+        run: |
+          node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('public/data/platforms/google-play/latest.json', 'utf8'));
+          console.log('## Google Play Radar');
+          console.log('');
+          console.log(`Provider: **${p.source.provider}** · status: **${p.status}** · entries: **${p.entries.length}**`);
+          console.log(`Cadence: **Mon / Wed / Fri** · configured cost: **${p.source.creditsPerRun} AppBrain credits/run** · free monthly allowance: **${p.source.freeMonthlyCreditBudget}**`);
+          console.log('');
+          console.log('Ranks and ratings are third-party AppBrain market intelligence. Download values are explicitly third-party estimates. This workflow never infers Google Play performance from Apple data and never labels its provider-global browse as a country storefront chart.');
+          NODE
+
+      - name: Commit provider state safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/data/platforms/google-play
+          if ! git diff --cached --quiet; then
+            git commit -m 'data: refresh Google Play radar'
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
+          fi
+
+      - name: Deploy latest main through canonical Pages workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main
