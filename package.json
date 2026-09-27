@@ -9,7 +9,7 @@
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
     "lint": "eslint .",
-    "validate:radar": "node scripts/validate-radar-data.mjs"
+    "validate:radar": "node scripts/validate-radar-data.mjs && node scripts/validate-radar-evidence-quality.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.117.1",
