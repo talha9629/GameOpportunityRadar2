@@ -1,11 +1,20 @@
 import { z } from 'zod';
 
+export const TrendWindowStatusSchema = z.enum([
+  'available',
+  'history_missing',
+  'not_ranked',
+  'market_failed',
+  'source_mismatch',
+  'coverage_gap',
+]);
+
 export const TrendWindowSchema = z.object({
   days: z.union([z.literal(1), z.literal(3), z.literal(7)]),
   targetDate: z.string(),
-  status: z.enum(['available', 'history_missing', 'not_ranked', 'market_failed']),
+  status: TrendWindowStatusSchema,
   priorRank: z.number().int().positive().nullable(),
-  currentRank: z.number().int().positive(),
+  currentRank: z.number().int().positive().nullable(),
   delta: z.number().int().nullable(),
 });
 
@@ -67,6 +76,7 @@ export const TrendSignalsPayloadSchema = z.object({
   markets: z.record(z.string(), TrendMarketSchema),
 });
 
+export type TrendWindowStatus = z.infer<typeof TrendWindowStatusSchema>;
 export type TrendSignal = z.infer<typeof TrendSignalSchema>;
 export type TrendSignalsPayload = z.infer<typeof TrendSignalsPayloadSchema>;
 
@@ -74,6 +84,24 @@ export async function loadTrendSignals(): Promise<TrendSignalsPayload> {
   const response = await fetch(`${import.meta.env.BASE_URL}data/radar/trend-signals.json`, { cache: 'no-store' });
   if (!response.ok) throw new Error(`Trend signals request failed (${response.status}).`);
   return TrendSignalsPayloadSchema.parse(await response.json());
+}
+
+export function trendWindowStatusCounts(payload: TrendSignalsPayload) {
+  const counts: Record<TrendWindowStatus, number> = {
+    available: 0,
+    history_missing: 0,
+    not_ranked: 0,
+    market_failed: 0,
+    source_mismatch: 0,
+    coverage_gap: 0,
+  };
+
+  for (const market of Object.values(payload.markets)) {
+    for (const signal of market.signals) {
+      for (const window of Object.values(signal.exactWindows)) counts[window.status] += 1;
+    }
+  }
+  return counts;
 }
 
 export function strongestTrendSignals(payload: TrendSignalsPayload, limit = 12) {
