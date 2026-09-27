@@ -41,3 +41,12 @@ jobs:
       - run: npm run typecheck
       - run: npm run test
       - run: npm run build
+      - name: Validate installable PWA output
+        shell: bash
+        run: |
+          test -f dist/manifest.webmanifest
+          test -f dist/sw.js
+          test -f dist/version.json
+          test -f dist/icons/radar-512.png
+          grep -q '"buildId"' dist/version.json
+          grep -q 'radar-512.png' dist/manifest.webmanifest
