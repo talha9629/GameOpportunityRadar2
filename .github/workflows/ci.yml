@@ -20,6 +20,10 @@ jobs:
         run: node scripts/build-trend-signals.mjs
       - name: Validate trend-signal semantics
         run: node scripts/validate-trend-signals.mjs
+      - name: Build cross-market Trend Attention
+        run: node scripts/build-trend-attention.mjs
+      - name: Validate Trend Attention provenance
+        run: node scripts/validate-trend-attention.mjs
       - name: Exercise gameplay discovery without credentials
         run: node scripts/discover-gameplay-sources.mjs
       - name: Validate zero-credit discovery fallback
