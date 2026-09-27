@@ -30,11 +30,13 @@ export const POLICY_DIMENSIONS: Array<{ key: PolicyAffectedDimension; label: str
 ];
 
 const HashSchema = z.string().regex(/^[a-f0-9]{64}$/);
+const NormalizationVersionSchema = z.number().int().positive().optional();
 
 export const PolicySnapshotRefSchema = z.object({
   hash: HashSchema,
   path: z.string().min(1),
   fetchedAt: z.string().datetime(),
+  normalizationVersion: NormalizationVersionSchema,
 });
 
 export const PolicyChangeSchema = z.object({
@@ -44,7 +46,11 @@ export const PolicyChangeSchema = z.object({
   detectedAt: z.string().datetime(),
   confirmedAt: z.string().datetime().optional(),
   observations: z.number().int().positive().optional(),
+  observationTimestamps: z.array(z.string().datetime()).optional(),
   confirmationStatus: z.enum(['legacy_unconfirmed', 'confirmed_repeat']).optional(),
+  confirmationVersion: z.number().int().positive().optional(),
+  consecutiveSuccessfulObservations: z.boolean().optional(),
+  normalizationVersion: NormalizationVersionSchema,
   fromPath: z.string().min(1),
   toPath: z.string().min(1),
 });
@@ -56,7 +62,22 @@ export const PolicyPendingCandidateSchema = z.object({
   firstSeenAt: z.string().datetime(),
   lastSeenAt: z.string().datetime(),
   observations: z.number().int().positive(),
+  observationTimestamps: z.array(z.string().datetime()).optional(),
+  confirmationVersion: z.number().int().positive().optional(),
+  normalizationVersion: NormalizationVersionSchema,
   minimumConfirmationAt: z.string().datetime(),
+});
+
+export const PolicyCandidateInterruptionSchema = z.object({
+  id: HashSchema,
+  hash: HashSchema,
+  path: z.string().min(1),
+  firstSeenAt: z.string().datetime(),
+  lastSeenAt: z.string().datetime(),
+  interruptedAt: z.string().datetime(),
+  observations: z.number().int().positive(),
+  reason: z.enum(['fetch_failure', 'different_successful_hash', 'baseline_reappeared', 'normalizer_upgrade']),
+  confirmationVersion: z.number().int().positive().optional(),
 });
 
 export const PolicySourceSchema = z.object({
@@ -69,22 +90,40 @@ export const PolicySourceSchema = z.object({
   fetchStatus: z.enum(['fresh', 'stale', 'unavailable']),
   lastAttemptAt: z.string().datetime(),
   error: z.string().nullable(),
+  normalizationVersion: NormalizationVersionSchema,
   current: PolicySnapshotRefSchema.nullable(),
   pendingCandidate: PolicyPendingCandidateSchema.nullable().optional(),
   history: z.array(PolicySnapshotRefSchema),
   changes: z.array(PolicyChangeSchema),
+  candidateInterruptions: z.array(PolicyCandidateInterruptionSchema).optional(),
+  normalizationRebaselines: z.array(z.object({
+    id: HashSchema,
+    at: z.string().datetime(),
+    fromHash: HashSchema,
+    toHash: HashSchema,
+    fromPath: z.string().min(1).optional(),
+    toPath: z.string().min(1).optional(),
+    fromNormalizationVersion: z.number().int().positive(),
+    toNormalizationVersion: z.number().int().positive(),
+    contentHashChanged: z.boolean().optional(),
+    reason: z.literal('normalizer_upgrade'),
+  })).optional(),
 });
 export type PolicySource = z.infer<typeof PolicySourceSchema>;
 
 export const PolicyIndexSchema = z.object({
   schemaVersion: z.literal(1),
+  normalizationVersion: z.number().int().positive().optional(),
+  confirmationVersion: z.number().int().positive().optional(),
   generatedAt: z.string().datetime(),
   runStatus: z.enum(['complete', 'partial', 'failed']),
   sourceCount: z.number().int().nonnegative(),
   freshCount: z.number().int().nonnegative(),
   failureCount: z.number().int().nonnegative(),
   confirmationPolicy: z.object({
-    observationsRequired: z.literal(2),
+    observationsRequired: z.number().int().min(2),
+    consecutiveSuccessfulObservationsRequired: z.boolean().optional(),
+    fetchFailureBreaksContinuity: z.boolean().optional(),
     minimumElapsedMinutes: z.number().min(60),
     statement: z.string().min(20),
   }).optional(),
@@ -94,6 +133,7 @@ export type PolicyIndex = z.infer<typeof PolicyIndexSchema>;
 
 export const PolicySnapshotSchema = z.object({
   schemaVersion: z.literal(1),
+  normalizationVersion: z.number().int().positive().optional(),
   sourceId: z.string().min(3),
   title: z.string().min(1),
   url: z.string().url(),
