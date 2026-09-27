@@ -76,10 +76,23 @@ async function fetchMarket(country) {
   }
 }
 
-function addHistory(entry, previousMarket, sameDay, previousIsYesterday) {
+function addHistory(entry, previousMarket, sameDay, previousIsYesterday, currentGameFocused) {
   const prior = previousMarket?.entries?.find((item) => item.appId === entry.appId);
   if (!prior) {
     return { ...entry, priorRank: null, delta: null, firstObserved: today, daysObserved: 1, bestObservedRank: entry.rank, events: ['NEW ENTRY'] };
+  }
+
+  const sourceComparable = previousMarket?.status === 'ok' && previousMarket?.gameFocused === currentGameFocused;
+  if (!sourceComparable) {
+    return {
+      ...entry,
+      priorRank: null,
+      delta: null,
+      firstObserved: today,
+      daysObserved: 1,
+      bestObservedRank: entry.rank,
+      events: ['SOURCE RESET'],
+    };
   }
 
   const firstDayReplacement = sameDay && prior.firstObserved === today && (prior.daysObserved ?? 1) === 1;
@@ -137,7 +150,13 @@ for (const [country, label] of Object.entries(markets)) {
       warning: snapshot.warning ?? null,
       observedAt: generatedAt,
       refreshStatus: 'fresh',
-      entries: snapshot.entries.map((entry) => addHistory(entry, previous.markets?.[country], sameDay, previousIsYesterday)),
+      entries: snapshot.entries.map((entry) => addHistory(
+        entry,
+        previous.markets?.[country],
+        sameDay,
+        previousIsYesterday,
+        snapshot.gameFocused,
+      )),
     };
   } catch (error) {
     const priorMarket = previous.markets?.[country];
