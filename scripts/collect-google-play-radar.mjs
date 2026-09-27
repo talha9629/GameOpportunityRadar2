@@ -9,7 +9,7 @@ const now = new Date();
 const generatedAt = now.toISOString();
 const today = generatedAt.slice(0, 10);
 const chartDepth = 50;
-const creditsPerRun = 12; // AppBrain: 4 credits first 10 + 2 per additional 10.
+const creditsPerRun = 12; // AppBrain pricing: 4 credits first 10 + 2 per additional 10.
 
 function readJson(file, fallback = null) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; }
@@ -42,8 +42,11 @@ const base = {
     endpoint: 'https://api.appbrain.com/v2/info/browse',
     origin: 'third_party_public',
     estimateOrigin: 'third_party_estimate',
-    method: 'POPULAR Android apps filtered to Google Play GAME category by provider query',
+    orderingSemantics: 'provider_popularity_position',
+    method: 'AppBrain POPULAR browse ordering for Android apps filtered to the provider GAME category',
     countryScope: 'provider_global_not_country_specific',
+    requestedDepth: chartDepth,
+    completenessPolicy: 'exact_requested_depth_required',
     creditsPerRun,
     freeMonthlyCreditBudget: 500,
   },
@@ -52,10 +55,12 @@ const base = {
   entries: [],
   limitations: [
     'This is AppBrain market intelligence, not an official Google Play top-chart API.',
+    'The displayed position is AppBrain provider ordering, not a Google Play storefront chart rank.',
     'Google Play Developer API is not used for competitor discovery because it is designed for apps in the developer account.',
     'estimatedDownloads and estimatedRecentDownloads are third-party estimates, never first-party Google figures.',
     'This provider browse endpoint is not labeled as a country storefront ranking; Radar does not attach US/UK/CA/AU market claims to it.',
-    'Movement compares the previous observed AppBrain snapshot and always records the observation gap; it is not called a 1-day move unless the gap is exactly one day.',
+    'A successful snapshot requires exactly the requested 50 unique provider results. Partial provider responses fail closed.',
+    'Movement compares the previous successful observed AppBrain snapshot and always records the observation gap; it is not called a 1-day move unless the gap is exactly one day.',
   ],
 };
 
@@ -81,27 +86,38 @@ try {
   url.searchParams.set('offset', '0');
   url.searchParams.set('format', 'json');
 
-  const response = await fetch(url, { headers: { 'User-Agent': 'GameOpportunityRadar2/1.0' } });
+  const response = await fetch(url, { headers: { 'User-Agent': 'GameOpportunityRadar2/1.1' } });
   if (!response.ok) throw new Error(`AppBrain HTTP ${response.status}`);
   const payload = await response.json();
   const apps = Array.isArray(payload?.apps) ? payload.apps : [];
-  if (apps.length < 10) throw new Error(`AppBrain browse returned only ${apps.length} apps.`);
+  if (apps.length !== chartDepth) {
+    throw new Error(`AppBrain browse returned ${apps.length} apps; exact requested depth ${chartDepth} is required.`);
+  }
 
-  const priorByPackage = new Map((Array.isArray(previous?.entries) ? previous.entries : []).map((entry) => [entry.packageName, entry]));
-  const entries = apps.slice(0, chartDepth).map((app, index) => {
-    const packageName = String(app.package ?? '').trim();
-    if (!packageName) throw new Error(`AppBrain result at rank ${index + 1} has no package name.`);
+  const packageNames = apps.map((app) => String(app?.package ?? '').trim());
+  if (packageNames.some((packageName) => !packageName)) throw new Error('AppBrain browse returned an app without a package name.');
+  if (new Set(packageNames).size !== chartDepth) throw new Error('AppBrain browse returned duplicate package names; snapshot rejected as incomplete.');
+
+  const previousSuccessful = previous?.status === 'ok' && Array.isArray(previous.entries) && previous.entries.length === chartDepth ? previous : null;
+  const priorByPackage = new Map((previousSuccessful?.entries ?? []).map((entry) => [entry.packageName, entry]));
+  const previousSuccessfulDate = typeof previousSuccessful?.generatedAt === 'string' ? previousSuccessful.generatedAt.slice(0, 10) : null;
+  const sameSuccessfulDay = previousSuccessfulDate === today;
+  const successfulGapDays = daysBetweenDates(previousSuccessfulDate, today);
+
+  const entries = apps.map((app, index) => {
+    const packageName = packageNames[index];
     const prior = priorByPackage.get(packageName);
-    const previousObservedRank = sameDay ? prior?.previousObservedRank ?? null : prior?.rank ?? null;
+    const previousObservedRank = sameSuccessfulDay ? prior?.previousObservedRank ?? null : prior?.rank ?? null;
     const firstObserved = prior?.firstObserved ?? today;
-    const observations = sameDay ? prior?.observations ?? 1 : prior ? (prior.observations ?? 1) + 1 : 1;
+    const observations = sameSuccessfulDay ? prior?.observations ?? 1 : prior ? (prior.observations ?? 1) + 1 : 1;
 
     return {
       rank: index + 1,
+      rankSemantics: 'appbrain_popularity_position',
       previousObservedRank,
       observedDelta: previousObservedRank == null ? null : previousObservedRank - (index + 1),
-      previousObservedAt: prior ? previous?.generatedAt ?? null : null,
-      observationGapDays: prior ? (sameDay ? prior.observationGapDays ?? observationGapDays : observationGapDays) : null,
+      previousObservedAt: prior ? previousSuccessful?.generatedAt ?? null : null,
+      observationGapDays: prior ? (sameSuccessfulDay ? prior.observationGapDays ?? successfulGapDays : successfulGapDays) : null,
       packageName,
       name: app.name ?? packageName,
       publisher: app.developerName ?? 'Publisher unknown',
@@ -128,13 +144,19 @@ try {
     status: 'ok',
     observedAt: generatedAt,
     creditsUsedThisRun: creditsPerRun,
+    completeness: {
+      requested: chartDepth,
+      received: entries.length,
+      uniquePackages: new Set(entries.map((entry) => entry.packageName)).size,
+      exactDepthSatisfied: true,
+    },
     entries,
   };
 
   fs.mkdirSync(historyDir, { recursive: true });
   fs.writeFileSync(latestPath, `${JSON.stringify(output, null, 2)}\n`);
   fs.writeFileSync(path.join(historyDir, `${today}.json`), `${JSON.stringify(output, null, 2)}\n`);
-  console.log(`[google-play] collected ${entries.length} popular Android games via AppBrain · ${creditsPerRun} credits`);
+  console.log(`[google-play] collected exact ${entries.length}/${chartDepth} AppBrain popularity positions · ${creditsPerRun} credits`);
 } catch (error) {
   fs.mkdirSync(historyDir, { recursive: true });
   fs.writeFileSync(latestPath, `${JSON.stringify({

@@ -10,7 +10,7 @@ function googlePage(body, dynamicToken) {
 }
 
 test('policy normalization version is explicit', () => {
-  assert.equal(POLICY_NORMALIZATION_VERSION, 2);
+  assert.equal(POLICY_NORMALIZATION_VERSION, 3);
 });
 
 test('Google dynamic Help Center footer tokens do not change normalized policy evidence', () => {

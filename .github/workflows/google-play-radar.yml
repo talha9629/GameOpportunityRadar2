@@ -39,7 +39,7 @@ jobs:
           APPBRAIN_API_KEY: ${{ secrets.APPBRAIN_API_KEY }}
         run: node scripts/collect-google-play-radar.mjs
 
-      - name: Validate Google Play provenance and cadence
+      - name: Validate Google Play provenance and exact provider depth
         run: node scripts/validate-google-play-radar.mjs
 
       - name: Write run summary
@@ -52,8 +52,9 @@ jobs:
           console.log('');
           console.log(`Provider: **${p.source.provider}** · status: **${p.status}** · entries: **${p.entries.length}**`);
           console.log(`Cadence: **Mon / Wed / Fri** · configured cost: **${p.source.creditsPerRun} AppBrain credits/run** · free monthly allowance: **${p.source.freeMonthlyCreditBudget}**`);
+          if (p.status === 'ok') console.log(`Coverage: **${p.completeness.received}/${p.completeness.requested} unique provider results** · exact depth: **${p.completeness.exactDepthSatisfied}**`);
           console.log('');
-          console.log('Ranks and ratings are third-party AppBrain market intelligence. Download values are explicitly third-party estimates. This workflow never infers Google Play performance from Apple data and never labels its provider-global browse as a country storefront chart.');
+          console.log('Displayed positions are AppBrain provider-global popularity positions, not official Google Play storefront ranks. Ratings are third-party AppBrain market intelligence and download values are explicitly third-party estimates. This workflow never infers Google Play performance from Apple data and never labels its provider-global browse as a country storefront chart.');
           NODE
 
       - name: Commit provider state safely

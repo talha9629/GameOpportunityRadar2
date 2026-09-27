@@ -1,6 +1,9 @@
 import { createHash } from 'node:crypto';
 
-export const POLICY_NORMALIZATION_VERSION = 2;
+// v3 keeps the v2 text normalization rules but changes snapshot identity to be
+// normalization-version aware. This prevents an unchanged text hash from
+// making an older snapshot file appear to have been produced by a newer normalizer.
+export const POLICY_NORMALIZATION_VERSION = 3;
 
 function decodeEntities(value) {
   const named = new Map([

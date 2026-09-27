@@ -32,15 +32,16 @@ function GooglePlayHome() {
       {data?.status === 'unconfigured' && <div className="platform-source-note">APPBRAIN_API_KEY is not configured. Radar is intentionally showing no Google Play candidates rather than recycling Apple results. Once the key is added to GitHub Actions, this page will populate automatically on the next scheduled run.</div>}
       {data?.status === 'failed' && <div className="error-box">Provider collection failed: {data.error}</div>}
       {data?.status === 'ok' && <>
+        <div className="platform-source-note"><strong>Coverage verified:</strong> exact {data.completeness?.received}/{data.completeness?.requested} unique AppBrain provider results. These are <strong>AppBrain popularity positions</strong>, not official Google Play storefront ranks.</div>
         <div className="search-row"><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Filter by game, publisher, or Android package" /><button disabled><Search size={16} /> {filtered.length} matches</button></div>
         <div className="deep-library-list">{filtered.slice(0, 30).map((entry) => <a key={entry.packageName} href={entry.storeUrl} target="_blank" rel="noreferrer" className="platform-capability-card">
           <div className="platform-context-head"><div><strong>#{entry.rank} {entry.name}</strong><p>{entry.publisher} · {entry.packageName}</p></div>{entry.iconUrl && <img src={entry.iconUrl} alt="" width="44" height="44" />}</div>
           <div className="market-strip">
-            <span className="market-chip">Popularity rank <b>#{entry.rank}</b></span>
-            {entry.observedDelta != null && <span className="market-chip">Δ vs prior observation <b>{entry.observedDelta > 0 ? `+${entry.observedDelta}` : entry.observedDelta}</b>{entry.observationGapDays != null ? ` / ${entry.observationGapDays}d gap` : ''}</span>}
-            <span className="market-chip">Snapshots <b>{entry.observations}</b></span>
+            <span className="market-chip">AppBrain position <b>#{entry.rank}</b></span>
+            {entry.observedDelta != null && <span className="market-chip">Δ vs prior AppBrain observation <b>{entry.observedDelta > 0 ? `+${entry.observedDelta}` : entry.observedDelta}</b>{entry.observationGapDays != null ? ` / ${entry.observationGapDays}d gap` : ''}</span>}
+            <span className="market-chip">Successful snapshots <b>{entry.observations}</b></span>
           </div>
-          <div className="platform-source-note">Rank: third-party public · Downloads: {entry.estimatedRecentDownloads != null ? `${entry.estimatedRecentDownloads.toLocaleString()} recent estimate` : 'estimate unavailable'} · no country storefront claim</div>
+          <div className="platform-source-note">Provider position: third-party public · Downloads: {entry.estimatedRecentDownloads != null ? `${entry.estimatedRecentDownloads.toLocaleString()} recent estimate` : 'estimate unavailable'} · provider-global scope · no country storefront claim</div>
           <span>Open Google Play <ExternalLink size={13} /></span>
         </a>)}</div>
       </>}
@@ -68,10 +69,10 @@ function CrossPlatformHome({ onAnalyze }: { onAnalyze: (appId: string) => void }
     <div className="today-heading"><div><div className="eyebrow">CROSS-PLATFORM · RESEARCH</div><h1>Compare coverage before comparing games.</h1><p>Each platform keeps its own evidence quality and source boundaries.</p></div></div>
     <div className="platform-capability-grid">
       <div className="platform-capability-card"><span className="capability-status live">Live</span><h3>Apple App Store</h3><p>Official Games charts + Apple metadata across US, UK, Canada and Australia.</p></div>
-      <div className="platform-capability-card"><span className="capability-status">Conditional</span><h3>Google Play</h3><p>AppBrain-powered Android discovery once configured; estimates remain labeled third-party.</p></div>
+      <div className="platform-capability-card"><span className="capability-status">Conditional</span><h3>Google Play</h3><p>AppBrain-powered Android discovery once configured; provider positions and estimates remain explicitly third-party.</p></div>
       <div className="platform-capability-card"><span className="capability-status assisted">Assisted</span><h3>Amazon Appstore · Fire</h3><p>No automated competitor chart integrated yet; Fire-specific research remains assisted/manual.</p></div>
     </div>
-    <div className="platform-source-note">Cross-platform mode never merges incomparable ranks into one score. Apple, Google Play, and Amazon evidence stay side-by-side until a comparable fact actually exists.</div>
+    <div className="platform-source-note">Cross-platform mode never merges incomparable ranks or provider positions into one score. Apple, Google Play, and Amazon evidence stay side-by-side until a comparable fact actually exists.</div>
     <Today onAnalyze={onAnalyze} />
   </section>;
 }
