@@ -11,6 +11,8 @@ on:
       - 'scripts/validate-radar-data.mjs'
       - 'scripts/build-trend-signals.mjs'
       - 'scripts/validate-trend-signals.mjs'
+      - 'scripts/build-trend-attention.mjs'
+      - 'scripts/validate-trend-attention.mjs'
       - 'scripts/build-research-queue.mjs'
       - 'scripts/enrich-research-queue.mjs'
       - 'scripts/validate-research-queue.mjs'
@@ -57,6 +59,10 @@ jobs:
         run: node scripts/build-trend-signals.mjs
       - name: Validate exact-date trend signals
         run: node scripts/validate-trend-signals.mjs
+      - name: Build cross-market Trend Attention
+        run: node scripts/build-trend-attention.mjs
+      - name: Validate Trend Attention provenance
+        run: node scripts/validate-trend-attention.mjs
       - name: Build evidence-backed research queue
         env:
           APPBRAIN_API_KEY: ${{ secrets.APPBRAIN_API_KEY }}
@@ -96,6 +102,7 @@ jobs:
           node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
           const fs = require('fs');
           const t = JSON.parse(fs.readFileSync('public/data/radar/trend-signals.json', 'utf8'));
+          const a = JSON.parse(fs.readFileSync('public/data/radar/trend-attention.json', 'utf8'));
           const q = JSON.parse(fs.readFileSync('public/data/research/latest.json', 'utf8'));
           const v = JSON.parse(fs.readFileSync('public/data/verification/latest.json', 'utf8'));
           const s = JSON.parse(fs.readFileSync('public/data/discovery/latest.json', 'utf8'));
@@ -109,10 +116,14 @@ jobs:
           console.log(`Data health: **${h.overall}** · essential pipelines **${h.essentialHealthy}/${h.essentialCount} healthy** · exact history **${h.facts.exactHistoryDays}/7 days**`);
           console.log(`Apple Games chart depth: **Top ${t.chartDepth}** · exact trend signals: **${t.summary.signalCount}** across **${t.summary.healthyGameMarkets}** healthy Games markets`);
           console.log(`Trend states: ${stateCounts || 'none'}`);
+          console.log(`Trend Attention: **${a.summary.appCount} app(s)** · ${a.summary.evidenceCount} qualified market signal(s) · **${a.summary.crossMarketMovementCount} cross-market movement app(s)**`);
           console.log(`Radar date: **${q.radarDate}** · Apple charts: **${q.sources.appleCharts.status}** · live evidence: **${q.sources.liveAnalyzer?.status ?? 'not-run'}** · AppBrain: **${q.sources.appBrain.status}**`);
           console.log(`Verification queue: **${v.summary.taskCount}/${v.summary.rawTaskCount} explicit unknown(s) routed** · omitted ${v.summary.omittedTaskCount} · **${v.summary.captureSessionCount} capture session(s)** cover ${v.summary.groupedEvidenceTaskCount} gameplay evidence task(s) · ${v.summary.readyForHumanReview} human-review · ${v.summary.autoWaiting} auto-waiting · ${v.summary.optionalExternal} optional external`);
           console.log(`Gameplay discovery: **${s.provider.status}** · ${suggestedSessions} session(s) with suggestions · ${suggestedSources} suggested source(s) · ${s.provider.creditsUsedThisRun}/${s.provider.dailyCreditCap} Basic-search credit budget`);
           console.log(`Daily digest: **${d.status}** · ${d.summary.changeCount} exact-date change(s) · ${d.summary.attentionCount} attention item(s)`);
+          console.log('');
+          console.log('### Top factual trend attention');
+          for (const item of a.items.slice(0, 8)) console.log(`- **${item.name}** · ${item.attentionClass.replaceAll('_', ' ')} · ${item.evidenceMarketCount} qualified market(s) · best #${item.bestRank} · ${item.reasonCodes.join(', ')}`);
           console.log('');
           console.log('| # | Title | Priority | Listing facts | Unknowns | First-party reasons |');
           console.log('|---:|---|---:|---:|---:|---|');
@@ -121,7 +132,7 @@ jobs:
           console.log('### Next factual actions');
           for (const action of h.recommendedActions.slice(0, 5)) console.log(`- **${action.action}**${action.name ? ` · ${action.name}` : ''}: ${action.why}`);
           console.log('');
-          console.log('Trend visibility is a bounded chart-position heuristic, not downloads/revenue/market share. Trend states use exact dated rank evidence only; saturation states are reserved for separate mechanic-cluster evidence. Priority is deterministic research ordering, not a success probability or build recommendation. Verification tasks are routes to evidence, not resolved facts; capture sessions only reduce duplicate evidence collection. Public gameplay search candidates are suggestions only and do not become verified gameplay evidence automatically.');
+          console.log('Trend Attention groups only already-qualified exact-date rank evidence. Ordering is factual triage, not a success prediction or opportunity score. Trend visibility is a bounded chart-position heuristic, not downloads/revenue/market share. Saturation states remain reserved for separate mechanic-cluster evidence.');
           NODE
       - name: Commit snapshot, queue, verification, discovery, digest and health safely
         run: |
