@@ -13,7 +13,9 @@ on:
       - 'scripts/validate-trend-signals.mjs'
       - 'scripts/build-research-queue.mjs'
       - 'scripts/enrich-research-queue.mjs'
+      - 'scripts/finalize-research-queue-contract.mjs'
       - 'scripts/validate-research-queue.mjs'
+      - 'scripts/validate-research-queue-transport.mjs'
       - 'scripts/build-verification-queue.mjs'
       - 'scripts/validate-verification-queue.mjs'
       - 'scripts/discover-gameplay-sources.mjs'
@@ -68,8 +70,12 @@ jobs:
           RADAR_PUBLISHABLE_KEY: sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg
           RADAR_EVIDENCE_PACK_CAP: '8'
         run: node scripts/enrich-research-queue.mjs
+      - name: Finalize research queue transport contract
+        run: node scripts/finalize-research-queue-contract.mjs
       - name: Validate research queue provenance and budget
         run: node scripts/validate-research-queue.mjs
+      - name: Validate research queue transport contract
+        run: node scripts/validate-research-queue-transport.mjs
       - name: Build evidence-routed verification queue
         run: node scripts/build-verification-queue.mjs
       - name: Validate verification queue provenance and routing
