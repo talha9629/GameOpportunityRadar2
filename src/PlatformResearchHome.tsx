@@ -3,7 +3,7 @@ import { ExternalLink, RefreshCw, Search } from 'lucide-react';
 import { Today } from './Today';
 import { loadGooglePlayRadar, type GooglePlayRadar } from './googlePlayRadar';
 import { PlatformContextPanel } from './PlatformContextPanel';
-import { PLATFORM_META, type PlatformScope } from './platformScope';
+import type { PlatformScope } from './platformScope';
 
 function GooglePlayHome() {
   const [data, setData] = useState<GooglePlayRadar | null>(null);
@@ -35,7 +35,11 @@ function GooglePlayHome() {
         <div className="search-row"><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Filter by game, publisher, or Android package" /><button disabled><Search size={16} /> {filtered.length} matches</button></div>
         <div className="deep-library-list">{filtered.slice(0, 30).map((entry) => <a key={entry.packageName} href={entry.storeUrl} target="_blank" rel="noreferrer" className="platform-capability-card">
           <div className="platform-context-head"><div><strong>#{entry.rank} {entry.name}</strong><p>{entry.publisher} · {entry.packageName}</p></div>{entry.iconUrl && <img src={entry.iconUrl} alt="" width="44" height="44" />}</div>
-          <div className="market-strip"><span className="market-chip">Popularity rank <b>#{entry.rank}</b></span>{entry.delta != null && <span className="market-chip">1d Δ <b>{entry.delta > 0 ? `+${entry.delta}` : entry.delta}</b></span>}<span className="market-chip">Observed <b>{entry.daysObserved}d</b></span></div>
+          <div className="market-strip">
+            <span className="market-chip">Popularity rank <b>#{entry.rank}</b></span>
+            {entry.observedDelta != null && <span className="market-chip">Δ vs prior observation <b>{entry.observedDelta > 0 ? `+${entry.observedDelta}` : entry.observedDelta}</b>{entry.observationGapDays != null ? ` / ${entry.observationGapDays}d gap` : ''}</span>}
+            <span className="market-chip">Snapshots <b>{entry.observations}</b></span>
+          </div>
           <div className="platform-source-note">Rank: third-party public · Downloads: {entry.estimatedRecentDownloads != null ? `${entry.estimatedRecentDownloads.toLocaleString()} recent estimate` : 'estimate unavailable'} · no country storefront claim</div>
           <span>Open Google Play <ExternalLink size={13} /></span>
         </a>)}</div>
