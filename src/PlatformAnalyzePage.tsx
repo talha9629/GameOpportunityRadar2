@@ -32,7 +32,13 @@ function GooglePlayAnalyze() {
         <div className="search-row"><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Game title, publisher, or Android package" /><button disabled><Search size={17} /> {matches.length}</button></div>
         <div className="deep-library-list">{matches.slice(0, 30).map((entry) => <article className="panel" key={entry.packageName}>
           <div className="platform-context-head"><div><div className="eyebrow">APPBRAIN · THIRD-PARTY</div><h3>#{entry.rank} {entry.name}</h3><p>{entry.publisher} · {entry.packageName}</p></div>{entry.iconUrl && <img src={entry.iconUrl} alt="" width="56" height="56" />}</div>
-          <div className="market-strip"><span className="market-chip">Rating <b>{entry.rating?.toFixed(2) ?? '—'}</b></span><span className="market-chip">Ratings <b>{entry.ratingCount?.toLocaleString() ?? '—'}</b></span><span className="market-chip">Recent downloads <b>{entry.estimatedRecentDownloads?.toLocaleString() ?? '—'} est.</b></span><span className="market-chip">Observed <b>{entry.daysObserved}d</b></span></div>
+          <div className="market-strip">
+            <span className="market-chip">Rating <b>{entry.rating?.toFixed(2) ?? '—'}</b></span>
+            <span className="market-chip">Ratings <b>{entry.ratingCount?.toLocaleString() ?? '—'}</b></span>
+            <span className="market-chip">Recent downloads <b>{entry.estimatedRecentDownloads?.toLocaleString() ?? '—'} est.</b></span>
+            <span className="market-chip">Snapshots <b>{entry.observations}</b></span>
+            {entry.observedDelta != null && <span className="market-chip">Observed Δ <b>{entry.observedDelta > 0 ? `+${entry.observedDelta}` : entry.observedDelta}</b>{entry.observationGapDays != null ? ` / ${entry.observationGapDays}d gap` : ''}</span>}
+          </div>
           <div className="platform-source-note">Popularity/rating fields are AppBrain market intelligence. Download values are third-party estimates. This is not an official Google rank/download claim and is not country-specific.</div>
           <a href={entry.storeUrl} target="_blank" rel="noreferrer">Open Google Play <ExternalLink size={14} /></a>
         </article>)}</div>
