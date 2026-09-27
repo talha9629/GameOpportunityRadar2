@@ -19,7 +19,7 @@ export function PlatformScopeSelector({
           key={scope}
           className={`${value === scope ? 'active' : ''} status-${meta.status}`}
           onClick={() => onChange(scope)}
-          title={meta.description}
+          aria-label={`${meta.label}. ${meta.description}`}
           aria-pressed={value === scope}
         >
           {meta.shortLabel}
