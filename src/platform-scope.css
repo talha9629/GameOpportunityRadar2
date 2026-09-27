@@ -1,0 +1,29 @@
+.platform-scope-selector { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.platform-scope-selector > span { color: #7187a3; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.platform-scope-buttons { display: flex; gap: 5px; flex-wrap: wrap; }
+.platform-scope-buttons button { padding: 7px 9px; border-radius: 9px; background: #0d1a2b; border-color: #2a405d; color: #9fb0c7; font-size: 11px; }
+.platform-scope-buttons button.active { color: #ecf8ff; background: #15314a; border-color: #3b78a5; box-shadow: inset 0 0 0 1px rgba(103, 212, 255, .12); }
+.platform-scope-buttons .status-assisted:not(.active) { border-style: dashed; }
+.platform-context { display: grid; gap: 12px; margin-bottom: 16px; }
+.platform-context-head { display: flex; justify-content: space-between; gap: 18px; align-items: start; }
+.platform-context-head h2 { margin: 0; font-size: 18px; }
+.platform-context-head p { margin: 4px 0 0; color: #899cb5; font-size: 12px; line-height: 1.5; }
+.platform-badge { white-space: nowrap; padding: 5px 8px; border: 1px solid #2c4c6c; border-radius: 999px; color: #8ed8ff; font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.market-strip { display: flex; gap: 7px; flex-wrap: wrap; }
+.market-chip { border: 1px solid #2a405d; background: #0b1726; border-radius: 999px; padding: 6px 9px; color: #b8c6d8; font-size: 11px; }
+.market-chip b { color: #eef7ff; margin-right: 4px; }
+.platform-capability-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.platform-capability-card { padding: 14px; border: 1px solid #273b56; border-radius: 12px; background: #0c1726; display: grid; gap: 8px; }
+.platform-capability-card h3 { margin: 0; font-size: 14px; }
+.platform-capability-card p { margin: 0; color: #899cb5; font-size: 11px; line-height: 1.5; }
+.platform-capability-card .capability-status { width: fit-content; padding: 3px 6px; border-radius: 999px; font-size: 9px; letter-spacing: .06em; font-weight: 800; text-transform: uppercase; border: 1px solid #315778; color: #91c9e8; }
+.platform-capability-card .capability-status.live { color: #86efac; border-color: #2f6248; }
+.platform-capability-card .capability-status.assisted { color: #fbbf24; border-color: #72591f; }
+.platform-research-empty { display: grid; gap: 12px; }
+.platform-research-empty h1, .platform-research-empty h2 { margin-bottom: 0; }
+.platform-research-empty p { color: #8fa2ba; line-height: 1.55; }
+.platform-research-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.platform-research-actions a, .platform-research-actions button { text-decoration: none; }
+.platform-source-note { padding: 10px 12px; border: 1px dashed #344965; border-radius: 10px; color: #91a6bf; font-size: 11px; line-height: 1.5; }
+@media (max-width: 980px) { .platform-capability-grid { grid-template-columns: 1fr; } }
+@media (max-width: 860px) { .platform-scope-selector > span { display: none; } .platform-scope-buttons { max-width: 52vw; } }
