@@ -66,7 +66,7 @@ export interface RadarWindow {
   index: RadarIndex | null;
 }
 
-export type RankWindowStatus = 'available' | 'history_missing' | 'not_ranked' | 'market_failed';
+export type RankWindowStatus = 'available' | 'history_missing' | 'not_ranked' | 'market_failed' | 'source_mismatch';
 
 export interface RankWindowChange {
   days: 1 | 3 | 7;
@@ -182,7 +182,7 @@ export function rankWindowChange(
   const currentEntry = currentMarket?.entries.find((entry) => entry.appId === appId);
   const currentRank = currentEntry?.rank ?? 0;
   const currentDate = dateKey(current);
-  if (!currentDate || !currentEntry) {
+  if (!currentDate || !currentMarket || currentMarket.status !== 'ok' || !currentEntry) {
     return { days, status: 'history_missing', delta: null, priorRank: null, currentRank };
   }
 
@@ -193,6 +193,14 @@ export function rankWindowChange(
   const priorMarket = prior.markets[marketCode];
   if (!priorMarket || priorMarket.status !== 'ok') {
     return { days, status: 'market_failed', delta: null, priorRank: null, currentRank };
+  }
+
+  if (
+    typeof currentMarket.gameFocused === 'boolean'
+    && typeof priorMarket.gameFocused === 'boolean'
+    && currentMarket.gameFocused !== priorMarket.gameFocused
+  ) {
+    return { days, status: 'source_mismatch', delta: null, priorRank: null, currentRank };
   }
 
   const priorEntry = priorMarket.entries.find((entry) => entry.appId === appId);
@@ -288,14 +296,16 @@ export function assessRadarTrend(
   if (entry.daysObserved >= 7 && sevenDay.status === 'available' && entry.rank <= 30) {
     return {
       state: 'ESTABLISHED',
-      reason: `Observed for ${entry.daysObserved} daily snapshots, currently #${entry.rank}, with an exact 7-day comparison available.`,
+      reason: `Observed for ${entry.daysObserved} consecutive daily snapshots, currently #${entry.rank}, with an exact 7-day comparison available.`,
       evidenceDays: [7],
     };
   }
 
   return {
     state: 'INSUFFICIENT_DATA',
-    reason: 'Exact rank history does not yet meet the evidence gate for emerging, rising, established, or declining.',
+    reason: [oneDay, threeDay, sevenDay].some((signal) => signal.status === 'source_mismatch')
+      ? 'At least one exact comparison crosses incompatible chart source classes, so no directional trend is inferred from that window.'
+      : 'Exact rank history does not yet meet the evidence gate for emerging, rising, established, or declining.',
     evidenceDays: [],
   };
 }
