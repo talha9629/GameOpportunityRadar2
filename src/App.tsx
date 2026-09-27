@@ -13,6 +13,7 @@ import { PlatformCompetitorsPage } from './PlatformCompetitorsPage';
 import { PlatformContextPanel } from './PlatformContextPanel';
 import { PlatformResearchHome } from './PlatformResearchHome';
 import {
+  canUseAppleOnlyEvidencePipeline,
   isPlatformScope,
   PLATFORM_META,
   PLATFORM_SCOPE_STORAGE_KEY,
@@ -46,12 +47,15 @@ function initialPlatformScope(): PlatformScope {
 }
 
 function PlatformPipelineBoundary({ scope, feature }: { scope: PlatformScope; feature: string }) {
+  const cross = scope === 'cross';
   return <>
     <PlatformContextPanel scope={scope} />
     <section className="panel platform-research-empty">
       <div className="eyebrow">PLATFORM BOUNDARY</div>
-      <h1>{feature} is not yet automated for {PLATFORM_META[scope].label}.</h1>
-      <p>Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to this platform. Switch the platform selector to Apple to inspect the existing pipeline, or use Today/Analyze/Competitors for the platform-specific source coverage that is currently available.</p>
+      <h1>{feature} is not available as blended {PLATFORM_META[scope].label} evidence.</h1>
+      <p>{cross
+        ? 'This pipeline currently contains Apple-specific evidence. Cross-platform mode is a coverage overview only, so Radar will not display the Apple pipeline under an All-platform label. Select Apple explicitly to inspect it.'
+        : `Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to ${PLATFORM_META[scope].label}. Select Apple to inspect the existing Apple pipeline, or use Today/Analyze/Competitors for evidence currently available to this platform.`}</p>
     </section>
   </>;
 }
@@ -166,7 +170,7 @@ export function App() {
   }
 
   const deepVerifySession = deepVerifySeed?.session ?? null;
-  const applePipelineVisible = platformScope === 'apple' || platformScope === 'cross';
+  const applePipelineVisible = canUseAppleOnlyEvidencePipeline(platformScope);
 
   return <AppShell
     route={route}
@@ -177,10 +181,10 @@ export function App() {
   >
     {route.view === 'today' && <PlatformResearchHome scope={platformScope} onAnalyze={openAppleAnalyze} />}
     {route.view === 'trends' && (applePipelineVisible
-      ? <><PlatformContextPanel scope={platformScope} /><TrendSignalsPage onAnalyze={openAppleAnalyze} /></>
+      ? <><PlatformContextPanel scope="apple" /><TrendSignalsPage onAnalyze={openAppleAnalyze} /></>
       : <PlatformPipelineBoundary scope={platformScope} feature="Trend Signals" />)}
     {route.view === 'verification' && (applePipelineVisible
-      ? <><PlatformContextPanel scope={platformScope} /><VerificationQueuePage onDeepVerify={openDeepVerify} onCompetitors={() => openPage('competitors')} /></>
+      ? <><PlatformContextPanel scope="apple" /><VerificationQueuePage onDeepVerify={openDeepVerify} onCompetitors={() => openPage('competitors')} /></>
       : <PlatformPipelineBoundary scope={platformScope} feature="Verification Queue" />)}
     {route.view === 'analyze' && <PlatformAnalyzePage
       scope={route.runId ? 'apple' : platformScope}
