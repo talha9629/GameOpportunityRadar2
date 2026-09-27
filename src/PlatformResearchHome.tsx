@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ExternalLink, RefreshCw, Search } from 'lucide-react';
 import { Today } from './Today';
+import { EvidenceLegend } from './EvidenceLegend';
 import { loadGooglePlayRadar, type GooglePlayRadar } from './googlePlayRadar';
 import { PlatformContextPanel } from './PlatformContextPanel';
 import type { PlatformScope } from './platformScope';
@@ -79,7 +80,7 @@ function CrossPlatformHome() {
 export function PlatformResearchHome({ scope, onAnalyze }: { scope: PlatformScope; onAnalyze: (appId: string) => void }) {
   return <>
     <PlatformContextPanel scope={scope} />
-    {scope === 'apple' && <Today onAnalyze={onAnalyze} />}
+    {scope === 'apple' && <><EvidenceLegend /><Today onAnalyze={onAnalyze} /></>}
     {scope === 'google_play' && <GooglePlayHome />}
     {scope === 'amazon_fire' && <AmazonFireHome />}
     {scope === 'cross' && <CrossPlatformHome />}
