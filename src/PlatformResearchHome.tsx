@@ -73,9 +73,10 @@ function CrossPlatformHome({ onAnalyze }: { onAnalyze: (appId: string) => void }
       .catch((err) => setGoogleError(err instanceof Error ? err.message : 'Google Play status unavailable.'));
   }, []);
 
+  const googleIsLive = google?.status === 'ok';
   const googleStatus = google?.status ?? (googleError ? 'failed' : 'loading');
-  const googleStatusClass = googleStatus === 'ok' ? 'live' : 'assisted';
-  const googleCopy = googleStatus === 'ok'
+  const googleStatusClass = googleIsLive ? 'live' : 'assisted';
+  const googleCopy = googleIsLive
     ? `${google.entries.length} Android candidates from AppBrain · last refresh ${new Date(google.generatedAt).toLocaleString()}.`
     : googleStatus === 'unconfigured'
       ? 'Automation ready, but APPBRAIN_API_KEY is not configured; 0 Android candidates are shown rather than Apple substitutes.'
