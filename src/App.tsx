@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
-import { Analyze } from './Analyze';
 import { AppShell } from './AppShell';
 import {
   navigateAppRoute,
@@ -10,10 +9,18 @@ import {
 } from './appRouter';
 import { Competitors } from './Competitors';
 import { DeepVerifyWorkspace } from './DeepVerifyWorkspace';
+import { PlatformAnalyzePage } from './PlatformAnalyzePage';
+import { PlatformContextPanel } from './PlatformContextPanel';
+import { PlatformResearchHome } from './PlatformResearchHome';
+import {
+  isPlatformScope,
+  PLATFORM_META,
+  PLATFORM_SCOPE_STORAGE_KEY,
+  type PlatformScope,
+} from './platformScope';
 import { PolicyWatch } from './PolicyWatch';
 import { ReviewSamples } from './ReviewSamples';
 import { SavedDossiers } from './SavedDossiers';
-import { Today } from './Today';
 import { TrendSignalsPage } from './TrendSignalsPage';
 import { VerificationQueuePage } from './VerificationQueuePage';
 import { loadVerificationQueue, type VerificationCaptureSession } from './verificationQueue';
@@ -32,8 +39,26 @@ function initialRoute(): AppRoute {
   return parseAppRoute(window.location.hash);
 }
 
+function initialPlatformScope(): PlatformScope {
+  if (typeof window === 'undefined') return 'cross';
+  const stored = window.localStorage.getItem(PLATFORM_SCOPE_STORAGE_KEY);
+  return isPlatformScope(stored) ? stored : 'cross';
+}
+
+function PlatformPipelineBoundary({ scope, feature }: { scope: PlatformScope; feature: string }) {
+  return <>
+    <PlatformContextPanel scope={scope} />
+    <section className="panel platform-research-empty">
+      <div className="eyebrow">PLATFORM BOUNDARY</div>
+      <h1>{feature} is not yet automated for {PLATFORM_META[scope].label}.</h1>
+      <p>Radar is deliberately not reusing Apple ranks or Apple verification tasks as if they belonged to this platform. Switch the platform selector to Apple to inspect the existing pipeline, or use Today/Analyze for the platform-specific source coverage that is currently available.</p>
+    </section>
+  </>;
+}
+
 export function App() {
   const [route, setRoute] = useState<AppRoute>(initialRoute);
+  const [platformScope, setPlatformScope] = useState<PlatformScope>(initialPlatformScope);
   const [deepVerifySeed, setDeepVerifySeed] = useState<DeepVerifySeed>(null);
   const [deepVerifyHydrating, setDeepVerifyHydrating] = useState(false);
   const [owner, setOwner] = useState<User | null>(null);
@@ -45,6 +70,10 @@ export function App() {
     else syncRoute();
     return () => window.removeEventListener('hashchange', syncRoute);
   }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(PLATFORM_SCOPE_STORAGE_KEY, platformScope);
+  }, [platformScope]);
 
   useEffect(() => {
     let active = true;
@@ -87,15 +116,21 @@ export function App() {
     return () => { active = false; };
   }, [route.sessionId, route.videoId, route.view]);
 
+  function changePlatformScope(scope: PlatformScope) {
+    setPlatformScope(scope);
+  }
+
   function openPage(view: AppView) {
     navigateAppRoute({ view });
   }
 
-  function openAnalyze(appId?: string) {
+  function openAppleAnalyze(appId?: string) {
+    setPlatformScope('apple');
     navigateAppRoute({ view: 'analyze', appId });
   }
 
   function openSavedRun(runId: string) {
+    setPlatformScope('apple');
     navigateAppRoute({ view: 'analyze', runId });
   }
 
@@ -131,18 +166,29 @@ export function App() {
   }
 
   const deepVerifySession = deepVerifySeed?.session ?? null;
+  const applePipelineVisible = platformScope === 'apple' || platformScope === 'cross';
 
-  return <AppShell route={route} owner={owner} onNavigate={openPage}>
-    {route.view === 'today' && <Today onAnalyze={(appId) => openAnalyze(appId)} />}
-    {route.view === 'trends' && <TrendSignalsPage onAnalyze={(appId) => openAnalyze(appId)} />}
-    {route.view === 'verification' && <VerificationQueuePage onDeepVerify={openDeepVerify} onCompetitors={() => openPage('competitors')} />}
-    {route.view === 'analyze' && <Analyze
-      key={route.runId ?? route.appId ?? 'manual'}
+  return <AppShell
+    route={route}
+    owner={owner}
+    platformScope={platformScope}
+    onPlatformScopeChange={changePlatformScope}
+    onNavigate={openPage}
+  >
+    {route.view === 'today' && <PlatformResearchHome scope={platformScope} onAnalyze={openAppleAnalyze} />}
+    {route.view === 'trends' && (applePipelineVisible
+      ? <><PlatformContextPanel scope={platformScope} /><TrendSignalsPage onAnalyze={openAppleAnalyze} /></>
+      : <PlatformPipelineBoundary scope={platformScope} feature="Trend Signals" />)}
+    {route.view === 'verification' && (applePipelineVisible
+      ? <><PlatformContextPanel scope={platformScope} /><VerificationQueuePage onDeepVerify={openDeepVerify} onCompetitors={() => openPage('competitors')} /></>
+      : <PlatformPipelineBoundary scope={platformScope} feature="Verification Queue" />)}
+    {route.view === 'analyze' && <PlatformAnalyzePage
+      scope={route.runId ? 'apple' : platformScope}
       initialInput={route.runId ? '' : route.appId ?? ''}
       initialRunId={route.runId ?? null}
       ownerEmail={owner?.email ?? null}
     />}
-    {route.view === 'saved' && <SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} />}
+    {route.view === 'saved' && <><PlatformContextPanel scope="apple" /><SavedDossiers ownerEmail={owner?.email ?? null} onOpen={openSavedRun} /></>}
     {route.view === 'competitors' && <Competitors ownerEmail={owner?.email ?? null} />}
     {route.view === 'reviews' && <ReviewSamples ownerEmail={owner?.email ?? null} />}
     {route.view === 'deep-verify' && <>
