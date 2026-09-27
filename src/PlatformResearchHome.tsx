@@ -64,16 +64,15 @@ function AmazonFireHome() {
   </section>;
 }
 
-function CrossPlatformHome({ onAnalyze }: { onAnalyze: (appId: string) => void }) {
+function CrossPlatformHome() {
   return <section className="today-shell">
-    <div className="today-heading"><div><div className="eyebrow">CROSS-PLATFORM · RESEARCH</div><h1>Compare coverage before comparing games.</h1><p>Each platform keeps its own evidence quality and source boundaries.</p></div></div>
+    <div className="today-heading"><div><div className="eyebrow">CROSS-PLATFORM · COVERAGE</div><h1>Compare evidence availability before comparing games.</h1><p>Cross-platform mode is a coverage overview, not a blended candidate feed.</p></div></div>
     <div className="platform-capability-grid">
       <div className="platform-capability-card"><span className="capability-status live">Live</span><h3>Apple App Store</h3><p>Official Games charts + Apple metadata across US, UK, Canada and Australia.</p></div>
       <div className="platform-capability-card"><span className="capability-status">Conditional</span><h3>Google Play</h3><p>AppBrain-powered Android discovery once configured; provider positions and estimates remain explicitly third-party.</p></div>
       <div className="platform-capability-card"><span className="capability-status assisted">Assisted</span><h3>Amazon Appstore · Fire</h3><p>No automated competitor chart integrated yet; Fire-specific research remains assisted/manual.</p></div>
     </div>
-    <div className="platform-source-note">Cross-platform mode never merges incomparable ranks or provider positions into one score. Apple, Google Play, and Amazon evidence stay side-by-side until a comparable fact actually exists.</div>
-    <Today onAnalyze={onAnalyze} />
+    <div className="platform-source-note"><strong>No blended feed:</strong> select Apple, Google Play, or Amazon Fire in the platform selector before viewing candidates. Cross-platform mode never presents Apple candidates as cross-platform evidence and never merges incomparable ranks or provider positions into one score.</div>
   </section>;
 }
 
@@ -83,6 +82,6 @@ export function PlatformResearchHome({ scope, onAnalyze }: { scope: PlatformScop
     {scope === 'apple' && <Today onAnalyze={onAnalyze} />}
     {scope === 'google_play' && <GooglePlayHome />}
     {scope === 'amazon_fire' && <AmazonFireHome />}
-    {scope === 'cross' && <CrossPlatformHome onAnalyze={onAnalyze} />}
+    {scope === 'cross' && <CrossPlatformHome />}
   </>;
 }
