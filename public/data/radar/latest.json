@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-09-27T13:28:36.344Z",
+  "generatedAt": "2026-09-27T13:32:18.169Z",
   "chart": "top-free",
   "category": "Games",
   "chartDepth": 100,
@@ -16,7 +16,7 @@
       "sourceUrl": "https://itunes.apple.com/us/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T13:28:36.344Z",
+      "observedAt": "2026-09-27T13:32:18.169Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -73,9 +73,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 4,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 5,
@@ -89,9 +87,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 5,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 6,
@@ -119,9 +115,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 7,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 8,
@@ -136,7 +130,6 @@
           "daysObserved": 2,
           "bestObservedRank": 8,
           "events": [
-            "NEW HIGH",
             "TOP 10"
           ]
         },
@@ -194,9 +187,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 12,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 13,
@@ -210,9 +201,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 13,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 14,
@@ -282,9 +271,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 18,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 19,
@@ -410,9 +397,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 27,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 28,
@@ -426,9 +411,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 28,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 29,
@@ -456,9 +439,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 30,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 31,
@@ -500,9 +481,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 33,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 34,
@@ -516,9 +495,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 34,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 35,
@@ -532,9 +509,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 35,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 36,
@@ -576,9 +551,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 38,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 39,
@@ -606,9 +579,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 40,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 41,
@@ -636,9 +607,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 42,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 43,
@@ -652,9 +621,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 43,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 44,
@@ -710,9 +677,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 47,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 48,
@@ -768,9 +733,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 51,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 52,
@@ -856,9 +819,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 57,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 58,
@@ -914,9 +875,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 61,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 62,
@@ -1046,9 +1005,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 70,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 71,
@@ -1204,9 +1161,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 81,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 82,
@@ -1220,9 +1175,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 82,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 83,
@@ -1296,9 +1249,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 87,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 88,
@@ -1326,9 +1277,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 89,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 90,
@@ -1502,7 +1451,7 @@
       "sourceUrl": "https://itunes.apple.com/gb/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T13:28:36.344Z",
+      "observedAt": "2026-09-27T13:32:18.169Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -1531,9 +1480,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 2,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 3,
@@ -1561,9 +1508,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 4,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 5,
@@ -1633,9 +1578,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 9,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 10,
@@ -1819,9 +1762,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 22,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 23,
@@ -1835,9 +1776,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 23,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 24,
@@ -1851,9 +1790,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 24,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 25,
@@ -1937,9 +1874,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 30,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 31,
@@ -1995,9 +1930,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 34,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 35,
@@ -2011,9 +1944,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 35,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 36,
@@ -2055,9 +1986,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 38,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 39,
@@ -2113,9 +2042,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 42,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 43,
@@ -2199,9 +2126,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 48,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 49,
@@ -2215,9 +2140,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 49,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 50,
@@ -2245,9 +2168,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 51,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 52,
@@ -2261,9 +2182,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 52,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 53,
@@ -2277,9 +2196,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 53,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 54,
@@ -2349,9 +2266,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 58,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 59,
@@ -2365,9 +2280,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 59,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 60,
@@ -2451,9 +2364,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 65,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 66,
@@ -2481,9 +2392,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 67,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 68,
@@ -2497,9 +2406,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 68,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 69,
@@ -2541,9 +2448,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 71,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 72,
@@ -2585,9 +2490,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 74,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 75,
@@ -2629,9 +2532,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 77,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 78,
@@ -2775,9 +2676,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 87,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 88,
@@ -2791,9 +2690,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 88,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 89,
@@ -2821,9 +2718,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 90,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 91,
@@ -2911,9 +2806,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 96,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 97,
@@ -2985,7 +2878,7 @@
       "sourceUrl": "https://itunes.apple.com/ca/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T13:28:36.344Z",
+      "observedAt": "2026-09-27T13:32:18.169Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -3028,9 +2921,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 3,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 4,
@@ -3072,9 +2963,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 6,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 7,
@@ -3089,7 +2978,6 @@
           "daysObserved": 2,
           "bestObservedRank": 7,
           "events": [
-            "NEW HIGH",
             "TOP 10"
           ]
         },
@@ -3161,9 +3049,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 12,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 13,
@@ -3261,9 +3147,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 19,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 20,
@@ -3277,9 +3161,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 20,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 21,
@@ -3293,9 +3175,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 21,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 22,
@@ -3365,9 +3245,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 26,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 27,
@@ -3381,9 +3259,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 27,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 28,
@@ -3425,9 +3301,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 30,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 31,
@@ -3441,9 +3315,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 31,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 32,
@@ -3471,9 +3343,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 33,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 34,
@@ -3487,9 +3357,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 34,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 35,
@@ -3517,9 +3385,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 36,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 37,
@@ -3561,9 +3427,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 39,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 40,
@@ -3675,9 +3539,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 47,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 48,
@@ -3719,9 +3581,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 50,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 51,
@@ -3735,9 +3595,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 51,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 52,
@@ -3823,9 +3681,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 57,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 58,
@@ -3839,9 +3695,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 58,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 59,
@@ -3855,9 +3709,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 59,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 60,
@@ -4137,9 +3989,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 79,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 80,
@@ -4167,9 +4017,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 81,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 82,
@@ -4227,9 +4075,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 85,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 86,
@@ -4317,9 +4163,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 91,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 92,
@@ -4467,7 +4311,7 @@
       "sourceUrl": "https://itunes.apple.com/au/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-27T13:28:36.344Z",
+      "observedAt": "2026-09-27T13:32:18.169Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -4511,7 +4355,6 @@
           "daysObserved": 2,
           "bestObservedRank": 3,
           "events": [
-            "NEW HIGH",
             "TOP 10"
           ]
         },
@@ -4625,9 +4468,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 11,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 12,
@@ -4641,9 +4482,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 12,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 13,
@@ -4671,9 +4510,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 14,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 15,
@@ -4701,9 +4538,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 16,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 17,
@@ -4717,9 +4552,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 17,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 18,
@@ -4761,9 +4594,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 20,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 21,
@@ -4791,9 +4622,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 22,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 23,
@@ -4835,9 +4664,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 25,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 26,
@@ -4851,9 +4678,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 26,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 27,
@@ -4895,9 +4720,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 29,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 30,
@@ -4911,9 +4734,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 30,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 31,
@@ -4955,9 +4776,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 33,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 34,
@@ -4971,9 +4790,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 34,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 35,
@@ -4987,9 +4804,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 35,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 36,
@@ -5003,9 +4818,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 36,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 37,
@@ -5061,9 +4874,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 40,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 41,
@@ -5077,9 +4888,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 41,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 42,
@@ -5107,9 +4916,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 43,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 44,
@@ -5123,9 +4930,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 44,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 45,
@@ -5153,9 +4958,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 46,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 47,
@@ -5253,9 +5056,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 53,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 54,
@@ -5283,9 +5084,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 55,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 56,
@@ -5341,9 +5140,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 59,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 60,
@@ -5357,9 +5154,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 60,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 61,
@@ -5443,9 +5238,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 66,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 67,
@@ -5459,9 +5252,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 67,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 68,
@@ -5475,9 +5266,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 68,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 69,
@@ -5491,9 +5280,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 69,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 70,
@@ -5507,9 +5294,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 70,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 71,
@@ -5523,9 +5308,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 71,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 72,
@@ -5595,9 +5378,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 76,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 77,
@@ -5625,9 +5406,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 78,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 79,
@@ -5655,9 +5434,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 80,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 81,
@@ -5699,9 +5476,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 83,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 84,
@@ -5715,9 +5490,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 84,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 85,
@@ -5747,9 +5520,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 86,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 87,
@@ -5777,9 +5548,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 88,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 89,
@@ -5911,9 +5680,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 2,
           "bestObservedRank": 97,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 98,

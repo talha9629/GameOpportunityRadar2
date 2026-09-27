@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-27T13:28:42.883Z",
-  "verificationGeneratedAt": "2026-09-27T13:28:42.778Z",
+  "generatedAt": "2026-09-27T13:32:25.971Z",
+  "verificationGeneratedAt": "2026-09-27T13:32:25.896Z",
   "statement": "Public gameplay discovery proposes search candidates only. A URL is not gameplay evidence until it is saved into Deep Verify, analyzed or inspected, and its timestamped findings receive explicit human review.",
   "provider": {
     "key": "none",
