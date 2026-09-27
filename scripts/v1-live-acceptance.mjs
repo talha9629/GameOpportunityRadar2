@@ -63,14 +63,26 @@ const results = [];
 for (const testCase of cases) {
   const result = await analyze(testCase);
   results.push(result);
-  console.log(`[acceptance] ${result.pass ? 'PASS' : 'FAIL'} ${result.canonicalName} · ${result.findingCount} findings · ${result.unknownCount} unknowns`);
+  console.log(`[m1-acceptance] ${result.pass ? 'PASS' : 'FAIL'} ${result.canonicalName} · ${result.findingCount} findings · ${result.unknownCount} unknowns`);
   for (const failure of result.failures) console.error(`  - ${failure}`);
 }
 
+const meowdoku = results.find((result) => result.key === 'meowdoku');
 const report = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   generatedAt: new Date().toISOString(),
   liveEndpoint: endpoint,
+  acceptanceScope: 'automated_backend',
+  m1Anchor: {
+    key: 'meowdoku',
+    appleId: '6761760135',
+    automatedBackendPass: Boolean(meowdoku?.pass),
+  },
+  manualMobileUxAcceptance: {
+    required: true,
+    status: 'not_evaluated_by_this_workflow',
+    reason: 'This workflow validates the production Analyze backend and evidence contract. It cannot prove touch readability, information hierarchy, or human comprehension on a physical mobile device.',
+  },
   cases: results,
   automatedCriteria: {
     officialAppleIdentityResolved: results.every((result) => result.pass),
@@ -79,7 +91,8 @@ const report = {
     listingInferenceIsSeparated: results.every((result) => result.listingFindingCount >= 1),
     noRankToRevenueOrDownloadFabrication: results.every((result) => result.pass),
   },
+  acceptanceBoundary: 'Automated PASS does not by itself satisfy the Product Authority mobile usability requirement. M1 is fully accepted only after the Meowdoku dossier is also readable and actionable on touch-only mobile.',
 };
 
-await writeFile('v1-live-acceptance.json', `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+await writeFile('m1-live-acceptance.json', `${JSON.stringify(report, null, 2)}\n`, 'utf8');
 if (results.some((result) => !result.pass)) process.exitCode = 1;
