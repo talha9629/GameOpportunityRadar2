@@ -24,12 +24,13 @@ for (const [code, market] of Object.entries(latest?.markets ?? {})) {
   }
 }
 
-let previous = null;
+let previousText = null;
 try {
-  previous = readJson(execFileSync('git', ['show', `HEAD:${latestPath}`], { encoding: 'utf8' }), `HEAD:${latestPath}`);
+  previousText = execFileSync('git', ['show', `HEAD:${latestPath}`], { encoding: 'utf8' });
 } catch {
   // First collection or environments without prior committed Radar evidence have nothing to compare.
 }
+const previous = previousText == null ? null : readJson(previousText, `HEAD:${latestPath}`);
 
 const latestDate = typeof latest?.generatedAt === 'string' ? latest.generatedAt.slice(0, 10) : null;
 const previousDate = typeof previous?.generatedAt === 'string' ? previous.generatedAt.slice(0, 10) : null;
