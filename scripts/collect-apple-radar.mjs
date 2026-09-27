@@ -43,24 +43,33 @@ function legacyEntry(entry, index) {
   };
 }
 
+function requireCompleteDepth(entries, label) {
+  if (entries.length !== chartDepth) {
+    throw new Error(`${label} expected ${chartDepth} entries, received ${entries.length}`);
+  }
+  return entries;
+}
+
 async function fetchMarket(country) {
   const legacyUrl = `https://itunes.apple.com/${country}/rss/topfreeapplications/limit=${chartDepth}/genre=6014/json`;
   try {
     const response = await fetch(legacyUrl, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.8' } });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const json = await response.json();
-    const entries = Array.isArray(json?.feed?.entry) ? json.feed.entry : [];
-    if (entries.length >= 10) {
-      return { sourceMode: 'apple_itunes_rss_games', sourceUrl: legacyUrl, gameFocused: true, entries: entries.map(legacyEntry) };
-    }
-    throw new Error(`Only ${entries.length} entries returned`);
+    const entries = requireCompleteDepth(
+      Array.isArray(json?.feed?.entry) ? json.feed.entry : [],
+      `${country} Games-category RSS`,
+    );
+    return { sourceMode: 'apple_itunes_rss_games', sourceUrl: legacyUrl, gameFocused: true, entries: entries.map(legacyEntry) };
   } catch (legacyError) {
     const fallbackUrl = `https://rss.marketingtools.apple.com/api/v2/${country}/apps/top-free/${chartDepth}/apps.json`;
     const response = await fetch(fallbackUrl, { headers: { 'User-Agent': 'GameOpportunityRadar2/0.8' } });
     if (!response.ok) throw new Error(`${country}: legacy failed (${legacyError}); fallback HTTP ${response.status}`);
     const json = await response.json();
-    const results = Array.isArray(json?.feed?.results) ? json.feed.results : [];
-    if (results.length === 0) throw new Error(`${country}: Apple fallback returned no entries`);
+    const results = requireCompleteDepth(
+      Array.isArray(json?.feed?.results) ? json.feed.results : [],
+      `${country} overall-app fallback`,
+    );
     return {
       sourceMode: 'apple_marketing_tools_top_free_overall', sourceUrl: fallbackUrl, gameFocused: false,
       warning: `Games-category RSS unavailable: ${String(legacyError)}`,
@@ -140,6 +149,27 @@ const output = {
 for (const [country, label] of Object.entries(markets)) {
   try {
     const snapshot = await fetchMarket(country);
+    const priorMarket = previous.markets?.[country];
+    const preserveEarlierGamesObservation = sameDay
+      && priorMarket?.status === 'ok'
+      && priorMarket.gameFocused === true
+      && Array.isArray(priorMarket.entries)
+      && priorMarket.entries.length === chartDepth
+      && snapshot.gameFocused === false;
+
+    if (preserveEarlierGamesObservation) {
+      const priorWarning = priorMarket.warning ? `${priorMarket.warning} ` : '';
+      output.markets[country] = {
+        ...priorMarket,
+        country,
+        label,
+        warning: `${priorWarning}Latest Games-category refresh was unavailable; preserving the earlier complete ${today} Games observation instead of replacing it with the overall-app fallback. ${snapshot.warning ?? ''}`.trim(),
+        observedAt: priorMarket.observedAt ?? previous.generatedAt ?? generatedAt,
+        refreshStatus: 'preserved_same_day',
+      };
+      continue;
+    }
+
     output.markets[country] = {
       country,
       label,
@@ -152,7 +182,7 @@ for (const [country, label] of Object.entries(markets)) {
       refreshStatus: 'fresh',
       entries: snapshot.entries.map((entry) => addHistory(
         entry,
-        previous.markets?.[country],
+        priorMarket,
         sameDay,
         previousIsYesterday,
         snapshot.gameFocused,
@@ -160,13 +190,18 @@ for (const [country, label] of Object.entries(markets)) {
     };
   } catch (error) {
     const priorMarket = previous.markets?.[country];
-    if (sameDay && priorMarket?.status === 'ok' && Array.isArray(priorMarket.entries) && priorMarket.entries.length > 0) {
+    if (
+      sameDay
+      && priorMarket?.status === 'ok'
+      && Array.isArray(priorMarket.entries)
+      && priorMarket.entries.length === chartDepth
+    ) {
       const priorWarning = priorMarket.warning ? `${priorMarket.warning} ` : '';
       output.markets[country] = {
         ...priorMarket,
         country,
         label,
-        warning: `${priorWarning}Latest same-day refresh failed; preserving the earlier successful ${today} observation. ${String(error)}`,
+        warning: `${priorWarning}Latest same-day refresh failed; preserving the earlier complete ${today} observation. ${String(error)}`,
         observedAt: priorMarket.observedAt ?? previous.generatedAt ?? generatedAt,
         refreshStatus: 'preserved_same_day',
       };
