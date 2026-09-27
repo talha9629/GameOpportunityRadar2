@@ -7,7 +7,7 @@ const errors = [];
 const assert = (condition, message) => { if (!condition) errors.push(message); };
 
 const allowedStates = new Set(['EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING', 'INSUFFICIENT_DATA']);
-const allowedWindowStates = new Set(['available', 'history_missing', 'not_ranked', 'market_failed']);
+const allowedWindowStates = new Set(['available', 'history_missing', 'not_ranked', 'market_failed', 'source_mismatch', 'coverage_gap']);
 
 assert(signals.schemaVersion === 1, 'schemaVersion must be 1');
 assert(signals.radarGeneratedAt === radar.generatedAt, 'trend signals must derive from the current Radar snapshot');
@@ -21,6 +21,7 @@ assert(/not download share/i.test(signals.statement), 'statement must reject dow
 assert(/not.*build recommendation/i.test(signals.statement), 'statement must reject build recommendation');
 assert(!signals.method?.statesEmitted?.includes('CROWDED'), 'CROWDED cannot be emitted from rank evidence alone');
 assert(!signals.method?.statesEmitted?.includes('WINDOW_CLOSING'), 'WINDOW_CLOSING cannot be emitted from rank evidence alone');
+assert(/coverage_gap/i.test(signals.method?.missingHistoryRule ?? ''), 'missing-history rule must document shallow-chart coverage gaps');
 
 let signalCount = 0;
 const stateCounts = {};
@@ -54,7 +55,7 @@ for (const [marketCode, market] of Object.entries(signals.markets ?? {})) {
       assert(Boolean(window), `${marketCode} ${signal.appId} missing ${key} window`);
       assert(allowedWindowStates.has(window?.status), `${marketCode} ${signal.appId} invalid ${key} status`);
       if (window?.status !== 'available') {
-        assert(window?.delta == null, `${marketCode} ${signal.appId} ${key} cannot invent delta for ${window?.status}`);
+        assert(window?.delta == null && window?.priorRank == null && window?.currentRank == null, `${marketCode} ${signal.appId} ${key} cannot carry rank values for ${window?.status}`);
       } else {
         assert(Number.isInteger(window?.priorRank) && Number.isInteger(window?.currentRank), `${marketCode} ${signal.appId} ${key} available window requires ranks`);
         assert(window.delta === window.priorRank - window.currentRank, `${marketCode} ${signal.appId} ${key} delta mismatch`);
@@ -69,6 +70,9 @@ for (const [marketCode, market] of Object.entries(signals.markets ?? {})) {
     }
     if (signal.trend.state === 'ESTABLISHED') {
       assert(signal.daysObserved >= 7 && signal.rank <= 30 && signal.exactWindows['7d'].status === 'available', `${marketCode} ${signal.appId} established gate invalid`);
+    }
+    if (Object.values(signal.exactWindows).some((window) => window.status === 'coverage_gap')) {
+      assert(signal.trend.state !== 'EMERGING', `${marketCode} ${signal.appId} coverage gap cannot be treated as emerging`);
     }
 
     signalCount += 1;

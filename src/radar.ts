@@ -43,6 +43,7 @@ const RadarSnapshotSchema = z.object({
 const RadarIndexEntrySchema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   generatedAt: z.string(),
+  chartDepth: z.number().int().min(10).max(100).optional(),
   successfulMarkets: z.number().int().nonnegative(),
   gameFocusedMarkets: z.number().int().nonnegative(),
   runStatus: z.enum(['complete', 'partial', 'failed']),
@@ -66,7 +67,7 @@ export interface RadarWindow {
   index: RadarIndex | null;
 }
 
-export type RankWindowStatus = 'available' | 'history_missing' | 'not_ranked' | 'market_failed' | 'source_mismatch';
+export type RankWindowStatus = 'available' | 'history_missing' | 'not_ranked' | 'market_failed' | 'source_mismatch' | 'coverage_gap';
 
 export interface RankWindowChange {
   days: 1 | 3 | 7;
@@ -106,6 +107,12 @@ function subtractUtcDays(date: string, days: number) {
   const value = new Date(`${date}T00:00:00Z`);
   value.setUTCDate(value.getUTCDate() - days);
   return value.toISOString().slice(0, 10);
+}
+
+function inferredDepth(snapshot: RadarSnapshot, market?: RadarMarket) {
+  if (snapshot.chartDepth != null) return snapshot.chartDepth;
+  const entries = market?.entries ?? [];
+  return Math.max(0, ...entries.map((entry) => entry.rank), entries.length);
 }
 
 async function fetchJson(path: string) {
@@ -204,7 +211,14 @@ export function rankWindowChange(
   }
 
   const priorEntry = priorMarket.entries.find((entry) => entry.appId === appId);
-  if (!priorEntry) return { days, status: 'not_ranked', delta: null, priorRank: null, currentRank };
+  if (!priorEntry) {
+    const priorDepth = inferredDepth(prior, priorMarket);
+    const currentDepth = inferredDepth(current, currentMarket);
+    if (priorDepth > 0 && priorDepth < currentDepth && currentRank > priorDepth) {
+      return { days, status: 'coverage_gap', delta: null, priorRank: null, currentRank };
+    }
+    return { days, status: 'not_ranked', delta: null, priorRank: null, currentRank };
+  }
 
   return {
     days,
@@ -254,58 +268,33 @@ export function assessRadarTrend(
   }
 
   if (sevenDay.status === 'available' && (sevenDay.delta ?? 0) <= -10) {
-    return {
-      state: 'DECLINING',
-      reason: `Rank fell ${Math.abs(sevenDay.delta ?? 0)} places over the exact 7-day window.`,
-      evidenceDays: [7],
-    };
+    return { state: 'DECLINING', reason: `Rank fell ${Math.abs(sevenDay.delta ?? 0)} places over the exact 7-day window.`, evidenceDays: [7] };
   }
-
   if (threeDay.status === 'available' && (threeDay.delta ?? 0) <= -5) {
-    return {
-      state: 'DECLINING',
-      reason: `Rank fell ${Math.abs(threeDay.delta ?? 0)} places over the exact 3-day window.`,
-      evidenceDays: [3],
-    };
+    return { state: 'DECLINING', reason: `Rank fell ${Math.abs(threeDay.delta ?? 0)} places over the exact 3-day window.`, evidenceDays: [3] };
   }
-
   if (sevenDay.status === 'available' && (sevenDay.delta ?? 0) >= 10) {
-    return {
-      state: 'RISING',
-      reason: `Rank improved ${sevenDay.delta} places over the exact 7-day window.`,
-      evidenceDays: [7],
-    };
+    return { state: 'RISING', reason: `Rank improved ${sevenDay.delta} places over the exact 7-day window.`, evidenceDays: [7] };
   }
-
   if (threeDay.status === 'available' && (threeDay.delta ?? 0) >= 5) {
-    return {
-      state: 'RISING',
-      reason: `Rank improved ${threeDay.delta} places over the exact 3-day window.`,
-      evidenceDays: [3],
-    };
+    return { state: 'RISING', reason: `Rank improved ${threeDay.delta} places over the exact 3-day window.`, evidenceDays: [3] };
   }
-
   if (oneDay.status === 'available' && (oneDay.delta ?? 0) >= 8) {
-    return {
-      state: 'RISING',
-      reason: `Rank improved ${oneDay.delta} places on the exact prior-day comparison.`,
-      evidenceDays: [1],
-    };
+    return { state: 'RISING', reason: `Rank improved ${oneDay.delta} places on the exact prior-day comparison.`, evidenceDays: [1] };
   }
-
   if (entry.daysObserved >= 7 && sevenDay.status === 'available' && entry.rank <= 30) {
-    return {
-      state: 'ESTABLISHED',
-      reason: `Observed for ${entry.daysObserved} consecutive daily snapshots, currently #${entry.rank}, with an exact 7-day comparison available.`,
-      evidenceDays: [7],
-    };
+    return { state: 'ESTABLISHED', reason: `Observed for ${entry.daysObserved} consecutive daily snapshots, currently #${entry.rank}, with an exact 7-day comparison available.`, evidenceDays: [7] };
   }
 
+  const hasCoverageGap = [oneDay, threeDay, sevenDay].some((signal) => signal.status === 'coverage_gap');
+  const hasSourceMismatch = [oneDay, threeDay, sevenDay].some((signal) => signal.status === 'source_mismatch');
   return {
     state: 'INSUFFICIENT_DATA',
-    reason: [oneDay, threeDay, sevenDay].some((signal) => signal.status === 'source_mismatch')
-      ? 'At least one exact comparison crosses incompatible chart source classes, so no directional trend is inferred from that window.'
-      : 'Exact rank history does not yet meet the evidence gate for emerging, rising, established, or declining.',
+    reason: hasCoverageGap
+      ? 'At least one exact comparison falls outside a shallower historical chart depth, so absence is unknown rather than a new-entry signal.'
+      : hasSourceMismatch
+        ? 'At least one exact comparison crosses incompatible chart source classes, so no directional trend is inferred from that window.'
+        : 'Exact rank history does not yet meet the evidence gate for emerging, rising, established, or declining.',
     evidenceDays: [],
   };
 }
