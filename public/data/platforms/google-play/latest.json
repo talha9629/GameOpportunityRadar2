@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-27T04:26:29.352Z",
+  "platform": "google_play",
+  "platformLabel": "Google Play",
+  "source": {
+    "provider": "AppBrain",
+    "endpoint": "https://api.appbrain.com/v2/info/browse",
+    "origin": "third_party_public",
+    "estimateOrigin": "third_party_estimate",
+    "method": "POPULAR Android apps filtered to Google Play GAME category by provider query",
+    "countryScope": "provider_global_not_country_specific",
+    "creditsPerRun": 12,
+    "freeMonthlyCreditBudget": 500
+  },
+  "status": "unconfigured",
+  "chartDepth": 50,
+  "entries": [],
+  "limitations": [
+    "This is AppBrain market intelligence, not an official Google Play top-chart API.",
+    "Google Play Developer API is not used for competitor discovery because it is designed for apps in the developer account.",
+    "estimatedDownloads and estimatedRecentDownloads are third-party estimates, never first-party Google figures.",
+    "This provider browse endpoint is not labeled as a country storefront ranking; Radar does not attach US/UK/CA/AU market claims to it.",
+    "Movement compares the previous observed AppBrain snapshot and always records the observation gap; it is not called a 1-day move unless the gap is exactly one day."
+  ],
+  "message": "APPBRAIN_API_KEY is not configured. Google Play hunting remains unavailable rather than inferred from Apple data.",
+  "previousSuccessfulAt": null
+}
