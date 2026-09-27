@@ -77,6 +77,8 @@ jobs:
       - name: Discover suggested public gameplay sources
         env:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_DISCOVERY_MODEL: gemini-3.8-flash
         run: node scripts/discover-gameplay-sources.mjs
       - name: Validate gameplay discovery provenance and budget
         run: node scripts/validate-gameplay-discovery.mjs
@@ -104,6 +106,10 @@ jobs:
           const suggestedSessions = s.sessions.filter((session) => session.status === 'found').length;
           const suggestedSources = s.sessions.reduce((sum, session) => sum + session.candidates.length, 0);
           const stateCounts = Object.entries(t.summary.stateCounts).map(([state, count]) => `${state} ${count}`).join(' · ');
+          const providerName = s.provider.name ?? 'Unknown';
+          const requestsUsed = s.provider.requestsUsedThisRun ?? s.provider.creditsUsedThisRun ?? 0;
+          const requestCap = s.provider.dailyRequestCap ?? s.provider.dailyCreditCap ?? 0;
+          const searchQueries = s.provider.searchQueriesUsedThisRun ?? requestsUsed;
           console.log('## Automated Research Queue');
           console.log('');
           console.log(`Data health: **${h.overall}** · essential pipelines **${h.essentialHealthy}/${h.essentialCount} healthy** · exact history **${h.facts.exactHistoryDays}/7 days**`);
@@ -111,7 +117,7 @@ jobs:
           console.log(`Trend states: ${stateCounts || 'none'}`);
           console.log(`Radar date: **${q.radarDate}** · Apple charts: **${q.sources.appleCharts.status}** · live evidence: **${q.sources.liveAnalyzer?.status ?? 'not-run'}** · AppBrain: **${q.sources.appBrain.status}**`);
           console.log(`Verification queue: **${v.summary.taskCount}/${v.summary.rawTaskCount} explicit unknown(s) routed** · omitted ${v.summary.omittedTaskCount} · **${v.summary.captureSessionCount} capture session(s)** cover ${v.summary.groupedEvidenceTaskCount} gameplay evidence task(s) · ${v.summary.readyForHumanReview} human-review · ${v.summary.autoWaiting} auto-waiting · ${v.summary.optionalExternal} optional external`);
-          console.log(`Gameplay discovery: **${s.provider.status}** · ${suggestedSessions} session(s) with suggestions · ${suggestedSources} suggested source(s) · ${s.provider.creditsUsedThisRun}/${s.provider.dailyCreditCap} Basic-search credit budget`);
+          console.log(`Gameplay discovery: **${providerName} ${s.provider.status}** · ${suggestedSessions} session(s) with suggestions · ${suggestedSources} suggested source(s) · requests ${requestsUsed}/${requestCap} · reported search queries ${searchQueries}`);
           console.log(`Daily digest: **${d.status}** · ${d.summary.changeCount} exact-date change(s) · ${d.summary.attentionCount} attention item(s)`);
           console.log('');
           console.log('| # | Title | Priority | Listing facts | Unknowns | First-party reasons |');
@@ -121,7 +127,7 @@ jobs:
           console.log('### Next factual actions');
           for (const action of h.recommendedActions.slice(0, 5)) console.log(`- **${action.action}**${action.name ? ` · ${action.name}` : ''}: ${action.why}`);
           console.log('');
-          console.log('Trend visibility is a bounded chart-position heuristic, not downloads/revenue/market share. Trend states use exact dated rank evidence only; saturation states are reserved for separate mechanic-cluster evidence. Priority is deterministic research ordering, not a success probability or build recommendation. Verification tasks are routes to evidence, not resolved facts; capture sessions only reduce duplicate evidence collection. Public gameplay search candidates are suggestions only and do not become verified gameplay evidence automatically.');
+          console.log('Trend visibility is a bounded chart-position heuristic, not downloads/revenue/market share. Trend states use exact dated rank evidence only; saturation states are reserved for separate mechanic-cluster evidence. Priority is deterministic research ordering, not a success probability or build recommendation. Verification tasks are routes to evidence, not resolved facts; capture sessions only reduce duplicate evidence collection. Public gameplay search candidates are suggestions only; YouTube oEmbed confirms public availability only and does not verify gameplay content.');
           NODE
       - name: Commit snapshot, queue, verification, discovery, digest and health safely
         run: |
