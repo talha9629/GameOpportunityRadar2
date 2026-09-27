@@ -10,6 +10,7 @@ import {
   ListChecks,
   Menu,
   MessageSquareText,
+  MoreHorizontal,
   Network,
   Search,
   ShieldCheck,
@@ -52,6 +53,15 @@ const groups: Array<{
   },
 ];
 
+const mobilePrimary: Array<{ view: AppView; label: string; icon: typeof Activity }> = [
+  { view: 'today', label: 'Today', icon: Activity },
+  { view: 'trends', label: 'Trends', icon: BarChart3 },
+  { view: 'analyze', label: 'Analyze', icon: Search },
+  { view: 'verification', label: 'Verify', icon: ListChecks },
+];
+
+const mobilePrimaryViews = new Set<AppView>(mobilePrimary.map((item) => item.view));
+
 export function AppShell({
   route,
   owner,
@@ -69,11 +79,21 @@ export function AppShell({
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const meta = APP_PAGE_META[route.view];
+  const moreActive = !mobilePrimaryViews.has(route.view);
 
   useEffect(() => {
     document.title = `${meta.title} · Game Opportunity Radar`;
     setMobileOpen(false);
   }, [meta.title, route.view]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileOpen]);
 
   function navigate(view: AppView) {
     onNavigate(view);
@@ -90,7 +110,7 @@ export function AppShell({
           <strong>Game Opportunity Radar</strong>
           <span>Studio intelligence</span>
         </div>
-        <button className="sidebar-close" aria-label="Close navigation" onClick={() => setMobileOpen(false)}><X size={18} /></button>
+        <button className="sidebar-close" aria-label="Close navigation" onClick={() => setMobileOpen(false)}><X size={20} /></button>
       </div>
 
       <nav className="sidebar-nav">
@@ -104,7 +124,7 @@ export function AppShell({
               aria-current={route.view === item.view ? 'page' : undefined}
               onClick={() => navigate(item.view)}
             >
-              <Icon size={17} />
+              <Icon size={18} />
               <span>{item.label}</span>
             </button>;
           })}
@@ -123,10 +143,10 @@ export function AppShell({
     <section className="app-workspace">
       <header className="workspace-header">
         <div className="workspace-header-left">
-          <button className="mobile-nav-toggle" aria-label="Open navigation" onClick={() => setMobileOpen(true)}><Menu size={18} /></button>
+          <button className="mobile-nav-toggle" aria-label="Open full navigation" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
           <div className="history-controls" aria-label="Page history">
-            <button title="Back" aria-label="Back" onClick={() => window.history.back()}><ArrowLeft size={16} /></button>
-            <button title="Forward" aria-label="Forward" onClick={() => window.history.forward()}><ArrowRight size={16} /></button>
+            <button title="Back" aria-label="Back" onClick={() => window.history.back()}><ArrowLeft size={17} /></button>
+            <button title="Forward" aria-label="Forward" onClick={() => window.history.forward()}><ArrowRight size={17} /></button>
           </div>
           <div className="page-context">
             <span>{meta.section}</span>
@@ -145,5 +165,30 @@ export function AppShell({
 
       <main className="page-shell app-page-shell">{children}</main>
     </section>
+
+    <nav className="mobile-bottom-nav" aria-label="Mobile primary navigation">
+      {mobilePrimary.map((item) => {
+        const Icon = item.icon;
+        const active = route.view === item.view;
+        return <button
+          key={item.view}
+          className={active ? 'active' : ''}
+          aria-current={active ? 'page' : undefined}
+          onClick={() => navigate(item.view)}
+        >
+          <Icon size={20} />
+          <span>{item.label}</span>
+        </button>;
+      })}
+      <button
+        className={moreActive || mobileOpen ? 'active' : ''}
+        aria-expanded={mobileOpen}
+        aria-label="Open more tools"
+        onClick={() => setMobileOpen(true)}
+      >
+        <MoreHorizontal size={20} />
+        <span>More</span>
+      </button>
+    </nav>
   </div>;
 }
