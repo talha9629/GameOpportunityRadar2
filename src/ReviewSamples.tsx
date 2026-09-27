@@ -70,8 +70,17 @@ export function ReviewSamples({
   }
 
   useEffect(() => {
-    setSelectedSampleId(null);
+    setLabel('');
     setStoreId('');
+    setRawText('');
+    setAnalysis(null);
+    setSelectedSampleId(null);
+    setMessage(null);
+    setError(null);
+  }, [storefront]);
+
+  useEffect(() => {
+    setSelectedSampleId(null);
     setMessage(null);
     setError(null);
     void refreshSaved();
