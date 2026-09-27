@@ -44,17 +44,44 @@ function exactWindow(history, currentDate, marketCode, appId, currentRank, days,
   return { days, targetDate, status: 'not_ranked', priorRank: null, currentRank: null, delta: null };
 }
 function assessTrend(entry, windows) {
-  const oneDay = windows['1d']; const threeDay = windows['3d']; const sevenDay = windows['7d'];
-  if (oneDay.status === 'not_ranked' && entry.rank <= 20) return { state: 'EMERGING', reason: `Entered the tracked Games range at #${entry.rank} after a comparable exact prior-day chart did not contain the title.`, evidenceDays: [1] };
-  if (sevenDay.status === 'available' && (sevenDay.delta ?? 0) <= -10) return { state: 'DECLINING', reason: `Rank fell ${Math.abs(sevenDay.delta)} places over the exact 7-day window.`, evidenceDays: [7] };
-  if (threeDay.status === 'available' && (threeDay.delta ?? 0) <= -5) return { state: 'DECLINING', reason: `Rank fell ${Math.abs(threeDay.delta)} places over the exact 3-day window.`, evidenceDays: [3] };
-  if (sevenDay.status === 'available' && (sevenDay.delta ?? 0) >= 10) return { state: 'RISING', reason: `Rank improved ${sevenDay.delta} places over the exact 7-day window.`, evidenceDays: [7] };
-  if (threeDay.status === 'available' && (threeDay.delta ?? 0) >= 5) return { state: 'RISING', reason: `Rank improved ${threeDay.delta} places over the exact 3-day window.`, evidenceDays: [3] };
-  if (oneDay.status === 'available' && (oneDay.delta ?? 0) >= 8) return { state: 'RISING', reason: `Rank improved ${oneDay.delta} places on the exact prior-day comparison.`, evidenceDays: [1] };
-  if ((entry.daysObserved ?? 0) >= 7 && sevenDay.status === 'available' && entry.rank <= 30) return { state: 'ESTABLISHED', reason: `Observed for ${entry.daysObserved} consecutive daily snapshots, currently #${entry.rank}, with an exact 7-day comparison available.`, evidenceDays: [7] };
-  const gap = [oneDay, threeDay, sevenDay].some((signal) => signal.status === 'coverage_gap');
-  const mismatch = [oneDay, threeDay, sevenDay].some((signal) => signal.status === 'source_mismatch');
-  return { state: 'INSUFFICIENT_DATA', reason: gap ? 'At least one exact comparison falls outside a shallower historical chart depth, so absence remains unknown.' : mismatch ? 'At least one exact comparison uses an incompatible chart source, so no directional trend is inferred from that window.' : 'Exact rank history does not yet meet the evidence gate for emerging, rising, established, or declining.', evidenceDays: [] };
+  const threeDay = windows['3d'];
+  const sevenDay = windows['7d'];
+
+  if (threeDay.status === 'not_ranked' && entry.rank <= 20) {
+    return { state: 'EMERGING', reason: `Entered the tracked Games range at #${entry.rank}; the comparable exact 3-day chart did not contain the title.`, evidenceDays: [3] };
+  }
+  if (threeDay.status === 'available' && (threeDay.delta ?? 0) >= 5) {
+    return { state: 'RISING', reason: `Rank improved ${threeDay.delta} places over the exact 3-day window.`, evidenceDays: [3] };
+  }
+  if (threeDay.status === 'available' && (threeDay.delta ?? 0) <= -5) {
+    return { state: 'DECLINING', reason: `Rank fell ${Math.abs(threeDay.delta)} places over the exact 3-day window.`, evidenceDays: [3] };
+  }
+  if (
+    (entry.daysObserved ?? 0) >= 7
+    && entry.rank <= 30
+    && threeDay.status === 'available'
+    && sevenDay.status === 'available'
+    && Math.abs(threeDay.delta ?? 0) < 5
+    && Math.abs(sevenDay.delta ?? 0) < 8
+  ) {
+    return { state: 'ESTABLISHED', reason: `Observed for ${entry.daysObserved} consecutive daily snapshots at #${entry.rank}; exact 3-day and 7-day movement is comparatively stable.`, evidenceDays: [3, 7] };
+  }
+
+  const gap = Object.values(windows).some((signal) => signal.status === 'coverage_gap');
+  const mismatch = Object.values(windows).some((signal) => signal.status === 'source_mismatch');
+  const oneDayAvailable = windows['1d'].status === 'available';
+  const oneDayFact = oneDayAvailable
+    ? ` The exact 1-day move is ${windows['1d'].delta > 0 ? '+' : ''}${windows['1d'].delta}, but 1-day movement alone does not assign a mature trend state.`
+    : '';
+  return {
+    state: 'INSUFFICIENT_DATA',
+    reason: gap
+      ? `At least one exact comparison falls outside a shallower historical chart depth, so absence remains unknown.${oneDayFact}`
+      : mismatch
+        ? `At least one exact comparison uses an incompatible chart source, so no directional trend is inferred from that window.${oneDayFact}`
+        : `Exact 3-day history does not yet meet the evidence gate for emerging, rising, established, or declining.${oneDayFact}`,
+    evidenceDays: [],
+  };
 }
 
 const latest = readJson(latestPath);
@@ -71,14 +98,41 @@ for (const [marketCode, market] of Object.entries(latest.markets)) {
   const signals = market.entries.map((entry) => {
     const windows = Object.fromEntries(LOOKBACK_DAYS.map((days) => [`${days}d`, exactWindow(history, currentDate, marketCode, entry.appId, entry.rank, days, true, chartDepth)]));
     const trend = assessTrend(entry, windows); stateCounts[trend.state] = (stateCounts[trend.state] ?? 0) + 1; signalCount += 1;
-    return { appId: String(entry.appId), name: entry.name, publisher: entry.publisher, rank: entry.rank, chartDepth, visibility: rankVisibility(entry.rank, chartDepth), daysObserved: entry.daysObserved ?? 1, bestObservedRank: entry.bestObservedRank ?? entry.rank, exactWindows: windows, trend };
+    return {
+      appId: String(entry.appId),
+      name: entry.name,
+      publisher: entry.publisher,
+      iconUrl: entry.iconUrl ?? null,
+      storeUrl: entry.storeUrl ?? null,
+      rank: entry.rank,
+      chartDepth,
+      visibility: rankVisibility(entry.rank, chartDepth),
+      daysObserved: entry.daysObserved ?? 1,
+      bestObservedRank: entry.bestObservedRank ?? entry.rank,
+      exactWindows: windows,
+      trend,
+    };
   });
   markets[marketCode] = { country: marketCode, label: market.label, status: 'ok', sourceMode: market.sourceMode ?? null, gameFocused: true, signals };
 }
 const output = {
-  schemaVersion: 1, generatedAt: new Date().toISOString(), radarGeneratedAt: latest.generatedAt, radarDate: currentDate, chart: latest.chart, category: latest.category, chartDepth,
-  statement: 'Trend signals describe observed Apple Games chart position, exact dated rank movement, and persistence. Visibility is a bounded rank-position heuristic only; it is not download share, revenue share, market share, probability, or a build recommendation.',
-  method: { name: 'exact_rank_trend_signals_v1', lookbackDays: LOOKBACK_DAYS, visibilityFormula: 'ln((N+1)/rank)/ln(N+1)', statesEmitted: ['EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING', 'INSUFFICIENT_DATA'], statesReservedForOtherEvidence: ['CROWDED', 'WINDOW_CLOSING'], missingHistoryRule: 'Never interpolate or smooth a missing exact comparison date. If an older chart is shallower than the current chart, absence below the old cutoff is coverage_gap, not not_ranked.' },
+  schemaVersion: 1,
+  generatedAt: new Date().toISOString(),
+  radarGeneratedAt: latest.generatedAt,
+  radarDate: currentDate,
+  chart: latest.chart,
+  category: latest.category,
+  chartDepth,
+  statement: 'Trend signals describe observed Apple Games chart position, exact dated rank movement, and persistence. One-day movement is shown as a factual movement signal but does not assign a mature directional trend state. Visibility is a bounded rank-position heuristic only; it is not download share, revenue share, market share, probability, or a build recommendation.',
+  method: {
+    name: 'exact_rank_trend_signals_v1',
+    lookbackDays: LOOKBACK_DAYS,
+    visibilityFormula: 'ln((N+1)/rank)/ln(N+1)',
+    statesEmitted: ['EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING', 'INSUFFICIENT_DATA'],
+    statesReservedForOtherEvidence: ['CROWDED', 'WINDOW_CLOSING'],
+    missingHistoryRule: 'Never interpolate or smooth a missing exact comparison date. If an older chart is shallower than the current chart, absence below the old cutoff is coverage_gap, not not_ranked.',
+    directionalStateRule: 'RISING and DECLINING require an exact comparable 3-day rank window. One-day movement is displayed separately as a movement fact.',
+  },
   summary: { marketCount: Object.keys(markets).length, healthyGameMarkets: Object.values(markets).filter((market) => market.status === 'ok' && market.gameFocused === true).length, signalCount, stateCounts },
   markets,
 };
