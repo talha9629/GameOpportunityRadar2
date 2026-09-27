@@ -24,14 +24,12 @@
 }
 
 .owner-access small {
-  color: #8ea1bd;
+  color: var(--color-text-subtle);
   font-size: 11px;
   line-height: 1.35;
 }
 
-.owner-note {
-  opacity: .9;
-}
+.owner-note { opacity: .9; }
 
 .owner-access.signed-in {
   grid-template-columns: 1fr auto;
@@ -45,7 +43,7 @@
 }
 
 .owner-access.signed-in span {
-  color: #86efac;
+  color: var(--color-success);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: .08em;
@@ -59,9 +57,7 @@
   font-size: 12px;
 }
 
-.owner-access.signed-in small {
-  grid-column: 1 / -1;
-}
+.owner-access.signed-in small { grid-column: 1 / -1; }
 
 @media (max-width: 820px) {
   .owner-access { min-width: 0; width: 100%; }
