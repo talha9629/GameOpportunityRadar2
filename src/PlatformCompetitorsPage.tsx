@@ -15,7 +15,7 @@ function AndroidIdentity({ entry, label }: { entry: GooglePlayEntry; label: stri
   return <div className="comparison-identity">
     {entry.iconUrl && <img src={entry.iconUrl} alt="" />}
     <div><span>{label}</span><strong>{entry.name}</strong><small>{entry.publisher} · {entry.packageName}</small></div>
-    <a href={entry.storeUrl} target="_blank" rel="noreferrer" title="Open Google Play"><ExternalLink size={14} /></a>
+    <a href={entry.storeUrl} target="_blank" rel="noreferrer" aria-label={`Open ${entry.name} on Google Play`}><ExternalLink size={14} /><span>Google Play</span></a>
   </div>;
 }
 
