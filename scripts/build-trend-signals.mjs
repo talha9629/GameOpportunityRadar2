@@ -46,16 +46,19 @@ function loadHistory(latest) {
   return snapshots;
 }
 
-function exactWindow(history, currentDate, marketCode, appId, currentRank, days) {
+function exactWindow(history, currentDate, marketCode, appId, currentRank, days, currentGameFocused = true) {
   const targetDate = subtractUtcDays(currentDate, days);
   const prior = history.get(targetDate);
-  if (!prior) return { days, targetDate, status: 'history_missing', priorRank: null, currentRank, delta: null };
+  if (!prior) return { days, targetDate, status: 'history_missing', priorRank: null, currentRank: null, delta: null };
   const market = prior.markets?.[marketCode];
-  if (!market || market.status !== 'ok' || market.gameFocused === false) {
-    return { days, targetDate, status: 'market_failed', priorRank: null, currentRank, delta: null };
+  if (!market || market.status !== 'ok') {
+    return { days, targetDate, status: 'market_failed', priorRank: null, currentRank: null, delta: null };
+  }
+  if (typeof market.gameFocused === 'boolean' && market.gameFocused !== currentGameFocused) {
+    return { days, targetDate, status: 'source_mismatch', priorRank: null, currentRank: null, delta: null };
   }
   const priorEntry = Array.isArray(market.entries) ? market.entries.find((item) => String(item.appId) === String(appId)) : null;
-  if (!priorEntry) return { days, targetDate, status: 'not_ranked', priorRank: null, currentRank, delta: null };
+  if (!priorEntry) return { days, targetDate, status: 'not_ranked', priorRank: null, currentRank: null, delta: null };
   return {
     days,
     targetDate,
@@ -96,13 +99,15 @@ function assessTrend(entry, windows) {
   if ((entry.daysObserved ?? 0) >= 7 && sevenDay.status === 'available' && entry.rank <= 30) {
     return {
       state: 'ESTABLISHED',
-      reason: `Observed for ${entry.daysObserved} daily snapshots, currently #${entry.rank}, with an exact 7-day comparison available.`,
+      reason: `Observed for ${entry.daysObserved} consecutive daily snapshots, currently #${entry.rank}, with an exact 7-day comparison available.`,
       evidenceDays: [7],
     };
   }
   return {
     state: 'INSUFFICIENT_DATA',
-    reason: 'Exact rank history does not yet meet the evidence gate for emerging, rising, established, or declining.',
+    reason: [oneDay, threeDay, sevenDay].some((window) => window.status === 'source_mismatch')
+      ? 'At least one exact comparison crosses incompatible chart source classes, so no directional trend is inferred from that window.'
+      : 'Exact rank history does not yet meet the evidence gate for emerging, rising, established, or declining.',
     evidenceDays: [],
   };
 }
@@ -132,7 +137,7 @@ for (const [marketCode, market] of Object.entries(latest.markets)) {
   const signals = market.entries.map((entry) => {
     const windows = Object.fromEntries(LOOKBACK_DAYS.map((days) => [
       `${days}d`,
-      exactWindow(history, currentDate, marketCode, entry.appId, entry.rank, days),
+      exactWindow(history, currentDate, marketCode, entry.appId, entry.rank, days, true),
     ]));
     const trend = assessTrend(entry, windows);
     stateCounts[trend.state] = (stateCounts[trend.state] ?? 0) + 1;
@@ -177,6 +182,7 @@ const output = {
     statesEmitted: ['EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING', 'INSUFFICIENT_DATA'],
     statesReservedForOtherEvidence: ['CROWDED', 'WINDOW_CLOSING'],
     missingHistoryRule: 'Never interpolate or smooth a missing exact comparison date.',
+    sourceCompatibilityRule: 'Never compare Games-category rank with overall Top Free fallback rank; emit source_mismatch with no ranks or delta.',
   },
   summary: {
     marketCount: Object.keys(markets).length,
