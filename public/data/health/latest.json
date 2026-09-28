@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T11:43:08.155Z",
+  "generatedAt": "2026-09-28T12:20:58.525Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -14,7 +14,7 @@
         "4/4 healthy Games markets",
         "0 failed market(s)",
         "0 overall-chart fallback market(s)",
-        "2.1h snapshot age"
+        "2.7h snapshot age"
       ],
       "action": null
     },
@@ -26,7 +26,7 @@
         "12 candidates",
         "Apple lookup complete",
         "live evidence complete (8/8)",
-        "2.1h queue age"
+        "2.7h queue age"
       ],
       "action": null
     },
@@ -39,7 +39,7 @@
         "0 omitted task(s)",
         "8 capture session(s) cover 24 gameplay evidence task(s)",
         "derived from current research queue",
-        "2.1h verification age"
+        "2.7h verification age"
       ],
       "action": null
     },
@@ -105,6 +105,20 @@
       "action": "Optional only: configure APPBRAIN_API_KEY for capped estimate enrichment."
     },
     {
+      "id": "google_play_radar",
+      "label": "Google Play Discovery · AppBrain",
+      "state": "optional",
+      "facts": [
+        "provider status unconfigured",
+        "0/50 AppBrain popularity position(s) available",
+        "exact requested depth not currently available",
+        "1.3h provider observation age",
+        "Positions are AppBrain provider-global popularity ordering, not official Google Play storefront ranks.",
+        "Download values, when present, are third-party estimates and are never inferred from Apple ranks."
+      ],
+      "action": "Optional only: configure APPBRAIN_API_KEY to enable platform-scoped Google Play discovery."
+    },
+    {
       "id": "trend_signals",
       "label": "Exact-Date Trend Signals",
       "state": "healthy",
@@ -114,7 +128,7 @@
         "chart depth matches Top 100",
         "derived from current Apple Radar snapshot",
         "INSUFFICIENT_DATA 400",
-        "2.1h trend-signal age",
+        "2.7h trend-signal age",
         "Visibility is a bounded chart-position heuristic; it is not downloads, revenue, market share, probability, or a build recommendation."
       ],
       "action": null
@@ -132,6 +146,11 @@
       "priority": 9,
       "action": "OPTIONAL_CONFIGURE_APPBRAIN",
       "why": "Adds capped third-party estimate context but is not required for first-party triage."
+    },
+    {
+      "priority": 9,
+      "action": "OPTIONAL_CONFIGURE_GOOGLE_PLAY_DISCOVERY",
+      "why": "Google Play discovery is optional and currently unconfigured; no Android candidates are inferred from Apple evidence."
     }
   ],
   "facts": {
@@ -155,6 +174,13 @@
     "pendingPolicyCandidates": 1,
     "legacyUnconfirmedPolicyChanges": 5,
     "appBrainConfigured": false,
+    "googlePlayRadarConfigured": false,
+    "googlePlayRadarStatus": "unconfigured",
+    "googlePlayRadarProvider": "AppBrain",
+    "googlePlayRadarEntryCount": 0,
+    "googlePlayRadarRequestedDepth": 50,
+    "googlePlayRadarExactDepth": false,
+    "googlePlayRadarAgeHours": 1.2622022222222222,
     "trendSignalCount": 400,
     "trendExpectedSignalCount": 400,
     "trendHealthyMarketCount": 4,
