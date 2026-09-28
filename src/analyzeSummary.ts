@@ -45,6 +45,7 @@ export function deriveDossierStatusSummary({
 }): DossierStatusSummary {
   const unreviewedCount = Math.max(0, findingCount - reviewedCount);
   const missingCount = decision.missing.length;
+  const decisiveGateActive = decision.status === 'PASS' || decision.status === 'TOO LATE';
 
   const source = rawSourceCaptured
     ? {
@@ -82,17 +83,23 @@ export function deriveDossierStatusSummary({
         complete: false,
       };
 
-  const decisionSummary = missingCount > 0
+  const decisionSummary = decisiveGateActive
     ? {
-        label: 'Scorecard incomplete',
-        detail: `${missingCount} score dimension${missingCount === 1 ? '' : 's'} still need${missingCount === 1 ? 's' : ''} evidence.`,
-        complete: false,
-      }
-    : {
-        label: `${decision.status} threshold result`,
-        detail: 'This is a preliminary rules-based result, not a success forecast or BUILD NOW decision.',
+        label: `${decision.status} gate active`,
+        detail: `${decision.reasons[0]}${missingCount > 0 ? ` ${missingCount} other score dimension${missingCount === 1 ? '' : 's'} remain unfilled, but this rule already determines the preliminary threshold result.` : ' This is a preliminary rules-based result, not a success forecast or BUILD NOW decision.'}`,
         complete: true,
-      };
+      }
+    : missingCount > 0
+      ? {
+          label: 'Scorecard incomplete',
+          detail: `${missingCount} score dimension${missingCount === 1 ? '' : 's'} still need${missingCount === 1 ? 's' : ''} evidence.`,
+          complete: false,
+        }
+      : {
+          label: `${decision.status} threshold result`,
+          detail: 'This is a preliminary rules-based result, not a success forecast or BUILD NOW decision.',
+          complete: true,
+        };
 
   if (unreviewedCount > 0) {
     return {
@@ -122,7 +129,7 @@ export function deriveDossierStatusSummary({
     };
   }
 
-  if (missingCount > 0) {
+  if (missingCount > 0 && !decisiveGateActive) {
     return {
       source,
       review,
