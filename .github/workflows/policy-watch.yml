@@ -11,6 +11,9 @@ on:
       - 'scripts/validate-policy-watch.mjs'
       - 'scripts/policy-normalization.mjs'
       - 'scripts/policy-confirmation.mjs'
+      - 'scripts/google-play-health.mjs'
+      - 'scripts/augment-google-play-health.mjs'
+      - 'scripts/validate-google-play-health.mjs'
       - '.github/workflows/policy-watch.yml'
 
 permissions:
@@ -45,11 +48,17 @@ jobs:
       - name: Rebuild factual data health from updated policy state
         run: node scripts/build-data-health.mjs
 
+      - name: Add platform-scoped Google Play health
+        run: node scripts/augment-google-play-health.mjs
+
       - name: Require current trend signals in Data Health
         run: node scripts/augment-trend-health.mjs
 
       - name: Validate data health semantics
         run: node scripts/validate-data-health.mjs
+
+      - name: Validate Google Play health boundary
+        run: node scripts/validate-google-play-health.mjs
 
       - name: Write policy confirmation summary
         shell: bash
@@ -67,7 +76,7 @@ jobs:
           console.log('');
           console.log(`Sources: **${index.freshCount}/${index.sourceCount} fresh** · fetch run: **${index.runStatus}**`);
           console.log(`Confirmed repeated changes: **${confirmed}** · pending changed hashes: **${pending}** · interrupted candidates recorded: **${interruptions}** · legacy unconfirmed records: **${legacy}**`);
-          console.log(`Data Health: **${health.overall}** · essential pipelines: **${health.essentialHealthy}/${health.essentialCount} healthy**`);
+          console.log(`Data Health: **${health.overall}** · essential pipelines: **${health.essentialHealthy}/${health.essentialCount} healthy** · Google Play: **${health.facts.googlePlayRadarStatus}**`);
           console.log('');
           console.log('A policy change is reviewable only after three consecutive successful observations of the same changed normalized content spanning at least 60 minutes. Fetch failures, different successful hashes, baseline reappearance, and normalizer upgrades break candidate continuity.');
           NODE
