@@ -1,0 +1,128 @@
+.dossier-status-panel {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.dossier-status-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  align-items: end;
+}
+
+.dossier-status-heading p {
+  margin: var(--space-1) 0 0;
+}
+
+.dossier-status-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.dossier-status-card {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-subtle);
+}
+
+.dossier-status-card.is-complete {
+  border-color: var(--color-success);
+  background: var(--color-success-bg);
+}
+
+.dossier-status-card.is-pending {
+  border-color: var(--color-warning);
+  background: var(--color-warning-bg);
+}
+
+.dossier-status-card small {
+  color: var(--color-text-subtle);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.dossier-status-card strong {
+  color: var(--color-text-strong);
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.dossier-status-card span {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.dossier-next-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-4);
+  align-items: center;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.dossier-next-step > div {
+  display: grid;
+  gap: 5px;
+}
+
+.dossier-next-step p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.dossier-next-step button {
+  min-height: var(--touch-min);
+  justify-content: center;
+}
+
+#dossier-findings,
+#dossier-unknowns,
+#dossier-scorecard {
+  scroll-margin-top: var(--space-6);
+}
+
+@media (max-width: 920px) {
+  .dossier-status-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .dossier-status-panel {
+    padding: 16px;
+  }
+
+  .dossier-status-heading,
+  .dossier-next-step {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .dossier-status-heading {
+    display: grid;
+  }
+
+  .dossier-status-grid {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .dossier-status-card {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 12px;
+  }
+
+  .dossier-next-step button {
+    width: 100%;
+  }
+}
