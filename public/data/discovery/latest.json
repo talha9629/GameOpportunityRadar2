@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-27T14:21:02.782Z",
-  "verificationGeneratedAt": "2026-09-27T14:21:02.401Z",
+  "generatedAt": "2026-09-28T09:39:07.196Z",
+  "verificationGeneratedAt": "2026-09-28T09:39:07.069Z",
   "statement": "Public gameplay discovery proposes search candidates only. A URL is not gameplay evidence until it is saved into Deep Verify, analyzed or inspected, and its timestamped findings receive explicit human review.",
   "provider": {
     "key": "tavily",
@@ -22,77 +22,16 @@
   },
   "sessions": [
     {
-      "sessionId": "ea059d0454b4206bc64c47d2",
-      "appId": "6793924927",
-      "name": "Rotate Rings",
-      "queueRank": 1,
-      "query": "\"Rotate Rings\" gameplay walkthrough menu monetization progression",
-      "providerKey": "tavily",
-      "searchQueries": [
-        "\"Rotate Rings\" gameplay walkthrough menu monetization progression"
-      ],
-      "searchedAt": "2026-09-27T14:21:02.782Z",
-      "status": "found",
-      "candidates": [
-        {
-          "rank": 1,
-          "url": "https://www.youtube.com/watch?v=yRxkndTfRN0",
-          "title": "The ULTIMATE Guide to the WorldBox 0.50 Update (Mobile Too)",
-          "snippet": "[0:24] there's something that you want to see, just watch until you see it, then click off if you want. I'm going to try to showcase literally everything about the [0:31] new update. So, let's begin. And if you like this video, you should join my Discord in case you want to point out anything I may have missed in this video [0:40] or if there's anything else that you need further explaining on. So, go check it out. The very first thing I'm going to do is unlock everything because, as [...] #worldbox #worldboxupdate #worldboxnewupdate #worldboxgameplay #worldboxgodsimulator #newworldboxupdate #worldboxsimulation #simulation #simulator #evolution #worldboxspecies #newworldboxspecies #evolution",
-          "score": 0.017060088,
-          "channelName": "Jackal",
-          "thumbnailUrl": "https://i.ytimg.com/vi/yRxkndTfRN0/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:04.981Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        },
-        {
-          "rank": 2,
-          "url": "https://www.youtube.com/watch?v=INUdPETwnOE",
-          "title": "EVERYTHING You NEED To KNOW About Pixel Quest FULL Guide",
-          "snippet": "As promised I have finished a guide on Pixel Quest that gives you a basic understanding how certain things work in the game, tread carefully",
-          "score": 0.012432874,
-          "channelName": "Vaporbaby",
-          "thumbnailUrl": "https://i.ytimg.com/vi/INUdPETwnOE/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:05.052Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        },
-        {
-          "rank": 3,
-          "url": "https://www.youtube.com/watch?v=D7JNXpoBACI",
-          "title": "How To Change Age On TikTok",
-          "snippet": "Here's how to change your age on TikTok if it doesn't have your correct date of birth on your account. How To Make More Money While Working 40",
-          "score": 0.009747066,
-          "channelName": "Trevor Nace",
-          "thumbnailUrl": "https://i.ytimg.com/vi/D7JNXpoBACI/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:05.119Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        }
-      ],
-      "error": null
-    },
-    {
       "sessionId": "a4a8ea3251b63d2ee04a3c0b",
       "appId": "1546690510",
       "name": "NoomiClone",
-      "queueRank": 2,
+      "queueRank": 1,
       "query": "\"NoomiClone\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
         "\"NoomiClone\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-27T14:21:05.119Z",
+      "searchedAt": "2026-09-28T09:39:07.196Z",
       "status": "found",
       "candidates": [
         {
@@ -103,7 +42,7 @@
           "score": 0.07694017,
           "channelName": "Djef Games",
           "thumbnailUrl": "https://i.ytimg.com/vi/ar8mmiWz89Y/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:07.719Z",
+          "availabilityVerifiedAt": "2026-09-28T09:39:08.746Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -118,7 +57,7 @@
           "score": 0.06738094,
           "channelName": "KiraX Blox",
           "thumbnailUrl": "https://i.ytimg.com/vi/EBb3bN_npWc/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:07.863Z",
+          "availabilityVerifiedAt": "2026-09-28T09:39:08.828Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -133,7 +72,7 @@
           "score": 0.057966188,
           "channelName": "ValencianistasPL",
           "thumbnailUrl": "https://i.ytimg.com/vi/hWLzQwDLxPk/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:07.923Z",
+          "availabilityVerifiedAt": "2026-09-28T09:39:08.872Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -144,27 +83,27 @@
       "error": null
     },
     {
-      "sessionId": "6ad11f74465d2b9c03bed4dd",
-      "appId": "6762010774",
-      "name": "CrownCards - Trading Cards",
-      "queueRank": 3,
-      "query": "\"CrownCards - Trading Cards\" gameplay walkthrough menu monetization progression",
+      "sessionId": "ea059d0454b4206bc64c47d2",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "queueRank": 2,
+      "query": "\"Rotate Rings\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
-        "\"CrownCards - Trading Cards\" gameplay walkthrough menu monetization progression"
+        "\"Rotate Rings\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-27T14:21:07.923Z",
+      "searchedAt": "2026-09-28T09:39:08.872Z",
       "status": "found",
       "candidates": [
         {
           "rank": 1,
-          "url": "https://www.youtube.com/watch?v=fjNruk_szo4",
-          "title": "Card Evolution: TCG hyper game - Gameplay Walkthrough Part 5 - Android Gameplay",
-          "snippet": "Gameplay 13100 subscribers 19 views 4 Dec 2024 Card Evolution: TCG hyper game - Gameplay Walkthrough Part 5 - Android Gameplay 👍Like and Subscribe for more video games 📱Game Description: Grow and evolve your trading cards collection: collect cards, unlock new character series - ranging from sports to monsters - and build the most powerful hyper cards collection in one of your favorite trading card games. Battle against other tcg card thrower players, like cards against humanity to become the greatest card collector and earn money to unlock card stack, collect cards and make cards combos, just like card animation throwdown and card shuffle sort. Be the owner of the world's rarest and most e",
-          "score": 0.21718012,
-          "channelName": "Mobile Gameplay",
-          "thumbnailUrl": "https://i.ytimg.com/vi/fjNruk_szo4/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:09.344Z",
+          "url": "https://www.youtube.com/watch?v=yRxkndTfRN0",
+          "title": "The ULTIMATE Guide to the WorldBox 0.50 Update (Mobile Too)",
+          "snippet": "[0:24] there's something that you want to see, just watch until you see it, then click off if you want. I'm going to try to showcase literally everything about the [0:31] new update. So, let's begin. And if you like this video, you should join my Discord in case you want to point out anything I may have missed in this video [0:40] or if there's anything else that you need further explaining on. So, go check it out. The very first thing I'm going to do is unlock everything because, as [...] #worldbox #worldboxupdate #worldboxnewupdate #worldboxgameplay #worldboxgodsimulator #newworldboxupdate #worldboxsimulation #simulation #simulator #evolution #worldboxspecies #newworldboxspecies #evolution",
+          "score": 0.017060088,
+          "channelName": "Jackal",
+          "thumbnailUrl": "https://i.ytimg.com/vi/yRxkndTfRN0/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:10.496Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -173,13 +112,13 @@
         },
         {
           "rank": 2,
-          "url": "https://www.youtube.com/watch?v=nCVdhUhonKs",
-          "title": "Pokémon Trading Card Game Part 1 THE LEGENDARY CARDS Gameplay Walkthrough Nintendo Switch",
-          "snippet": "[28:14] [Music] [28:18] go for another emblem we can finish you off the lightning on you [28:26] and then we'll just have to attack we got a fire energy I don't know if we can pitch any energy oops it's fine it's fine [28:34] [Music] [28:36] price card come on give me a good prize potion I'll take that if we draw a fire energy oh that Oddish is super duper dead [28:44] [Music] [28:47] oh to jinx okay stun Spore please don't get heads please don't get heads [...] [8:31] into Starmie so we're probably gonna draw Starmie next turn to do that and then we'll attach that water energy sweets that's free and then we are going [8:40] to attack with slap that's 20 damage [8:48] I'm gonna evolve to mat",
-          "score": 0.1779683,
-          "channelName": "HeroVoltsyTCG",
-          "thumbnailUrl": "https://i.ytimg.com/vi/nCVdhUhonKs/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:09.424Z",
+          "url": "https://www.youtube.com/watch?v=INUdPETwnOE",
+          "title": "EVERYTHING You NEED To KNOW About Pixel Quest FULL Guide",
+          "snippet": "As promised I have finished a guide on Pixel Quest that gives you a basic understanding how certain things work in the game, tread carefully",
+          "score": 0.012432874,
+          "channelName": "Vaporbaby",
+          "thumbnailUrl": "https://i.ytimg.com/vi/INUdPETwnOE/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:10.547Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -188,74 +127,13 @@
         },
         {
           "rank": 3,
-          "url": "https://www.youtube.com/watch?v=TISmNwasvCw",
-          "title": "$10,000 MAX WIN on CrownCards! (100X PULL)",
-          "snippet": "755000 subscribers 8 likes 455 views 12 Jul 2026 I loaded $10,000 into CrownCards the BEST Pokemon Trading Cards App and went ALL IN on the biggest packs! Only $500, $1,000, and $2,500 pulls, no small packs, chasing the $100,000 MAX WIN! I almost lost my ENTIRE balance down to nothing... then hit a crazy comeback with some of the craziest grails l've ever pulled... 🪎GET A FREE PACK (worth up to $100) + enter my monthly giveaway for up to $10,000: 👉- https://apps.apple.com/app/crowncards-trading-cards/id6762010774 💎Use code “JOSH” for your free pack! This app is super similar to Rips by Triumph, which creators like TrueCeloLive and ObsidianX23 create videos on. If you love pack opening, ca",
-          "score": 0.14404073,
-          "channelName": "Whoods",
-          "thumbnailUrl": "https://i.ytimg.com/vi/TISmNwasvCw/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:09.496Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        }
-      ],
-      "error": null
-    },
-    {
-      "sessionId": "7e0505e80e5efb5fb2f723f8",
-      "appId": "6761757565",
-      "name": "Colorever: Gem Art Puzzle",
-      "queueRank": 4,
-      "query": "\"Colorever: Gem Art Puzzle\" gameplay walkthrough menu monetization progression",
-      "providerKey": "tavily",
-      "searchQueries": [
-        "\"Colorever: Gem Art Puzzle\" gameplay walkthrough menu monetization progression"
-      ],
-      "searchedAt": "2026-09-27T14:21:09.496Z",
-      "status": "found",
-      "candidates": [
-        {
-          "rank": 1,
-          "url": "https://www.youtube.com/watch?v=4nt6whbxmFg",
-          "title": "Colorever (by Oakever Games) IOS Gameplay Video (HD)",
-          "snippet": "hplayHD 71900 subscribers 281 views 2 Jun 2026 App description: Enter a relaxing world where puzzle, sort, and art come together. Sort sparkling gems/gem by color and shape, plan your moves, and watch beautiful pixel art come to life—one satisfying placement at a time. Easy to learn, calming to play, and rewarding to master. How to play Sort and place: Drag and sort gems into the right spots to solve each puzzle. Plan your space: Use shelves/slots wisely to organize, clear, and progress. Reveal pixel art: Every correct move fills the canvas and completes the artwork. Features you’ll love Pixel art puzzles with gem sorting: A soothing blend of puzzle, sort, and art. Growing gallery: A broad l",
-          "score": 0.62633044,
-          "channelName": "IOSTouchplayHD",
-          "thumbnailUrl": "https://i.ytimg.com/vi/4nt6whbxmFg/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:11.180Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        },
-        {
-          "rank": 2,
-          "url": "https://www.youtube.com/watch?v=iqYbIsVvis4",
-          "title": "Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS",
-          "snippet": "Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS - YouTube. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS. 361 views 2 years ago#bubbleshooter#puzzle#games. 361 views • Premiered Oct 20, 2023 • #bubbleshooter #puzzle #games. Bubble Gem is a peaceful and calm puzzle pop game. Welcome to the Bubble Shooter Gem Pop puzzle shooting game world!…...more. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android IOS. Bubble Shooter Gem Puzzle Pop All Levels Gameplay Walkthrough Android I",
-          "score": 0.13648199,
-          "channelName": "Fazie Gamer",
-          "thumbnailUrl": "https://i.ytimg.com/vi/iqYbIsVvis4/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:11.254Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        },
-        {
-          "rank": 3,
-          "url": "https://www.youtube.com/watch?v=cD3JrFPWS_I",
-          "title": "Colony Flow! Level 454 Solution/ Hard Puzzle Walkthrough",
-          "snippet": "Colony Flow offers hundreds of increasingly challenging levels with charming animations and no time pressure. In this video: • Full Colony Flow gameplay • Early level walkthrough • Puzzle-solving strategies • Relaxing no-commentary gameplay • Ant colony mechanics • Pixel art puzzle progression Whether you’re looking for a walkthrough, tips before downloading the game, or simply enjoy satisfying mobile puzzle games, I hope you enjoy watching! 👍 If you enjoyed this video, please Like, [...] Colony Flow Gameplay Walkthrough – Relaxing Ant Puzzle Game (No Commentary) Welcome to my full gameplay walkthrough of Colony Flow, a relaxing puzzle game where tiny worker ants transport colorful cubes to",
-          "score": 0.11288363,
-          "channelName": "Nova’s Puzzle Den",
-          "thumbnailUrl": "https://i.ytimg.com/vi/cD3JrFPWS_I/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:11.338Z",
+          "url": "https://www.youtube.com/watch?v=D7JNXpoBACI",
+          "title": "How To Change Age On TikTok",
+          "snippet": "Here's how to change your age on TikTok if it doesn't have your correct date of birth on your account. helping you solve your \"how to\" problems",
+          "score": 0.008658434,
+          "channelName": "Trevor Nace",
+          "thumbnailUrl": "https://i.ytimg.com/vi/D7JNXpoBACI/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:10.587Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -269,13 +147,13 @@
       "sessionId": "60f2b3ae35b05df28d153b48",
       "appId": "6761760135",
       "name": "Meowdoku!",
-      "queueRank": 5,
+      "queueRank": 3,
       "query": "\"Meowdoku!\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
         "\"Meowdoku!\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-27T14:21:11.338Z",
+      "searchedAt": "2026-09-28T09:39:10.587Z",
       "status": "found",
       "candidates": [
         {
@@ -286,7 +164,7 @@
           "score": 0.45769477,
           "channelName": "Rock Gaming Channel",
           "thumbnailUrl": "https://i.ytimg.com/vi/qlv3OzlMdkI/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:12.402Z",
+          "availabilityVerifiedAt": "2026-09-28T09:39:11.776Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -301,7 +179,7 @@
           "score": 0.39515805,
           "channelName": "GAMISTAN ARENA",
           "thumbnailUrl": "https://i.ytimg.com/vi/3EiSxVM0FAo/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:12.469Z",
+          "availabilityVerifiedAt": "2026-09-28T09:39:11.809Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -316,7 +194,7 @@
           "score": 0.38456595,
           "channelName": "Game Rush",
           "thumbnailUrl": "https://i.ytimg.com/vi/my7pX7FELfg/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:12.541Z",
+          "availabilityVerifiedAt": "2026-09-28T09:39:11.838Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -327,16 +205,31 @@
       "error": null
     },
     {
+      "sessionId": "499a756a0718a91049643fed",
+      "appId": "6752672568",
+      "name": "Block Out! - Color Sort Puzzle",
+      "queueRank": 4,
+      "query": "\"Block Out! - Color Sort Puzzle\" gameplay walkthrough menu monetization progression",
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Block Out! - Color Sort Puzzle\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-28T09:39:11.839Z",
+      "status": "no_result",
+      "candidates": [],
+      "error": null
+    },
+    {
       "sessionId": "23ce7fa7abde6f05aedb3d4d",
       "appId": "1623318294",
       "name": "Gossip Harbor®: Merge & Story",
-      "queueRank": 6,
+      "queueRank": 5,
       "query": "\"Gossip Harbor®: Merge & Story\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
         "\"Gossip Harbor®: Merge & Story\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-27T14:21:12.542Z",
+      "searchedAt": "2026-09-28T09:39:13.503Z",
       "status": "found",
       "candidates": [
         {
@@ -347,7 +240,7 @@
           "score": 0.72184175,
           "channelName": "TA Plays Games",
           "thumbnailUrl": "https://i.ytimg.com/vi/fIZqtLFNs3M/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:14.358Z",
+          "availabilityVerifiedAt": "2026-09-28T09:39:16.961Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -362,7 +255,7 @@
           "score": 0.6202772,
           "channelName": "Mobile Gameplay",
           "thumbnailUrl": "https://i.ytimg.com/vi/UGOJ_bSvTHU/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:14.431Z",
+          "availabilityVerifiedAt": "2026-09-28T09:39:16.997Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -377,7 +270,7 @@
           "score": 0.5954225,
           "channelName": "Mobile Gameplay",
           "thumbnailUrl": "https://i.ytimg.com/vi/ldDxMg09sx0/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-27T14:21:14.499Z",
+          "availabilityVerifiedAt": "2026-09-28T09:39:17.032Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -388,33 +281,171 @@
       "error": null
     },
     {
-      "sessionId": "499a756a0718a91049643fed",
-      "appId": "6752672568",
-      "name": "Block Out! - Color Sort Puzzle",
-      "queueRank": 7,
-      "query": "\"Block Out! - Color Sort Puzzle\" gameplay walkthrough menu monetization progression",
+      "sessionId": "2d1b5c7c05ccfd0bada56495",
+      "appId": "6468921495",
+      "name": "Vita Mahjong",
+      "queueRank": 6,
+      "query": "\"Vita Mahjong\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
-        "\"Block Out! - Color Sort Puzzle\" gameplay walkthrough menu monetization progression"
+        "\"Vita Mahjong\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-27T14:21:14.499Z",
-      "status": "no_result",
-      "candidates": [],
+      "searchedAt": "2026-09-28T09:39:17.032Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=7TlkwlSGtV0",
+          "title": "Vita Mahjong - Gameplay Walkthrough 87 (Android, iOS)",
+          "snippet": "bile Games with Pew 11500 subscribers 35 views 29 Jul 2026 #games #gameplay #vitamahjong Vita Mahjong Walkthrough playlist: https://www.youtube.com/playlist?list=PLifKJ5AQuqX35rSIhWzGoW4wkuLfXFOJR ❤️ SUBSCRIBE for more content! 👍 Drop a LIKE if you enjoyed the video! 📺 More VIDEOS! Most popular series: https://www.youtube.com/channel/UCznEynsRMNR-4p8FnoLqy0A/playlists Most popular uploads: https://www.youtube.com/channel/UCznEynsRMNR-4p8FnoLqy0A/videos Vita Mahjong is an Exclusive Puzzle Game of Tile Matching. We are thrilled to present the mahjong solitaire game that combines innovation with classic gameplay. It offers large tiles and a user-friendly interface compatible with pads and pho",
+          "score": 0.69199765,
+          "channelName": "2026 Mobile Games with Pew",
+          "thumbnailUrl": "https://i.ytimg.com/vi/7TlkwlSGtV0/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:18.031Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=xlJMeinddOM",
+          "title": "Vita Mahjong - Gameplay Walkthrough 36 (Android, iOS)",
+          "snippet": "bile Games with Pew 8380 subscribers 8 views 10 Jan 2026 #games #gameplay #vitamahjong Vita Mahjong Walkthrough playlist: https://www.youtube.com/playlist?list=PLifKJ5AQuqX35rSIhWzGoW4wkuLfXFOJR ❤️ SUBSCRIBE for more content! 👍 Drop a LIKE if you enjoyed the video! 📺 More VIDEOS! Most popular series: https://www.youtube.com/channel/UCznEynsRMNR-4p8FnoLqy0A/playlists Most popular uploads: https://www.youtube.com/channel/UCznEynsRMNR-4p8FnoLqy0A/videos Vita Mahjong is an Exclusive Puzzle Game of Tile Matching. We are thrilled to present the mahjong solitaire game that combines innovation with classic gameplay. It offers large tiles and a user-friendly interface compatible with pads and phone",
+          "score": 0.68748367,
+          "channelName": "2026 Mobile Games with Pew",
+          "thumbnailUrl": "https://i.ytimg.com/vi/xlJMeinddOM/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:18.065Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=3vG0WgnDN_Q",
+          "title": "Vita Mahjong - Gameplay Walkthrough 98 (Android, iOS)",
+          "snippet": "bile Games with Pew 10900 subscribers 7 views 11 Aug 2026 #games #gameplay #vitamahjong Vita Mahjong Walkthrough playlist: https://www.youtube.com/playlist?list=PLifKJ5AQuqX35rSIhWzGoW4wkuLfXFOJR ❤️ SUBSCRIBE for more content! 👍 Drop a LIKE if you enjoyed the video! 📺 More VIDEOS! Most popular series: https://www.youtube.com/channel/UCznEynsRMNR-4p8FnoLqy0A/playlists Most popular uploads: https://www.youtube.com/channel/UCznEynsRMNR-4p8FnoLqy0A/videos Vita Mahjong is an Exclusive Puzzle Game of Tile Matching. We are thrilled to present the mahjong solitaire game that combines innovation with classic gameplay. It offers large tiles and a user-friendly interface compatible with pads and phon",
+          "score": 0.6862234,
+          "channelName": "2026 Mobile Games with Pew",
+          "thumbnailUrl": "https://i.ytimg.com/vi/3vG0WgnDN_Q/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:18.102Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
       "error": null
     },
     {
-      "sessionId": "775e66b20792a8f712fa949c",
-      "appId": "596402997",
-      "name": "Minion Rush: Running game",
-      "queueRank": 8,
-      "query": "\"Minion Rush: Running game\" gameplay walkthrough menu monetization progression",
+      "sessionId": "a7ed1fe74505c6ed1bc6fdbc",
+      "appId": "6779167923",
+      "name": "Colony Flow!",
+      "queueRank": 7,
+      "query": "\"Colony Flow!\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
-        "\"Minion Rush: Running game\" gameplay walkthrough menu monetization progression"
+        "\"Colony Flow!\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-27T14:21:16.061Z",
-      "status": "no_result",
-      "candidates": [],
+      "searchedAt": "2026-09-28T09:39:18.102Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=NCBSNbGnFoY",
+          "title": "Colony Flow! Level 1165 Walkthrough Solution",
+          "snippet": "Puzzle Den 25000 subscribers 1 views 16 Aug 2026 Colony Flow Gameplay Walkthrough – Relaxing Ant Puzzle Game (No Commentary) Welcome to my full gameplay walkthrough of Colony Flow, a relaxing puzzle game where tiny worker ants transport colorful cubes to create beautiful pixel art! In this no-commentary playthrough, you’ll see the early levels, puzzle mechanics, and strategy needed to keep the ant colony running efficiently. If you enjoy relaxing puzzle games, color sorting games, pixel art puzzles, and satisfying brain teasers, Colony Flow offers hundreds of increasingly challenging levels with charming animations and no time pressure. In this video: • Full Colony Flow gameplay • Early leve",
+          "score": 0.6141863,
+          "channelName": "Nova’s Puzzle Den",
+          "thumbnailUrl": "https://i.ytimg.com/vi/NCBSNbGnFoY/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:19.347Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=nF4E683Thkw",
+          "title": "Colony Flow Level 1233 Walkthrough Solution",
+          "snippet": "Puzzle Den 25100 subscribers 6 views 18 Aug 2026 Colony Flow Gameplay Walkthrough – Relaxing Ant Puzzle Game (No Commentary) Welcome to my full gameplay walkthrough of Colony Flow, a relaxing puzzle game where tiny worker ants transport colorful cubes to create beautiful pixel art! In this no-commentary playthrough, you’ll see the early levels, puzzle mechanics, and strategy needed to keep the ant colony running efficiently. If you enjoy relaxing puzzle games, color sorting games, pixel art puzzles, and satisfying brain teasers, Colony Flow offers hundreds of increasingly challenging levels with charming animations and no time pressure. In this video: • Full Colony Flow gameplay • Early leve",
+          "score": 0.61057013,
+          "channelName": "Nova’s Puzzle Den",
+          "thumbnailUrl": "https://i.ytimg.com/vi/nF4E683Thkw/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:19.393Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=lZUUud55liw",
+          "title": "Colony Flow Level 1304 Walkthrough Solution",
+          "snippet": "Puzzle Den 25300 subscribers 16 views 20 Aug 2026 Colony Flow Gameplay Walkthrough – Relaxing Ant Puzzle Game (No Commentary) Welcome to my full gameplay walkthrough of Colony Flow, a relaxing puzzle game where tiny worker ants transport colorful cubes to create beautiful pixel art! In this no-commentary playthrough, you’ll see the early levels, puzzle mechanics, and strategy needed to keep the ant colony running efficiently. If you enjoy relaxing puzzle games, color sorting games, pixel art puzzles, and satisfying brain teasers, Colony Flow offers hundreds of increasingly challenging levels with charming animations and no time pressure. In this video: • Full Colony Flow gameplay • Early lev",
+          "score": 0.60610276,
+          "channelName": "Nova’s Puzzle Den",
+          "thumbnailUrl": "https://i.ytimg.com/vi/lZUUud55liw/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:19.438Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
+      "error": null
+    },
+    {
+      "sessionId": "131018038bf6804ca35ce2eb",
+      "appId": "6499209744",
+      "name": "Magic Sort!",
+      "queueRank": 8,
+      "query": "\"Magic Sort!\" gameplay walkthrough menu monetization progression",
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Magic Sort!\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-09-28T09:39:19.438Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=VP9HHcFxx8w",
+          "title": "Minecraft Mods: How to make Zivicio Armor in SkyFactory 2.5 - E10",
+          "snippet": "In this episode, I continue the Magical Crops progression to get to the Zivicio essence. Then I build the full set of Zivicio armor so I can",
+          "score": 0.023208743,
+          "channelName": "Soapthgr8MC",
+          "thumbnailUrl": "https://i.ytimg.com/vi/VP9HHcFxx8w/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:22.294Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=2uJ3qOY0TkI",
+          "title": "Reign Of Guilds, New MMO First Impressions",
+          "snippet": "Reign Of Guilds is a brand new medieval ... this is an indie game made by a very small team with no publisher or external funding. our",
+          "score": 0.012318289,
+          "channelName": "TheLazyPeon",
+          "thumbnailUrl": "https://i.ytimg.com/vi/2uJ3qOY0TkI/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-09-28T09:39:22.329Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
       "error": null
     }
   ]
