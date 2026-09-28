@@ -10,6 +10,10 @@ on:
       - 'scripts/collect-google-play-radar.mjs'
       - 'scripts/google-play-history.mjs'
       - 'scripts/google-play-history.node-test.mjs'
+      - 'scripts/google-play-health.mjs'
+      - 'scripts/google-play-health.node-test.mjs'
+      - 'scripts/augment-google-play-health.mjs'
+      - 'scripts/validate-google-play-health.mjs'
       - 'scripts/validate-google-play-radar.mjs'
       - '.github/workflows/google-play-radar.yml'
 
@@ -39,6 +43,9 @@ jobs:
       - name: Test successful-observation continuity
         run: node --test scripts/google-play-history.node-test.mjs
 
+      - name: Test platform health semantics
+        run: node --test scripts/google-play-health.node-test.mjs
+
       - name: Collect Google Play discovery feed
         env:
           APPBRAIN_API_KEY: ${{ secrets.APPBRAIN_API_KEY }}
@@ -46,6 +53,38 @@ jobs:
 
       - name: Validate Google Play provenance and exact provider depth
         run: node scripts/validate-google-play-radar.mjs
+
+      - name: Detect provider evidence change
+        id: provider
+        shell: bash
+        run: |
+          if git diff --quiet -- public/data/platforms/google-play; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+            echo 'Google Play provider evidence is unchanged.'
+          else
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+            echo 'Google Play provider evidence changed; Data Health will be rebuilt.'
+          fi
+
+      - name: Rebuild factual Data Health for changed provider state
+        if: steps.provider.outputs.changed == 'true'
+        run: node scripts/build-data-health.mjs
+
+      - name: Add platform-scoped Google Play health
+        if: steps.provider.outputs.changed == 'true'
+        run: node scripts/augment-google-play-health.mjs
+
+      - name: Restore current trend health after base rebuild
+        if: steps.provider.outputs.changed == 'true'
+        run: node scripts/augment-trend-health.mjs
+
+      - name: Validate Data Health semantics
+        if: steps.provider.outputs.changed == 'true'
+        run: node scripts/validate-data-health.mjs
+
+      - name: Validate Google Play health boundary
+        if: steps.provider.outputs.changed == 'true'
+        run: node scripts/validate-google-play-health.mjs
 
       - name: Write run summary
         shell: bash
@@ -58,11 +97,15 @@ jobs:
           console.log(`Provider: **${p.source.provider}** · status: **${p.status}** · entries: **${p.entries.length}**`);
           console.log(`Cadence: **Mon / Wed / Fri** · configured cost: **${p.source.creditsPerRun} AppBrain credits/run** · free monthly allowance: **${p.source.freeMonthlyCreditBudget}**`);
           if (p.status === 'ok') console.log(`Coverage: **${p.completeness.received}/${p.completeness.requested} unique provider results** · exact depth: **${p.completeness.exactDepthSatisfied}**`);
+          if (fs.existsSync('public/data/health/latest.json')) {
+            const h = JSON.parse(fs.readFileSync('public/data/health/latest.json', 'utf8'));
+            if (h.facts?.googlePlayRadarStatus) console.log(`Data Health Google Play state: **${h.facts.googlePlayRadarStatus}** · exact depth: **${h.facts.googlePlayRadarExactDepth}**`);
+          }
           console.log('');
           console.log('Displayed positions are AppBrain provider-global popularity positions, not official Google Play storefront ranks. Ratings are third-party AppBrain market intelligence and download values are explicitly third-party estimates. This workflow never infers Google Play performance from Apple data and never labels its provider-global browse as a country storefront chart.');
           NODE
 
-      - name: Commit provider state safely
+      - name: Commit provider state and health safely
         id: commit
         shell: bash
         run: |
@@ -70,7 +113,7 @@ jobs:
           echo 'changed=false' >> "$GITHUB_OUTPUT"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add public/data/platforms/google-play
+          git add public/data/platforms/google-play public/data/health
           if ! git diff --cached --quiet; then
             git commit -m 'data: refresh Google Play radar'
             git fetch origin main
@@ -86,3 +129,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run pages.yml --ref main
+
+      - name: Report provider collection failure after persisting state
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('public/data/platforms/google-play/latest.json', 'utf8'));
+          if (p.status === 'failed') {
+            console.error(`Persisted Google Play provider failure: ${p.error ?? 'unknown provider error'}`);
+            process.exit(1);
+          }
+          NODE
