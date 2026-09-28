@@ -47,6 +47,8 @@ jobs:
         run: node scripts/validate-gameplay-discovery.mjs
       - name: Test Google Play successful-observation continuity
         run: node --test scripts/google-play-history.node-test.mjs
+      - name: Test Google Play platform health semantics
+        run: node --test scripts/google-play-health.node-test.mjs
       - name: Exercise Google Play discovery without AppBrain credentials
         run: node scripts/collect-google-play-radar.mjs
       - name: Validate Google Play zero-provider boundary

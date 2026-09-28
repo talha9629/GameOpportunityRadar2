@@ -181,5 +181,5 @@ try {
     previousSuccessfulAt,
   }, null, 2)}\n`);
   console.error(`[google-play] collection failed: ${String(error)}`);
-  process.exitCode = 1;
+  console.error('[google-play] failed provider state was written and will be validated/committed before the workflow reports failure.');
 }
