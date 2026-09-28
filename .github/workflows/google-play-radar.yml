@@ -8,6 +8,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/collect-google-play-radar.mjs'
+      - 'scripts/google-play-history.mjs'
+      - 'scripts/google-play-history.node-test.mjs'
       - 'scripts/validate-google-play-radar.mjs'
       - '.github/workflows/google-play-radar.yml'
 
@@ -34,6 +36,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Test successful-observation continuity
+        run: node --test scripts/google-play-history.node-test.mjs
+
       - name: Collect Google Play discovery feed
         env:
           APPBRAIN_API_KEY: ${{ secrets.APPBRAIN_API_KEY }}
@@ -58,9 +63,11 @@ jobs:
           NODE
 
       - name: Commit provider state safely
+        id: commit
         shell: bash
         run: |
           set -euo pipefail
+          echo 'changed=false' >> "$GITHUB_OUTPUT"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add public/data/platforms/google-play
@@ -69,9 +76,13 @@ jobs:
             git fetch origin main
             git rebase origin/main
             git push origin HEAD:main
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'Google Play provider evidence is unchanged; skipping generated-data commit.'
           fi
 
       - name: Deploy latest main through canonical Pages workflow
+        if: steps.commit.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run pages.yml --ref main
