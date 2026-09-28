@@ -1,5 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  selectLatestSuccessfulGooglePlaySnapshot,
+  unconfiguredStateIsSemanticallyUnchanged,
+} from './google-play-history.mjs';
 
 const root = path.resolve('public/data/platforms/google-play');
 const latestPath = path.join(root, 'latest.json');
@@ -15,6 +19,14 @@ function readJson(file, fallback = null) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; }
 }
 
+function readHistorySnapshots() {
+  if (!fs.existsSync(historyDir)) return [];
+  return fs.readdirSync(historyDir)
+    .filter((name) => name.endsWith('.json'))
+    .map((name) => readJson(path.join(historyDir, name), null))
+    .filter(Boolean);
+}
+
 function daysBetweenDates(older, newer) {
   if (!older || !newer) return null;
   const start = new Date(`${older}T00:00:00Z`);
@@ -28,9 +40,8 @@ function playUrl(packageName) {
 }
 
 const previous = readJson(latestPath, null);
-const previousDate = typeof previous?.generatedAt === 'string' ? previous.generatedAt.slice(0, 10) : null;
-const sameDay = previousDate === today;
-const observationGapDays = daysBetweenDates(previousDate, today);
+const previousSuccessful = selectLatestSuccessfulGooglePlaySnapshot(previous, readHistorySnapshots(), chartDepth);
+const previousSuccessfulAt = previousSuccessful?.generatedAt ?? null;
 
 const base = {
   schemaVersion: 1,
@@ -66,12 +77,17 @@ const base = {
 
 if (!key) {
   fs.mkdirSync(historyDir, { recursive: true });
-  fs.writeFileSync(latestPath, `${JSON.stringify({
+  const output = {
     ...base,
     status: 'unconfigured',
     message: 'APPBRAIN_API_KEY is not configured. Google Play hunting remains unavailable rather than inferred from Apple data.',
-    previousSuccessfulAt: previous?.status === 'ok' ? previous.generatedAt : previous?.previousSuccessfulAt ?? null,
-  }, null, 2)}\n`);
+    previousSuccessfulAt,
+  };
+  if (unconfiguredStateIsSemanticallyUnchanged(previous, output)) {
+    console.log('[google-play] AppBrain remains unconfigured; provider evidence is unchanged, so no generated-data rewrite is needed.');
+    process.exit(0);
+  }
+  fs.writeFileSync(latestPath, `${JSON.stringify(output, null, 2)}\n`);
   console.log('[google-play] AppBrain unconfigured; wrote truthful provider state without consuming credits.');
   process.exit(0);
 }
@@ -98,9 +114,8 @@ try {
   if (packageNames.some((packageName) => !packageName)) throw new Error('AppBrain browse returned an app without a package name.');
   if (new Set(packageNames).size !== chartDepth) throw new Error('AppBrain browse returned duplicate package names; snapshot rejected as incomplete.');
 
-  const previousSuccessful = previous?.status === 'ok' && Array.isArray(previous.entries) && previous.entries.length === chartDepth ? previous : null;
   const priorByPackage = new Map((previousSuccessful?.entries ?? []).map((entry) => [entry.packageName, entry]));
-  const previousSuccessfulDate = typeof previousSuccessful?.generatedAt === 'string' ? previousSuccessful.generatedAt.slice(0, 10) : null;
+  const previousSuccessfulDate = typeof previousSuccessfulAt === 'string' ? previousSuccessfulAt.slice(0, 10) : null;
   const sameSuccessfulDay = previousSuccessfulDate === today;
   const successfulGapDays = daysBetweenDates(previousSuccessfulDate, today);
 
@@ -116,7 +131,7 @@ try {
       rankSemantics: 'appbrain_popularity_position',
       previousObservedRank,
       observedDelta: previousObservedRank == null ? null : previousObservedRank - (index + 1),
-      previousObservedAt: prior ? previousSuccessful?.generatedAt ?? null : null,
+      previousObservedAt: prior ? previousSuccessfulAt : null,
       observationGapDays: prior ? (sameSuccessfulDay ? prior.observationGapDays ?? successfulGapDays : successfulGapDays) : null,
       packageName,
       name: app.name ?? packageName,
@@ -163,7 +178,7 @@ try {
     ...base,
     status: 'failed',
     error: String(error),
-    previousSuccessfulAt: previous?.status === 'ok' ? previous.generatedAt : previous?.previousSuccessfulAt ?? null,
+    previousSuccessfulAt,
   }, null, 2)}\n`);
   console.error(`[google-play] collection failed: ${String(error)}`);
   process.exitCode = 1;
