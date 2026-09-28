@@ -52,6 +52,24 @@ describe('deriveDossierStatusSummary', () => {
     expect(summary.nextAction).toMatchObject({ label: 'Complete evidence-backed scores', target: 'scorecard' });
   });
 
+  it('keeps a decisive PASS gate visible even when other dimensions are blank', () => {
+    const summary = deriveDossierStatusSummary({
+      rawSourceCaptured: true,
+      findingCount: 9,
+      reviewedCount: 9,
+      unknownCount: 0,
+      decision: decision({
+        status: 'PASS',
+        reasons: ['One or more hard blockers are active.'],
+        missing: ['momentum', 'differentiation'],
+      }),
+    });
+
+    expect(summary.decision.label).toBe('PASS gate active');
+    expect(summary.decision.detail).toContain('already determines the preliminary threshold result');
+    expect(summary.nextAction).toMatchObject({ label: 'Review preliminary threshold result', target: 'scorecard' });
+  });
+
   it('never converts a complete scorecard into BUILD NOW guidance', () => {
     const summary = deriveDossierStatusSummary({
       rawSourceCaptured: true,
