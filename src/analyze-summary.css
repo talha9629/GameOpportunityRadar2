@@ -32,8 +32,8 @@
 }
 
 .dossier-status-card.is-complete {
-  border-color: var(--color-success);
-  background: var(--color-success-bg);
+  border-color: var(--color-border-strong);
+  background: var(--color-accent-bg);
 }
 
 .dossier-status-card.is-pending {
