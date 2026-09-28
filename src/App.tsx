@@ -43,9 +43,9 @@ function initialRoute(): AppRoute {
 }
 
 function initialPlatformScope(): PlatformScope {
-  if (typeof window === 'undefined') return 'cross';
+  if (typeof window === 'undefined') return 'apple';
   const stored = window.localStorage.getItem(PLATFORM_SCOPE_STORAGE_KEY);
-  return isPlatformScope(stored) ? stored : 'cross';
+  return isPlatformScope(stored) ? stored : 'apple';
 }
 
 function PlatformPipelineBoundary({ scope, feature, persistence = false }: { scope: PlatformScope; feature: string; persistence?: boolean }) {
