@@ -45,6 +45,12 @@ jobs:
         run: node scripts/build-research-queue.mjs
       - name: Validate research visibility and trend semantics
         run: node scripts/validate-research-queue.mjs
+      - name: Test digest trend-authority semantics
+        run: node --test scripts/research-digest-facts.node-test.mjs
+      - name: Rebuild exact-date research digest
+        run: node scripts/build-research-digest.mjs
+      - name: Validate research digest semantics
+        run: node scripts/validate-research-digest.mjs
       - name: Exercise gameplay discovery without credentials
         run: node scripts/discover-gameplay-sources.mjs
       - name: Validate zero-credit discovery fallback
