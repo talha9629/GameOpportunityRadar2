@@ -1,8 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { consecutiveSnapshotDays, MIN_TREND_HISTORY_DAYS } from './trend-state.mjs';
 
 const file = path.resolve('public/data/research/latest.json');
 const queue = JSON.parse(fs.readFileSync(file, 'utf8'));
+const radarIndex = JSON.parse(fs.readFileSync(path.resolve('public/data/radar/index.json'), 'utf8'));
+const consecutiveHistoryDays = consecutiveSnapshotDays(radarIndex, queue.radarDate);
 const errors = [];
 const allowedWindowStatuses = new Set(['available', 'history_missing', 'market_failed', 'not_ranked', 'source_mismatch', 'coverage_gap']);
 const allowedTrendStates = new Set(['INSUFFICIENT_DATA', 'EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING']);
@@ -18,8 +21,12 @@ assert(queue.schemaVersion === 1, 'schemaVersion must be 1');
 assert(typeof queue.generatedAt === 'string' && !Number.isNaN(Date.parse(queue.generatedAt)), 'generatedAt must be an ISO date');
 assert(/^\d{4}-\d{2}-\d{2}$/.test(queue.radarDate ?? ''), 'radarDate must be YYYY-MM-DD');
 assert(queue.method?.name === 'deterministic_research_priority_v1', 'unexpected queue method');
+assert(queue.method?.minimumConsecutiveTrendHistoryDays === MIN_TREND_HISTORY_DAYS, 'research trend maturity threshold must remain seven exact days');
+assert(/movement.*order research|order research.*movement/i.test(queue.method?.earlyMovementRule ?? ''), 'early movement rule must distinguish triage ordering from mature trend state');
+assert(/before 7 consecutive exact daily snapshots/i.test(queue.method?.earlyMovementRule ?? ''), 'early movement rule must document the seven-day maturity gate');
 assert(/not opportunity|not an opportunity score|not a success probability/i.test(queue.method?.statement ?? ''), 'method must explicitly reject predictive scoring');
 assert(Array.isArray(queue.limitations) && queue.limitations.some((value) => /not a download count|neither is a download count/i.test(value)), 'rank/download limitation must be explicit');
+assert(Array.isArray(queue.limitations) && queue.limitations.some((value) => /INSUFFICIENT_DATA.*7 consecutive exact daily snapshots/i.test(value)), 'trend maturity limitation must be explicit');
 assert(Array.isArray(queue.candidates), 'candidates must be an array');
 assert(queue.candidates.length <= 12, 'candidate queue must stay capped at 12');
 
@@ -84,15 +91,33 @@ for (let index = 0; index < (queue.candidates ?? []).length; index += 1) {
   const trend = candidate.evidence?.trend;
   assert(trend?.basis === 'exact_rank_history_v1', `${candidate.appId} trend basis mismatch`);
   assert(allowedTrendStates.has(trend?.state), `${candidate.appId} invalid trend state`);
+  assert(trend?.consecutiveHistoryDays === consecutiveHistoryDays, `${candidate.appId} trend history maturity does not match Radar index`);
+  assert(trend?.minimumConsecutiveHistoryDays === MIN_TREND_HISTORY_DAYS, `${candidate.appId} trend minimum history must remain seven days`);
   assert(Number.isInteger(trend?.comparable3dMarkets) && trend.comparable3dMarkets >= 0 && trend.comparable3dMarkets <= candidate.evidence.marketCount, `${candidate.appId} invalid comparable3dMarkets`);
   assert(Number.isInteger(trend?.comparable7dMarkets) && trend.comparable7dMarkets >= 0 && trend.comparable7dMarkets <= candidate.evidence.marketCount, `${candidate.appId} invalid comparable7dMarkets`);
   assert(Number.isInteger(trend?.newlyEntered3dMarkets) && trend.newlyEntered3dMarkets >= 0, `${candidate.appId} invalid newlyEntered3dMarkets`);
   assert(Number.isInteger(trend?.coverageGap3dMarkets) && trend.coverageGap3dMarkets >= 0, `${candidate.appId} invalid coverageGap3dMarkets`);
   assert(Array.isArray(trend?.rationale) && trend.rationale.length > 0, `${candidate.appId} trend needs an evidence rationale`);
-  if (trend.state === 'RISING') assert(typeof trend.median3dDelta === 'number' && trend.median3dDelta >= 5, `${candidate.appId} RISING contradicts 3d median`);
-  if (trend.state === 'DECLINING') assert(typeof trend.median3dDelta === 'number' && trend.median3dDelta <= -5, `${candidate.appId} DECLINING contradicts 3d median`);
-  if (trend.state === 'EMERGING') assert(trend.newlyEntered3dMarkets > 0 && trend.comparable3dMarkets === 0 && trend.coverageGap3dMarkets === 0, `${candidate.appId} EMERGING lacks clean tracked-range entry evidence`);
-  if (trend.state === 'ESTABLISHED') assert(typeof trend.median3dDelta === 'number' && typeof trend.median7dDelta === 'number' && Math.abs(trend.median3dDelta) < 5 && Math.abs(trend.median7dDelta) < 8, `${candidate.appId} ESTABLISHED contradicts exact windows`);
+  if (consecutiveHistoryDays < MIN_TREND_HISTORY_DAYS) {
+    assert(trend.state === 'INSUFFICIENT_DATA', `${candidate.appId} cannot emit ${trend.state} before ${MIN_TREND_HISTORY_DAYS} consecutive exact days`);
+    assert(trend.rationale.some((value) => new RegExp(`${consecutiveHistoryDays}/${MIN_TREND_HISTORY_DAYS}`).test(value)), `${candidate.appId} insufficient rationale must expose current history maturity`);
+  }
+  if (trend.state === 'RISING') {
+    assert(consecutiveHistoryDays >= MIN_TREND_HISTORY_DAYS, `${candidate.appId} RISING requires mature global history`);
+    assert(typeof trend.median3dDelta === 'number' && trend.median3dDelta >= 5, `${candidate.appId} RISING contradicts 3d median`);
+  }
+  if (trend.state === 'DECLINING') {
+    assert(consecutiveHistoryDays >= MIN_TREND_HISTORY_DAYS, `${candidate.appId} DECLINING requires mature global history`);
+    assert(typeof trend.median3dDelta === 'number' && trend.median3dDelta <= -5, `${candidate.appId} DECLINING contradicts 3d median`);
+  }
+  if (trend.state === 'EMERGING') {
+    assert(consecutiveHistoryDays >= MIN_TREND_HISTORY_DAYS, `${candidate.appId} EMERGING requires mature global history`);
+    assert(trend.newlyEntered3dMarkets > 0 && trend.comparable3dMarkets === 0 && trend.coverageGap3dMarkets === 0, `${candidate.appId} EMERGING lacks clean tracked-range entry evidence`);
+  }
+  if (trend.state === 'ESTABLISHED') {
+    assert(consecutiveHistoryDays >= MIN_TREND_HISTORY_DAYS, `${candidate.appId} ESTABLISHED requires mature global history`);
+    assert(typeof trend.median3dDelta === 'number' && typeof trend.median7dDelta === 'number' && Math.abs(trend.median3dDelta) < 5 && Math.abs(trend.median7dDelta) < 8, `${candidate.appId} ESTABLISHED contradicts exact windows`);
+  }
 
   const oneDayAvailable = candidate.evidence?.exactWindows?.['1d']?.status === 'available';
   const hasUpwardReason = candidate.reasonCodes.some((reason) => /^UP_\d+_PLUS_1D$/.test(reason));
@@ -139,4 +164,4 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`[research-queue] validation PASS · ${queue.candidates.length} candidates · visibility/trend semantics verified · AppBrain ${appBrain.status} · ${appBrain.creditsUsedThisRun}/${appBrain.dailyCreditCap} credits · evidence packs ${liveAnalyzer?.succeeded ?? 0}/${liveAnalyzer?.attempted ?? 0}`);
+console.log(`[research-queue] validation PASS · ${queue.candidates.length} candidates · history ${consecutiveHistoryDays}/${MIN_TREND_HISTORY_DAYS} · visibility/trend semantics verified · AppBrain ${appBrain.status} · ${appBrain.creditsUsedThisRun}/${appBrain.dailyCreditCap} credits · evidence packs ${liveAnalyzer?.succeeded ?? 0}/${liveAnalyzer?.attempted ?? 0}`);
