@@ -30,14 +30,22 @@ export function TrendSignalsPanel({ payload, onAnalyze }: {
   const counts = payload.summary.stateCounts;
   const windowCounts = trendWindowStatusCounts(payload);
   const incomparable = windowCounts.coverage_gap + windowCounts.source_mismatch + windowCounts.market_failed;
+  const historyDays = payload.summary.consecutiveHistoryDays;
+  const historyRequired = payload.method.minimumConsecutiveHistoryDays;
+  const historyMature = historyDays >= historyRequired;
 
   return <section className="panel trend-signals-panel">
     <div className="section-heading">
       <div>
         <h2>Exact-Date Trend Signals</h2>
-        <p>Observed Apple Games rank evidence only. One-day movement is shown numerically; mature directional states require exact 3-day evidence. Visibility measures chart position inside Top {payload.chartDepth}; it is not installs, revenue, market share, or success probability.</p>
+        <p>Observed Apple Games rank evidence only. One-day and exact-window movement stays factual context; mature trend states require {historyRequired} consecutive exact daily snapshots plus the state-specific exact comparison gate. Visibility measures chart position inside Top {payload.chartDepth}; it is not installs, revenue, market share, or success probability.</p>
       </div>
       <span>{payload.summary.signalCount} chart rows · {payload.summary.healthyGameMarkets} markets</span>
+    </div>
+
+    <div className={`trend-maturity-banner ${historyMature ? 'mature' : 'maturing'}`}>
+      <strong>{historyDays}/{historyRequired} consecutive exact days</strong>
+      <span>{historyMature ? 'Global history maturity gate met. Individual states still require their exact evidence thresholds.' : `History is still maturing. Exact movement is visible below, but every mature trend state must remain INSUFFICIENT_DATA until ${historyRequired}/${historyRequired}.`}</span>
     </div>
 
     <div className="trend-state-summary">
@@ -84,11 +92,11 @@ export function TrendSignalsPanel({ payload, onAnalyze }: {
         })}</div>}
 
     <div className="trend-subsection-heading">
-      <div><strong>Mature trend states</strong><span>Only states that cross the conservative exact-history gate appear here.</span></div>
+      <div><strong>Mature trend states</strong><span>Only states that cross the {historyRequired}-day history gate and their state-specific exact-evidence threshold appear here.</span></div>
       <b>{strongest.length} shown</b>
     </div>
     {strongest.length === 0
-      ? <div className="trend-empty"><TrendingUp size={18} /><span>No title currently crosses a mature trend threshold. Exact history will keep accumulating automatically; 1-day movement above remains available as factual context.</span></div>
+      ? <div className="trend-empty"><TrendingUp size={18} /><span>{historyMature ? 'No title currently crosses a mature trend threshold.' : `No mature trend can be assigned at ${historyDays}/${historyRequired} exact days.`} Exact movement above remains available as factual context.</span></div>
       : <div className="trend-signal-list">{strongest.map((signal) => <div className="trend-signal-row" key={`${signal.country}-${signal.appId}-${signal.trend.state}`}>
           {signal.iconUrl ? <img className="trend-app-icon" src={signal.iconUrl} alt="" /> : <div className="trend-app-icon placeholder" />}
           <div className="trend-signal-copy">
