@@ -1,4 +1,9 @@
 .trend-signals-panel { display: grid; gap: var(--space-3); }
+.trend-maturity-banner { display: grid; gap: 4px; padding: 11px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface-subtle); }
+.trend-maturity-banner strong { color: var(--color-text-strong); font-size: 12px; }
+.trend-maturity-banner span { color: var(--color-text-muted); font-size: 11px; line-height: 1.45; }
+.trend-maturity-banner.maturing { border-color: var(--color-warning); background: var(--color-warning-bg); }
+.trend-maturity-banner.mature { border-color: var(--color-success); background: var(--color-success-bg); }
 .trend-state-summary { display: flex; flex-wrap: wrap; gap: 7px; }
 .trend-state { display: inline-flex; align-items: center; gap: var(--space-1); border-radius: var(--radius-pill); padding: var(--space-1) 7px; border: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 10px; letter-spacing: .03em; }
 .trend-state b { color: var(--color-text-strong); }
