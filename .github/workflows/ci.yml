@@ -37,6 +37,8 @@ jobs:
         run: node scripts/build-trend-signals.mjs
       - name: Validate trend-signal semantics
         run: node scripts/validate-trend-signals.mjs
+      - name: Test aggregate research trend maturity gate
+        run: node --test scripts/research-trend.node-test.mjs
       - name: Rebuild deterministic research queue contract
         env:
           APPBRAIN_DAILY_CREDIT_CAP: '0'
