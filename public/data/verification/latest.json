@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T09:43:11.607Z",
-  "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
+  "generatedAt": "2026-09-29T21:54:47.047Z",
+  "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
   "radarDate": "2026-09-29",
   "statement": "Verification Queue routes explicit unresolved Radar unknowns to admissible evidence. It does not create facts, predict success, or mark an unknown resolved without evidence.",
   "method": {
@@ -67,8 +67,8 @@
         "monetization_placement"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:09.977Z"
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.487Z"
       }
     },
     {
@@ -101,16 +101,84 @@
         "meta_progression"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.165Z"
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.760Z"
       }
     },
     {
       "sessionOrder": 3,
+      "sessionId": "d7b6b2d3396b26f15799ac5d",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
+      "queueRank": 3,
+      "researchPriority": 67,
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "automationState": "ready_for_human_evidence",
+      "impact": "critical",
+      "actionLabel": "Capture one gameplay session",
+      "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
+      "taskCount": 3,
+      "taskIds": [
+        "a2680102e6d8f0a3e00ea58d",
+        "6ed92a47035bdc4c9d135d77",
+        "74968d138fd784f5c978ae03"
+      ],
+      "unknowns": [
+        "Core mechanic has not been gameplay-verified.",
+        "Meta progression and retention systems are only partially observable from the listing.",
+        "Monetization placement and frequency are unknown until gameplay evidence is added."
+      ],
+      "categories": [
+        "gameplay_mechanic",
+        "meta_progression",
+        "monetization_placement"
+      ],
+      "source": {
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.981Z"
+      }
+    },
+    {
+      "sessionOrder": 4,
+      "sessionId": "3a7f6691d874ccdd06a57902",
+      "appId": "6742809194",
+      "name": "Warline: Sniper Strike",
+      "queueRank": 4,
+      "researchPriority": 64,
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "automationState": "ready_for_human_evidence",
+      "impact": "critical",
+      "actionLabel": "Capture one gameplay session",
+      "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
+      "taskCount": 3,
+      "taskIds": [
+        "613716b285a7f8d40da5d495",
+        "cab8496af893183670780407",
+        "ee1fa38689058bf7fc995cbd"
+      ],
+      "unknowns": [
+        "Core mechanic has not been gameplay-verified.",
+        "Meta progression and retention systems are only partially observable from the listing.",
+        "Monetization placement and frequency are unknown until gameplay evidence is added."
+      ],
+      "categories": [
+        "gameplay_mechanic",
+        "meta_progression",
+        "monetization_placement"
+      ],
+      "source": {
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.187Z"
+      }
+    },
+    {
+      "sessionOrder": 5,
       "sessionId": "60f2b3ae35b05df28d153b48",
       "appId": "6761760135",
       "name": "Meowdoku!",
-      "queueRank": 3,
+      "queueRank": 5,
       "researchPriority": 61,
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
@@ -135,16 +203,16 @@
         "meta_progression"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.348Z"
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.374Z"
       }
     },
     {
-      "sessionOrder": 4,
+      "sessionOrder": 6,
       "sessionId": "499a756a0718a91049643fed",
       "appId": "6752672568",
       "name": "Block Out! - Color Sort Puzzle",
-      "queueRank": 4,
+      "queueRank": 6,
       "researchPriority": 61,
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
@@ -169,16 +237,16 @@
         "meta_progression"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.527Z"
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.507Z"
       }
     },
     {
-      "sessionOrder": 5,
+      "sessionOrder": 7,
       "sessionId": "ea059d0454b4206bc64c47d2",
       "appId": "6793924927",
       "name": "Rotate Rings",
-      "queueRank": 5,
+      "queueRank": 7,
       "researchPriority": 61,
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
@@ -203,85 +271,17 @@
         "monetization_placement"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.844Z"
-      }
-    },
-    {
-      "sessionOrder": 6,
-      "sessionId": "5198a1fe31aa7054c95ca1bc",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
-      "queueRank": 6,
-      "researchPriority": 60,
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "automationState": "ready_for_human_evidence",
-      "impact": "critical",
-      "actionLabel": "Capture one gameplay session",
-      "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
-      "taskCount": 3,
-      "taskIds": [
-        "cc7f6c40ed6e68e742ec426d",
-        "1aca86eb56d158e1c0953645",
-        "f42004c23cab8cb2cdacfb5f"
-      ],
-      "unknowns": [
-        "Core mechanic has not been gameplay-verified.",
-        "Monetization placement and frequency are unknown until gameplay evidence is added.",
-        "Meta progression and retention systems are only partially observable from the listing."
-      ],
-      "categories": [
-        "gameplay_mechanic",
-        "monetization_placement",
-        "meta_progression"
-      ],
-      "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.007Z"
-      }
-    },
-    {
-      "sessionOrder": 7,
-      "sessionId": "a4a8ea3251b63d2ee04a3c0b",
-      "appId": "1546690510",
-      "name": "NoomiClone",
-      "queueRank": 7,
-      "researchPriority": 60,
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "automationState": "ready_for_human_evidence",
-      "impact": "critical",
-      "actionLabel": "Capture one gameplay session",
-      "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
-      "taskCount": 3,
-      "taskIds": [
-        "6fab2ff7224e4c05fa78b05c",
-        "72b33ae6a32c0440f644d7bb",
-        "c2bc90038351bcc087ac7e6c"
-      ],
-      "unknowns": [
-        "Core mechanic has not been gameplay-verified.",
-        "Monetization placement and frequency are unknown until gameplay evidence is added.",
-        "Meta progression and retention systems are only partially observable from the listing."
-      ],
-      "categories": [
-        "gameplay_mechanic",
-        "monetization_placement",
-        "meta_progression"
-      ],
-      "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.187Z"
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.689Z"
       }
     },
     {
       "sessionOrder": 8,
-      "sessionId": "cd8eb7c0be8cbe8344d433f7",
-      "appId": "6746743297",
-      "name": "Bus Fever Party!",
+      "sessionId": "1de872eb134193c39a1dd9ee",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 8,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
       "automationState": "ready_for_human_evidence",
@@ -290,9 +290,9 @@
       "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
       "taskCount": 3,
       "taskIds": [
-        "85364be226302be6ab132e83",
-        "ba42a225a9b80a2aa247f414",
-        "bde7ef39eacb21e0fcd3e412"
+        "8e3187c6b6e1d77d6c7069ed",
+        "aeea3612a8f744c74bad4459",
+        "dd3433c9ad072973bf197563"
       ],
       "unknowns": [
         "Core mechanic has not been gameplay-verified.",
@@ -305,8 +305,8 @@
         "meta_progression"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.380Z"
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.821Z"
       }
     }
   ],
@@ -327,8 +327,8 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:09.977Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.487Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -349,19 +349,19 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.165Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.760Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 3,
-      "taskId": "51e93481827e3ec65b9f24a7",
-      "appId": "6761760135",
-      "name": "Meowdoku!",
+      "taskId": "a2680102e6d8f0a3e00ea58d",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 3,
-      "researchPriority": 61,
+      "researchPriority": 67,
       "unknown": "Core mechanic has not been gameplay-verified.",
       "category": "gameplay_mechanic",
       "evidenceType": "deep_verify_video",
@@ -371,19 +371,19 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.348Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.981Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 4,
-      "taskId": "8825fb202ea875297cb34897",
-      "appId": "6752672568",
-      "name": "Block Out! - Color Sort Puzzle",
+      "taskId": "613716b285a7f8d40da5d495",
+      "appId": "6742809194",
+      "name": "Warline: Sniper Strike",
       "queueRank": 4,
-      "researchPriority": 61,
+      "researchPriority": 64,
       "unknown": "Core mechanic has not been gameplay-verified.",
       "category": "gameplay_mechanic",
       "evidenceType": "deep_verify_video",
@@ -393,17 +393,17 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.527Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.187Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 5,
-      "taskId": "7a21795328d416a766bc2ba9",
-      "appId": "6793924927",
-      "name": "Rotate Rings",
+      "taskId": "51e93481827e3ec65b9f24a7",
+      "appId": "6761760135",
+      "name": "Meowdoku!",
       "queueRank": 5,
       "researchPriority": 61,
       "unknown": "Core mechanic has not been gameplay-verified.",
@@ -415,19 +415,19 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.844Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.374Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 6,
-      "taskId": "cc7f6c40ed6e68e742ec426d",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "8825fb202ea875297cb34897",
+      "appId": "6752672568",
+      "name": "Block Out! - Color Sort Puzzle",
       "queueRank": 6,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Core mechanic has not been gameplay-verified.",
       "category": "gameplay_mechanic",
       "evidenceType": "deep_verify_video",
@@ -437,19 +437,19 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.007Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.507Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 7,
-      "taskId": "6fab2ff7224e4c05fa78b05c",
-      "appId": "1546690510",
-      "name": "NoomiClone",
+      "taskId": "7a21795328d416a766bc2ba9",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
       "queueRank": 7,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Core mechanic has not been gameplay-verified.",
       "category": "gameplay_mechanic",
       "evidenceType": "deep_verify_video",
@@ -459,19 +459,19 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.187Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.689Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 8,
-      "taskId": "85364be226302be6ab132e83",
-      "appId": "6746743297",
-      "name": "Bus Fever Party!",
+      "taskId": "8e3187c6b6e1d77d6c7069ed",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 8,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Core mechanic has not been gameplay-verified.",
       "category": "gameplay_mechanic",
       "evidenceType": "deep_verify_video",
@@ -481,8 +481,8 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.380Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.821Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -503,8 +503,8 @@
       "actionLabel": "Verify meta and retention loop",
       "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:09.977Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.487Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -525,8 +525,8 @@
       "actionLabel": "Confirm competitor family",
       "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:09.977Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.487Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -547,8 +547,8 @@
       "actionLabel": "Verify monetization in gameplay",
       "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:09.977Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.487Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -569,8 +569,8 @@
       "actionLabel": "Collect exact rank history",
       "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:09.977Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.487Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -591,8 +591,8 @@
       "actionLabel": "Collect exact rank history",
       "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.165Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.760Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -613,8 +613,8 @@
       "actionLabel": "Confirm competitor family",
       "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.165Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.760Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -635,8 +635,8 @@
       "actionLabel": "Verify monetization in gameplay",
       "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.165Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.760Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -657,260 +657,282 @@
       "actionLabel": "Verify meta and retention loop",
       "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.165Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.760Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 17,
-      "taskId": "091447370868d6555440720d",
-      "appId": "6761760135",
-      "name": "Meowdoku!",
+      "taskId": "61c37bb7091683495769f225",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 3,
-      "researchPriority": 61,
-      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
-      "category": "competitor_relationship",
-      "evidenceType": "competitor_map",
-      "evidenceMode": "human_confirmed_relationships",
+      "researchPriority": 67,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
       "impact": "high",
-      "automationState": "ready_for_human_review",
-      "actionLabel": "Confirm competitor family",
-      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.348Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.981Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 18,
-      "taskId": "449062bedd6fa6d351c17042",
-      "appId": "6761760135",
-      "name": "Meowdoku!",
+      "taskId": "6ed92a47035bdc4c9d135d77",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 3,
-      "researchPriority": 61,
-      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
-      "category": "monetization_placement",
+      "researchPriority": 67,
+      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
+      "category": "meta_progression",
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
       "impact": "high",
       "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify monetization in gameplay",
-      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
+      "actionLabel": "Verify meta and retention loop",
+      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.348Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.981Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 19,
-      "taskId": "9cf8e584333b292229f94c93",
-      "appId": "6761760135",
-      "name": "Meowdoku!",
+      "taskId": "74968d138fd784f5c978ae03",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 3,
-      "researchPriority": 61,
-      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
-      "category": "meta_progression",
+      "researchPriority": 67,
+      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
+      "category": "monetization_placement",
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
       "impact": "high",
       "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify meta and retention loop",
-      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
+      "actionLabel": "Verify monetization in gameplay",
+      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.348Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.981Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 20,
-      "taskId": "bc7003a44ef53d2074445e19",
-      "appId": "6761760135",
-      "name": "Meowdoku!",
+      "taskId": "9d7d26e098dadaed43603c18",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 3,
-      "researchPriority": 61,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
+      "researchPriority": 67,
+      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
+      "category": "competitor_relationship",
+      "evidenceType": "competitor_map",
+      "evidenceMode": "human_confirmed_relationships",
       "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "automationState": "ready_for_human_review",
+      "actionLabel": "Confirm competitor family",
+      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.348Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.981Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 21,
-      "taskId": "024060c9dcc9fdbddd2df164",
-      "appId": "6752672568",
-      "name": "Block Out! - Color Sort Puzzle",
+      "taskId": "8e8180b3b90adfb35107aa63",
+      "appId": "6742809194",
+      "name": "Warline: Sniper Strike",
       "queueRank": 4,
-      "researchPriority": 61,
-      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
-      "category": "monetization_placement",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
+      "researchPriority": 64,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
       "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify monetization in gameplay",
-      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.527Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.187Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 22,
-      "taskId": "31c9c6bf045b9bece81540c6",
-      "appId": "6752672568",
-      "name": "Block Out! - Color Sort Puzzle",
+      "taskId": "cab8496af893183670780407",
+      "appId": "6742809194",
+      "name": "Warline: Sniper Strike",
       "queueRank": 4,
-      "researchPriority": 61,
-      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
-      "category": "competitor_relationship",
-      "evidenceType": "competitor_map",
-      "evidenceMode": "human_confirmed_relationships",
+      "researchPriority": 64,
+      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
+      "category": "meta_progression",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
       "impact": "high",
-      "automationState": "ready_for_human_review",
-      "actionLabel": "Confirm competitor family",
-      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify meta and retention loop",
+      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.527Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.187Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 23,
-      "taskId": "e07e590aa40b9e4b108643fb",
-      "appId": "6752672568",
-      "name": "Block Out! - Color Sort Puzzle",
+      "taskId": "e4e9297f9e805c9838dd2081",
+      "appId": "6742809194",
+      "name": "Warline: Sniper Strike",
       "queueRank": 4,
-      "researchPriority": 61,
-      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
-      "category": "meta_progression",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
+      "researchPriority": 64,
+      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
+      "category": "competitor_relationship",
+      "evidenceType": "competitor_map",
+      "evidenceMode": "human_confirmed_relationships",
       "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify meta and retention loop",
-      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
+      "automationState": "ready_for_human_review",
+      "actionLabel": "Confirm competitor family",
+      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.527Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.187Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 24,
-      "taskId": "f21dd2442bde4420645938c5",
-      "appId": "6752672568",
-      "name": "Block Out! - Color Sort Puzzle",
+      "taskId": "ee1fa38689058bf7fc995cbd",
+      "appId": "6742809194",
+      "name": "Warline: Sniper Strike",
       "queueRank": 4,
-      "researchPriority": 61,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
+      "researchPriority": 64,
+      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
+      "category": "monetization_placement",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
       "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify monetization in gameplay",
+      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.527Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.187Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 25,
-      "taskId": "7e5374b6ebfa176cb78ea3c4",
-      "appId": "6793924927",
-      "name": "Rotate Rings",
+      "taskId": "091447370868d6555440720d",
+      "appId": "6761760135",
+      "name": "Meowdoku!",
       "queueRank": 5,
       "researchPriority": 61,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
+      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
+      "category": "competitor_relationship",
+      "evidenceType": "competitor_map",
+      "evidenceMode": "human_confirmed_relationships",
       "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "automationState": "ready_for_human_review",
+      "actionLabel": "Confirm competitor family",
+      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.844Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.374Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 26,
-      "taskId": "902f048dd19ba484b96947f8",
-      "appId": "6793924927",
-      "name": "Rotate Rings",
+      "taskId": "449062bedd6fa6d351c17042",
+      "appId": "6761760135",
+      "name": "Meowdoku!",
       "queueRank": 5,
       "researchPriority": 61,
-      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
-      "category": "meta_progression",
+      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
+      "category": "monetization_placement",
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
       "impact": "high",
       "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify meta and retention loop",
-      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
+      "actionLabel": "Verify monetization in gameplay",
+      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.844Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.374Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 27,
-      "taskId": "d0e3a07d44dea093f88d23c5",
-      "appId": "6793924927",
-      "name": "Rotate Rings",
+      "taskId": "9cf8e584333b292229f94c93",
+      "appId": "6761760135",
+      "name": "Meowdoku!",
       "queueRank": 5,
       "researchPriority": 61,
-      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
-      "category": "competitor_relationship",
-      "evidenceType": "competitor_map",
-      "evidenceMode": "human_confirmed_relationships",
+      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
+      "category": "meta_progression",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
       "impact": "high",
-      "automationState": "ready_for_human_review",
-      "actionLabel": "Confirm competitor family",
-      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify meta and retention loop",
+      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.844Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.374Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 28,
-      "taskId": "db2ca7ae4deb08770f202aab",
-      "appId": "6793924927",
-      "name": "Rotate Rings",
+      "taskId": "bc7003a44ef53d2074445e19",
+      "appId": "6761760135",
+      "name": "Meowdoku!",
       "queueRank": 5,
+      "researchPriority": 61,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
+      "impact": "high",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "source": {
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.374Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 29,
+      "taskId": "024060c9dcc9fdbddd2df164",
+      "appId": "6752672568",
+      "name": "Block Out! - Color Sort Puzzle",
+      "queueRank": 6,
       "researchPriority": 61,
       "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
       "category": "monetization_placement",
@@ -921,129 +943,107 @@
       "actionLabel": "Verify monetization in gameplay",
       "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.844Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 29,
-      "taskId": "1aca86eb56d158e1c0953645",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
-      "queueRank": 6,
-      "researchPriority": 60,
-      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
-      "category": "monetization_placement",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify monetization in gameplay",
-      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
-      "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.007Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.507Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 30,
-      "taskId": "51218cb34e53f6dfb871c165",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "31c9c6bf045b9bece81540c6",
+      "appId": "6752672568",
+      "name": "Block Out! - Color Sort Puzzle",
       "queueRank": 6,
-      "researchPriority": 60,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
+      "researchPriority": 61,
+      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
+      "category": "competitor_relationship",
+      "evidenceType": "competitor_map",
+      "evidenceMode": "human_confirmed_relationships",
       "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "automationState": "ready_for_human_review",
+      "actionLabel": "Confirm competitor family",
+      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.007Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.507Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 31,
-      "taskId": "d348501b4d78da35f7d48b65",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "e07e590aa40b9e4b108643fb",
+      "appId": "6752672568",
+      "name": "Block Out! - Color Sort Puzzle",
       "queueRank": 6,
-      "researchPriority": 60,
-      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
-      "category": "competitor_relationship",
-      "evidenceType": "competitor_map",
-      "evidenceMode": "human_confirmed_relationships",
+      "researchPriority": 61,
+      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
+      "category": "meta_progression",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
       "impact": "high",
-      "automationState": "ready_for_human_review",
-      "actionLabel": "Confirm competitor family",
-      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify meta and retention loop",
+      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.007Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.507Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 32,
-      "taskId": "f42004c23cab8cb2cdacfb5f",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "f21dd2442bde4420645938c5",
+      "appId": "6752672568",
+      "name": "Block Out! - Color Sort Puzzle",
       "queueRank": 6,
-      "researchPriority": 60,
-      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
-      "category": "meta_progression",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
+      "researchPriority": 61,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
       "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify meta and retention loop",
-      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.007Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.507Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 33,
-      "taskId": "72b33ae6a32c0440f644d7bb",
-      "appId": "1546690510",
-      "name": "NoomiClone",
+      "taskId": "7e5374b6ebfa176cb78ea3c4",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
       "queueRank": 7,
-      "researchPriority": 60,
-      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
-      "category": "monetization_placement",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
+      "researchPriority": 61,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
       "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify monetization in gameplay",
-      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.187Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.689Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 34,
-      "taskId": "c2bc90038351bcc087ac7e6c",
-      "appId": "1546690510",
-      "name": "NoomiClone",
+      "taskId": "902f048dd19ba484b96947f8",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
       "queueRank": 7,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Meta progression and retention systems are only partially observable from the listing.",
       "category": "meta_progression",
       "evidenceType": "deep_verify_video",
@@ -1053,19 +1053,19 @@
       "actionLabel": "Verify meta and retention loop",
       "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.187Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.689Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 35,
-      "taskId": "eab467acea002a4d7700d70d",
-      "appId": "1546690510",
-      "name": "NoomiClone",
+      "taskId": "d0e3a07d44dea093f88d23c5",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
       "queueRank": 7,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Competitor family and differentiation room have not been human-confirmed.",
       "category": "competitor_relationship",
       "evidenceType": "competitor_map",
@@ -1075,63 +1075,19 @@
       "actionLabel": "Confirm competitor family",
       "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.187Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.689Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 36,
-      "taskId": "ee1777a64271c8831245396b",
-      "appId": "1546690510",
-      "name": "NoomiClone",
+      "taskId": "db2ca7ae4deb08770f202aab",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
       "queueRank": 7,
-      "researchPriority": 60,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
-      "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
-      "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.187Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 37,
-      "taskId": "1436053a1dad1a4875dcbea0",
-      "appId": "6746743297",
-      "name": "Bus Fever Party!",
-      "queueRank": 8,
-      "researchPriority": 60,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
-      "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
-      "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.380Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 38,
-      "taskId": "ba42a225a9b80a2aa247f414",
-      "appId": "6746743297",
-      "name": "Bus Fever Party!",
-      "queueRank": 8,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
       "category": "monetization_placement",
       "evidenceType": "deep_verify_video",
@@ -1141,41 +1097,19 @@
       "actionLabel": "Verify monetization in gameplay",
       "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.380Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.689Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
-      "verificationOrder": 39,
-      "taskId": "bde7ef39eacb21e0fcd3e412",
-      "appId": "6746743297",
-      "name": "Bus Fever Party!",
+      "verificationOrder": 37,
+      "taskId": "10f9e1fba5823f7927b2aae5",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 8,
-      "researchPriority": 60,
-      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
-      "category": "meta_progression",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify meta and retention loop",
-      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
-      "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.380Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 40,
-      "taskId": "be3ab7f8e78b910825bb46c0",
-      "appId": "6746743297",
-      "name": "Bus Fever Party!",
-      "queueRank": 8,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Competitor family and differentiation room have not been human-confirmed.",
       "category": "competitor_relationship",
       "evidenceType": "competitor_map",
@@ -1185,8 +1119,74 @@
       "actionLabel": "Confirm competitor family",
       "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.380Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.821Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 38,
+      "taskId": "4614ad9a92a19872212a3746",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
+      "queueRank": 8,
+      "researchPriority": 61,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
+      "impact": "high",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "source": {
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.821Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 39,
+      "taskId": "aeea3612a8f744c74bad4459",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
+      "queueRank": 8,
+      "researchPriority": 61,
+      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
+      "category": "monetization_placement",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "impact": "high",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify monetization in gameplay",
+      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
+      "source": {
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.821Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 40,
+      "taskId": "dd3433c9ad072973bf197563",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
+      "queueRank": 8,
+      "researchPriority": 61,
+      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
+      "category": "meta_progression",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "impact": "high",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify meta and retention loop",
+      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
+      "source": {
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.821Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -1207,8 +1207,8 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:09.977Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.487Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -1229,19 +1229,19 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.165Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.760Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 43,
-      "taskId": "d0272529fadfc247cbef2167",
-      "appId": "6761760135",
-      "name": "Meowdoku!",
+      "taskId": "d6f9daa8b0cceb2d9304f7c3",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 3,
-      "researchPriority": 61,
+      "researchPriority": 67,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
       "category": "performance_estimate",
       "evidenceType": "third_party_estimate",
@@ -1251,19 +1251,19 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.348Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:45.981Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 44,
-      "taskId": "75ebcbc2dd980124239cc3a5",
-      "appId": "6752672568",
-      "name": "Block Out! - Color Sort Puzzle",
+      "taskId": "38b63ab5d391fa08211b4748",
+      "appId": "6742809194",
+      "name": "Warline: Sniper Strike",
       "queueRank": 4,
-      "researchPriority": 61,
+      "researchPriority": 64,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
       "category": "performance_estimate",
       "evidenceType": "third_party_estimate",
@@ -1273,17 +1273,17 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.527Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.187Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 45,
-      "taskId": "611dad2b89ea74bed8d4a6bb",
-      "appId": "6793924927",
-      "name": "Rotate Rings",
+      "taskId": "d0272529fadfc247cbef2167",
+      "appId": "6761760135",
+      "name": "Meowdoku!",
       "queueRank": 5,
       "researchPriority": 61,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
@@ -1295,19 +1295,19 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:10.844Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.374Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 46,
-      "taskId": "a722d7ef2cb3fa0237de5395",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "75ebcbc2dd980124239cc3a5",
+      "appId": "6752672568",
+      "name": "Block Out! - Color Sort Puzzle",
       "queueRank": 6,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
       "category": "performance_estimate",
       "evidenceType": "third_party_estimate",
@@ -1317,19 +1317,19 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.007Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.507Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 47,
-      "taskId": "2bac669cfd4a1021ef9ecab7",
-      "appId": "1546690510",
-      "name": "NoomiClone",
+      "taskId": "611dad2b89ea74bed8d4a6bb",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
       "queueRank": 7,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
       "category": "performance_estimate",
       "evidenceType": "third_party_estimate",
@@ -1339,19 +1339,19 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.187Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.689Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 48,
-      "taskId": "e3be1daa12ea3e3d63807d89",
-      "appId": "6746743297",
-      "name": "Bus Fever Party!",
+      "taskId": "3f4c204a8c6f071406230646",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 8,
-      "researchPriority": 60,
+      "researchPriority": 61,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
       "category": "performance_estimate",
       "evidenceType": "third_party_estimate",
@@ -1361,8 +1361,8 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-29T09:43:11.391Z",
-        "analysisObservedAt": "2026-09-29T09:43:11.380Z",
+        "researchGeneratedAt": "2026-09-29T21:54:46.831Z",
+        "analysisObservedAt": "2026-09-29T21:54:46.821Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }

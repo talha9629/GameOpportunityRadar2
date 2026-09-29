@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T11:23:22.341Z",
+  "generatedAt": "2026-09-29T21:55:03.310Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -14,7 +14,7 @@
         "4/4 healthy Games markets",
         "0 failed market(s)",
         "0 overall-chart fallback market(s)",
-        "1.7h snapshot age"
+        "0.0h snapshot age"
       ],
       "action": null
     },
@@ -26,7 +26,7 @@
         "12 candidates",
         "Apple lookup complete",
         "live evidence complete (8/8)",
-        "1.7h queue age"
+        "0.0h queue age"
       ],
       "action": null
     },
@@ -39,7 +39,7 @@
         "0 omitted task(s)",
         "8 capture session(s) cover 24 gameplay evidence task(s)",
         "derived from current research queue",
-        "1.7h verification age"
+        "0.0h verification age"
       ],
       "action": null
     },
@@ -49,8 +49,8 @@
       "state": "healthy",
       "facts": [
         "Tavily status complete",
-        "6/8 capture session(s) have public source suggestion(s)",
-        "18 suggested YouTube source(s)",
+        "7/8 capture session(s) have public source suggestion(s)",
+        "21 suggested YouTube source(s)",
         "8/8 provider request cap used",
         "8 search queries reported by provider",
         "derived from current verification queue",
@@ -74,8 +74,8 @@
       "state": "healthy",
       "facts": [
         "status complete",
-        "20 exact-date change(s)",
-        "20 attention item(s)"
+        "19 exact-date change(s)",
+        "19 attention item(s)"
       ],
       "action": null
     },
@@ -88,7 +88,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "1 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "0.0h policy-index age",
+        "10.5h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -112,7 +112,7 @@
         "provider status unconfigured",
         "0/50 AppBrain popularity position(s) available",
         "exact requested depth not currently available",
-        "24.3h provider observation age",
+        "34.8h provider observation age",
         "Positions are AppBrain provider-global popularity ordering, not official Google Play storefront ranks.",
         "Download values, when present, are third-party estimates and are never inferred from Apple ranks."
       ],
@@ -127,8 +127,8 @@
         "4/4 healthy Games market(s) represented",
         "chart depth matches Top 100",
         "derived from current Apple Radar snapshot",
-        "DECLINING 97 · EMERGING 1 · INSUFFICIENT_DATA 192 · RISING 110",
-        "1.7h trend-signal age",
+        "INSUFFICIENT_DATA 400",
+        "0.0h trend-signal age",
         "Visibility is a bounded chart-position heuristic; it is not downloads, revenue, market share, probability, or a build recommendation."
       ],
       "action": null
@@ -165,7 +165,7 @@
     "verificationDerivedFromCurrentQueue": true,
     "gameplayDiscoveryConfigured": true,
     "gameplayDiscoveryProvider": "tavily",
-    "gameplayDiscoveryCandidateCount": 18,
+    "gameplayDiscoveryCandidateCount": 21,
     "gameplayDiscoveryRequestsUsed": 8,
     "gameplayDiscoverySearchQueriesUsed": 8,
     "gameplayDiscoveryDerivedFromCurrentVerification": true,
@@ -180,7 +180,7 @@
     "googlePlayRadarEntryCount": 0,
     "googlePlayRadarRequestedDepth": 50,
     "googlePlayRadarExactDepth": false,
-    "googlePlayRadarAgeHours": 24.3021525,
+    "googlePlayRadarAgeHours": 34.830198333333335,
     "trendSignalCount": 400,
     "trendExpectedSignalCount": 400,
     "trendHealthyMarketCount": 4,
@@ -188,10 +188,7 @@
     "trendDerivedFromCurrentRadar": true,
     "trendChartDepthMatches": true,
     "trendStateCounts": {
-      "INSUFFICIENT_DATA": 192,
-      "RISING": 110,
-      "DECLINING": 97,
-      "EMERGING": 1
+      "INSUFFICIENT_DATA": 400
     }
   }
 }

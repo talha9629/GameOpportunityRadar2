@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T09:43:26.802Z",
+  "generatedAt": "2026-09-29T21:55:03.209Z",
   "currentDate": "2026-09-29",
   "comparisonDate": "2026-09-28",
   "status": "complete",
   "statement": "This digest reports exact observed changes between dated research queues. It does not predict success, downloads, revenue, or causal demand.",
   "summary": {
     "currentCandidateCount": 12,
-    "changeCount": 20,
-    "attentionCount": 20,
-    "newCandidates": 6,
-    "droppedCandidates": 6,
-    "marketChanges": 0,
-    "maturityEvents": 6
+    "changeCount": 19,
+    "attentionCount": 19,
+    "newCandidates": 4,
+    "droppedCandidates": 4,
+    "marketChanges": 1,
+    "maturityEvents": 8
   },
   "limitations": [
     "No previous exact-date queue means history_pending, not zero change.",
@@ -31,12 +31,12 @@
       "currentQueueRank": 1,
       "significance": "attention",
       "current": 71,
-      "currentBestRank": 2,
+      "currentBestRank": 1,
       "currentMarketCount": 3,
       "evidence": [
         "Not present in the exact 2026-09-28 queue.",
         "Current deterministic research priority 71.",
-        "Current best Games rank #2 across 3 market(s)."
+        "Current best Games rank #1 across 3 market(s)."
       ]
     },
     {
@@ -79,12 +79,66 @@
       "previousQueueRank": 12,
       "currentQueueRank": 2,
       "significance": "attention",
-      "current": 33,
+      "current": 38,
       "currentBestRank": 9,
       "evidence": [
         "Exact 3-day comparison is now available.",
-        "Best upward delta: 33.",
+        "Best upward delta: 38.",
         "Current best Games rank #9."
+      ]
+    },
+    {
+      "type": "CROSS_MARKET_EXPANDED",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c6/72/20/c67220f2-b088-fcf4-7f2d-89df4ed8adbd/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/100x100bb.png",
+      "publisher": "Calico Studio Inc.",
+      "previousQueueRank": 9,
+      "currentQueueRank": 3,
+      "significance": "attention",
+      "previous": 3,
+      "current": 4,
+      "delta": 1,
+      "previousBestRank": 8,
+      "currentBestRank": 9,
+      "evidence": [
+        "Healthy Games-chart market presence changed 3 → 4.",
+        "Best rank is now #9."
+      ]
+    },
+    {
+      "type": "EXACT_3D_HISTORY_MATURED",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c6/72/20/c67220f2-b088-fcf4-7f2d-89df4ed8adbd/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/100x100bb.png",
+      "publisher": "Calico Studio Inc.",
+      "previousQueueRank": 9,
+      "currentQueueRank": 3,
+      "significance": "attention",
+      "current": 3,
+      "currentBestRank": 9,
+      "evidence": [
+        "Exact 3-day comparison is now available.",
+        "Best upward delta: 3.",
+        "Current best Games rank #9."
+      ]
+    },
+    {
+      "type": "NEW_TO_RESEARCH_QUEUE",
+      "appId": "6742809194",
+      "name": "Warline: Sniper Strike",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3f/91/e0/3f91e0f3-ed96-95c6-6231-e53367abe96f/AppIcon-Global-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
+      "publisher": "Powerfantasy",
+      "previousQueueRank": null,
+      "currentQueueRank": 4,
+      "significance": "attention",
+      "current": 64,
+      "currentBestRank": 20,
+      "currentMarketCount": 4,
+      "evidence": [
+        "Not present in the exact 2026-09-28 queue.",
+        "Current deterministic research priority 64.",
+        "Current best Games rank #20 across 4 market(s)."
       ]
     },
     {
@@ -94,7 +148,7 @@
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bb/92/ba/bb92ba02-bec3-41fb-c5e9-b6875bcb5d1e/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
       "publisher": "Oakever Games",
       "previousQueueRank": 3,
-      "currentQueueRank": 3,
+      "currentQueueRank": 5,
       "significance": "attention",
       "current": 0,
       "currentBestRank": 1,
@@ -111,7 +165,7 @@
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1d/d0/bc/1dd0bcac-6a6c-52bd-9b5d-e2d6a41b59a2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
       "publisher": "Grand Games A.Ş.",
       "previousQueueRank": 4,
-      "currentQueueRank": 4,
+      "currentQueueRank": 6,
       "significance": "attention",
       "current": 0,
       "currentBestRank": 2,
@@ -128,14 +182,32 @@
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/51/53/61/515361e3-0844-74cc-a6fe-8a5c822bf3bd/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
       "publisher": "Nebula Studio",
       "previousQueueRank": 2,
-      "currentQueueRank": 5,
+      "currentQueueRank": 7,
       "significance": "attention",
       "current": 9,
-      "currentBestRank": 2,
+      "currentBestRank": 3,
       "evidence": [
         "Exact 3-day comparison is now available.",
         "Best upward delta: 9.",
-        "Current best Games rank #2."
+        "Current best Games rank #3."
+      ]
+    },
+    {
+      "type": "NEW_TO_RESEARCH_QUEUE",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7e/99/d2/7e99d217-5a1c-489d-3af1-a53427fb4cb8/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+      "publisher": "GOODROID,Inc.",
+      "previousQueueRank": null,
+      "currentQueueRank": 8,
+      "significance": "attention",
+      "current": 61,
+      "currentBestRank": 3,
+      "currentMarketCount": 4,
+      "evidence": [
+        "Not present in the exact 2026-09-28 queue.",
+        "Current deterministic research priority 61.",
+        "Current best Games rank #3 across 4 market(s)."
       ]
     },
     {
@@ -145,15 +217,32 @@
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/19/40/db/1940db5a-3f81-fabc-1fad-48a5df75e5c5/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
       "publisher": "Flow Games Bilisim Yazilim ve Pazarlama Anonim Sirketi",
       "previousQueueRank": null,
-      "currentQueueRank": 6,
+      "currentQueueRank": 9,
       "significance": "attention",
       "current": 60,
-      "currentBestRank": 5,
+      "currentBestRank": 4,
       "currentMarketCount": 4,
       "evidence": [
         "Not present in the exact 2026-09-28 queue.",
         "Current deterministic research priority 60.",
-        "Current best Games rank #5 across 4 market(s)."
+        "Current best Games rank #4 across 4 market(s)."
+      ]
+    },
+    {
+      "type": "EXACT_3D_HISTORY_MATURED",
+      "appId": "6468921495",
+      "name": "Vita Mahjong",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a0/ef/57/a0ef5705-570a-f61e-cfbd-5913e40e6c9b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+      "publisher": "Vita Studio",
+      "previousQueueRank": 6,
+      "currentQueueRank": 10,
+      "significance": "attention",
+      "current": 2,
+      "currentBestRank": 6,
+      "evidence": [
+        "Exact 3-day comparison is now available.",
+        "Best upward delta: 2.",
+        "Current best Games rank #6."
       ]
     },
     {
@@ -163,13 +252,13 @@
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/fd/7d/01/fd7d0197-f3fa-2836-1e90-f74acedaa746/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
       "publisher": "Matthew Jones",
       "previousQueueRank": 1,
-      "currentQueueRank": 7,
+      "currentQueueRank": 11,
       "significance": "attention",
       "previous": 70,
       "current": 60,
       "delta": -10,
       "previousBestRank": 5,
-      "currentBestRank": 8,
+      "currentBestRank": 6,
       "previousMarketCount": 4,
       "currentMarketCount": 4,
       "reasonCodesAdded": [
@@ -192,103 +281,31 @@
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/fd/7d/01/fd7d0197-f3fa-2836-1e90-f74acedaa746/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
       "publisher": "Matthew Jones",
       "previousQueueRank": 1,
-      "currentQueueRank": 7,
+      "currentQueueRank": 11,
       "significance": "attention",
       "current": 70,
-      "currentBestRank": 8,
+      "currentBestRank": 6,
       "evidence": [
         "Exact 3-day comparison is now available.",
         "Best upward delta: 70.",
-        "Current best Games rank #8."
+        "Current best Games rank #6."
       ]
     },
     {
       "type": "EXACT_3D_HISTORY_MATURED",
-      "appId": "6746743297",
-      "name": "Bus Fever Party!",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a0/0e/f2/a00ef223-a563-5329-c4ee-ab31e25f5e86/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-      "publisher": "Lumi Games",
-      "previousQueueRank": 11,
-      "currentQueueRank": 8,
-      "significance": "attention",
-      "current": 8,
-      "currentBestRank": 9,
-      "evidence": [
-        "Exact 3-day comparison is now available.",
-        "Best upward delta: 8.",
-        "Current best Games rank #9."
-      ]
-    },
-    {
-      "type": "NEW_TO_RESEARCH_QUEUE",
-      "appId": "6742809194",
-      "name": "Warline: Sniper Strike",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3f/91/e0/3f91e0f3-ed96-95c6-6231-e53367abe96f/AppIcon-Global-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
-      "publisher": "Powerfantasy",
-      "previousQueueRank": null,
-      "currentQueueRank": 9,
-      "significance": "attention",
-      "current": 59,
-      "currentBestRank": 16,
-      "currentMarketCount": 4,
-      "evidence": [
-        "Not present in the exact 2026-09-28 queue.",
-        "Current deterministic research priority 59.",
-        "Current best Games rank #16 across 4 market(s)."
-      ]
-    },
-    {
-      "type": "NEW_TO_RESEARCH_QUEUE",
-      "appId": "6780891673",
-      "name": "Royal Smash! - Physics Puzzle",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/67/07/11/670711b5-7ac8-bd8a-f72e-b05b095e1c18/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-      "publisher": "Cypher Games",
-      "previousQueueRank": null,
-      "currentQueueRank": 10,
-      "significance": "attention",
-      "current": 56,
-      "currentBestRank": 23,
-      "currentMarketCount": 4,
-      "evidence": [
-        "Not present in the exact 2026-09-28 queue.",
-        "Current deterministic research priority 56.",
-        "Current best Games rank #23 across 4 market(s)."
-      ]
-    },
-    {
-      "type": "NEW_TO_RESEARCH_QUEUE",
-      "appId": "6756185760",
-      "name": "Search It - Hidden Objects",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6c/6b/55/6c6b5524-1667-9d5a-aef5-a4ba2e0c7c84/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-      "publisher": "LEAP BILISIM TEKNOLOJILERI VE YAZILIM TICARET ANONIM SIRKETI",
-      "previousQueueRank": null,
-      "currentQueueRank": 11,
-      "significance": "attention",
-      "current": 56,
-      "currentBestRank": 67,
-      "currentMarketCount": 4,
-      "evidence": [
-        "Not present in the exact 2026-09-28 queue.",
-        "Current deterministic research priority 56.",
-        "Current best Games rank #67 across 4 market(s)."
-      ]
-    },
-    {
-      "type": "NEW_TO_RESEARCH_QUEUE",
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7e/99/d2/7e99d217-5a1c-489d-3af1-a53427fb4cb8/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-      "publisher": "GOODROID,Inc.",
-      "previousQueueRank": null,
+      "appId": "6499209744",
+      "name": "Magic Sort!",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/23/7b/12/237b1251-16fe-3a52-a9dc-022d9253266b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+      "publisher": "Grand Games A.Ş.",
+      "previousQueueRank": 8,
       "currentQueueRank": 12,
       "significance": "attention",
-      "current": 55,
-      "currentBestRank": 4,
-      "currentMarketCount": 4,
+      "current": 3,
+      "currentBestRank": 7,
       "evidence": [
-        "Not present in the exact 2026-09-28 queue.",
-        "Current deterministic research priority 55.",
-        "Current best Games rank #4 across 4 market(s)."
+        "Exact 3-day comparison is now available.",
+        "Best upward delta: 3.",
+        "Current best Games rank #7."
       ]
     },
     {
@@ -305,24 +322,6 @@
       "previousMarketCount": 4,
       "evidence": [
         "Present in the exact 2026-09-28 queue at queue #5, priority 61, best rank #3.",
-        "Absent from the current deterministic top-12 research queue.",
-        "This records only a triage cutoff change; no product-performance conclusion is made."
-      ]
-    },
-    {
-      "type": "DROPPED_FROM_RESEARCH_QUEUE",
-      "appId": "6468921495",
-      "name": "Vita Mahjong",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a0/ef/57/a0ef5705-570a-f61e-cfbd-5913e40e6c9b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-      "publisher": "Vita Studio",
-      "previousQueueRank": 6,
-      "currentQueueRank": null,
-      "significance": "attention",
-      "previous": 60,
-      "previousBestRank": 4,
-      "previousMarketCount": 4,
-      "evidence": [
-        "Present in the exact 2026-09-28 queue at queue #6, priority 60, best rank #4.",
         "Absent from the current deterministic top-12 research queue.",
         "This records only a triage cutoff change; no product-performance conclusion is made."
       ]
@@ -347,42 +346,6 @@
     },
     {
       "type": "DROPPED_FROM_RESEARCH_QUEUE",
-      "appId": "6499209744",
-      "name": "Magic Sort!",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/23/7b/12/237b1251-16fe-3a52-a9dc-022d9253266b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-      "publisher": "Grand Games A.Ş.",
-      "previousQueueRank": 8,
-      "currentQueueRank": null,
-      "significance": "attention",
-      "previous": 60,
-      "previousBestRank": 7,
-      "previousMarketCount": 4,
-      "evidence": [
-        "Present in the exact 2026-09-28 queue at queue #8, priority 60, best rank #7.",
-        "Absent from the current deterministic top-12 research queue.",
-        "This records only a triage cutoff change; no product-performance conclusion is made."
-      ]
-    },
-    {
-      "type": "DROPPED_FROM_RESEARCH_QUEUE",
-      "appId": "6804464432",
-      "name": "Songless: Guess the Song!",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bd/23/70/bd237087-2f11-74e6-b044-1160e81d8c6b/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/100x100bb.png",
-      "publisher": "Calico Studio Inc.",
-      "previousQueueRank": 9,
-      "currentQueueRank": null,
-      "significance": "attention",
-      "previous": 60,
-      "previousBestRank": 8,
-      "previousMarketCount": 3,
-      "evidence": [
-        "Present in the exact 2026-09-28 queue at queue #9, priority 60, best rank #8.",
-        "Absent from the current deterministic top-12 research queue.",
-        "This records only a triage cutoff change; no product-performance conclusion is made."
-      ]
-    },
-    {
-      "type": "DROPPED_FROM_RESEARCH_QUEUE",
       "appId": "6756482832",
       "name": "Brain Puzzle 3: Crazy Mind",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ed/f4/df/edf4df66-c8f5-e488-bc0d-7677aa8ea52d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
@@ -398,6 +361,24 @@
         "Absent from the current deterministic top-12 research queue.",
         "This records only a triage cutoff change; no product-performance conclusion is made."
       ]
+    },
+    {
+      "type": "DROPPED_FROM_RESEARCH_QUEUE",
+      "appId": "6746743297",
+      "name": "Bus Fever Party!",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a0/0e/f2/a00ef223-a563-5329-c4ee-ab31e25f5e86/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+      "publisher": "Lumi Games",
+      "previousQueueRank": 11,
+      "currentQueueRank": null,
+      "significance": "attention",
+      "previous": 60,
+      "previousBestRank": 10,
+      "previousMarketCount": 4,
+      "evidence": [
+        "Present in the exact 2026-09-28 queue at queue #11, priority 60, best rank #10.",
+        "Absent from the current deterministic top-12 research queue.",
+        "This records only a triage cutoff change; no product-performance conclusion is made."
+      ]
     }
   ],
   "states": [
@@ -409,7 +390,7 @@
       "queueRank": 1,
       "researchPriority": 71,
       "state": "RISING_EXACT_3D",
-      "evidence": "Best exact 3d rank improvement is +13."
+      "evidence": "Best exact 3d rank improvement is +10."
     },
     {
       "appId": "6761757565",
@@ -419,14 +400,34 @@
       "queueRank": 2,
       "researchPriority": 70,
       "state": "RISING_EXACT_3D",
-      "evidence": "Best exact 3d rank improvement is +33."
+      "evidence": "Best exact 3d rank improvement is +38."
+    },
+    {
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c6/72/20/c67220f2-b088-fcf4-7f2d-89df4ed8adbd/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/100x100bb.png",
+      "publisher": "Calico Studio Inc.",
+      "queueRank": 3,
+      "researchPriority": 67,
+      "state": "RISING_EXACT_3D",
+      "evidence": "Best exact 3d rank improvement is +3."
+    },
+    {
+      "appId": "6742809194",
+      "name": "Warline: Sniper Strike",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3f/91/e0/3f91e0f3-ed96-95c6-6231-e53367abe96f/AppIcon-Global-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
+      "publisher": "Powerfantasy",
+      "queueRank": 4,
+      "researchPriority": 64,
+      "state": "RISING_EXACT_3D",
+      "evidence": "Best exact 3d rank improvement is +19."
     },
     {
       "appId": "6761760135",
       "name": "Meowdoku!",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/bb/92/ba/bb92ba02-bec3-41fb-c5e9-b6875bcb5d1e/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
       "publisher": "Oakever Games",
-      "queueRank": 3,
+      "queueRank": 5,
       "researchPriority": 61,
       "state": "FLAT_EXACT_3D",
       "evidence": "Best exact 3d rank change is 0."
@@ -436,7 +437,7 @@
       "name": "Block Out! - Color Sort Puzzle",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1d/d0/bc/1dd0bcac-6a6c-52bd-9b5d-e2d6a41b59a2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
       "publisher": "Grand Games A.Ş.",
-      "queueRank": 4,
+      "queueRank": 6,
       "researchPriority": 61,
       "state": "FLAT_EXACT_3D",
       "evidence": "Best exact 3d rank change is 0."
@@ -446,17 +447,37 @@
       "name": "Rotate Rings",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/51/53/61/515361e3-0844-74cc-a6fe-8a5c822bf3bd/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.png",
       "publisher": "Nebula Studio",
-      "queueRank": 5,
+      "queueRank": 7,
       "researchPriority": 61,
       "state": "RISING_EXACT_3D",
       "evidence": "Best exact 3d rank improvement is +9."
+    },
+    {
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7e/99/d2/7e99d217-5a1c-489d-3af1-a53427fb4cb8/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
+      "publisher": "GOODROID,Inc.",
+      "queueRank": 8,
+      "researchPriority": 61,
+      "state": "RISING_EXACT_3D",
+      "evidence": "Best exact 3d rank improvement is +2."
     },
     {
       "appId": "6748084174",
       "name": "Smash Fest!",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/19/40/db/1940db5a-3f81-fabc-1fad-48a5df75e5c5/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
       "publisher": "Flow Games Bilisim Yazilim ve Pazarlama Anonim Sirketi",
-      "queueRank": 6,
+      "queueRank": 9,
+      "researchPriority": 60,
+      "state": "RISING_EXACT_3D",
+      "evidence": "Best exact 3d rank improvement is +2."
+    },
+    {
+      "appId": "6468921495",
+      "name": "Vita Mahjong",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a0/ef/57/a0ef5705-570a-f61e-cfbd-5913e40e6c9b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+      "publisher": "Vita Studio",
+      "queueRank": 10,
       "researchPriority": 60,
       "state": "RISING_EXACT_3D",
       "evidence": "Best exact 3d rank improvement is +2."
@@ -466,58 +487,18 @@
       "name": "NoomiClone",
       "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/fd/7d/01/fd7d0197-f3fa-2836-1e90-f74acedaa746/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
       "publisher": "Matthew Jones",
-      "queueRank": 7,
+      "queueRank": 11,
       "researchPriority": 60,
       "state": "RISING_EXACT_3D",
       "evidence": "Best exact 3d rank improvement is +70."
     },
     {
-      "appId": "6746743297",
-      "name": "Bus Fever Party!",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a0/0e/f2/a00ef223-a563-5329-c4ee-ab31e25f5e86/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-      "publisher": "Lumi Games",
-      "queueRank": 8,
-      "researchPriority": 60,
-      "state": "RISING_EXACT_3D",
-      "evidence": "Best exact 3d rank improvement is +8."
-    },
-    {
-      "appId": "6742809194",
-      "name": "Warline: Sniper Strike",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/3f/91/e0/3f91e0f3-ed96-95c6-6231-e53367abe96f/AppIcon-Global-0-0-1x_U007epad-0-1-85-220.png/100x100bb.png",
-      "publisher": "Powerfantasy",
-      "queueRank": 9,
-      "researchPriority": 59,
-      "state": "RISING_EXACT_3D",
-      "evidence": "Best exact 3d rank improvement is +11."
-    },
-    {
-      "appId": "6780891673",
-      "name": "Royal Smash! - Physics Puzzle",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/67/07/11/670711b5-7ac8-bd8a-f72e-b05b095e1c18/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-      "publisher": "Cypher Games",
-      "queueRank": 10,
-      "researchPriority": 56,
-      "state": "RISING_EXACT_3D",
-      "evidence": "Best exact 3d rank improvement is +7."
-    },
-    {
-      "appId": "6756185760",
-      "name": "Search It - Hidden Objects",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6c/6b/55/6c6b5524-1667-9d5a-aef5-a4ba2e0c7c84/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
-      "publisher": "LEAP BILISIM TEKNOLOJILERI VE YAZILIM TICARET ANONIM SIRKETI",
-      "queueRank": 11,
-      "researchPriority": 56,
-      "state": "RISING_EXACT_3D",
-      "evidence": "Best exact 3d rank improvement is +21."
-    },
-    {
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
-      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7e/99/d2/7e99d217-5a1c-489d-3af1-a53427fb4cb8/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/100x100bb.png",
-      "publisher": "GOODROID,Inc.",
+      "appId": "6499209744",
+      "name": "Magic Sort!",
+      "iconUrl": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/23/7b/12/237b1251-16fe-3a52-a9dc-022d9253266b/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.png",
+      "publisher": "Grand Games A.Ş.",
       "queueRank": 12,
-      "researchPriority": 55,
+      "researchPriority": 60,
       "state": "RISING_EXACT_3D",
       "evidence": "Best exact 3d rank improvement is +3."
     }
