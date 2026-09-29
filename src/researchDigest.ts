@@ -21,19 +21,37 @@ const ResearchChangeSchema = z.object({
   evidence: z.array(z.string()).min(1),
 });
 
-const ResearchStateSchema = z.object({
+const ExactWindowStatusSchema = z.enum([
+  'available',
+  'history_missing',
+  'not_ranked',
+  'market_failed',
+  'source_mismatch',
+  'coverage_gap',
+]);
+
+const ResearchTrendStateSchema = z.enum(['INSUFFICIENT_DATA', 'EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING']);
+
+const DigestCandidateSnapshotSchema = z.object({
   appId: z.string().min(5),
   name: z.string().min(1),
   iconUrl: z.string().nullable().optional(),
   publisher: z.string().nullable().optional(),
   queueRank: z.number().int().positive(),
   researchPriority: z.number().int().min(0).max(100),
-  state: z.enum(['INSUFFICIENT_HISTORY', 'PERSISTING_3D', 'PERSISTING_7D', 'RISING_EXACT_3D', 'FALLING_EXACT_3D', 'FLAT_EXACT_3D']),
-  evidence: z.string().min(10),
+  trendState: ResearchTrendStateSchema,
+  trendRationale: z.array(z.string()),
+  consecutiveHistoryDays: z.number().int().nonnegative().nullable(),
+  minimumConsecutiveHistoryDays: z.number().int().positive().nullable(),
+  observedPersistenceDays: z.number().int().nonnegative(),
+  exact3dMovement: z.object({
+    status: ExactWindowStatusSchema,
+    bestUpwardDelta: z.number().int().nullable(),
+  }),
 });
 
 export const ResearchDigestSchema = z.object({
-  schemaVersion: z.literal(1),
+  schemaVersion: z.literal(2),
   generatedAt: z.string(),
   currentDate: z.string(),
   comparisonDate: z.string(),
@@ -46,11 +64,11 @@ export const ResearchDigestSchema = z.object({
     newCandidates: z.number().int().nonnegative(),
     droppedCandidates: z.number().int().nonnegative(),
     marketChanges: z.number().int().nonnegative(),
-    maturityEvents: z.number().int().nonnegative(),
+    comparisonAvailabilityEvents: z.number().int().nonnegative(),
   }),
-  limitations: z.array(z.string()).min(3),
+  limitations: z.array(z.string()).min(4),
   changes: z.array(ResearchChangeSchema),
-  states: z.array(ResearchStateSchema),
+  candidateSnapshots: z.array(DigestCandidateSnapshotSchema),
 });
 
 export type ResearchDigest = z.infer<typeof ResearchDigestSchema>;
