@@ -63,71 +63,105 @@ jobs:
         run: node --test scripts/research-trend.node-test.mjs
       - name: Test digest trend-authority semantics
         run: node --test scripts/research-digest-facts.node-test.mjs
-      - name: Collect Apple Games chart evidence
+      - name: Collect Apple charts
         run: node scripts/collect-apple-radar.mjs
-      - name: Validate Radar snapshot semantics
-        run: node scripts/validate-radar-data.mjs
-      - name: Validate current Radar evidence quality
-        run: node scripts/validate-radar-evidence-quality.mjs
+      - name: Validate collected Radar data
+        run: npm run validate:radar
       - name: Build exact-date trend signals
         run: node scripts/build-trend-signals.mjs
-      - name: Validate trend-signal semantics
+      - name: Validate exact-date trend signals
         run: node scripts/validate-trend-signals.mjs
-      - name: Build deterministic research queue
+      - name: Build evidence-backed research queue
         env:
           APPBRAIN_API_KEY: ${{ secrets.APPBRAIN_API_KEY }}
           APPBRAIN_DAILY_CREDIT_CAP: '10'
         run: node scripts/build-research-queue.mjs
-      - name: Enrich research queue with live listing evidence
+      - name: Attach live listing evidence packs to top candidates
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          RADAR_ANALYZE_ENDPOINT: https://gajkwzgxfjlvdbzrvdqn.supabase.co/functions/v1/analyze-game
+          RADAR_PUBLISHABLE_KEY: sb_publishable_nBEm6fhkwDCeFWhgpFKT3A_XDQSU6Bg
+          RADAR_EVIDENCE_PACK_CAP: '8'
         run: node scripts/enrich-research-queue.mjs
-      - name: Restore queue contract after enrichment
+      - name: Finalize research queue transport contract
         run: node scripts/finalize-research-queue-contract.mjs
-      - name: Validate research queue semantics
+      - name: Validate research queue provenance and budget
         run: node scripts/validate-research-queue.mjs
-      - name: Validate research queue transport fields
+      - name: Validate research queue transport contract
         run: node scripts/validate-research-queue-transport.mjs
-      - name: Build verification queue
+      - name: Build evidence-routed verification queue
         run: node scripts/build-verification-queue.mjs
-      - name: Validate verification queue semantics
+      - name: Validate verification queue provenance and routing
         run: node scripts/validate-verification-queue.mjs
-      - name: Discover bounded public gameplay sources
+      - name: Discover suggested public gameplay sources
         env:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_DISCOVERY_MODEL: gemini-3.8-flash
         run: node scripts/discover-gameplay-sources.mjs
-      - name: Validate gameplay discovery boundary
+      - name: Validate gameplay discovery provenance and budget
         run: node scripts/validate-gameplay-discovery.mjs
-      - name: Build exact-date research digest
+      - name: Build exact-date research change digest
         run: node scripts/build-research-digest.mjs
       - name: Validate research digest semantics
         run: node scripts/validate-research-digest.mjs
-      - name: Build factual Data Health
+      - name: Build factual data health report
         run: node scripts/build-data-health.mjs
       - name: Add platform-scoped Google Play health
         run: node scripts/augment-google-play-health.mjs
-      - name: Add current trend health
+      - name: Require current trend signals in Data Health
         run: node scripts/augment-trend-health.mjs
-      - name: Validate Data Health semantics
+      - name: Validate data health semantics
         run: node scripts/validate-data-health.mjs
       - name: Validate Google Play health boundary
         run: node scripts/validate-google-play-health.mjs
-      - name: Commit generated evidence safely
+      - name: Write run summary
         shell: bash
         run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const fs = require('fs');
+          const t = JSON.parse(fs.readFileSync('public/data/radar/trend-signals.json', 'utf8'));
+          const q = JSON.parse(fs.readFileSync('public/data/research/latest.json', 'utf8'));
+          const v = JSON.parse(fs.readFileSync('public/data/verification/latest.json', 'utf8'));
+          const s = JSON.parse(fs.readFileSync('public/data/discovery/latest.json', 'utf8'));
+          const d = JSON.parse(fs.readFileSync('public/data/research/digest.json', 'utf8'));
+          const h = JSON.parse(fs.readFileSync('public/data/health/latest.json', 'utf8'));
+          const suggestedSessions = s.sessions.filter((session) => session.status === 'found').length;
+          const suggestedSources = s.sessions.reduce((sum, session) => sum + session.candidates.length, 0);
+          const stateCounts = Object.entries(t.summary.stateCounts).map(([state, count]) => `${state} ${count}`).join(' · ');
+          const providerName = s.provider.name ?? 'Unknown';
+          const requestsUsed = s.provider.requestsUsedThisRun ?? s.provider.creditsUsedThisRun ?? 0;
+          const requestCap = s.provider.dailyRequestCap ?? s.provider.dailyCreditCap ?? 0;
+          const searchQueries = s.provider.searchQueriesUsedThisRun ?? requestsUsed;
+          console.log('## Automated Research Queue');
+          console.log('');
+          console.log(`Data health: **${h.overall}** · essential pipelines **${h.essentialHealthy}/${h.essentialCount} healthy** · exact history **${h.facts.exactHistoryDays}/7 days** · Google Play **${h.facts.googlePlayRadarStatus}**`);
+          console.log(`Apple Games chart depth: **Top ${t.chartDepth}** · exact trend signals: **${t.summary.signalCount}** across **${t.summary.healthyGameMarkets}** healthy Games markets`);
+          console.log(`Trend states: ${stateCounts || 'none'}`);
+          console.log(`Radar date: **${q.radarDate}** · Apple charts: **${q.sources.appleCharts.status}** · live evidence: **${q.sources.liveAnalyzer?.status ?? 'not-run'}** · AppBrain estimates: **${q.sources.appBrain.status}**`);
+          console.log(`Verification queue: **${v.summary.taskCount}/${v.summary.rawTaskCount} explicit unknown(s) routed** · omitted ${v.summary.omittedTaskCount} · **${v.summary.captureSessionCount} capture session(s)** cover ${v.summary.groupedEvidenceTaskCount} gameplay evidence task(s) · ${v.summary.readyForHumanReview} human-review · ${v.summary.autoWaiting} auto-waiting · ${v.summary.optionalExternal} optional external`);
+          console.log(`Gameplay discovery: **${providerName} ${s.provider.status}** · ${suggestedSessions} session(s) with suggestions · ${suggestedSources} suggested source(s) · requests ${requestsUsed}/${requestCap} · reported search queries ${searchQueries}`);
+          console.log(`Daily digest: **${d.status}** · ${d.summary.changeCount} exact-date change(s) · ${d.summary.attentionCount} attention item(s)`);
+          console.log('');
+          console.log('| # | Title | Priority | Listing facts | Unknowns | First-party reasons |');
+          console.log('|---:|---|---:|---:|---:|---|');
+          for (const c of q.candidates.slice(0, 8)) console.log(`| ${c.queueRank} | ${c.name.replaceAll('|', '\\|')} | ${c.researchPriority} | ${c.analysisEvidence?.listingFindingCount ?? 0} | ${c.analysisEvidence?.unknownCount ?? '—'} | ${c.reasonCodes.join(', ')} |`);
+          console.log('');
+          console.log('### Next factual actions');
+          for (const action of h.recommendedActions.slice(0, 5)) console.log(`- **${action.action}**${action.name ? ` · ${action.name}` : ''}: ${action.why}`);
+          console.log('');
+          console.log('Trend visibility is a bounded chart-position heuristic, not downloads/revenue/market share. Trend states use exact dated rank evidence only; saturation states are reserved for separate mechanic-cluster evidence. Priority is deterministic research ordering, not a success probability or build recommendation. Verification tasks are routes to evidence, not resolved facts; capture sessions only reduce duplicate evidence collection. Public gameplay search candidates are suggestions only; YouTube oEmbed confirms public availability only and does not verify gameplay content.');
+          NODE
+      - name: Commit snapshot, queue, verification, discovery, digest and health safely
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add public/data/radar public/data/research public/data/verification public/data/discovery public/data/health
-          if git diff --cached --quiet; then
-            echo "No generated evidence changes to commit."
-            exit 0
+          if ! git diff --cached --quiet; then
+            git commit -m 'data: collect daily Apple radar and research queue'
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
           fi
-          git commit -m "data: collect daily Apple radar and research queue"
-          git pull --rebase origin main
-          git push origin HEAD:main
       - name: Deploy latest main through canonical Pages workflow
         env:
           GH_TOKEN: ${{ github.token }}
