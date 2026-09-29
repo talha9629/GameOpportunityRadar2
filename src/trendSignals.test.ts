@@ -14,15 +14,19 @@ function payloadWithStatus(status: 'coverage_gap' | 'source_mismatch') {
     method: {
       name: 'exact_rank_trend_signals_v1',
       lookbackDays: [1, 3, 7],
+      minimumConsecutiveHistoryDays: 7,
       visibilityFormula: 'ln((N+1)/rank)/ln(N+1)',
       statesEmitted: ['EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING', 'INSUFFICIENT_DATA'],
       statesReservedForOtherEvidence: ['CROWDED', 'WINDOW_CLOSING'],
       missingHistoryRule: 'Never interpolate a missing exact date and never interpret source mismatch as movement.',
+      historyMaturityRule: 'All mature states require 7 consecutive exact dated snapshots ending on radarDate.',
+      directionalStateRule: 'After the 7-day history maturity gate, directional states require exact 3-day evidence.',
     },
     summary: {
       marketCount: 1,
       healthyGameMarkets: 1,
       signalCount: 1,
+      consecutiveHistoryDays: 4,
       stateCounts: { INSUFFICIENT_DATA: 1 },
     },
     markets: {
@@ -66,6 +70,13 @@ describe('TrendSignalsPayloadSchema', () => {
   it('accepts source mismatches instead of treating incomparable charts as movement', () => {
     const parsed = TrendSignalsPayloadSchema.parse(payloadWithStatus('source_mismatch'));
     expect(parsed.markets.us.signals[0].exactWindows['1d'].status).toBe('source_mismatch');
+  });
+
+  it('preserves the global history maturity fields needed by the UI', () => {
+    const parsed = TrendSignalsPayloadSchema.parse(payloadWithStatus('coverage_gap'));
+    expect(parsed.summary.consecutiveHistoryDays).toBe(4);
+    expect(parsed.method.minimumConsecutiveHistoryDays).toBe(7);
+    expect(parsed.method.historyMaturityRule).toContain('7 consecutive exact');
   });
 
   it('counts conservative comparison failures separately', () => {
