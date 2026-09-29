@@ -3,7 +3,8 @@ import type { ResearchChange, ResearchDigest } from './researchDigest';
 import './researchDigest.css';
 
 function ChangeIcon({ type }: { type: string }) {
-  if (/INCREASED|EXPANDED|IMPROVED|MATURED|NEW_TO/.test(type)) return <ArrowUp size={15} />;
+  if (/^EXACT_[37]D_COMPARISON_AVAILABLE$/.test(type)) return <Clock3 size={15} />;
+  if (/INCREASED|EXPANDED|IMPROVED|NEW_TO/.test(type)) return <ArrowUp size={15} />;
   if (/DECREASED|CONTRACTED|DECLINED|DROPPED/.test(type)) return <ArrowDown size={15} />;
   return <Minus size={15} />;
 }
@@ -18,8 +19,8 @@ function changeLabel(type: string) {
     CROSS_MARKET_CONTRACTED: 'Cross-market presence contracted',
     BEST_RANK_IMPROVED: 'Best rank improved',
     BEST_RANK_DECLINED: 'Best rank declined',
-    EXACT_3D_HISTORY_MATURED: 'Exact 3-day history available',
-    EXACT_7D_HISTORY_MATURED: 'Exact 7-day history available',
+    EXACT_3D_COMPARISON_AVAILABLE: 'Exact 3-day comparison available',
+    EXACT_7D_COMPARISON_AVAILABLE: 'Exact 7-day comparison available',
   };
   return labels[type] ?? type.replaceAll('_', ' ').toLowerCase();
 }
@@ -62,7 +63,7 @@ function metricLine(change: ResearchChange) {
     ].filter(Boolean);
     return bits.join(' · ') || 'no longer in deterministic top-12 queue';
   }
-  if (/^EXACT_[37]D_HISTORY_MATURED$/.test(change.type)) {
+  if (/^EXACT_[37]D_COMPARISON_AVAILABLE$/.test(change.type)) {
     const days = change.type.includes('7D') ? 7 : 3;
     return `${days}d exact comparison now available${change.currentBestRank != null ? ` · current best #${change.currentBestRank}` : ''}`;
   }
@@ -82,14 +83,14 @@ export function ResearchDigestPanel({ digest, onAnalyze }: { digest: ResearchDig
 
   return <section className="panel digest-panel">
     <div className="section-heading">
-      <div><h2>Daily Change Digest</h2><p>Observed differences versus the exact {digest.comparisonDate} research queue. Each row is factual triage context, not a success forecast.</p></div>
+      <div><h2>Daily Change Digest</h2><p>Observed differences versus the exact {digest.comparisonDate} research queue. Each row is factual triage context, not a success forecast or an independent trend classification.</p></div>
       <span>{digest.summary.attentionCount} attention · {digest.summary.changeCount} total</span>
     </div>
     <div className="digest-kpis">
       <span><b>{digest.summary.newCandidates}</b> new</span>
       <span><b>{digest.summary.droppedCandidates}</b> dropped</span>
       <span><b>{digest.summary.marketChanges}</b> market shifts</span>
-      <span><b>{digest.summary.maturityEvents}</b> maturity events</span>
+      <span><b>{digest.summary.comparisonAvailabilityEvents}</b> exact windows opened</span>
     </div>
     {displayChanges.length === 0 ? <div className="digest-empty"><Sparkles size={18} /><div><strong>No material queue changes.</strong><span>The exact daily comparison completed, but none crossed the digest thresholds.</span></div></div> : <div className="digest-list">
       {displayChanges.map((change, index) => <article key={`${change.type}-${change.appId}-${index}`} className={`digest-change ${change.significance}`}>
