@@ -31,6 +31,8 @@ jobs:
         run: node --test scripts/policy-confirmation.node-test.mjs
       - name: Validate committed policy evidence
         run: node scripts/validate-policy-watch.mjs
+      - name: Test trend history maturity gate
+        run: node --test scripts/trend-state.node-test.mjs
       - name: Build exact-date trend signals from committed Radar evidence
         run: node scripts/build-trend-signals.mjs
       - name: Validate trend-signal semantics
