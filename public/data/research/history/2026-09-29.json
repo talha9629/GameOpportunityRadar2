@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T21:54:46.831Z",
+  "generatedAt": "2026-09-29T22:04:02.031Z",
   "radarDate": "2026-09-29",
-  "radarGeneratedAt": "2026-09-29T21:54:41.401Z",
+  "radarGeneratedAt": "2026-09-29T22:03:54.219Z",
   "method": {
     "name": "deterministic_research_priority_v1",
     "inputs": [
@@ -20,13 +20,15 @@
       "AI opinion",
       "incompatible chart-source comparisons"
     ],
+    "minimumConsecutiveTrendHistoryDays": 7,
+    "earlyMovementRule": "Exact 1-day movement and observed persistence may order research work before trend maturity, but they cannot activate EMERGING, RISING, ESTABLISHED or DECLINING before 7 consecutive exact daily snapshots.",
     "statement": "Priority orders what to investigate first. Rank visibility and trend state are descriptive chart transforms, not opportunity scores, predictions, download estimates or causal claims."
   },
   "sources": {
     "appleCharts": {
       "status": "complete",
       "origin": "official_public",
-      "observedAt": "2026-09-29T21:54:41.401Z",
+      "observedAt": "2026-09-29T22:03:54.219Z",
       "healthyGameMarkets": 4
     },
     "appleLookup": {
@@ -57,7 +59,8 @@
   },
   "limitations": [
     "App Store chart rank and the bounded visibility transform are ordinal chart evidence; neither is a download count, download share, revenue figure or causal measure of demand.",
-    "Trend state uses exact dated rank observations only. CROWDED and WINDOW_CLOSING are intentionally not assigned from rank history alone because they require saturation evidence.",
+    "Trend state uses exact dated rank observations only and remains INSUFFICIENT_DATA until 7 consecutive exact daily snapshots exist. CROWDED and WINDOW_CLOSING are intentionally not assigned from rank history alone because they require saturation evidence.",
+    "Exact early movement and persistence may prioritize investigation as factual triage signals before 7 days; they do not constitute a mature trend state or momentum conclusion.",
     "A shallower historical chart can create a coverage gap for current ranks below the old cutoff; Radar labels that UNKNOWN instead of treating the title as a new entrant.",
     "The queue currently covers Apple Games charts in US, UK, Canada and Australia; Android is not inferred from iOS.",
     "A missing exact historical date remains UNKNOWN. The queue never interpolates missing rank history.",
@@ -97,7 +100,7 @@
           "average": 0.6513
         },
         "trend": {
-          "state": "RISING",
+          "state": "INSUFFICIENT_DATA",
           "basis": "exact_rank_history_v1",
           "comparable3dMarkets": 2,
           "comparable7dMarkets": 0,
@@ -106,8 +109,10 @@
           "median3dDelta": 10,
           "median7dDelta": null,
           "rationale": [
-            "Median exact 3-day rank move is +10 across 2 comparable market(s)."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -120,7 +125,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 1
           },
           {
@@ -133,7 +138,7 @@
             "bestObservedRank": 5,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6513
           },
           {
@@ -146,7 +151,7 @@
             "bestObservedRank": 22,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.3025
           }
         ],
@@ -258,7 +263,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6762010774,6804464432,1546690510&country=gb&entity=software",
         "canonicalName": "CrownCards - Trading Cards",
@@ -280,6 +285,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -289,7 +295,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-29T21:54:45.487Z",
+        "observedAt": "2026-09-29T22:04:00.170Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "CrownCards - Trading Cards",
         "publisher": "Crown Cards LLC",
@@ -401,7 +407,7 @@
           "average": 0.3498
         },
         "trend": {
-          "state": "RISING",
+          "state": "INSUFFICIENT_DATA",
           "basis": "exact_rank_history_v1",
           "comparable3dMarkets": 4,
           "comparable7dMarkets": 0,
@@ -410,8 +416,10 @@
           "median3dDelta": 31.5,
           "median7dDelta": null,
           "rationale": [
-            "Median exact 3-day rank move is +31.5 across 4 comparable market(s)."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -424,7 +432,7 @@
             "bestObservedRank": 9,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.5239
           },
           {
@@ -437,7 +445,7 @@
             "bestObservedRank": 18,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.3737
           },
           {
@@ -450,7 +458,7 @@
             "bestObservedRank": 19,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.362
           },
           {
@@ -463,7 +471,7 @@
             "bestObservedRank": 51,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.1397
           }
         ],
@@ -602,7 +610,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761757565,6761760135,6752672568,6793924927,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Colorever: Gem Art Puzzle",
@@ -625,6 +633,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -634,7 +643,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-29T21:54:45.760Z",
+        "observedAt": "2026-09-29T22:04:00.415Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Colorever: Gem Art Puzzle",
         "publisher": "OAKEVER GAMES PTE. LTD.",
@@ -775,8 +784,10 @@
           "median3dDelta": -2,
           "median7dDelta": null,
           "rationale": [
-            "3-day movement is available, but a mature 7-day comparison is still missing."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -789,7 +800,7 @@
             "bestObservedRank": 7,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.5239
           },
           {
@@ -802,7 +813,7 @@
             "bestObservedRank": 28,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.2359
           },
           {
@@ -815,7 +826,7 @@
             "bestObservedRank": 38,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.1704
           },
           {
@@ -828,7 +839,7 @@
             "bestObservedRank": 68,
             "newEntry": true,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.0857
           }
         ],
@@ -967,7 +978,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6762010774,6804464432,1546690510&country=gb&entity=software",
         "canonicalName": "Songless: Guess the Song!",
@@ -1001,7 +1012,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-29T21:54:45.981Z",
+        "observedAt": "2026-09-29T22:04:00.615Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Songless: Guess the Song!",
         "publisher": "Calico Studio Inc.",
@@ -1023,7 +1034,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.60909",
+            "value": "4.606",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1033,7 +1044,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "550",
+            "value": "500",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1053,7 +1064,7 @@
           {
             "key": "version_release_date",
             "label": "Current version release",
-            "value": "2026-09-29T18:13:48Z",
+            "value": "2026-09-28T13:30:18Z",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1122,8 +1133,10 @@
           "median3dDelta": 2.5,
           "median7dDelta": null,
           "rationale": [
-            "3-day movement is available, but a mature 7-day comparison is still missing."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -1136,7 +1149,7 @@
             "bestObservedRank": 12,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.3509
           },
           {
@@ -1149,7 +1162,7 @@
             "bestObservedRank": 22,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.2704
           },
           {
@@ -1162,7 +1175,7 @@
             "bestObservedRank": 30,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.263
           },
           {
@@ -1175,7 +1188,7 @@
             "bestObservedRank": 37,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.2176
           }
         ],
@@ -1314,7 +1327,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "au",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6742809194,6760325543&country=au&entity=software",
         "canonicalName": "Warline: Sniper Strike",
@@ -1348,7 +1361,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-29T21:54:46.187Z",
+        "observedAt": "2026-09-29T22:04:00.875Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Warline: Sniper Strike",
         "publisher": "Powerfantasy HK Limited",
@@ -1370,7 +1383,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.91021",
+            "value": "4.91031",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1380,7 +1393,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "18310",
+            "value": "18498",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1468,8 +1481,10 @@
           "median3dDelta": 0,
           "median7dDelta": null,
           "rationale": [
-            "3-day movement is available, but a mature 7-day comparison is still missing."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -1482,7 +1497,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 1
           },
           {
@@ -1495,7 +1510,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 1
           },
           {
@@ -1508,7 +1523,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 1
           },
           {
@@ -1521,7 +1536,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.8498
           }
         ],
@@ -1660,7 +1675,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761757565,6761760135,6752672568,6793924927,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Meowdoku!",
@@ -1693,7 +1708,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-29T21:54:46.374Z",
+        "observedAt": "2026-09-29T22:04:01.170Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Meowdoku!",
         "publisher": "OAKEVER GAMES PTE. LTD.",
@@ -1715,7 +1730,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.80996",
+            "value": "4.81019",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1725,7 +1740,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "262458",
+            "value": "264427",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -1843,8 +1858,10 @@
           "median3dDelta": 0,
           "median7dDelta": null,
           "rationale": [
-            "3-day movement is available, but a mature 7-day comparison is still missing."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -1857,7 +1874,7 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.8498
           },
           {
@@ -1870,7 +1887,7 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.8498
           },
           {
@@ -1883,7 +1900,7 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.8498
           },
           {
@@ -1896,7 +1913,7 @@
             "bestObservedRank": 1,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.762
           }
         ],
@@ -2035,7 +2052,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761757565,6761760135,6752672568,6793924927,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Block Out! - Color Sort Puzzle",
@@ -2068,7 +2085,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-29T21:54:46.507Z",
+        "observedAt": "2026-09-29T22:04:01.392Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Block Out! - Color Sort Puzzle",
         "publisher": "GRAND GAMES OYUN VE YAZILIM ANONIM SIRKETI",
@@ -2090,7 +2107,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.7276",
+            "value": "4.72736",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2100,7 +2117,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "270391",
+            "value": "271965",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2189,7 +2206,7 @@
           "average": 0.7005
         },
         "trend": {
-          "state": "RISING",
+          "state": "INSUFFICIENT_DATA",
           "basis": "exact_rank_history_v1",
           "comparable3dMarkets": 4,
           "comparable7dMarkets": 0,
@@ -2198,8 +2215,10 @@
           "median3dDelta": 5,
           "median7dDelta": null,
           "rationale": [
-            "Median exact 3-day rank move is +5 across 4 comparable market(s)."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -2212,7 +2231,7 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.762
           },
           {
@@ -2225,7 +2244,7 @@
             "bestObservedRank": 2,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.762
           },
           {
@@ -2238,7 +2257,7 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6996
           },
           {
@@ -2251,7 +2270,7 @@
             "bestObservedRank": 4,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.5784
           }
         ],
@@ -2390,7 +2409,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761757565,6761760135,6752672568,6793924927,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Rotate Rings",
@@ -2414,6 +2433,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -2423,7 +2443,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-29T21:54:46.689Z",
+        "observedAt": "2026-09-29T22:04:01.777Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "Rotate Rings",
         "publisher": "HURELAX PTE. LTD.",
@@ -2445,7 +2465,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.80719",
+            "value": "4.80497",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2455,7 +2475,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "6597",
+            "value": "6845",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2563,8 +2583,10 @@
           "median3dDelta": 1,
           "median7dDelta": null,
           "rationale": [
-            "3-day movement is available, but a mature 7-day comparison is still missing."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -2577,7 +2599,7 @@
             "bestObservedRank": 3,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.762
           },
           {
@@ -2590,7 +2612,7 @@
             "bestObservedRank": 4,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6996
           },
           {
@@ -2603,7 +2625,7 @@
             "bestObservedRank": 4,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6513
           },
           {
@@ -2616,7 +2638,7 @@
             "bestObservedRank": 9,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.5011
           }
         ],
@@ -2755,7 +2777,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "au",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6742809194,6760325543&country=au&entity=software",
         "canonicalName": "CubeAway - 3DPuzzle",
@@ -2788,7 +2810,7 @@
         "source": "live_analyze_game",
         "sourceOrigin": "official_public",
         "sourceMode": "automated",
-        "observedAt": "2026-09-29T21:54:46.821Z",
+        "observedAt": "2026-09-29T22:04:02.015Z",
         "endpointClass": "Radar Supabase Edge Function → Apple Lookup",
         "canonicalName": "CubeAway - 3DPuzzle",
         "publisher": "GOODROID,Inc.",
@@ -2810,7 +2832,7 @@
           {
             "key": "rating",
             "label": "Current store rating",
-            "value": "4.66146",
+            "value": "4.66099",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2820,7 +2842,7 @@
           {
             "key": "rating_count",
             "label": "Rating count",
-            "value": "102940",
+            "value": "104382",
             "origin": "official_public",
             "interpretation": "direct",
             "coverage": "verified",
@@ -2909,8 +2931,10 @@
           "median3dDelta": 1,
           "median7dDelta": null,
           "rationale": [
-            "3-day movement is available, but a mature 7-day comparison is still missing."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -2923,7 +2947,7 @@
             "bestObservedRank": 4,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6996
           },
           {
@@ -2936,7 +2960,7 @@
             "bestObservedRank": 5,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6513
           },
           {
@@ -2949,7 +2973,7 @@
             "bestObservedRank": 5,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6513
           },
           {
@@ -2962,7 +2986,7 @@
             "bestObservedRank": 5,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6118
           }
         ],
@@ -3101,7 +3125,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761757565,6761760135,6752672568,6793924927,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Smash Fest!",
@@ -3170,8 +3194,10 @@
           "median3dDelta": 1.5,
           "median7dDelta": null,
           "rationale": [
-            "3-day movement is available, but a mature 7-day comparison is still missing."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -3184,7 +3210,7 @@
             "bestObservedRank": 4,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6118
           },
           {
@@ -3197,7 +3223,7 @@
             "bestObservedRank": 8,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.5494
           },
           {
@@ -3210,7 +3236,7 @@
             "bestObservedRank": 11,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.4804
           },
           {
@@ -3223,7 +3249,7 @@
             "bestObservedRank": 16,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.3992
           }
         ],
@@ -3362,7 +3388,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761757565,6761760135,6752672568,6793924927,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Vita Mahjong",
@@ -3425,7 +3451,7 @@
           "average": 0.4542
         },
         "trend": {
-          "state": "RISING",
+          "state": "INSUFFICIENT_DATA",
           "basis": "exact_rank_history_v1",
           "comparable3dMarkets": 4,
           "comparable7dMarkets": 0,
@@ -3434,8 +3460,10 @@
           "median3dDelta": 33.5,
           "median7dDelta": null,
           "rationale": [
-            "Median exact 3-day rank move is +33.5 across 4 comparable market(s)."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -3448,7 +3476,7 @@
             "bestObservedRank": 5,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.6118
           },
           {
@@ -3461,7 +3489,7 @@
             "bestObservedRank": 12,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.4616
           },
           {
@@ -3474,7 +3502,7 @@
             "bestObservedRank": 9,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.4132
           },
           {
@@ -3487,7 +3515,7 @@
             "bestObservedRank": 19,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.3302
           }
         ],
@@ -3626,7 +3654,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "gb",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6762010774,6804464432,1546690510&country=gb&entity=software",
         "canonicalName": "NoomiClone",
@@ -3649,6 +3677,7 @@
       },
       "appBrainEstimate": null,
       "nextVerification": [
+        "Keep exact daily collection running before treating trend direction as mature evidence.",
         "Wait for an exact comparable 7-day Games-chart window before making a mature momentum claim.",
         "Open Analyze Game to inspect official listing evidence and unknowns.",
         "Use Deep Verify for gameplay mechanics, monetization placement, meta and production-complexity evidence.",
@@ -3696,8 +3725,10 @@
           "median3dDelta": 2,
           "median7dDelta": null,
           "rationale": [
-            "3-day movement is available, but a mature 7-day comparison is still missing."
-          ]
+            "Only 4/7 consecutive exact daily snapshots are available. Aggregate 1-day/3-day movement facts may still order research work, but no mature trend state is assigned yet."
+          ],
+          "consecutiveHistoryDays": 4,
+          "minimumConsecutiveHistoryDays": 7
         },
         "markets": [
           {
@@ -3710,7 +3741,7 @@
             "bestObservedRank": 7,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.5784
           },
           {
@@ -3723,7 +3754,7 @@
             "bestObservedRank": 7,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.5011
           },
           {
@@ -3736,7 +3767,7 @@
             "bestObservedRank": 11,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.4282
           },
           {
@@ -3749,7 +3780,7 @@
             "bestObservedRank": 27,
             "newEntry": false,
             "sourceMode": "apple_itunes_rss_games",
-            "observedAt": "2026-09-29T21:54:41.401Z",
+            "observedAt": "2026-09-29T22:03:54.219Z",
             "visibility": 0.2859
           }
         ],
@@ -3888,7 +3919,7 @@
       "appleMetadata": {
         "sourceOrigin": "official_public",
         "interpretation": "direct",
-        "observedAt": "2026-09-29T21:54:41.401Z",
+        "observedAt": "2026-09-29T22:03:54.219Z",
         "country": "us",
         "sourceUrl": "https://itunes.apple.com/lookup?id=6761757565,6761760135,6752672568,6793924927,6748084174,6468921495,6499209744&country=us&entity=software",
         "canonicalName": "Magic Sort!",

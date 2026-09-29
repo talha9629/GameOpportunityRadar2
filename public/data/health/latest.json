@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29T21:55:03.310Z",
+  "generatedAt": "2026-09-29T22:04:06.840Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -88,7 +88,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "1 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "10.5h policy-index age",
+        "10.7h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -112,7 +112,7 @@
         "provider status unconfigured",
         "0/50 AppBrain popularity position(s) available",
         "exact requested depth not currently available",
-        "34.8h provider observation age",
+        "35.0h provider observation age",
         "Positions are AppBrain provider-global popularity ordering, not official Google Play storefront ranks.",
         "Download values, when present, are third-party estimates and are never inferred from Apple ranks."
       ],
@@ -180,7 +180,7 @@
     "googlePlayRadarEntryCount": 0,
     "googlePlayRadarRequestedDepth": 50,
     "googlePlayRadarExactDepth": false,
-    "googlePlayRadarAgeHours": 34.830198333333335,
+    "googlePlayRadarAgeHours": 34.98117722222222,
     "trendSignalCount": 400,
     "trendExpectedSignalCount": 400,
     "trendHealthyMarketCount": 4,

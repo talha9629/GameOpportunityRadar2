@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "generatedAt": "2026-09-29T21:54:41.401Z",
+  "generatedAt": "2026-09-29T22:03:54.219Z",
   "chart": "top-free",
   "category": "Games",
   "chartDepth": 100,
@@ -16,7 +16,7 @@
       "sourceUrl": "https://itunes.apple.com/us/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-29T21:54:41.401Z",
+      "observedAt": "2026-09-29T22:03:54.219Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -245,9 +245,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 16,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 17,
@@ -485,9 +483,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 33,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 34,
@@ -515,9 +511,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 35,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 36,
@@ -545,9 +539,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 37,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 38,
@@ -659,9 +651,7 @@
           "firstObserved": "2026-09-27",
           "daysObserved": 3,
           "bestObservedRank": 45,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 46,
@@ -703,9 +693,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 48,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 49,
@@ -789,9 +777,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 54,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 55,
@@ -805,9 +791,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 55,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 56,
@@ -877,9 +861,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 60,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 61,
@@ -921,9 +903,7 @@
           "firstObserved": "2026-09-28",
           "daysObserved": 2,
           "bestObservedRank": 63,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 64,
@@ -965,9 +945,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 66,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 67,
@@ -1081,9 +1059,7 @@
           "firstObserved": "2026-09-27",
           "daysObserved": 3,
           "bestObservedRank": 74,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 75,
@@ -1139,9 +1115,7 @@
           "firstObserved": "2026-09-27",
           "daysObserved": 3,
           "bestObservedRank": 78,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 79,
@@ -1371,9 +1345,7 @@
           "firstObserved": "2026-09-28",
           "daysObserved": 2,
           "bestObservedRank": 94,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 95,
@@ -1473,7 +1445,7 @@
       "sourceUrl": "https://itunes.apple.com/gb/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-29T21:54:41.401Z",
+      "observedAt": "2026-09-29T22:03:54.219Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -1488,9 +1460,7 @@
           "firstObserved": "2026-09-27",
           "daysObserved": 3,
           "bestObservedRank": 1,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 2,
@@ -1546,9 +1516,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 5,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 6,
@@ -1591,7 +1559,6 @@
           "daysObserved": 4,
           "bestObservedRank": 8,
           "events": [
-            "NEW HIGH",
             "TOP 10"
           ]
         },
@@ -1635,9 +1602,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 11,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 12,
@@ -1721,9 +1686,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 17,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 18,
@@ -1765,9 +1728,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 20,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 21,
@@ -1865,9 +1826,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 27,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 28,
@@ -2049,9 +2008,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 40,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 41,
@@ -2135,9 +2092,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 46,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 47,
@@ -2151,9 +2106,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 47,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 48,
@@ -2167,9 +2120,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 48,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 49,
@@ -2227,9 +2178,7 @@
           "firstObserved": "2026-09-28",
           "daysObserved": 2,
           "bestObservedRank": 52,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 53,
@@ -2257,9 +2206,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 54,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 55,
@@ -2387,9 +2334,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 63,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 64,
@@ -2475,9 +2420,7 @@
           "firstObserved": "2026-09-28",
           "daysObserved": 2,
           "bestObservedRank": 69,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 70,
@@ -2519,9 +2462,7 @@
           "firstObserved": "2026-09-28",
           "daysObserved": 2,
           "bestObservedRank": 72,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 73,
@@ -2535,9 +2476,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 73,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 74,
@@ -2649,9 +2588,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 81,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 82,
@@ -2943,7 +2880,7 @@
       "sourceUrl": "https://itunes.apple.com/ca/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-29T21:54:41.401Z",
+      "observedAt": "2026-09-29T22:03:54.219Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -3015,7 +2952,6 @@
           "daysObserved": 4,
           "bestObservedRank": 5,
           "events": [
-            "NEW HIGH",
             "TOP 10"
           ]
         },
@@ -3045,9 +2981,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 7,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 8,
@@ -3313,9 +3247,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 26,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 27,
@@ -3371,9 +3303,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 30,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 31,
@@ -3387,9 +3317,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 31,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 32,
@@ -3473,9 +3401,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 37,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 38,
@@ -3531,9 +3457,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 41,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 42,
@@ -3561,9 +3485,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 43,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 44,
@@ -3591,9 +3513,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 45,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 46,
@@ -3663,9 +3583,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 50,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 51,
@@ -3735,9 +3653,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 55,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 56,
@@ -3893,9 +3809,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 66,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 67,
@@ -4093,9 +4007,7 @@
           "firstObserved": "2026-09-28",
           "daysObserved": 2,
           "bestObservedRank": 80,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 81,
@@ -4329,9 +4241,7 @@
           "firstObserved": "2026-09-28",
           "daysObserved": 2,
           "bestObservedRank": 96,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 97,
@@ -4405,7 +4315,7 @@
       "sourceUrl": "https://itunes.apple.com/au/rss/topfreeapplications/limit=100/genre=6014/json",
       "gameFocused": true,
       "warning": null,
-      "observedAt": "2026-09-29T21:54:41.401Z",
+      "observedAt": "2026-09-29T22:03:54.219Z",
       "refreshStatus": "fresh",
       "entries": [
         {
@@ -4448,9 +4358,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 3,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 4,
@@ -4562,9 +4470,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 11,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 12,
@@ -4634,9 +4540,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 16,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 17,
@@ -4678,9 +4582,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 19,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 20,
@@ -4736,9 +4638,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 23,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 24,
@@ -4794,9 +4694,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 27,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 28,
@@ -4810,9 +4708,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 28,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 29,
@@ -4896,9 +4792,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 34,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 35,
@@ -4940,9 +4834,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 37,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 38,
@@ -5054,9 +4946,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 45,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 46,
@@ -5084,9 +4974,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 47,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 48,
@@ -5114,9 +5002,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 49,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 50,
@@ -5130,9 +5016,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 50,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 51,
@@ -5174,9 +5058,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 53,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 54,
@@ -5190,9 +5072,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 54,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 55,
@@ -5206,9 +5086,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 55,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 56,
@@ -5238,9 +5116,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 57,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 58,
@@ -5254,9 +5130,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 58,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 59,
@@ -5340,9 +5214,7 @@
           "firstObserved": "2026-09-26",
           "daysObserved": 4,
           "bestObservedRank": 64,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 65,
@@ -5416,9 +5288,7 @@
           "firstObserved": "2026-09-28",
           "daysObserved": 2,
           "bestObservedRank": 69,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 70,
@@ -5546,9 +5416,7 @@
           "firstObserved": "2026-09-28",
           "daysObserved": 2,
           "bestObservedRank": 78,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 79,
@@ -5766,9 +5634,7 @@
           "firstObserved": "2026-09-27",
           "daysObserved": 3,
           "bestObservedRank": 93,
-          "events": [
-            "NEW HIGH"
-          ]
+          "events": []
         },
         {
           "rank": 94,

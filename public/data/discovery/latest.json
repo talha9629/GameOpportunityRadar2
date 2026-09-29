@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-29T21:54:47.156Z",
-  "verificationGeneratedAt": "2026-09-29T21:54:47.047Z",
+  "generatedAt": "2026-09-29T22:04:02.317Z",
+  "verificationGeneratedAt": "2026-09-29T22:04:02.225Z",
   "statement": "Public gameplay discovery proposes search candidates only. A URL is not gameplay evidence until it is saved into Deep Verify, analyzed or inspected, and its timestamped findings receive explicit human review.",
   "provider": {
     "key": "tavily",
@@ -31,7 +31,7 @@
       "searchQueries": [
         "\"CrownCards - Trading Cards\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-29T21:54:47.157Z",
+      "searchedAt": "2026-09-29T22:04:02.318Z",
       "status": "found",
       "candidates": [
         {
@@ -42,7 +42,7 @@
           "score": 0.3365932,
           "channelName": "Pokemon Steven",
           "thumbnailUrl": "https://i.ytimg.com/vi/luSdX4LOcII/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:48.583Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:02.655Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -57,7 +57,7 @@
           "score": 0.18714789,
           "channelName": "Raichu",
           "thumbnailUrl": "https://i.ytimg.com/vi/RfVAlIvVJ_U/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:48.608Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:02.713Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -72,7 +72,7 @@
           "score": 0.17856912,
           "channelName": "TRUE CELO LIVE",
           "thumbnailUrl": "https://i.ytimg.com/vi/j1ZS-CdNkrg/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:48.647Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:02.785Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -92,7 +92,7 @@
       "searchQueries": [
         "\"Colorever: Gem Art Puzzle\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-29T21:54:48.647Z",
+      "searchedAt": "2026-09-29T22:04:02.785Z",
       "status": "found",
       "candidates": [
         {
@@ -103,7 +103,7 @@
           "score": 0.62633044,
           "channelName": "IOSTouchplayHD",
           "thumbnailUrl": "https://i.ytimg.com/vi/4nt6whbxmFg/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:50.681Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:02.948Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -118,7 +118,7 @@
           "score": 0.13648199,
           "channelName": "Fazie Gamer",
           "thumbnailUrl": "https://i.ytimg.com/vi/iqYbIsVvis4/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:50.723Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:03.108Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -133,7 +133,7 @@
           "score": 0.11288363,
           "channelName": "Nova’s Puzzle Den",
           "thumbnailUrl": "https://i.ytimg.com/vi/cD3JrFPWS_I/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:50.765Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:03.179Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -153,7 +153,7 @@
       "searchQueries": [
         "\"Songless: Guess the Song!\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-29T21:54:50.765Z",
+      "searchedAt": "2026-09-29T22:04:03.179Z",
       "status": "found",
       "candidates": [
         {
@@ -164,7 +164,7 @@
           "score": 0.28953284,
           "channelName": "TY and LO show",
           "thumbnailUrl": "https://i.ytimg.com/vi/xzI48Xs-GKQ/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:53.503Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:03.477Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -179,7 +179,7 @@
           "score": 0.28786337,
           "channelName": "KruGames",
           "thumbnailUrl": "https://i.ytimg.com/vi/9kBp5Cio-F8/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:53.544Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:03.616Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -194,7 +194,7 @@
           "score": 0.28451186,
           "channelName": "Whos Suda",
           "thumbnailUrl": "https://i.ytimg.com/vi/hCro2Yv2boI/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:53.583Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:03.683Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -214,7 +214,7 @@
       "searchQueries": [
         "\"Warline: Sniper Strike\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-29T21:54:53.583Z",
+      "searchedAt": "2026-09-29T22:04:03.683Z",
       "status": "found",
       "candidates": [
         {
@@ -225,7 +225,7 @@
           "score": 0.64478505,
           "channelName": "Elkholasa Gaming",
           "thumbnailUrl": "https://i.ytimg.com/vi/uKqGuJa7xcE/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:55.219Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:03.827Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -240,7 +240,7 @@
           "score": 0.6213807,
           "channelName": "Pryszard Android iOS Gameplays",
           "thumbnailUrl": "https://i.ytimg.com/vi/-ace3v2F-u0/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:55.265Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:03.911Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -255,7 +255,7 @@
           "score": 0.5683445,
           "channelName": "MobileGamesDaily",
           "thumbnailUrl": "https://i.ytimg.com/vi/xi4oad2mO-I/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:55.308Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:03.962Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -275,7 +275,7 @@
       "searchQueries": [
         "\"Meowdoku!\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-29T21:54:55.308Z",
+      "searchedAt": "2026-09-29T22:04:03.962Z",
       "status": "found",
       "candidates": [
         {
@@ -286,7 +286,7 @@
           "score": 0.45769477,
           "channelName": "Rock Gaming Channel",
           "thumbnailUrl": "https://i.ytimg.com/vi/qlv3OzlMdkI/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:57.085Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:04.097Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -301,7 +301,7 @@
           "score": 0.39515805,
           "channelName": "GAMISTAN ARENA",
           "thumbnailUrl": "https://i.ytimg.com/vi/3EiSxVM0FAo/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:57.116Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:04.161Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -316,7 +316,7 @@
           "score": 0.38456595,
           "channelName": "Game Rush",
           "thumbnailUrl": "https://i.ytimg.com/vi/my7pX7FELfg/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:54:57.151Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:04.221Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -336,7 +336,7 @@
       "searchQueries": [
         "\"Block Out! - Color Sort Puzzle\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-29T21:54:57.151Z",
+      "searchedAt": "2026-09-29T22:04:04.221Z",
       "status": "no_result",
       "candidates": [],
       "error": null
@@ -351,7 +351,7 @@
       "searchQueries": [
         "\"Rotate Rings\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-29T21:54:58.560Z",
+      "searchedAt": "2026-09-29T22:04:05.661Z",
       "status": "found",
       "candidates": [
         {
@@ -362,7 +362,7 @@
           "score": 0.017060088,
           "channelName": "Jackal",
           "thumbnailUrl": "https://i.ytimg.com/vi/yRxkndTfRN0/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:55:00.830Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:05.918Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -377,7 +377,7 @@
           "score": 0.012432874,
           "channelName": "Vaporbaby",
           "thumbnailUrl": "https://i.ytimg.com/vi/INUdPETwnOE/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:55:00.869Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:05.971Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -392,7 +392,7 @@
           "score": 0.008658434,
           "channelName": "Trevor Nace",
           "thumbnailUrl": "https://i.ytimg.com/vi/D7JNXpoBACI/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:55:00.893Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:06.043Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -412,7 +412,7 @@
       "searchQueries": [
         "\"CubeAway - 3DPuzzle\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-09-29T21:55:00.893Z",
+      "searchedAt": "2026-09-29T22:04:06.043Z",
       "status": "found",
       "candidates": [
         {
@@ -423,7 +423,7 @@
           "score": 0.428784,
           "channelName": "GameGalaxy",
           "thumbnailUrl": "https://i.ytimg.com/vi/B5DpIbi8r8M/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:55:02.971Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:06.175Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -438,7 +438,7 @@
           "score": 0.22159523,
           "channelName": "H2Q Gamer",
           "thumbnailUrl": "https://i.ytimg.com/vi/BdoLUFOJMIw/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:55:03.011Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:06.251Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -453,7 +453,7 @@
           "score": 0.066794194,
           "channelName": "Djef Games",
           "thumbnailUrl": "https://i.ytimg.com/vi/ar8mmiWz89Y/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-09-29T21:55:03.106Z",
+          "availabilityVerifiedAt": "2026-09-29T22:04:06.647Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
