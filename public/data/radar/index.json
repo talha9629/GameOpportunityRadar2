@@ -1,7 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-28T09:39:00.052Z",
+  "updatedAt": "2026-09-29T09:43:08.017Z",
   "snapshots": [
+    {
+      "date": "2026-09-29",
+      "generatedAt": "2026-09-29T09:43:08.017Z",
+      "chartDepth": 100,
+      "successfulMarkets": 4,
+      "freshMarkets": 4,
+      "gameFocusedMarkets": 4,
+      "runStatus": "complete",
+      "marketStatus": {
+        "us": "ok",
+        "gb": "ok",
+        "ca": "ok",
+        "au": "ok"
+      }
+    },
     {
       "date": "2026-09-28",
       "generatedAt": "2026-09-28T09:39:00.052Z",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T12:20:58.525Z",
+  "generatedAt": "2026-09-29T09:43:26.902Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -14,7 +14,7 @@
         "4/4 healthy Games markets",
         "0 failed market(s)",
         "0 overall-chart fallback market(s)",
-        "2.7h snapshot age"
+        "0.0h snapshot age"
       ],
       "action": null
     },
@@ -26,7 +26,7 @@
         "12 candidates",
         "Apple lookup complete",
         "live evidence complete (8/8)",
-        "2.7h queue age"
+        "0.0h queue age"
       ],
       "action": null
     },
@@ -39,7 +39,7 @@
         "0 omitted task(s)",
         "8 capture session(s) cover 24 gameplay evidence task(s)",
         "derived from current research queue",
-        "2.7h verification age"
+        "0.0h verification age"
       ],
       "action": null
     },
@@ -49,8 +49,8 @@
       "state": "healthy",
       "facts": [
         "Tavily status complete",
-        "7/8 capture session(s) have public source suggestion(s)",
-        "20 suggested YouTube source(s)",
+        "6/8 capture session(s) have public source suggestion(s)",
+        "18 suggested YouTube source(s)",
         "8/8 provider request cap used",
         "8 search queries reported by provider",
         "derived from current verification queue",
@@ -63,7 +63,7 @@
       "label": "Exact Rank History",
       "state": "maturing",
       "facts": [
-        "3/7 consecutive exact dated snapshot(s)",
+        "4/7 consecutive exact dated snapshot(s)",
         "1d/3d/7d comparisons never interpolate missing dates"
       ],
       "action": "Keep scheduled collection running; time is the missing evidence."
@@ -74,8 +74,8 @@
       "state": "healthy",
       "facts": [
         "status complete",
-        "8 exact-date change(s)",
-        "8 attention item(s)"
+        "20 exact-date change(s)",
+        "20 attention item(s)"
       ],
       "action": null
     },
@@ -88,7 +88,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "1 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "0.0h policy-index age",
+        "21.4h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -112,7 +112,7 @@
         "provider status unconfigured",
         "0/50 AppBrain popularity position(s) available",
         "exact requested depth not currently available",
-        "1.3h provider observation age",
+        "22.6h provider observation age",
         "Positions are AppBrain provider-global popularity ordering, not official Google Play storefront ranks.",
         "Download values, when present, are third-party estimates and are never inferred from Apple ranks."
       ],
@@ -127,8 +127,8 @@
         "4/4 healthy Games market(s) represented",
         "chart depth matches Top 100",
         "derived from current Apple Radar snapshot",
-        "INSUFFICIENT_DATA 400",
-        "2.7h trend-signal age",
+        "DECLINING 97 · EMERGING 1 · INSUFFICIENT_DATA 192 · RISING 110",
+        "0.0h trend-signal age",
         "Visibility is a bounded chart-position heuristic; it is not downloads, revenue, market share, probability, or a build recommendation."
       ],
       "action": null
@@ -138,8 +138,8 @@
     {
       "priority": 3,
       "action": "DEEP_VERIFY_TOP_CANDIDATE",
-      "appId": "1546690510",
-      "name": "NoomiClone",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
       "why": "The highest-priority candidate still has an explicit gameplay-verification unknown; 3 public source suggestion(s) are available for inspection."
     },
     {
@@ -154,9 +154,9 @@
     }
   ],
   "facts": {
-    "radarDate": "2026-09-28",
-    "researchQueueDate": "2026-09-28",
-    "exactHistoryDays": 3,
+    "radarDate": "2026-09-29",
+    "researchQueueDate": "2026-09-29",
+    "exactHistoryDays": 4,
     "verificationTaskCount": 48,
     "verificationRawTaskCount": 48,
     "verificationOmittedTaskCount": 0,
@@ -165,7 +165,7 @@
     "verificationDerivedFromCurrentQueue": true,
     "gameplayDiscoveryConfigured": true,
     "gameplayDiscoveryProvider": "tavily",
-    "gameplayDiscoveryCandidateCount": 20,
+    "gameplayDiscoveryCandidateCount": 18,
     "gameplayDiscoveryRequestsUsed": 8,
     "gameplayDiscoverySearchQueriesUsed": 8,
     "gameplayDiscoveryDerivedFromCurrentVerification": true,
@@ -180,7 +180,7 @@
     "googlePlayRadarEntryCount": 0,
     "googlePlayRadarRequestedDepth": 50,
     "googlePlayRadarExactDepth": false,
-    "googlePlayRadarAgeHours": 1.2622022222222222,
+    "googlePlayRadarAgeHours": 22.63675138888889,
     "trendSignalCount": 400,
     "trendExpectedSignalCount": 400,
     "trendHealthyMarketCount": 4,
@@ -188,7 +188,10 @@
     "trendDerivedFromCurrentRadar": true,
     "trendChartDepthMatches": true,
     "trendStateCounts": {
-      "INSUFFICIENT_DATA": 400
+      "INSUFFICIENT_DATA": 192,
+      "RISING": 110,
+      "DECLINING": 97,
+      "EMERGING": 1
     }
   }
 }
