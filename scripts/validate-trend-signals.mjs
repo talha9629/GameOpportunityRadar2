@@ -1,29 +1,37 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { consecutiveSnapshotDays, MIN_TREND_HISTORY_DAYS } from './trend-state.mjs';
 
 const radar = JSON.parse(fs.readFileSync(path.resolve('public/data/radar/latest.json'), 'utf8'));
+const radarIndex = JSON.parse(fs.readFileSync(path.resolve('public/data/radar/index.json'), 'utf8'));
 const signals = JSON.parse(fs.readFileSync(path.resolve('public/data/radar/trend-signals.json'), 'utf8'));
 const errors = [];
 const assert = (condition, message) => { if (!condition) errors.push(message); };
 
 const allowedStates = new Set(['EMERGING', 'RISING', 'ESTABLISHED', 'DECLINING', 'INSUFFICIENT_DATA']);
 const allowedWindowStates = new Set(['available', 'history_missing', 'not_ranked', 'market_failed', 'source_mismatch', 'coverage_gap']);
+const radarDate = String(radar.generatedAt).slice(0, 10);
+const consecutiveHistoryDays = consecutiveSnapshotDays(radarIndex, radarDate);
 
 assert(signals.schemaVersion === 1, 'schemaVersion must be 1');
 assert(signals.radarGeneratedAt === radar.generatedAt, 'trend signals must derive from the current Radar snapshot');
-assert(signals.radarDate === String(radar.generatedAt).slice(0, 10), 'radarDate mismatch');
+assert(signals.radarDate === radarDate, 'radarDate mismatch');
 assert(signals.chart === 'top-free' && signals.category === 'Games', 'unexpected chart/category');
 assert(Number.isInteger(signals.chartDepth) && signals.chartDepth >= 10 && signals.chartDepth <= 100, 'invalid chartDepth');
 assert(signals.chartDepth === radar.chartDepth, 'trend chartDepth must match Radar chartDepth');
 assert(signals.method?.name === 'exact_rank_trend_signals_v1', 'unexpected trend method');
+assert(signals.method?.minimumConsecutiveHistoryDays === MIN_TREND_HISTORY_DAYS, 'trend maturity threshold must remain seven consecutive exact days');
 assert(signals.method?.visibilityFormula === 'ln((N+1)/rank)/ln(N+1)', 'visibility formula changed');
-assert(/3-day/i.test(signals.method?.directionalStateRule ?? ''), 'directional state rule must require exact 3-day evidence');
+assert(/7-day history maturity gate/i.test(signals.method?.directionalStateRule ?? ''), 'directional state rule must require the 7-day maturity gate');
+assert(/3-day/i.test(signals.method?.directionalStateRule ?? ''), 'directional state rule must require exact 3-day evidence after maturity');
 assert(/one-day movement/i.test(signals.method?.directionalStateRule ?? ''), 'directional state rule must separate 1-day movement facts');
+assert(/7 consecutive exact dated snapshots/i.test(signals.method?.historyMaturityRule ?? ''), 'history maturity rule must document seven consecutive exact snapshots');
 assert(/not download share/i.test(signals.statement), 'statement must reject download-share interpretation');
 assert(/not.*build recommendation/i.test(signals.statement), 'statement must reject build recommendation');
 assert(!signals.method?.statesEmitted?.includes('CROWDED'), 'CROWDED cannot be emitted from rank evidence alone');
 assert(!signals.method?.statesEmitted?.includes('WINDOW_CLOSING'), 'WINDOW_CLOSING cannot be emitted from rank evidence alone');
 assert(/coverage_gap/i.test(signals.method?.missingHistoryRule ?? ''), 'missing-history rule must document shallow-chart coverage gaps');
+assert(signals.summary?.consecutiveHistoryDays === consecutiveHistoryDays, 'summary consecutiveHistoryDays mismatch');
 
 let signalCount = 0;
 const stateCounts = {};
@@ -66,22 +74,29 @@ for (const [marketCode, market] of Object.entries(signals.markets ?? {})) {
       }
     }
 
+    if (consecutiveHistoryDays < MIN_TREND_HISTORY_DAYS) {
+      assert(signal.trend.state === 'INSUFFICIENT_DATA', `${marketCode} ${signal.appId} cannot emit ${signal.trend.state} before ${MIN_TREND_HISTORY_DAYS} consecutive exact days`);
+    }
     if (signal.trend.state === 'INSUFFICIENT_DATA') {
       assert(signal.trend.evidenceDays.length === 0, `${marketCode} ${signal.appId} insufficient state cannot cite a qualifying trend window`);
     }
     if (signal.trend.state === 'EMERGING') {
+      assert(consecutiveHistoryDays >= MIN_TREND_HISTORY_DAYS, `${marketCode} ${signal.appId} emerging requires mature history`);
       assert(signal.exactWindows['3d'].status === 'not_ranked' && signal.rank <= 20, `${marketCode} ${signal.appId} emerging gate must use exact 3-day absence`);
       assert(signal.trend.evidenceDays.length === 1 && signal.trend.evidenceDays[0] === 3, `${marketCode} ${signal.appId} emerging must cite 3d evidence`);
     }
     if (signal.trend.state === 'RISING') {
+      assert(consecutiveHistoryDays >= MIN_TREND_HISTORY_DAYS, `${marketCode} ${signal.appId} rising requires mature history`);
       assert(signal.exactWindows['3d'].status === 'available' && signal.exactWindows['3d'].delta >= 5, `${marketCode} ${signal.appId} RISING must use +5 or better exact 3-day movement`);
       assert(signal.trend.evidenceDays.length === 1 && signal.trend.evidenceDays[0] === 3, `${marketCode} ${signal.appId} RISING must cite 3d evidence`);
     }
     if (signal.trend.state === 'DECLINING') {
+      assert(consecutiveHistoryDays >= MIN_TREND_HISTORY_DAYS, `${marketCode} ${signal.appId} declining requires mature history`);
       assert(signal.exactWindows['3d'].status === 'available' && signal.exactWindows['3d'].delta <= -5, `${marketCode} ${signal.appId} DECLINING must use -5 or worse exact 3-day movement`);
       assert(signal.trend.evidenceDays.length === 1 && signal.trend.evidenceDays[0] === 3, `${marketCode} ${signal.appId} DECLINING must cite 3d evidence`);
     }
     if (signal.trend.state === 'ESTABLISHED') {
+      assert(consecutiveHistoryDays >= MIN_TREND_HISTORY_DAYS, `${marketCode} ${signal.appId} established requires mature history`);
       assert(signal.daysObserved >= 7 && signal.rank <= 30, `${marketCode} ${signal.appId} established persistence gate invalid`);
       assert(signal.exactWindows['3d'].status === 'available' && signal.exactWindows['7d'].status === 'available', `${marketCode} ${signal.appId} established requires exact 3d and 7d windows`);
       assert(Math.abs(signal.exactWindows['3d'].delta) < 5 && Math.abs(signal.exactWindows['7d'].delta) < 8, `${marketCode} ${signal.appId} established movement is too directional`);
@@ -107,4 +122,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`[trend-signals] validation PASS · ${signalCount} exact chart signal(s) · conservative 3d state gates · ${JSON.stringify(stateCounts)}`);
+console.log(`[trend-signals] validation PASS · ${signalCount} exact chart signal(s) · history ${consecutiveHistoryDays}/${MIN_TREND_HISTORY_DAYS} · ${JSON.stringify(stateCounts)}`);
