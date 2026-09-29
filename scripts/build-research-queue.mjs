@@ -1,5 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { applyResearchTrendMaturity } from './research-trend.mjs';
+import { consecutiveSnapshotDays, MIN_TREND_HISTORY_DAYS } from './trend-state.mjs';
 
 const radarRoot = path.resolve('public/data/radar');
 const queueRoot = path.resolve('public/data/research');
@@ -99,6 +101,8 @@ function buildAggregates(latest, history) {
   const currentDate = dateKey(latest.generatedAt);
   if (!currentDate) throw new Error('Latest Radar snapshot has no usable generatedAt date.');
   const currentChartDepth = Number.isInteger(latest.chartDepth) ? latest.chartDepth : 50;
+  const radarIndex = readJson(radarIndexPath, { snapshots: [] });
+  const consecutiveHistoryDays = consecutiveSnapshotDays(radarIndex, currentDate);
   const aggregate = new Map();
   for (const [marketCode, market] of Object.entries(latest.markets ?? {})) {
     if (market?.status !== 'ok' || market?.gameFocused === false || !Array.isArray(market.entries)) continue;
@@ -121,7 +125,7 @@ function buildAggregates(latest, history) {
       const available = perMarket.filter((signal) => signal.status === 'available'); const status = summarizeWindowStatus(perMarket);
       return [`${days}d`, { days, status, bestUpwardDelta: status === 'available' ? Math.max(...available.map((signal) => signal.delta)) : null, perMarket }];
     }));
-    const trend = classifyTrend(exactWindows);
+    const trend = applyResearchTrendMaturity(classifyTrend(exactWindows), consecutiveHistoryDays);
     const oneDayUp = exactWindows['1d'].status === 'available' ? exactWindows['1d'].bestUpwardDelta : null;
     const reasons = []; let priority = 0;
     if (marketCount >= 4) { priority += 35; reasons.push('CROSS_MARKET_4'); } else if (marketCount === 3) { priority += 30; reasons.push('CROSS_MARKET_3'); } else if (marketCount === 2) { priority += 22; reasons.push('CROSS_MARKET_2'); }
@@ -181,7 +185,7 @@ const candidates = aggregates.map((candidate, index) => ({
 
 const output = {
   schemaVersion: 1, generatedAt: new Date().toISOString(), radarDate, radarGeneratedAt: latest.generatedAt,
-  method: { name: 'deterministic_research_priority_v1', inputs: ['Apple Games chart rank', 'cross-market presence', 'exact comparable observed rank movement', 'new-entry status', 'consecutive observed persistence'], exclusions: ['downloads', 'revenue', 'rating', 'publisher size', 'AI opinion', 'incompatible chart-source comparisons'], statement: 'Priority orders what to investigate first. Rank visibility and trend state are descriptive chart transforms, not opportunity scores, predictions, download estimates or causal claims.' },
+  method: { name: 'deterministic_research_priority_v1', inputs: ['Apple Games chart rank', 'cross-market presence', 'exact comparable observed rank movement', 'new-entry status', 'consecutive observed persistence'], exclusions: ['downloads', 'revenue', 'rating', 'publisher size', 'AI opinion', 'incompatible chart-source comparisons'], minimumConsecutiveTrendHistoryDays: MIN_TREND_HISTORY_DAYS, earlyMovementRule: 'Exact 1-day movement and observed persistence may order research work before trend maturity, but they cannot activate EMERGING, RISING, ESTABLISHED or DECLINING before 7 consecutive exact daily snapshots.', statement: 'Priority orders what to investigate first. Rank visibility and trend state are descriptive chart transforms, not opportunity scores, predictions, download estimates or causal claims.' },
   sources: {
     appleCharts: { status: Object.values(latest.markets).every((market) => market?.status === 'ok') ? 'complete' : 'partial', origin: 'official_public', observedAt: latest.generatedAt, healthyGameMarkets: Object.values(latest.markets).filter((market) => market?.status === 'ok' && market?.gameFocused !== false).length },
     appleLookup: { status: apple.failures.length === 0 ? 'complete' : apple.metadata.size > 0 ? 'partial' : 'failed', origin: 'official_public', successfulApps: apple.metadata.size, failures: apple.failures },
@@ -189,7 +193,8 @@ const output = {
   },
   limitations: [
     'App Store chart rank and the bounded visibility transform are ordinal chart evidence; neither is a download count, download share, revenue figure or causal measure of demand.',
-    'Trend state uses exact dated rank observations only. CROWDED and WINDOW_CLOSING are intentionally not assigned from rank history alone because they require saturation evidence.',
+    'Trend state uses exact dated rank observations only and remains INSUFFICIENT_DATA until 7 consecutive exact daily snapshots exist. CROWDED and WINDOW_CLOSING are intentionally not assigned from rank history alone because they require saturation evidence.',
+    'Exact early movement and persistence may prioritize investigation as factual triage signals before 7 days; they do not constitute a mature trend state or momentum conclusion.',
     'A shallower historical chart can create a coverage gap for current ranks below the old cutoff; Radar labels that UNKNOWN instead of treating the title as a new entrant.',
     'The queue currently covers Apple Games charts in US, UK, Canada and Australia; Android is not inferred from iOS.',
     'A missing exact historical date remains UNKNOWN. The queue never interpolates missing rank history.',
