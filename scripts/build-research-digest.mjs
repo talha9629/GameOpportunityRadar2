@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { buildDigestCandidateSnapshot, exactComparisonAvailableEventType } from './research-digest-facts.mjs';
 
 const researchRoot = path.resolve('public/data/research');
 const latestPath = path.join(researchRoot, 'latest.json');
@@ -14,18 +15,6 @@ function subtractUtcDays(date, days) {
   const value = new Date(`${date}T00:00:00Z`);
   value.setUTCDate(value.getUTCDate() - days);
   return value.toISOString().slice(0, 10);
-}
-
-function lifecycle(candidate) {
-  const threeDay = candidate?.evidence?.exactWindows?.['3d'];
-  if (threeDay?.status === 'available' && threeDay.bestUpwardDelta != null) {
-    if (threeDay.bestUpwardDelta > 0) return { state: 'RISING_EXACT_3D', evidence: `Best exact 3d rank improvement is +${threeDay.bestUpwardDelta}.` };
-    if (threeDay.bestUpwardDelta < 0) return { state: 'FALLING_EXACT_3D', evidence: `Best exact 3d rank change is ${threeDay.bestUpwardDelta}.` };
-    return { state: 'FLAT_EXACT_3D', evidence: 'Best exact 3d rank change is 0.' };
-  }
-  if ((candidate?.evidence?.maxObservedDays ?? 0) >= 7) return { state: 'PERSISTING_7D', evidence: `Observed on tracked chart for ${candidate.evidence.maxObservedDays} consecutive day(s).` };
-  if ((candidate?.evidence?.maxObservedDays ?? 0) >= 3) return { state: 'PERSISTING_3D', evidence: `Observed on tracked chart for ${candidate.evidence.maxObservedDays} consecutive day(s).` };
-  return { state: 'INSUFFICIENT_HISTORY', evidence: `Only ${candidate?.evidence?.maxObservedDays ?? 0} consecutive observed day(s); no 3-day direction is claimed.` };
 }
 
 function reasonDelta(currentReasons, previousReasons) {
@@ -157,14 +146,19 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
       const currentSignal = candidate.evidence?.exactWindows?.[key];
       if (priorStatus !== 'available' && currentSignal?.status === 'available') {
         changes.push({
-          type: `EXACT_${days}D_HISTORY_MATURED`,
+          type: exactComparisonAvailableEventType(days),
           appId: candidate.appId,
           name: candidate.name,
           ...presentation(candidate, prior),
           significance: 'attention',
           current: currentSignal.bestUpwardDelta,
           currentBestRank: candidate.evidence.bestRank,
-          evidence: [`Exact ${days}-day comparison is now available.`, `Best upward delta: ${currentSignal.bestUpwardDelta ?? 'no positive move'}.`, `Current best Games rank #${candidate.evidence.bestRank}.`],
+          evidence: [
+            `Exact ${days}-day comparison is now available.`,
+            `Best upward delta: ${currentSignal.bestUpwardDelta ?? 'no positive move'}.`,
+            `Current best Games rank #${candidate.evidence.bestRank}.`,
+            days === 3 ? 'Comparison availability is a movement fact, not proof that the 7-day trend-history maturity gate has been met.' : 'The candidate trend state remains authoritative; this event only records comparison availability.',
+          ],
         });
       }
     }
@@ -191,23 +185,15 @@ if (previous?.radarDate === comparisonDate && Array.isArray(previous?.candidates
   }
 }
 
-const states = current.candidates.map((candidate) => ({
-  appId: candidate.appId,
-  name: candidate.name,
-  iconUrl: candidate.iconUrl ?? null,
-  publisher: candidate.publisher ?? null,
-  queueRank: candidate.queueRank,
-  researchPriority: candidate.researchPriority,
-  ...lifecycle(candidate),
-}));
+const candidateSnapshots = current.candidates.map(buildDigestCandidateSnapshot);
 
 const digest = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   generatedAt: new Date().toISOString(),
   currentDate: current.radarDate,
   comparisonDate,
   status: previous?.radarDate === comparisonDate ? 'complete' : 'history_pending',
-  statement: 'This digest reports exact observed changes between dated research queues. It does not predict success, downloads, revenue, or causal demand.',
+  statement: 'This digest reports exact observed changes between dated research queues. It does not predict success, downloads, revenue, causal demand, or create an independent trend classification.',
   summary: {
     currentCandidateCount: current.candidates.length,
     changeCount: changes.length,
@@ -215,19 +201,20 @@ const digest = {
     newCandidates: changes.filter((change) => change.type === 'NEW_TO_RESEARCH_QUEUE').length,
     droppedCandidates: changes.filter((change) => change.type === 'DROPPED_FROM_RESEARCH_QUEUE').length,
     marketChanges: changes.filter((change) => change.type.startsWith('CROSS_MARKET_')).length,
-    maturityEvents: changes.filter((change) => /^EXACT_[37]D_HISTORY_MATURED$/.test(change.type)).length,
+    comparisonAvailabilityEvents: changes.filter((change) => /^EXACT_[37]D_COMPARISON_AVAILABLE$/.test(change.type)).length,
   },
   limitations: [
     'No previous exact-date queue means history_pending, not zero change.',
     'Priority changes reflect deterministic triage inputs, not changes in probability of commercial success.',
     'Dropped-from-queue is a triage state only and is not a claim about installs, revenue, retention or product quality.',
-    'RISING/FALLING lifecycle states are only emitted when an exact 3-day rank comparison exists.',
+    'An exact 3-day or 7-day comparison becoming available is a movement-data event, not a history-maturity event.',
+    'Mature trend labels are copied from the research queue and remain INSUFFICIENT_DATA until the shared 7-consecutive-exact-day gate is satisfied.',
   ],
   changes,
-  states,
+  candidateSnapshots,
 };
 
 fs.mkdirSync(digestHistoryRoot, { recursive: true });
 fs.writeFileSync(digestPath, `${JSON.stringify(digest, null, 2)}\n`);
 fs.writeFileSync(path.join(digestHistoryRoot, `${current.radarDate}.json`), `${JSON.stringify(digest, null, 2)}\n`);
-console.log(`[research-digest] ${digest.status} · ${digest.summary.changeCount} changes · ${digest.summary.attentionCount} attention · ${states.length} states`);
+console.log(`[research-digest] ${digest.status} · ${digest.summary.changeCount} changes · ${digest.summary.attentionCount} attention · ${candidateSnapshots.length} candidate snapshots`);
