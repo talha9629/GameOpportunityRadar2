@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T09:35:13.124Z",
-  "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-  "radarDate": "2026-09-30",
+  "generatedAt": "2026-10-01T10:01:14.351Z",
+  "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+  "radarDate": "2026-10-01",
   "statement": "Verification Queue routes explicit unresolved Radar unknowns to admissible evidence. It does not create facts, predict success, or mark an unknown resolved without evidence.",
   "method": {
     "name": "explicit_unknown_evidence_router_v1",
@@ -39,11 +39,11 @@
   "captureSessions": [
     {
       "sessionOrder": 1,
-      "sessionId": "8162c1b0ceb51d12392a7714",
-      "appId": "1521236603",
-      "name": "Travel Town - Merge Adventure",
+      "sessionId": "d47d15c0810f18905edaf9ae",
+      "appId": "6741921686",
+      "name": "Bloons Blitz",
       "queueRank": 1,
-      "researchPriority": 72,
+      "researchPriority": 77,
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
       "automationState": "ready_for_human_evidence",
@@ -52,9 +52,9 @@
       "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
       "taskCount": 3,
       "taskIds": [
-        "aa75c3f5a3b3d16b08743bd6",
-        "86df5b04b13b4338eb82f5a5",
-        "a1615f36a393efdb3801b16a"
+        "12fb87c13a223b2c9fd7156a",
+        "aa0c7e3f15051ec34d660505",
+        "e1cf251ecf4a837fce1f4b34"
       ],
       "unknowns": [
         "Core mechanic has not been gameplay-verified.",
@@ -67,51 +67,17 @@
         "meta_progression"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:10.748Z"
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.731Z"
       }
     },
     {
       "sessionOrder": 2,
-      "sessionId": "1de872eb134193c39a1dd9ee",
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
-      "queueRank": 2,
-      "researchPriority": 66,
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "automationState": "ready_for_human_evidence",
-      "impact": "critical",
-      "actionLabel": "Capture one gameplay session",
-      "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
-      "taskCount": 3,
-      "taskIds": [
-        "8e3187c6b6e1d77d6c7069ed",
-        "aeea3612a8f744c74bad4459",
-        "dd3433c9ad072973bf197563"
-      ],
-      "unknowns": [
-        "Core mechanic has not been gameplay-verified.",
-        "Monetization placement and frequency are unknown until gameplay evidence is added.",
-        "Meta progression and retention systems are only partially observable from the listing."
-      ],
-      "categories": [
-        "gameplay_mechanic",
-        "monetization_placement",
-        "meta_progression"
-      ],
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.143Z"
-      }
-    },
-    {
-      "sessionOrder": 3,
       "sessionId": "d7b6b2d3396b26f15799ac5d",
       "appId": "6804464432",
       "name": "Songless: Guess the Song!",
-      "queueRank": 3,
-      "researchPriority": 65,
+      "queueRank": 2,
+      "researchPriority": 70,
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
       "automationState": "ready_for_human_evidence",
@@ -135,8 +101,42 @@
         "monetization_placement"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.382Z"
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.896Z"
+      }
+    },
+    {
+      "sessionOrder": 3,
+      "sessionId": "ea059d0454b4206bc64c47d2",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "queueRank": 3,
+      "researchPriority": 66,
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "automationState": "ready_for_human_evidence",
+      "impact": "critical",
+      "actionLabel": "Capture one gameplay session",
+      "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
+      "taskCount": 3,
+      "taskIds": [
+        "7a21795328d416a766bc2ba9",
+        "902f048dd19ba484b96947f8",
+        "db2ca7ae4deb08770f202aab"
+      ],
+      "unknowns": [
+        "Core mechanic has not been gameplay-verified.",
+        "Meta progression and retention systems are only partially observable from the listing.",
+        "Monetization placement and frequency are unknown until gameplay evidence is added."
+      ],
+      "categories": [
+        "gameplay_mechanic",
+        "meta_progression",
+        "monetization_placement"
+      ],
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.067Z"
       }
     },
     {
@@ -169,8 +169,8 @@
         "meta_progression"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.692Z"
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.281Z"
       }
     },
     {
@@ -203,15 +203,15 @@
         "meta_progression"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.991Z"
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.536Z"
       }
     },
     {
       "sessionOrder": 6,
-      "sessionId": "5198a1fe31aa7054c95ca1bc",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "sessionId": "1de872eb134193c39a1dd9ee",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 6,
       "researchPriority": 61,
       "evidenceType": "deep_verify_video",
@@ -222,9 +222,9 @@
       "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
       "taskCount": 3,
       "taskIds": [
-        "cc7f6c40ed6e68e742ec426d",
-        "1aca86eb56d158e1c0953645",
-        "f42004c23cab8cb2cdacfb5f"
+        "8e3187c6b6e1d77d6c7069ed",
+        "aeea3612a8f744c74bad4459",
+        "dd3433c9ad072973bf197563"
       ],
       "unknowns": [
         "Core mechanic has not been gameplay-verified.",
@@ -237,15 +237,15 @@
         "meta_progression"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.290Z"
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.771Z"
       }
     },
     {
       "sessionOrder": 7,
-      "sessionId": "131018038bf6804ca35ce2eb",
-      "appId": "6499209744",
-      "name": "Magic Sort!",
+      "sessionId": "a7ed1fe74505c6ed1bc6fdbc",
+      "appId": "6779167923",
+      "name": "Colony Flow!",
       "queueRank": 7,
       "researchPriority": 60,
       "evidenceType": "deep_verify_video",
@@ -256,9 +256,9 @@
       "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
       "taskCount": 3,
       "taskIds": [
-        "ea2c11014479ba723ae80f33",
-        "81861a852cd27c3e9ddc68ee",
-        "f309944a3840750420e2d684"
+        "0da8c8ae3c9c4c95b6ff5e1d",
+        "6c107c0b9cc2d220889fcce2",
+        "e397bd6fde799b41b1b6748b"
       ],
       "unknowns": [
         "Core mechanic has not been gameplay-verified.",
@@ -271,17 +271,17 @@
         "monetization_placement"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.611Z"
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.966Z"
       }
     },
     {
       "sessionOrder": 8,
-      "sessionId": "bdd1c4f061e300b41ac1383c",
-      "appId": "6756482832",
-      "name": "Brain Puzzle 3: Crazy Mind",
+      "sessionId": "6ad11f74465d2b9c03bed4dd",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
       "queueRank": 8,
-      "researchPriority": 60,
+      "researchPriority": 56,
       "evidenceType": "deep_verify_video",
       "evidenceMode": "user_capture_or_public_youtube",
       "automationState": "ready_for_human_evidence",
@@ -290,9 +290,9 @@
       "why": "One representative gameplay and menu capture can provide timestamped evidence for these related unknowns. Each atomic unknown remains unresolved until the captured evidence is reviewed against it.",
       "taskCount": 3,
       "taskIds": [
-        "1fbba2d25b5d650f1a4c7808",
-        "3c55373a994dbc2ee21165e6",
-        "d2864bcf3aa7844c5b89adb9"
+        "a130eca362bf91cf4fdb26be",
+        "90712835b6ddcf57f0601245",
+        "b547b8e3dc2025299a4fe52c"
       ],
       "unknowns": [
         "Core mechanic has not been gameplay-verified.",
@@ -305,19 +305,19 @@
         "monetization_placement"
       ],
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.883Z"
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:14.116Z"
       }
     }
   ],
   "tasks": [
     {
       "verificationOrder": 1,
-      "taskId": "aa75c3f5a3b3d16b08743bd6",
-      "appId": "1521236603",
-      "name": "Travel Town - Merge Adventure",
+      "taskId": "12fb87c13a223b2c9fd7156a",
+      "appId": "6741921686",
+      "name": "Bloons Blitz",
       "queueRank": 1,
-      "researchPriority": 72,
+      "researchPriority": 77,
       "unknown": "Core mechanic has not been gameplay-verified.",
       "category": "gameplay_mechanic",
       "evidenceType": "deep_verify_video",
@@ -327,18 +327,40 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:10.748Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.731Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 2,
-      "taskId": "8e3187c6b6e1d77d6c7069ed",
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
+      "taskId": "a2680102e6d8f0a3e00ea58d",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 2,
+      "researchPriority": 70,
+      "unknown": "Core mechanic has not been gameplay-verified.",
+      "category": "gameplay_mechanic",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "impact": "critical",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Deep Verify gameplay",
+      "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.896Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 3,
+      "taskId": "7a21795328d416a766bc2ba9",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "queueRank": 3,
       "researchPriority": 66,
       "unknown": "Core mechanic has not been gameplay-verified.",
       "category": "gameplay_mechanic",
@@ -349,30 +371,8 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.143Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 3,
-      "taskId": "a2680102e6d8f0a3e00ea58d",
-      "appId": "6804464432",
-      "name": "Songless: Guess the Song!",
-      "queueRank": 3,
-      "researchPriority": 65,
-      "unknown": "Core mechanic has not been gameplay-verified.",
-      "category": "gameplay_mechanic",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "impact": "critical",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Deep Verify gameplay",
-      "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.382Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.067Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -393,8 +393,8 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.692Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.281Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -415,17 +415,17 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.991Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.536Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 6,
-      "taskId": "cc7f6c40ed6e68e742ec426d",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "8e3187c6b6e1d77d6c7069ed",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 6,
       "researchPriority": 61,
       "unknown": "Core mechanic has not been gameplay-verified.",
@@ -437,17 +437,17 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.290Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.771Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 7,
-      "taskId": "ea2c11014479ba723ae80f33",
-      "appId": "6499209744",
-      "name": "Magic Sort!",
+      "taskId": "0da8c8ae3c9c4c95b6ff5e1d",
+      "appId": "6779167923",
+      "name": "Colony Flow!",
       "queueRank": 7,
       "researchPriority": 60,
       "unknown": "Core mechanic has not been gameplay-verified.",
@@ -459,19 +459,19 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.611Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.966Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 8,
-      "taskId": "1fbba2d25b5d650f1a4c7808",
-      "appId": "6756482832",
-      "name": "Brain Puzzle 3: Crazy Mind",
+      "taskId": "a130eca362bf91cf4fdb26be",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
       "queueRank": 8,
-      "researchPriority": 60,
+      "researchPriority": 56,
       "unknown": "Core mechanic has not been gameplay-verified.",
       "category": "gameplay_mechanic",
       "evidenceType": "deep_verify_video",
@@ -481,63 +481,63 @@
       "actionLabel": "Deep Verify gameplay",
       "why": "A timestamped gameplay source can directly verify the core interaction loop without treating listing language as gameplay evidence.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.883Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:14.116Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 9,
-      "taskId": "09905a1a95b8a497d6da2aa0",
-      "appId": "1521236603",
-      "name": "Travel Town - Merge Adventure",
+      "taskId": "146f52acf5f2dcf490bdda1e",
+      "appId": "6741921686",
+      "name": "Bloons Blitz",
       "queueRank": 1,
-      "researchPriority": 72,
-      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
-      "category": "competitor_relationship",
-      "evidenceType": "competitor_map",
-      "evidenceMode": "human_confirmed_relationships",
+      "researchPriority": 77,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
       "impact": "high",
-      "automationState": "ready_for_human_review",
-      "actionLabel": "Confirm competitor family",
-      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:10.748Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.731Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 10,
-      "taskId": "865ecd74141b5c50a536ebf6",
-      "appId": "1521236603",
-      "name": "Travel Town - Merge Adventure",
+      "taskId": "83e38f3e7a8d3b52ba01590e",
+      "appId": "6741921686",
+      "name": "Bloons Blitz",
       "queueRank": 1,
-      "researchPriority": 72,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
+      "researchPriority": 77,
+      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
+      "category": "competitor_relationship",
+      "evidenceType": "competitor_map",
+      "evidenceMode": "human_confirmed_relationships",
       "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "automationState": "ready_for_human_review",
+      "actionLabel": "Confirm competitor family",
+      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:10.748Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.731Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 11,
-      "taskId": "86df5b04b13b4338eb82f5a5",
-      "appId": "1521236603",
-      "name": "Travel Town - Merge Adventure",
+      "taskId": "aa0c7e3f15051ec34d660505",
+      "appId": "6741921686",
+      "name": "Bloons Blitz",
       "queueRank": 1,
-      "researchPriority": 72,
+      "researchPriority": 77,
       "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
       "category": "monetization_placement",
       "evidenceType": "deep_verify_video",
@@ -547,19 +547,19 @@
       "actionLabel": "Verify monetization in gameplay",
       "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:10.748Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.731Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 12,
-      "taskId": "a1615f36a393efdb3801b16a",
-      "appId": "1521236603",
-      "name": "Travel Town - Merge Adventure",
+      "taskId": "e1cf251ecf4a837fce1f4b34",
+      "appId": "6741921686",
+      "name": "Bloons Blitz",
       "queueRank": 1,
-      "researchPriority": 72,
+      "researchPriority": 77,
       "unknown": "Meta progression and retention systems are only partially observable from the listing.",
       "category": "meta_progression",
       "evidenceType": "deep_verify_video",
@@ -569,63 +569,63 @@
       "actionLabel": "Verify meta and retention loop",
       "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:10.748Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.731Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 13,
-      "taskId": "10f9e1fba5823f7927b2aae5",
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
+      "taskId": "61c37bb7091683495769f225",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 2,
-      "researchPriority": 66,
-      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
-      "category": "competitor_relationship",
-      "evidenceType": "competitor_map",
-      "evidenceMode": "human_confirmed_relationships",
+      "researchPriority": 70,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
       "impact": "high",
-      "automationState": "ready_for_human_review",
-      "actionLabel": "Confirm competitor family",
-      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.143Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.896Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 14,
-      "taskId": "4614ad9a92a19872212a3746",
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
+      "taskId": "6ed92a47035bdc4c9d135d77",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 2,
-      "researchPriority": 66,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
+      "researchPriority": 70,
+      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
+      "category": "meta_progression",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
       "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify meta and retention loop",
+      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.143Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.896Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 15,
-      "taskId": "aeea3612a8f744c74bad4459",
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
+      "taskId": "74968d138fd784f5c978ae03",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 2,
-      "researchPriority": 66,
+      "researchPriority": 70,
       "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
       "category": "monetization_placement",
       "evidenceType": "deep_verify_video",
@@ -635,107 +635,19 @@
       "actionLabel": "Verify monetization in gameplay",
       "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.143Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.896Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 16,
-      "taskId": "dd3433c9ad072973bf197563",
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
-      "queueRank": 2,
-      "researchPriority": 66,
-      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
-      "category": "meta_progression",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify meta and retention loop",
-      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.143Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 17,
-      "taskId": "61c37bb7091683495769f225",
-      "appId": "6804464432",
-      "name": "Songless: Guess the Song!",
-      "queueRank": 3,
-      "researchPriority": 65,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
-      "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.382Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 18,
-      "taskId": "6ed92a47035bdc4c9d135d77",
-      "appId": "6804464432",
-      "name": "Songless: Guess the Song!",
-      "queueRank": 3,
-      "researchPriority": 65,
-      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
-      "category": "meta_progression",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify meta and retention loop",
-      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.382Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 19,
-      "taskId": "74968d138fd784f5c978ae03",
-      "appId": "6804464432",
-      "name": "Songless: Guess the Song!",
-      "queueRank": 3,
-      "researchPriority": 65,
-      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
-      "category": "monetization_placement",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify monetization in gameplay",
-      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.382Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 20,
       "taskId": "9d7d26e098dadaed43603c18",
       "appId": "6804464432",
       "name": "Songless: Guess the Song!",
-      "queueRank": 3,
-      "researchPriority": 65,
+      "queueRank": 2,
+      "researchPriority": 70,
       "unknown": "Competitor family and differentiation room have not been human-confirmed.",
       "category": "competitor_relationship",
       "evidenceType": "competitor_map",
@@ -745,8 +657,96 @@
       "actionLabel": "Confirm competitor family",
       "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.382Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.896Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 17,
+      "taskId": "7e5374b6ebfa176cb78ea3c4",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "queueRank": 3,
+      "researchPriority": 66,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
+      "impact": "high",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.067Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 18,
+      "taskId": "902f048dd19ba484b96947f8",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "queueRank": 3,
+      "researchPriority": 66,
+      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
+      "category": "meta_progression",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "impact": "high",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify meta and retention loop",
+      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.067Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 19,
+      "taskId": "d0e3a07d44dea093f88d23c5",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "queueRank": 3,
+      "researchPriority": 66,
+      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
+      "category": "competitor_relationship",
+      "evidenceType": "competitor_map",
+      "evidenceMode": "human_confirmed_relationships",
+      "impact": "high",
+      "automationState": "ready_for_human_review",
+      "actionLabel": "Confirm competitor family",
+      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.067Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 20,
+      "taskId": "db2ca7ae4deb08770f202aab",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "queueRank": 3,
+      "researchPriority": 66,
+      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
+      "category": "monetization_placement",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "impact": "high",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify monetization in gameplay",
+      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.067Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -767,8 +767,8 @@
       "actionLabel": "Confirm competitor family",
       "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.692Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.281Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -789,8 +789,8 @@
       "actionLabel": "Verify monetization in gameplay",
       "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.692Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.281Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -811,8 +811,8 @@
       "actionLabel": "Verify meta and retention loop",
       "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.692Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.281Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -833,8 +833,8 @@
       "actionLabel": "Collect exact rank history",
       "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.692Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.281Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -855,8 +855,8 @@
       "actionLabel": "Verify monetization in gameplay",
       "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.991Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.536Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -877,8 +877,8 @@
       "actionLabel": "Confirm competitor family",
       "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.991Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.536Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -899,8 +899,8 @@
       "actionLabel": "Verify meta and retention loop",
       "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.991Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.536Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -921,39 +921,39 @@
       "actionLabel": "Collect exact rank history",
       "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.991Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.536Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 29,
-      "taskId": "1aca86eb56d158e1c0953645",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "10f9e1fba5823f7927b2aae5",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 6,
       "researchPriority": 61,
-      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
-      "category": "monetization_placement",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
+      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
+      "category": "competitor_relationship",
+      "evidenceType": "competitor_map",
+      "evidenceMode": "human_confirmed_relationships",
       "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify monetization in gameplay",
-      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
+      "automationState": "ready_for_human_review",
+      "actionLabel": "Confirm competitor family",
+      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.290Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.771Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 30,
-      "taskId": "51218cb34e53f6dfb871c165",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "4614ad9a92a19872212a3746",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 6,
       "researchPriority": 61,
       "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
@@ -965,39 +965,39 @@
       "actionLabel": "Collect exact rank history",
       "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.290Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.771Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 31,
-      "taskId": "d348501b4d78da35f7d48b65",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "aeea3612a8f744c74bad4459",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 6,
       "researchPriority": 61,
-      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
-      "category": "competitor_relationship",
-      "evidenceType": "competitor_map",
-      "evidenceMode": "human_confirmed_relationships",
+      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
+      "category": "monetization_placement",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
       "impact": "high",
-      "automationState": "ready_for_human_review",
-      "actionLabel": "Confirm competitor family",
-      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify monetization in gameplay",
+      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.290Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.771Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 32,
-      "taskId": "f42004c23cab8cb2cdacfb5f",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "dd3433c9ad072973bf197563",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 6,
       "researchPriority": 61,
       "unknown": "Meta progression and retention systems are only partially observable from the listing.",
@@ -1009,106 +1009,40 @@
       "actionLabel": "Verify meta and retention loop",
       "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.290Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.771Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 33,
-      "taskId": "81861a852cd27c3e9ddc68ee",
-      "appId": "6499209744",
-      "name": "Magic Sort!",
+      "taskId": "6745368f70f3baea7d66d00c",
+      "appId": "6779167923",
+      "name": "Colony Flow!",
       "queueRank": 7,
       "researchPriority": 60,
-      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
-      "category": "meta_progression",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
+      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
+      "category": "competitor_relationship",
+      "evidenceType": "competitor_map",
+      "evidenceMode": "human_confirmed_relationships",
       "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify meta and retention loop",
-      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
+      "automationState": "ready_for_human_review",
+      "actionLabel": "Confirm competitor family",
+      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.611Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.966Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 34,
-      "taskId": "85a25b4c46ab105cd52c43b0",
-      "appId": "6499209744",
-      "name": "Magic Sort!",
+      "taskId": "6c107c0b9cc2d220889fcce2",
+      "appId": "6779167923",
+      "name": "Colony Flow!",
       "queueRank": 7,
-      "researchPriority": 60,
-      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
-      "category": "competitor_relationship",
-      "evidenceType": "competitor_map",
-      "evidenceMode": "human_confirmed_relationships",
-      "impact": "high",
-      "automationState": "ready_for_human_review",
-      "actionLabel": "Confirm competitor family",
-      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.611Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 35,
-      "taskId": "e55ed7a4125a49ff1d460601",
-      "appId": "6499209744",
-      "name": "Magic Sort!",
-      "queueRank": 7,
-      "researchPriority": 60,
-      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
-      "category": "market_history",
-      "evidenceType": "exact_rank_history",
-      "evidenceMode": "automated_daily_collection",
-      "impact": "high",
-      "automationState": "auto_waiting",
-      "actionLabel": "Collect exact rank history",
-      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.611Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 36,
-      "taskId": "f309944a3840750420e2d684",
-      "appId": "6499209744",
-      "name": "Magic Sort!",
-      "queueRank": 7,
-      "researchPriority": 60,
-      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
-      "category": "monetization_placement",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify monetization in gameplay",
-      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.611Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 37,
-      "taskId": "3c55373a994dbc2ee21165e6",
-      "appId": "6756482832",
-      "name": "Brain Puzzle 3: Crazy Mind",
-      "queueRank": 8,
       "researchPriority": 60,
       "unknown": "Meta progression and retention systems are only partially observable from the listing.",
       "category": "meta_progression",
@@ -1119,62 +1053,18 @@
       "actionLabel": "Verify meta and retention loop",
       "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.883Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.966Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
-      "verificationOrder": 38,
-      "taskId": "cda667b7566f19f666b67c33",
-      "appId": "6756482832",
-      "name": "Brain Puzzle 3: Crazy Mind",
-      "queueRank": 8,
-      "researchPriority": 60,
-      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
-      "category": "competitor_relationship",
-      "evidenceType": "competitor_map",
-      "evidenceMode": "human_confirmed_relationships",
-      "impact": "high",
-      "automationState": "ready_for_human_review",
-      "actionLabel": "Confirm competitor family",
-      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.883Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 39,
-      "taskId": "d2864bcf3aa7844c5b89adb9",
-      "appId": "6756482832",
-      "name": "Brain Puzzle 3: Crazy Mind",
-      "queueRank": 8,
-      "researchPriority": 60,
-      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
-      "category": "monetization_placement",
-      "evidenceType": "deep_verify_video",
-      "evidenceMode": "user_capture_or_public_youtube",
-      "impact": "high",
-      "automationState": "ready_for_human_evidence",
-      "actionLabel": "Verify monetization in gameplay",
-      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.883Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 40,
-      "taskId": "e01c82e6b8a33c8931f145f8",
-      "appId": "6756482832",
-      "name": "Brain Puzzle 3: Crazy Mind",
-      "queueRank": 8,
+      "verificationOrder": 35,
+      "taskId": "762706d46a9257b074602a77",
+      "appId": "6779167923",
+      "name": "Colony Flow!",
+      "queueRank": 7,
       "researchPriority": 60,
       "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
       "category": "market_history",
@@ -1185,19 +1075,129 @@
       "actionLabel": "Collect exact rank history",
       "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.883Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.966Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 36,
+      "taskId": "e397bd6fde799b41b1b6748b",
+      "appId": "6779167923",
+      "name": "Colony Flow!",
+      "queueRank": 7,
+      "researchPriority": 60,
+      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
+      "category": "monetization_placement",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "impact": "high",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify monetization in gameplay",
+      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.966Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 37,
+      "taskId": "90712835b6ddcf57f0601245",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
+      "queueRank": 8,
+      "researchPriority": 56,
+      "unknown": "Meta progression and retention systems are only partially observable from the listing.",
+      "category": "meta_progression",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "impact": "high",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify meta and retention loop",
+      "why": "Gameplay/menu footage can directly expose progression, daily systems, rewards, lives, events, and other retention surfaces that are only partially visible in listing copy.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:14.116Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 38,
+      "taskId": "947c5ad73ab325c446842b6e",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
+      "queueRank": 8,
+      "researchPriority": 56,
+      "unknown": "Competitor family and differentiation room have not been human-confirmed.",
+      "category": "competitor_relationship",
+      "evidenceType": "competitor_map",
+      "evidenceMode": "human_confirmed_relationships",
+      "impact": "high",
+      "automationState": "ready_for_human_review",
+      "actionLabel": "Confirm competitor family",
+      "why": "Competitor relationships and differentiation are judgment-bearing classifications, so Radar can propose evidence but a human must confirm the relationship.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:14.116Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 39,
+      "taskId": "b547b8e3dc2025299a4fe52c",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
+      "queueRank": 8,
+      "researchPriority": 56,
+      "unknown": "Monetization placement and frequency are unknown until gameplay evidence is added.",
+      "category": "monetization_placement",
+      "evidenceType": "deep_verify_video",
+      "evidenceMode": "user_capture_or_public_youtube",
+      "impact": "high",
+      "automationState": "ready_for_human_evidence",
+      "actionLabel": "Verify monetization in gameplay",
+      "why": "Timestamped gameplay can show where ads, offers, currencies, gates, or purchase prompts actually appear; the store listing cannot establish frequency or placement.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:14.116Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 40,
+      "taskId": "bb2181a3bbfb04a0bbb4ef79",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
+      "queueRank": 8,
+      "researchPriority": 56,
+      "unknown": "Momentum and saturation require chart/trend history and are not inferred from listing popularity.",
+      "category": "market_history",
+      "evidenceType": "exact_rank_history",
+      "evidenceMode": "automated_daily_collection",
+      "impact": "high",
+      "automationState": "auto_waiting",
+      "actionLabel": "Collect exact rank history",
+      "why": "The scheduled Apple Radar collector is already gathering exact dated observations; no manual evidence can safely substitute for missing historical dates.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:14.116Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 41,
-      "taskId": "c991f8333519853701584dbb",
-      "appId": "1521236603",
-      "name": "Travel Town - Merge Adventure",
+      "taskId": "0e9de1cefdb8f2ed3759b402",
+      "appId": "6741921686",
+      "name": "Bloons Blitz",
       "queueRank": 1,
-      "researchPriority": 72,
+      "researchPriority": 77,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
       "category": "performance_estimate",
       "evidenceType": "third_party_estimate",
@@ -1207,18 +1207,40 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:10.748Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.731Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 42,
-      "taskId": "3f4c204a8c6f071406230646",
-      "appId": "6760325543",
-      "name": "CubeAway - 3DPuzzle",
+      "taskId": "d6f9daa8b0cceb2d9304f7c3",
+      "appId": "6804464432",
+      "name": "Songless: Guess the Song!",
       "queueRank": 2,
+      "researchPriority": 70,
+      "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
+      "category": "performance_estimate",
+      "evidenceType": "third_party_estimate",
+      "evidenceMode": "optional_appbrain_or_manual_provider",
+      "impact": "medium",
+      "automationState": "optional_external",
+      "actionLabel": "Add labeled third-party estimate",
+      "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
+      "source": {
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:12.896Z",
+        "sourceOrigin": "official_public",
+        "sourceMode": "automated"
+      }
+    },
+    {
+      "verificationOrder": 43,
+      "taskId": "611dad2b89ea74bed8d4a6bb",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "queueRank": 3,
       "researchPriority": 66,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
       "category": "performance_estimate",
@@ -1229,30 +1251,8 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.143Z",
-        "sourceOrigin": "official_public",
-        "sourceMode": "automated"
-      }
-    },
-    {
-      "verificationOrder": 43,
-      "taskId": "d6f9daa8b0cceb2d9304f7c3",
-      "appId": "6804464432",
-      "name": "Songless: Guess the Song!",
-      "queueRank": 3,
-      "researchPriority": 65,
-      "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
-      "category": "performance_estimate",
-      "evidenceType": "third_party_estimate",
-      "evidenceMode": "optional_appbrain_or_manual_provider",
-      "impact": "medium",
-      "automationState": "optional_external",
-      "actionLabel": "Add labeled third-party estimate",
-      "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
-      "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.382Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.067Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -1273,8 +1273,8 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.692Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.281Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
@@ -1295,17 +1295,17 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:11.991Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.536Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 46,
-      "taskId": "a722d7ef2cb3fa0237de5395",
-      "appId": "6748084174",
-      "name": "Smash Fest!",
+      "taskId": "3f4c204a8c6f071406230646",
+      "appId": "6760325543",
+      "name": "CubeAway - 3DPuzzle",
       "queueRank": 6,
       "researchPriority": 61,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
@@ -1317,17 +1317,17 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.290Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.771Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 47,
-      "taskId": "dfb0a4e46dc101ef70d7e777",
-      "appId": "6499209744",
-      "name": "Magic Sort!",
+      "taskId": "87d02758c1f08848a665021d",
+      "appId": "6779167923",
+      "name": "Colony Flow!",
       "queueRank": 7,
       "researchPriority": 60,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
@@ -1339,19 +1339,19 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.611Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:13.966Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
     },
     {
       "verificationOrder": 48,
-      "taskId": "69078bf59708eefaafe13ca7",
-      "appId": "6756482832",
-      "name": "Brain Puzzle 3: Crazy Mind",
+      "taskId": "0ac89ff052cbf4593c5ca6b7",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
       "queueRank": 8,
-      "researchPriority": 60,
+      "researchPriority": 56,
       "unknown": "Download/revenue performance is not available from this official Apple metadata source.",
       "category": "performance_estimate",
       "evidenceType": "third_party_estimate",
@@ -1361,8 +1361,8 @@
       "actionLabel": "Add labeled third-party estimate",
       "why": "Official Apple metadata does not expose competitor downloads or revenue. Any added value must remain a clearly labeled third-party estimate and must not affect first-party research priority.",
       "source": {
-        "researchGeneratedAt": "2026-09-30T09:35:12.898Z",
-        "analysisObservedAt": "2026-09-30T09:35:12.883Z",
+        "researchGeneratedAt": "2026-10-01T10:01:14.126Z",
+        "analysisObservedAt": "2026-10-01T10:01:14.116Z",
         "sourceOrigin": "official_public",
         "sourceMode": "automated"
       }
