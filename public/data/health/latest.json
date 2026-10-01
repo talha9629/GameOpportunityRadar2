@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T10:01:27.511Z",
+  "generatedAt": "2026-10-01T11:38:26.288Z",
   "overall": "ready_with_maturing_history",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -14,7 +14,7 @@
         "4/4 healthy Games markets",
         "0 failed market(s)",
         "0 overall-chart fallback market(s)",
-        "0.0h snapshot age"
+        "1.6h snapshot age"
       ],
       "action": null
     },
@@ -26,7 +26,7 @@
         "12 candidates",
         "Apple lookup complete",
         "live evidence complete (8/8)",
-        "0.0h queue age"
+        "1.6h queue age"
       ],
       "action": null
     },
@@ -39,7 +39,7 @@
         "0 omitted task(s)",
         "8 capture session(s) cover 24 gameplay evidence task(s)",
         "derived from current research queue",
-        "0.0h verification age"
+        "1.6h verification age"
       ],
       "action": null
     },
@@ -87,8 +87,8 @@
         "8/8 fresh official source(s)",
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
-        "1 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "22.8h policy-index age",
+        "2 pending hash candidate(s); 5 setup-era transition(s) quarantined",
+        "0.0h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -112,7 +112,7 @@
         "provider status unconfigured",
         "0/50 AppBrain popularity position(s) available",
         "exact requested depth not currently available",
-        "70.9h provider observation age",
+        "72.6h provider observation age",
         "Positions are AppBrain provider-global popularity ordering, not official Google Play storefront ranks.",
         "Download values, when present, are third-party estimates and are never inferred from Apple ranks."
       ],
@@ -128,7 +128,7 @@
         "chart depth matches Top 100",
         "derived from current Apple Radar snapshot",
         "INSUFFICIENT_DATA 400",
-        "0.0h trend-signal age",
+        "1.6h trend-signal age",
         "Visibility is a bounded chart-position heuristic; it is not downloads, revenue, market share, probability, or a build recommendation."
       ],
       "action": null
@@ -171,7 +171,7 @@
     "gameplayDiscoveryDerivedFromCurrentVerification": true,
     "policyDetectedChangeCount": 0,
     "confirmedPolicyChanges": 0,
-    "pendingPolicyCandidates": 1,
+    "pendingPolicyCandidates": 2,
     "legacyUnconfirmedPolicyChanges": 5,
     "appBrainConfigured": false,
     "googlePlayRadarConfigured": false,
@@ -180,7 +180,7 @@
     "googlePlayRadarEntryCount": 0,
     "googlePlayRadarRequestedDepth": 50,
     "googlePlayRadarExactDepth": false,
-    "googlePlayRadarAgeHours": 70.93692027777777,
+    "googlePlayRadarAgeHours": 72.55324861111112,
     "trendSignalCount": 400,
     "trendExpectedSignalCount": 400,
     "trendHealthyMarketCount": 4,
