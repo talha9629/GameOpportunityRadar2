@@ -5,6 +5,10 @@ const researchRoot = path.resolve('public/data/research');
 const latestPath = path.join(researchRoot, 'latest.json');
 const digestPath = path.join(researchRoot, 'digest.json');
 const digestHistoryRoot = path.join(researchRoot, 'digest-history');
+const weeklyDigestRoot = path.resolve('digest');
+const radarRoot = path.resolve('public/data/radar');
+const googleRoot = path.resolve('public/data/platforms/google-play');
+const configPath = path.resolve('radar.config.json');
 
 function readJson(file, fallback = null) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; }
@@ -231,3 +235,176 @@ fs.mkdirSync(digestHistoryRoot, { recursive: true });
 fs.writeFileSync(digestPath, `${JSON.stringify(digest, null, 2)}\n`);
 fs.writeFileSync(path.join(digestHistoryRoot, `${current.radarDate}.json`), `${JSON.stringify(digest, null, 2)}\n`);
 console.log(`[research-digest] ${digest.status} · ${digest.summary.changeCount} changes · ${digest.summary.attentionCount} attention · ${states.length} states`);
+
+function dateRange(endDate, days) {
+  return Array.from({ length: days }, (_, offset) => subtractUtcDays(endDate, days - offset - 1));
+}
+
+function normalizeTitle(value) {
+  return String(value ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+function titleTokens(value) {
+  return new Set(normalizeTitle(value).split(' ').filter((token) => token.length >= 4));
+}
+
+function bestImprovement(game, snapshots, latestDate, storefronts, days) {
+  const prior = snapshots.get(subtractUtcDays(latestDate, days));
+  if (!prior) return null;
+  const deltas = storefronts.flatMap((storefront) => {
+    const currentRank = game.ranks[storefront];
+    const priorEntry = prior.markets?.[storefront]?.entries?.find((entry) => String(entry.appId) === game.appId);
+    return Number.isInteger(currentRank) && Number.isInteger(priorEntry?.rank) ? [priorEntry.rank - currentRank] : [];
+  });
+  return deltas.length > 0 ? Math.max(...deltas) : null;
+}
+
+function markdownValue(value) {
+  return value == null ? '—' : String(value).replaceAll('|', '\\|');
+}
+
+const config = readJson(configPath);
+if (!config || !Array.isArray(config.storefronts) || !Number.isInteger(config.prototypeDays)) {
+  throw new Error('A valid radar.config.json is required for weekly digest generation.');
+}
+
+const radarIndex = readJson(path.join(radarRoot, 'index.json'));
+const radarLatest = readJson(path.join(radarRoot, 'latest.json'));
+const googleLatest = readJson(path.join(googleRoot, 'latest.json'));
+if (!radarIndex?.snapshots || !radarLatest?.markets) throw new Error('Committed Apple Radar data is required for weekly digest generation.');
+
+const trackedDates = new Set(radarIndex.snapshots.map((snapshot) => snapshot.date));
+const availableDates = dateRange(current.radarDate, config.prototypeDays).filter((date) => trackedDates.has(date));
+const missingDates = dateRange(current.radarDate, config.prototypeDays).filter((date) => !trackedDates.has(date));
+const snapshots = new Map(availableDates.map((date) => [date, readJson(path.join(radarRoot, 'history', `${date}.json`))]).filter(([, value]) => value));
+const queueById = new Map(current.candidates.map((candidate) => [String(candidate.appId), candidate]));
+const googleEntries = googleLatest?.status === 'ok' && Array.isArray(googleLatest.entries) ? googleLatest.entries : [];
+const googleByTitle = new Map(googleEntries.map((entry) => [normalizeTitle(entry.name), entry]));
+
+const games = new Map();
+for (const storefront of config.storefronts) {
+  for (const entry of radarLatest.markets?.[storefront]?.entries ?? []) {
+    const appId = String(entry.appId);
+    const game = games.get(appId) ?? {
+      appId,
+      name: entry.name,
+      developer: entry.publisher ?? null,
+      storeUrl: entry.storeUrl ?? null,
+      ranks: Object.fromEntries(config.storefronts.map((code) => [code, null])),
+    };
+    game.ranks[storefront] = entry.rank;
+    games.set(appId, game);
+  }
+}
+
+for (const game of games.values()) {
+  const queue = queueById.get(game.appId);
+  const metadata = queue?.appleMetadata;
+  const matchingGenres = (metadata?.genres ?? []).filter((genre) => config.genres.includes(genre));
+  game.genre = matchingGenres[0] ?? null;
+  game.releaseAgeDays = Number.isInteger(metadata?.releaseAgeDays) ? metadata.releaseAgeDays : null;
+  game.trendState = queue?.evidence?.trend?.state ?? null;
+  game.daysInChart = availableDates.filter((date) => {
+    const snapshot = snapshots.get(date);
+    return config.storefronts.some((storefront) => snapshot?.markets?.[storefront]?.entries?.some((entry) => String(entry.appId) === game.appId));
+  }).length;
+  game.placesCharted = Object.values(game.ranks).filter(Number.isInteger).length;
+  const firstSeenDates = config.storefronts.flatMap((storefront) => {
+    const entry = radarLatest.markets?.[storefront]?.entries?.find((item) => String(item.appId) === game.appId);
+    return entry?.firstObserved ? [entry.firstObserved] : [];
+  });
+  const firstSeen = firstSeenDates.length > 0 ? firstSeenDates.sort()[0] : null;
+  const ageInDays = firstSeen ? Math.round((new Date(`${current.radarDate}T00:00:00Z`) - new Date(`${firstSeen}T00:00:00Z`)) / 86_400_000) : null;
+  game.spike = ageInDays == null ? null : ageInDays < 3;
+  game.rankChange = Object.fromEntries([1, 3, 7].map((days) => [`${days}d`, bestImprovement(game, snapshots, current.radarDate, config.storefronts, days)]));
+  const google = googleByTitle.get(normalizeTitle(game.name));
+  game.googleRank = google?.rank ?? null;
+  game.candidate = game.daysInChart >= 5 && (game.rankChange['7d'] ?? 0) > 0 && game.placesCharted >= 2 && game.spike === false;
+  game.sourceLinks = { apple: game.storeUrl, google: google?.storeUrl ?? null };
+}
+
+const allGames = [...games.values()];
+for (const game of allGames) {
+  const tokens = titleTokens(game.name);
+  game.lookalikeCount = allGames.filter((other) => other.appId !== game.appId && (
+    (game.genre != null && other.genre === game.genre)
+    || [...tokens].some((token) => titleTokens(other.name).has(token))
+  )).length;
+}
+
+const topGames = allGames
+  .filter((game) => game.daysInChart >= 3 && game.rankChange['7d'] != null)
+  .sort((a, b) => b.rankChange['7d'] - a.rankChange['7d'] || Math.min(...Object.values(a.ranks).filter(Number.isInteger)) - Math.min(...Object.values(b.ranks).filter(Number.isInteger)) || a.name.localeCompare(b.name))
+  .slice(0, 30);
+
+const missing = [];
+if (missingDates.length > 0) missing.push(`Apple chart dates: ${missingDates.join(', ')}`);
+if (googleLatest?.status !== 'ok') missing.push(`Google Play ranks: ${googleLatest?.status ?? 'missing'}`);
+for (const game of topGames) {
+  for (const field of ['developer', 'genre', 'releaseAgeDays', 'trendState', 'googleRank', 'spike']) {
+    if (game[field] == null) missing.push(`games.${game.appId}.${field}`);
+  }
+  for (const storefront of config.storefronts) {
+    if (game.ranks[storefront] == null) missing.push(`games.${game.appId}.ranks.${storefront}`);
+  }
+  for (const window of ['1d', '3d', '7d']) {
+    if (game.rankChange[window] == null) missing.push(`games.${game.appId}.rankChange.${window}`);
+  }
+  for (const platform of ['apple', 'google']) {
+    if (game.sourceLinks[platform] == null) missing.push(`games.${game.appId}.sourceLinks.${platform}`);
+  }
+}
+
+let historyDays = 0;
+while (trackedDates.has(subtractUtcDays(current.radarDate, historyDays))) historyDays += 1;
+const confidence = historyDays < 7 ? 'EARLY' : historyDays <= 14 ? 'MEDIUM' : 'HIGH';
+const weekly = {
+  schemaVersion: 1,
+  generatedAt: new Date().toISOString(),
+  radarDate: current.radarDate,
+  historyDays,
+  platformsCovered: ['Apple App Store', ...(googleLatest?.status === 'ok' ? ['Google Play'] : [])],
+  missingDates,
+  missing,
+  confidence,
+  config,
+  selection: {
+    rule: 'Top 30 current games by best exact 7-day storefront rank improvement, limited to games charted on at least 3 of the last 14 tracked days.',
+    candidateRule: 'daysInChart >= 5, positive 7-day rank improvement, charted in 2+ places, and not a spike.',
+    trendStateSource: 'Copied from public/data/research/latest.json; null when the research queue has no value.',
+  },
+  cards: topGames.filter((game) => game.candidate).slice(0, config.maxCards),
+  games: topGames.map(({ storeUrl: _storeUrl, ...game }) => ({ ...game, confidence })),
+};
+
+const md = [
+  '# Radar Lite weekly digest',
+  '',
+  `Generated: ${weekly.generatedAt}`,
+  `History: ${historyDays} day(s) · Confidence: ${confidence}`,
+  `Platforms covered: ${weekly.platformsCovered.join(', ') || 'None'}`,
+  `Missing dates: ${missingDates.join(', ') || 'None'}`,
+  `What is missing: ${missing.join('; ') || 'Nothing'}`,
+  '',
+  '## Prototype candidates',
+  '',
+  ...(weekly.cards.length > 0 ? weekly.cards.map((game) => `- **${game.name}** — improved ${game.rankChange['7d']} places in 7 days; charted ${game.daysInChart} days in ${game.placesCharted} places. Next action: inspect the store listing before prototyping.`) : ['No game meets the candidate rule this week. Next action: keep collecting chart history.']),
+  '',
+  '## Top 30 by 7-day rank improvement',
+  '',
+  '| Game | Developer | Genre | Release age | US/GB/CA/AU | Google | 1d / 3d / 7d | Days | Places | Spike | Lookalikes | Trend | Candidate | Confidence | Sources |',
+  '|---|---|---|---:|---|---:|---|---:|---:|---|---:|---|---|---|---|',
+  ...weekly.games.map((game) => {
+    const appleLink = game.sourceLinks.apple ? `[Apple](${game.sourceLinks.apple})` : '—';
+    const googleLink = game.sourceLinks.google ? `[Google](${game.sourceLinks.google})` : '—';
+    return `| ${markdownValue(game.name)} | ${markdownValue(game.developer)} | ${markdownValue(game.genre)} | ${markdownValue(game.releaseAgeDays)} | ${config.storefronts.map((code) => markdownValue(game.ranks[code])).join('/')} | ${markdownValue(game.googleRank)} | ${markdownValue(game.rankChange['1d'])} / ${markdownValue(game.rankChange['3d'])} / ${markdownValue(game.rankChange['7d'])} | ${game.daysInChart} | ${game.placesCharted} | ${markdownValue(game.spike)} | ${game.lookalikeCount} | ${markdownValue(game.trendState)} | ${game.candidate} | ${confidence} | ${appleLink} ${googleLink} |`;
+  }),
+  '',
+  '_Rank improvement is the best exact storefront change. Missing values are never inferred._',
+  '',
+].join('\n');
+
+fs.mkdirSync(weeklyDigestRoot, { recursive: true });
+fs.writeFileSync(path.join(weeklyDigestRoot, 'latest.json'), `${JSON.stringify(weekly, null, 2)}\n`);
+fs.writeFileSync(path.join(weeklyDigestRoot, 'latest.md'), md);
+console.log(`[weekly-digest] ${weekly.games.length} ranked games · ${weekly.cards.length} candidate card(s) · ${confidence}`);
