@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-03T10:44:03.399Z",
+  "generatedAt": "2026-10-03T18:24:57.035Z",
   "radarDate": "2026-10-03",
   "historyDays": 8,
   "platformsCovered": [
@@ -15,10 +15,15 @@
     "2026-09-25"
   ],
   "missing": [
-    "googleRank: 9/9 games",
-    "rank ca: 1/9 games",
-    "rank au: 1/9 games",
-    "source google: 9/9 games"
+    "trendState: 29/30 games",
+    "googleRank: 30/30 games",
+    "rank us: 9/30 games",
+    "rank gb: 4/30 games",
+    "rank ca: 9/30 games",
+    "rank au: 7/30 games",
+    "rankChange 1d: 2/30 games",
+    "rankChange 3d: 2/30 games",
+    "source google: 30/30 games"
   ],
   "confidence": "MEDIUM",
   "config": {
@@ -58,103 +63,104 @@
   },
   "cards": [
     {
-      "appId": "6762010774",
-      "name": "CrownCards - Trading Cards",
-      "developer": "CrownCards",
-      "storeUrl": "https://apps.apple.com/us/app/crowncards-trading-cards/id6762010774?uo=2",
+      "appId": "6783815362",
+      "name": "Word Tiles - Relaxing Puzzle",
+      "developer": "Agave Games",
+      "storeUrl": "https://apps.apple.com/us/app/word-tiles-relaxing-puzzle/id6783815362?uo=2",
       "ranks": {
-        "us": 27,
-        "gb": 2,
-        "ca": 4,
-        "au": null
+        "us": 84,
+        "gb": 78,
+        "ca": 49,
+        "au": 72
       },
-      "genre": "Card",
-      "releaseAgeDays": 122,
-      "trendState": "INSUFFICIENT_DATA",
-      "daysInChart": 8,
-      "placesCharted": 3,
-      "spike": false,
-      "rankChange": {
-        "1d": 6,
-        "3d": 2,
-        "7d": 11
-      },
-      "googleRank": null,
-      "candidate": true,
-      "candidateReason": null,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/crowncards-trading-cards/id6762010774?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 0
-    },
-    {
-      "appId": "6793924927",
-      "name": "Rotate Rings",
-      "developer": "Nebula Studio",
-      "storeUrl": "https://apps.apple.com/us/app/rotate-rings/id6793924927?uo=2",
-      "ranks": {
-        "us": 3,
-        "gb": 5,
-        "ca": 3,
-        "au": 3
-      },
-      "genre": "Casual",
-      "releaseAgeDays": 59,
-      "trendState": "ESTABLISHED",
-      "daysInChart": 8,
+      "genre": "Word",
+      "releaseAgeDays": 67,
+      "trendState": null,
+      "daysInChart": 7,
       "placesCharted": 4,
       "spike": false,
       "rankChange": {
-        "1d": 2,
-        "3d": 6,
-        "7d": 9
+        "1d": 6,
+        "3d": 22,
+        "7d": 40
       },
       "googleRank": null,
       "candidate": true,
       "candidateReason": null,
       "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/rotate-rings/id6793924927?uo=2",
+        "apple": "https://apps.apple.com/us/app/word-tiles-relaxing-puzzle/id6783815362?uo=2",
         "google": null
       },
-      "lookalikeCount": 4
-    }
-  ],
-  "excluded": [
-    {
-      "appId": "1546690510",
-      "name": "NoomiClone",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6748397500",
-      "name": "Arrows – Puzzle Escape",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6783815362",
-      "name": "Word Tiles - Relaxing Puzzle",
-      "reason": "genre unavailable"
+      "lookalikeCount": 34
     },
     {
       "appId": "6760998152",
       "name": "Family Farm Merge",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6760530627",
-      "name": "Mahjong Clash: Win Real Cash",
-      "reason": "name matches excluded terms"
+      "developer": "Century Games Innovation Pte. Ltd.",
+      "storeUrl": "https://apps.apple.com/gb/app/family-farm-merge/id6760998152?uo=2",
+      "ranks": {
+        "us": null,
+        "gb": 90,
+        "ca": null,
+        "au": 66
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 147,
+      "trendState": null,
+      "daysInChart": 6,
+      "placesCharted": 2,
+      "spike": false,
+      "rankChange": {
+        "1d": 10,
+        "3d": 11,
+        "7d": 33
+      },
+      "googleRank": null,
+      "candidate": true,
+      "candidateReason": null,
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/gb/app/family-farm-merge/id6760998152?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 52
     },
     {
       "appId": "6761757565",
       "name": "Colorever: Gem Art Puzzle",
-      "reason": "genre unavailable"
-    },
+      "developer": "Oakever Games",
+      "storeUrl": "https://apps.apple.com/us/app/colorever-gem-art-puzzle/id6761757565?uo=2",
+      "ranks": {
+        "us": 16,
+        "gb": 19,
+        "ca": 91,
+        "au": 39
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 166,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": -4,
+        "3d": -4,
+        "7d": 31
+      },
+      "googleRank": null,
+      "candidate": true,
+      "candidateReason": null,
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/colorever-gem-art-puzzle/id6761757565?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 49
+    }
+  ],
+  "excluded": [
     {
-      "appId": "6755183085",
-      "name": "Yarn Loop: Knit Puzzle",
-      "reason": "genre unavailable"
+      "appId": "6760530627",
+      "name": "Mahjong Clash: Win Real Cash",
+      "reason": "name matches excluded terms"
     },
     {
       "appId": "6754009969",
@@ -164,17 +170,7 @@
     {
       "appId": "6503697761",
       "name": "Playtest Pro by BestPlay",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6742410648",
-      "name": "WhoLiked? - Guess Who Liked it",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6752886832",
-      "name": "Hotel Legacy: Merge Game",
-      "reason": "genre unavailable"
+      "reason": "not an included genre"
     },
     {
       "appId": "1446254576",
@@ -187,16 +183,6 @@
       "reason": "name matches excluded terms"
     },
     {
-      "appId": "6475757306",
-      "name": "Disney Solitaire",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "553834731",
-      "name": "Candy Crush Saga",
-      "reason": "genre unavailable"
-    },
-    {
       "appId": "6503213684",
       "name": "Stake - Real Money Casino",
       "reason": "name matches excluded terms"
@@ -204,70 +190,583 @@
     {
       "appId": "543186831",
       "name": "8 Ball Pool™",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6756185760",
-      "name": "Search It - Hidden Objects",
-      "reason": "genre unavailable"
+      "reason": "not an included genre"
     },
     {
       "appId": "6754582466",
       "name": "My Leisure Time",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6772975295",
-      "name": "Jewel Color Sort: Pixel Puzzle",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6756288168",
-      "name": "Cookingo: Perfect Meal",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6756058501",
-      "name": "Jelly Busters: Puzzle Game",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6745120053",
-      "name": "Imposter Game - Party Edition",
-      "reason": "genre unavailable"
+      "reason": "not an included genre"
     },
     {
       "appId": "6738109752",
       "name": "Tiles Survive!",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6767834940",
-      "name": "Top Lords",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "1484468651",
-      "name": "Dice Dreams™",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "6670441558",
-      "name": "Dark War:Survival",
-      "reason": "genre unavailable"
-    },
-    {
-      "appId": "1465731199",
-      "name": "2 Player Games : Offline games",
-      "reason": "genre unavailable"
+      "reason": "not an included genre"
     },
     {
       "appId": "1351168404",
       "name": "Among Us!",
-      "reason": "genre unavailable"
+      "reason": "not an included genre"
     }
   ],
   "games": [
+    {
+      "appId": "1546690510",
+      "name": "NoomiClone",
+      "developer": "Matthew Jones",
+      "ranks": {
+        "us": 48,
+        "gb": 24,
+        "ca": 40,
+        "au": 27
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 2103,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": -5,
+        "3d": -16,
+        "7d": 55
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/noomiclone/id1546690510?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 46,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6748397500",
+      "name": "Arrows – Puzzle Escape",
+      "developer": "Lessmore GmbH",
+      "ranks": {
+        "us": 37,
+        "gb": 67,
+        "ca": 30,
+        "au": 37
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 420,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 0,
+        "3d": 24,
+        "7d": 48
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/arrows-puzzle-escape/id6748397500?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 49,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6783815362",
+      "name": "Word Tiles - Relaxing Puzzle",
+      "developer": "Agave Games",
+      "ranks": {
+        "us": 84,
+        "gb": 78,
+        "ca": 49,
+        "au": 72
+      },
+      "genre": "Word",
+      "releaseAgeDays": 67,
+      "trendState": null,
+      "daysInChart": 7,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 6,
+        "3d": 22,
+        "7d": 40
+      },
+      "googleRank": null,
+      "candidate": true,
+      "candidateReason": null,
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/word-tiles-relaxing-puzzle/id6783815362?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 34,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6760998152",
+      "name": "Family Farm Merge",
+      "developer": "Century Games Innovation Pte. Ltd.",
+      "ranks": {
+        "us": null,
+        "gb": 90,
+        "ca": null,
+        "au": 66
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 147,
+      "trendState": null,
+      "daysInChart": 6,
+      "placesCharted": 2,
+      "spike": false,
+      "rankChange": {
+        "1d": 10,
+        "3d": 11,
+        "7d": 33
+      },
+      "googleRank": null,
+      "candidate": true,
+      "candidateReason": null,
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/gb/app/family-farm-merge/id6760998152?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 52,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6761757565",
+      "name": "Colorever: Gem Art Puzzle",
+      "developer": "Oakever Games",
+      "ranks": {
+        "us": 16,
+        "gb": 19,
+        "ca": 91,
+        "au": 39
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 166,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": -4,
+        "3d": -4,
+        "7d": 31
+      },
+      "googleRank": null,
+      "candidate": true,
+      "candidateReason": null,
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/colorever-gem-art-puzzle/id6761757565?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 49,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6755183085",
+      "name": "Yarn Loop: Knit Puzzle",
+      "developer": "Combo Games",
+      "ranks": {
+        "us": 47,
+        "gb": 43,
+        "ca": 64,
+        "au": null
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 316,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 3,
+      "spike": false,
+      "rankChange": {
+        "1d": 33,
+        "3d": 16,
+        "7d": 31
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/yarn-loop-knit-puzzle/id6755183085?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 50,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6742410648",
+      "name": "WhoLiked? - Guess Who Liked it",
+      "developer": "IRL Apps",
+      "ranks": {
+        "us": null,
+        "gb": 42,
+        "ca": null,
+        "au": null
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 536,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 1,
+      "spike": false,
+      "rankChange": {
+        "1d": 8,
+        "3d": 34,
+        "7d": 27
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/gb/app/wholiked-guess-who-liked-it/id6742410648?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 48,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6752886832",
+      "name": "Hotel Legacy: Merge Game",
+      "developer": "Century Games Innovation Pte. Ltd.",
+      "ranks": {
+        "us": 65,
+        "gb": 33,
+        "ca": 47,
+        "au": 30
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 262,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 4,
+        "3d": 20,
+        "7d": 26
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/hotel-legacy-merge-game/id6752886832?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 58,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6475757306",
+      "name": "Disney Solitaire",
+      "developer": "SuperPlay",
+      "ranks": {
+        "us": 35,
+        "gb": 26,
+        "ca": 65,
+        "au": 53
+      },
+      "genre": "Card",
+      "releaseAgeDays": 534,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 16,
+        "3d": 60,
+        "7d": 23
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/disney-solitaire/id6475757306?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 12,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "553834731",
+      "name": "Candy Crush Saga",
+      "developer": "King",
+      "ranks": {
+        "us": 44,
+        "gb": 57,
+        "ca": null,
+        "au": 58
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 5071,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 3,
+      "spike": false,
+      "rankChange": {
+        "1d": 9,
+        "3d": 15,
+        "7d": 23
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/candy-crush-saga/id553834731?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 42,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6756185760",
+      "name": "Search It - Hidden Objects",
+      "developer": "LEAP BILISIM TEKNOLOJILERI VE YAZILIM TICARET ANONIM SIRKETI",
+      "ranks": {
+        "us": 95,
+        "gb": 75,
+        "ca": 72,
+        "au": 88
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 278,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": -3,
+        "3d": -4,
+        "7d": 22
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/search-it-hidden-objects/id6756185760?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 44,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6772975295",
+      "name": "Jewel Color Sort: Pixel Puzzle",
+      "developer": "HappyTapLand Technology Co., Ltd.",
+      "ranks": {
+        "us": null,
+        "gb": 45,
+        "ca": 61,
+        "au": 64
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 100,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 3,
+      "spike": false,
+      "rankChange": {
+        "1d": 0,
+        "3d": 4,
+        "7d": 21
+      },
+      "googleRank": null,
+      "candidate": true,
+      "candidateReason": null,
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/gb/app/jewel-color-sort-pixel-puzzle/id6772975295?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 52,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6756288168",
+      "name": "Cookingo: Perfect Meal",
+      "developer": "Higame Global Limited",
+      "ranks": {
+        "us": null,
+        "gb": null,
+        "ca": 71,
+        "au": 46
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 291,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 2,
+      "spike": false,
+      "rankChange": {
+        "1d": 0,
+        "3d": -1,
+        "7d": 21
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/ca/app/cookingo-perfect-meal/id6756288168?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 46,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6756058501",
+      "name": "Jelly Busters: Puzzle Game",
+      "developer": "Moon Active",
+      "ranks": {
+        "us": null,
+        "gb": 47,
+        "ca": null,
+        "au": null
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 250,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 1,
+      "spike": false,
+      "rankChange": {
+        "1d": -2,
+        "3d": 6,
+        "7d": 21
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/gb/app/jelly-busters-puzzle-game/id6756058501?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 73,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6745120053",
+      "name": "Imposter Game - Party Edition",
+      "developer": "Sven Vucak",
+      "ranks": {
+        "us": 80,
+        "gb": 64,
+        "ca": null,
+        "au": null
+      },
+      "genre": "Word",
+      "releaseAgeDays": 503,
+      "trendState": null,
+      "daysInChart": 4,
+      "placesCharted": 2,
+      "spike": true,
+      "rankChange": {
+        "1d": null,
+        "3d": null,
+        "7d": 21
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/imposter-game-party-edition/id6745120053?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 20,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6767834940",
+      "name": "Top Lords",
+      "developer": "GAME SPARK PTE. LTD.",
+      "ranks": {
+        "us": null,
+        "gb": 71,
+        "ca": 63,
+        "au": 18
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 125,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 3,
+      "spike": false,
+      "rankChange": {
+        "1d": -1,
+        "3d": 3,
+        "7d": 20
+      },
+      "googleRank": null,
+      "candidate": true,
+      "candidateReason": null,
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/gb/app/top-lords/id6767834940?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 46,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "1484468651",
+      "name": "Dice Dreams™",
+      "developer": "SuperPlay",
+      "ranks": {
+        "us": 72,
+        "gb": 38,
+        "ca": 83,
+        "au": null
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 2432,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 3,
+      "spike": false,
+      "rankChange": {
+        "1d": -10,
+        "3d": 10,
+        "7d": 20
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/dice-dreams/id1484468651?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 46,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6670441558",
+      "name": "Dark War:Survival",
+      "developer": "Omnilojo Pte Ltd",
+      "ranks": {
+        "us": null,
+        "gb": null,
+        "ca": null,
+        "au": 59
+      },
+      "genre": "Card",
+      "releaseAgeDays": 752,
+      "trendState": null,
+      "daysInChart": 5,
+      "placesCharted": 1,
+      "spike": true,
+      "rankChange": {
+        "1d": null,
+        "3d": null,
+        "7d": 19
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/au/app/dark-war-survival/id6670441558?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 10,
+      "confidence": "MEDIUM"
+    },
     {
       "appId": "6757140488",
       "name": "Sand Blocks: Drop Puzzle",
@@ -296,255 +795,348 @@
         "apple": "https://apps.apple.com/us/app/sand-blocks-drop-puzzle/id6757140488?uo=2",
         "google": null
       },
-      "lookalikeCount": 24,
+      "lookalikeCount": 49,
       "confidence": "MEDIUM"
     },
     {
-      "appId": "6762010774",
-      "name": "CrownCards - Trading Cards",
-      "developer": "CrownCards",
+      "appId": "1465731199",
+      "name": "2 Player Games : Offline games",
+      "developer": "Moreno Maio",
       "ranks": {
-        "us": 27,
-        "gb": 2,
-        "ca": 4,
-        "au": null
+        "us": null,
+        "gb": null,
+        "ca": 81,
+        "au": 38
       },
-      "genre": "Card",
-      "releaseAgeDays": 122,
-      "trendState": "INSUFFICIENT_DATA",
+      "genre": "Casual",
+      "releaseAgeDays": 2682,
+      "trendState": null,
       "daysInChart": 8,
-      "placesCharted": 3,
+      "placesCharted": 2,
       "spike": false,
       "rankChange": {
         "1d": 6,
-        "3d": 2,
-        "7d": 11
-      },
-      "googleRank": null,
-      "candidate": true,
-      "candidateReason": null,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/crowncards-trading-cards/id6762010774?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 0,
-      "confidence": "MEDIUM"
-    },
-    {
-      "appId": "1423046460",
-      "name": "Paper.io 2",
-      "developer": "Voodoo",
-      "ranks": {
-        "us": 50,
-        "gb": 72,
-        "ca": null,
-        "au": 11
-      },
-      "genre": "Casual",
-      "releaseAgeDays": 2954,
-      "trendState": "RISING",
-      "daysInChart": 8,
-      "placesCharted": 3,
-      "spike": false,
-      "rankChange": {
-        "1d": 20,
-        "3d": 13,
-        "7d": 11
+        "3d": 14,
+        "7d": 17
       },
       "googleRank": null,
       "candidate": false,
       "candidateReason": "older than 180 days",
       "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/paper-io-2/id1423046460?uo=2",
+        "apple": "https://apps.apple.com/ca/app/2-player-games-offline-games/id1465731199?uo=2",
         "google": null
       },
-      "lookalikeCount": 4,
+      "lookalikeCount": 54,
       "confidence": "MEDIUM"
     },
     {
-      "appId": "638689075",
-      "name": "Township",
-      "developer": "Playrix",
+      "appId": "329218549",
+      "name": "Chess.com - Play and Learn",
+      "developer": "Chess.com",
       "ranks": {
-        "us": 19,
-        "gb": 27,
-        "ca": 23,
-        "au": 16
+        "us": 46,
+        "gb": 39,
+        "ca": 33,
+        "au": 41
+      },
+      "genre": "Board",
+      "releaseAgeDays": 6183,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 8,
+        "3d": 16,
+        "7d": 16
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/chess-com-play-and-learn/id329218549?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 8,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6753862216",
+      "name": "Foodstars: Merge & Cook",
+      "developer": "Happibits",
+      "ranks": {
+        "us": 96,
+        "gb": 76,
+        "ca": null,
+        "au": 63
       },
       "genre": "Puzzle",
-      "releaseAgeDays": 4751,
-      "trendState": "ESTABLISHED",
+      "releaseAgeDays": 296,
+      "trendState": null,
+      "daysInChart": 7,
+      "placesCharted": 3,
+      "spike": false,
+      "rankChange": {
+        "1d": 1,
+        "3d": -31,
+        "7d": 16
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/foodstars-merge-cook/id6753862216?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 48,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6747492600",
+      "name": "Mahjong Blast",
+      "developer": "Nebula Studio",
+      "ranks": {
+        "us": 18,
+        "gb": 40,
+        "ca": 19,
+        "au": 54
+      },
+      "genre": "Board",
+      "releaseAgeDays": 466,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 1,
+        "3d": -1,
+        "7d": 15
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/mahjong-blast/id6747492600?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 16,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6471045672",
+      "name": "Tasty Travels: Merge Game",
+      "developer": "Century Games Pte. Ltd.",
+      "ranks": {
+        "us": 30,
+        "gb": 32,
+        "ca": 29,
+        "au": 28
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 905,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 13,
+        "3d": 13,
+        "7d": 15
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/tasty-travels-merge-game/id6471045672?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 56,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "1608987929",
+      "name": "Triumph Arcade",
+      "developer": "Triumph Arcade",
+      "ranks": {
+        "us": 32,
+        "gb": null,
+        "ca": null,
+        "au": null
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 1684,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 1,
+      "spike": false,
+      "rankChange": {
+        "1d": 3,
+        "3d": 2,
+        "7d": 15
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/triumph-arcade/id1608987929?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 46,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "1602508478",
+      "name": "Word Search Explorer®",
+      "developer": "PlaySimple Games Pte Ltd",
+      "ranks": {
+        "us": 38,
+        "gb": 48,
+        "ca": 62,
+        "au": 86
+      },
+      "genre": "Word",
+      "releaseAgeDays": 1330,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 1,
+        "3d": -7,
+        "7d": 15
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/word-search-explorer/id1602508478?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 10,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "307569751",
+      "name": "NYT Games: Wordle & Crossword",
+      "developer": "The New York Times Company",
+      "ranks": {
+        "us": 83,
+        "gb": 85,
+        "ca": 56,
+        "au": 49
+      },
+      "genre": "Word",
+      "releaseAgeDays": 6399,
+      "trendState": null,
       "daysInChart": 8,
       "placesCharted": 4,
       "spike": false,
       "rankChange": {
         "1d": 9,
-        "3d": 11,
-        "7d": 10
+        "3d": -3,
+        "7d": 15
       },
       "googleRank": null,
       "candidate": false,
       "candidateReason": "older than 180 days",
       "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/township/id638689075?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 2,
-      "confidence": "MEDIUM"
-    },
-    {
-      "appId": "6793924927",
-      "name": "Rotate Rings",
-      "developer": "Nebula Studio",
-      "ranks": {
-        "us": 3,
-        "gb": 5,
-        "ca": 3,
-        "au": 3
-      },
-      "genre": "Casual",
-      "releaseAgeDays": 59,
-      "trendState": "ESTABLISHED",
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": 2,
-        "3d": 6,
-        "7d": 9
-      },
-      "googleRank": null,
-      "candidate": true,
-      "candidateReason": null,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/rotate-rings/id6793924927?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 4,
-      "confidence": "MEDIUM"
-    },
-    {
-      "appId": "6759763476",
-      "name": "Bus Traffic Fever!",
-      "developer": "GOODROID,Inc.",
-      "ranks": {
-        "us": 14,
-        "gb": 7,
-        "ca": 10,
-        "au": 7
-      },
-      "genre": "Casual",
-      "releaseAgeDays": 204,
-      "trendState": "ESTABLISHED",
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": 3,
-        "3d": 5,
-        "7d": 5
-      },
-      "googleRank": null,
-      "candidate": false,
-      "candidateReason": "older than 180 days",
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/bus-traffic-fever/id6759763476?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 5,
-      "confidence": "MEDIUM"
-    },
-    {
-      "appId": "1443446174",
-      "name": "Magic Tiles 3™: Piano Game",
-      "developer": "Amanotes Pte. Ltd.",
-      "ranks": {
-        "us": 25,
-        "gb": 58,
-        "ca": 45,
-        "au": 29
-      },
-      "genre": "Casual",
-      "releaseAgeDays": 2849,
-      "trendState": "RISING",
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": 19,
-        "3d": 20,
-        "7d": 4
-      },
-      "googleRank": null,
-      "candidate": false,
-      "candidateReason": "older than 180 days",
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/magic-tiles-3-piano-game/id1443446174?uo=2",
+        "apple": "https://apps.apple.com/us/app/nyt-games-wordle-crossword/id307569751?uo=2",
         "google": null
       },
       "lookalikeCount": 19,
       "confidence": "MEDIUM"
     },
     {
-      "appId": "6761760135",
-      "name": "Meowdoku!",
-      "developer": "Oakever Games",
+      "appId": "6670789598",
+      "name": "Brain Puzzle: Tricky Quest",
+      "developer": "SmallStep Dev Team",
       "ranks": {
-        "us": 1,
-        "gb": 1,
-        "ca": 1,
-        "au": 1
+        "us": null,
+        "gb": 77,
+        "ca": null,
+        "au": null
       },
-      "genre": "Casual",
-      "releaseAgeDays": 137,
-      "trendState": "ESTABLISHED",
-      "daysInChart": 8,
-      "placesCharted": 4,
+      "genre": "Puzzle",
+      "releaseAgeDays": 747,
+      "trendState": null,
+      "daysInChart": 7,
+      "placesCharted": 1,
       "spike": false,
       "rankChange": {
-        "1d": 1,
-        "3d": 1,
-        "7d": 0
+        "1d": -7,
+        "3d": -3,
+        "7d": 15
       },
       "googleRank": null,
       "candidate": false,
-      "candidateReason": "does not meet the chart evidence rule",
+      "candidateReason": "older than 180 days",
       "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/meowdoku/id6761760135?uo=2",
+        "apple": "https://apps.apple.com/gb/app/brain-puzzle-tricky-quest/id6670789598?uo=2",
         "google": null
       },
-      "lookalikeCount": 4,
+      "lookalikeCount": 49,
       "confidence": "MEDIUM"
     },
     {
-      "appId": "6752672568",
-      "name": "Block Out! - Color Sort Puzzle",
-      "developer": "Grand Games A.Ş.",
+      "appId": "6748950306",
+      "name": "Solitaire Associations Journey",
+      "developer": "Hitapps Games LTD",
       "ranks": {
-        "us": 2,
-        "gb": 3,
-        "ca": 2,
-        "au": 2
+        "us": 23,
+        "gb": 29,
+        "ca": 16,
+        "au": 15
       },
-      "genre": "Puzzle",
-      "releaseAgeDays": 337,
-      "trendState": "ESTABLISHED",
+      "genre": "Word",
+      "releaseAgeDays": 387,
+      "trendState": null,
       "daysInChart": 8,
       "placesCharted": 4,
       "spike": false,
       "rankChange": {
         "1d": 0,
         "3d": 0,
-        "7d": 0
+        "7d": 14
       },
       "googleRank": null,
       "candidate": false,
       "candidateReason": "older than 180 days",
       "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/block-out-color-sort-puzzle/id6752672568?uo=2",
+        "apple": "https://apps.apple.com/us/app/solitaire-associations-journey/id6748950306?uo=2",
         "google": null
       },
-      "lookalikeCount": 30,
+      "lookalikeCount": 14,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "1193508329",
+      "name": "Sudoku.com - Number Games",
+      "developer": "Easybrain Ltd",
+      "ranks": {
+        "us": 40,
+        "gb": 52,
+        "ca": 35,
+        "au": 50
+      },
+      "genre": "Board",
+      "releaseAgeDays": 3474,
+      "trendState": null,
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 0,
+        "3d": 1,
+        "7d": 13
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/sudoku-com-number-games/id1193508329?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 16,
       "confidence": "MEDIUM"
     }
   ]
