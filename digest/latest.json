@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-03T10:10:40.282Z",
+  "generatedAt": "2026-10-03T10:33:29.625Z",
   "radarDate": "2026-10-03",
   "historyDays": 8,
   "platformsCovered": [
@@ -15,202 +15,10 @@
     "2026-09-25"
   ],
   "missing": [
-    "Apple chart dates: 2026-09-20, 2026-09-21, 2026-09-22, 2026-09-23, 2026-09-24, 2026-09-25",
-    "Google Play ranks: unconfigured",
-    "games.1546690510.genre",
-    "games.1546690510.releaseAgeDays",
-    "games.1546690510.trendState",
-    "games.1546690510.googleRank",
-    "games.1546690510.sourceLinks.google",
-    "games.6748397500.genre",
-    "games.6748397500.releaseAgeDays",
-    "games.6748397500.trendState",
-    "games.6748397500.googleRank",
-    "games.6748397500.sourceLinks.google",
-    "games.6783815362.genre",
-    "games.6783815362.releaseAgeDays",
-    "games.6783815362.trendState",
-    "games.6783815362.googleRank",
-    "games.6783815362.sourceLinks.google",
-    "games.6760998152.genre",
-    "games.6760998152.releaseAgeDays",
-    "games.6760998152.trendState",
-    "games.6760998152.googleRank",
-    "games.6760998152.ranks.us",
-    "games.6760998152.ranks.ca",
-    "games.6760998152.sourceLinks.google",
-    "games.6760530627.genre",
-    "games.6760530627.releaseAgeDays",
-    "games.6760530627.trendState",
-    "games.6760530627.googleRank",
-    "games.6760530627.sourceLinks.google",
-    "games.6761757565.genre",
-    "games.6761757565.releaseAgeDays",
-    "games.6761757565.trendState",
-    "games.6761757565.googleRank",
-    "games.6761757565.sourceLinks.google",
-    "games.6755183085.genre",
-    "games.6755183085.releaseAgeDays",
-    "games.6755183085.trendState",
-    "games.6755183085.googleRank",
-    "games.6755183085.ranks.au",
-    "games.6755183085.sourceLinks.google",
-    "games.6754009969.genre",
-    "games.6754009969.releaseAgeDays",
-    "games.6754009969.trendState",
-    "games.6754009969.googleRank",
-    "games.6754009969.ranks.gb",
-    "games.6754009969.ranks.ca",
-    "games.6754009969.ranks.au",
-    "games.6754009969.sourceLinks.google",
-    "games.6503697761.genre",
-    "games.6503697761.releaseAgeDays",
-    "games.6503697761.trendState",
-    "games.6503697761.googleRank",
-    "games.6503697761.ranks.gb",
-    "games.6503697761.ranks.au",
-    "games.6503697761.sourceLinks.google",
-    "games.6742410648.genre",
-    "games.6742410648.releaseAgeDays",
-    "games.6742410648.trendState",
-    "games.6742410648.googleRank",
-    "games.6742410648.ranks.us",
-    "games.6742410648.ranks.ca",
-    "games.6742410648.ranks.au",
-    "games.6742410648.sourceLinks.google",
-    "games.6752886832.genre",
-    "games.6752886832.releaseAgeDays",
-    "games.6752886832.trendState",
-    "games.6752886832.googleRank",
-    "games.6752886832.sourceLinks.google",
-    "games.1446254576.genre",
-    "games.1446254576.releaseAgeDays",
-    "games.1446254576.trendState",
-    "games.1446254576.googleRank",
-    "games.1446254576.ranks.gb",
-    "games.1446254576.ranks.ca",
-    "games.1446254576.ranks.au",
-    "games.1446254576.sourceLinks.google",
-    "games.1583193717.genre",
-    "games.1583193717.releaseAgeDays",
-    "games.1583193717.trendState",
-    "games.1583193717.googleRank",
-    "games.1583193717.ranks.us",
-    "games.1583193717.ranks.gb",
-    "games.1583193717.ranks.au",
-    "games.1583193717.sourceLinks.google",
-    "games.6475757306.genre",
-    "games.6475757306.releaseAgeDays",
-    "games.6475757306.trendState",
-    "games.6475757306.googleRank",
-    "games.6475757306.sourceLinks.google",
-    "games.553834731.genre",
-    "games.553834731.releaseAgeDays",
-    "games.553834731.trendState",
-    "games.553834731.googleRank",
-    "games.553834731.ranks.ca",
-    "games.553834731.sourceLinks.google",
-    "games.6503213684.genre",
-    "games.6503213684.releaseAgeDays",
-    "games.6503213684.trendState",
-    "games.6503213684.googleRank",
-    "games.6503213684.ranks.us",
-    "games.6503213684.ranks.gb",
-    "games.6503213684.ranks.au",
-    "games.6503213684.sourceLinks.google",
-    "games.543186831.genre",
-    "games.543186831.releaseAgeDays",
-    "games.543186831.trendState",
-    "games.543186831.googleRank",
-    "games.543186831.ranks.ca",
-    "games.543186831.sourceLinks.google",
-    "games.6756185760.genre",
-    "games.6756185760.releaseAgeDays",
-    "games.6756185760.trendState",
-    "games.6756185760.googleRank",
-    "games.6756185760.sourceLinks.google",
-    "games.6754582466.genre",
-    "games.6754582466.releaseAgeDays",
-    "games.6754582466.trendState",
-    "games.6754582466.googleRank",
-    "games.6754582466.ranks.us",
-    "games.6754582466.ranks.gb",
-    "games.6754582466.ranks.ca",
-    "games.6754582466.sourceLinks.google",
-    "games.6772975295.genre",
-    "games.6772975295.releaseAgeDays",
-    "games.6772975295.trendState",
-    "games.6772975295.googleRank",
-    "games.6772975295.ranks.us",
-    "games.6772975295.sourceLinks.google",
-    "games.6756288168.genre",
-    "games.6756288168.releaseAgeDays",
-    "games.6756288168.trendState",
-    "games.6756288168.googleRank",
-    "games.6756288168.ranks.us",
-    "games.6756288168.ranks.gb",
-    "games.6756288168.sourceLinks.google",
-    "games.6756058501.genre",
-    "games.6756058501.releaseAgeDays",
-    "games.6756058501.trendState",
-    "games.6756058501.googleRank",
-    "games.6756058501.ranks.us",
-    "games.6756058501.ranks.ca",
-    "games.6756058501.ranks.au",
-    "games.6756058501.sourceLinks.google",
-    "games.6745120053.genre",
-    "games.6745120053.releaseAgeDays",
-    "games.6745120053.trendState",
-    "games.6745120053.googleRank",
-    "games.6745120053.ranks.ca",
-    "games.6745120053.ranks.au",
-    "games.6745120053.rankChange.1d",
-    "games.6745120053.rankChange.3d",
-    "games.6745120053.sourceLinks.google",
-    "games.6738109752.genre",
-    "games.6738109752.releaseAgeDays",
-    "games.6738109752.trendState",
-    "games.6738109752.googleRank",
-    "games.6738109752.ranks.us",
-    "games.6738109752.ranks.gb",
-    "games.6738109752.ranks.ca",
-    "games.6738109752.sourceLinks.google",
-    "games.6767834940.genre",
-    "games.6767834940.releaseAgeDays",
-    "games.6767834940.trendState",
-    "games.6767834940.googleRank",
-    "games.6767834940.ranks.us",
-    "games.6767834940.sourceLinks.google",
-    "games.1484468651.genre",
-    "games.1484468651.releaseAgeDays",
-    "games.1484468651.trendState",
-    "games.1484468651.googleRank",
-    "games.1484468651.ranks.au",
-    "games.1484468651.sourceLinks.google",
-    "games.6670441558.genre",
-    "games.6670441558.releaseAgeDays",
-    "games.6670441558.trendState",
-    "games.6670441558.googleRank",
-    "games.6670441558.ranks.us",
-    "games.6670441558.ranks.gb",
-    "games.6670441558.ranks.ca",
-    "games.6670441558.rankChange.1d",
-    "games.6670441558.rankChange.3d",
-    "games.6670441558.sourceLinks.google",
-    "games.6757140488.googleRank",
-    "games.6757140488.sourceLinks.google",
-    "games.1465731199.genre",
-    "games.1465731199.releaseAgeDays",
-    "games.1465731199.trendState",
-    "games.1465731199.googleRank",
-    "games.1465731199.ranks.us",
-    "games.1465731199.ranks.gb",
-    "games.1465731199.sourceLinks.google",
-    "games.1351168404.genre",
-    "games.1351168404.releaseAgeDays",
-    "games.1351168404.trendState",
-    "games.1351168404.googleRank",
-    "games.1351168404.sourceLinks.google"
+    "googleRank: 9/9 games",
+    "rank ca: 1/9 games",
+    "rank au: 1/9 games",
+    "source google: 9/9 games"
   ],
   "confidence": "MEDIUM",
   "config": {
@@ -219,6 +27,19 @@
       "Casual",
       "Arcade"
     ],
+    "includeGenres": [
+      "Puzzle",
+      "Casual",
+      "Arcade",
+      "Word",
+      "Board",
+      "Card"
+    ],
+    "excludeGenres": [
+      "Casino"
+    ],
+    "excludeNameRegex": "\\b(real money|win real|cash|casino|slots?|jackpot|betting)\\b",
+    "maxAgeDays": 180,
     "storefronts": [
       "us",
       "gb",
@@ -231,912 +52,222 @@
   },
   "selection": {
     "rule": "Top 30 current games by best exact 7-day storefront rank improvement, limited to games charted on at least 3 of the last 14 tracked days.",
-    "candidateRule": "daysInChart >= 5, positive 7-day rank improvement, charted in 2+ places, and not a spike.",
+    "candidateRule": "daysInChart >= 5, positive 7-day rank improvement, charted in 2+ places, not a spike, and releaseAgeDays <= 180; unknown age is not a candidate.",
+    "filters": "Genre and name filters are applied before ranking the Top 30.",
     "trendStateSource": "Copied from public/data/research/latest.json; null when the research queue has no value."
   },
   "cards": [
     {
-      "appId": "1546690510",
-      "name": "NoomiClone",
-      "developer": "Matthew Jones",
-      "storeUrl": "https://apps.apple.com/us/app/noomiclone/id1546690510?uo=2",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
+      "developer": "CrownCards",
+      "storeUrl": "https://apps.apple.com/us/app/crowncards-trading-cards/id6762010774?uo=2",
       "ranks": {
-        "us": 48,
-        "gb": 24,
-        "ca": 40,
-        "au": 27
+        "us": 27,
+        "gb": 2,
+        "ca": 4,
+        "au": null
       },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
+      "genre": "Card",
+      "releaseAgeDays": 122,
+      "trendState": "INSUFFICIENT_DATA",
       "daysInChart": 8,
-      "placesCharted": 4,
+      "placesCharted": 3,
       "spike": false,
       "rankChange": {
-        "1d": -5,
-        "3d": -16,
-        "7d": 55
+        "1d": 6,
+        "3d": 2,
+        "7d": 11
       },
       "googleRank": null,
       "candidate": true,
+      "candidateReason": null,
       "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/noomiclone/id1546690510?uo=2",
+        "apple": "https://apps.apple.com/us/app/crowncards-trading-cards/id6762010774?uo=2",
         "google": null
       },
       "lookalikeCount": 0
     },
     {
-      "appId": "6748397500",
-      "name": "Arrows – Puzzle Escape",
-      "developer": "Lessmore GmbH",
-      "storeUrl": "https://apps.apple.com/us/app/arrows-puzzle-escape/id6748397500?uo=2",
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "developer": "Nebula Studio",
+      "storeUrl": "https://apps.apple.com/us/app/rotate-rings/id6793924927?uo=2",
       "ranks": {
-        "us": 37,
-        "gb": 67,
-        "ca": 30,
-        "au": 37
+        "us": 3,
+        "gb": 5,
+        "ca": 3,
+        "au": 3
       },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
+      "genre": "Casual",
+      "releaseAgeDays": 59,
+      "trendState": "ESTABLISHED",
       "daysInChart": 8,
       "placesCharted": 4,
       "spike": false,
       "rankChange": {
-        "1d": 0,
-        "3d": 24,
-        "7d": 48
+        "1d": 2,
+        "3d": 6,
+        "7d": 9
       },
       "googleRank": null,
       "candidate": true,
+      "candidateReason": null,
       "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/arrows-puzzle-escape/id6748397500?uo=2",
+        "apple": "https://apps.apple.com/us/app/rotate-rings/id6793924927?uo=2",
         "google": null
       },
-      "lookalikeCount": 23
-    },
-    {
-      "appId": "6783815362",
-      "name": "Word Tiles - Relaxing Puzzle",
-      "developer": "Agave Games",
-      "storeUrl": "https://apps.apple.com/us/app/word-tiles-relaxing-puzzle/id6783815362?uo=2",
-      "ranks": {
-        "us": 84,
-        "gb": 78,
-        "ca": 49,
-        "au": 72
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 7,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": 6,
-        "3d": 22,
-        "7d": 40
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/word-tiles-relaxing-puzzle/id6783815362?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 28
+      "lookalikeCount": 4
     }
   ],
-  "games": [
+  "excluded": [
     {
       "appId": "1546690510",
       "name": "NoomiClone",
-      "developer": "Matthew Jones",
-      "ranks": {
-        "us": 48,
-        "gb": 24,
-        "ca": 40,
-        "au": 27
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": -5,
-        "3d": -16,
-        "7d": 55
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/noomiclone/id1546690510?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 0,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6748397500",
       "name": "Arrows – Puzzle Escape",
-      "developer": "Lessmore GmbH",
-      "ranks": {
-        "us": 37,
-        "gb": 67,
-        "ca": 30,
-        "au": 37
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": 0,
-        "3d": 24,
-        "7d": 48
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/arrows-puzzle-escape/id6748397500?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 23,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6783815362",
       "name": "Word Tiles - Relaxing Puzzle",
-      "developer": "Agave Games",
-      "ranks": {
-        "us": 84,
-        "gb": 78,
-        "ca": 49,
-        "au": 72
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 7,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": 6,
-        "3d": 22,
-        "7d": 40
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/word-tiles-relaxing-puzzle/id6783815362?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 28,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6760998152",
       "name": "Family Farm Merge",
-      "developer": "Century Games Innovation Pte. Ltd.",
-      "ranks": {
-        "us": null,
-        "gb": 90,
-        "ca": null,
-        "au": 66
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 6,
-      "placesCharted": 2,
-      "spike": false,
-      "rankChange": {
-        "1d": 10,
-        "3d": 11,
-        "7d": 33
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/gb/app/family-farm-merge/id6760998152?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 9,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6760530627",
       "name": "Mahjong Clash: Win Real Cash",
-      "developer": "Aviagames Inc.",
-      "ranks": {
-        "us": 86,
-        "gb": 37,
-        "ca": 86,
-        "au": 57
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": 1,
-        "3d": 25,
-        "7d": 32
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/mahjong-clash-win-real-cash/id6760530627?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 17,
-      "confidence": "MEDIUM"
+      "reason": "name matches excluded terms"
     },
     {
       "appId": "6761757565",
       "name": "Colorever: Gem Art Puzzle",
-      "developer": "Oakever Games",
-      "ranks": {
-        "us": 16,
-        "gb": 19,
-        "ca": 91,
-        "au": 39
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": -4,
-        "3d": -4,
-        "7d": 31
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/colorever-gem-art-puzzle/id6761757565?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 23,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6755183085",
       "name": "Yarn Loop: Knit Puzzle",
-      "developer": "Combo Games",
-      "ranks": {
-        "us": 47,
-        "gb": 43,
-        "ca": 64,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 3,
-      "spike": false,
-      "rankChange": {
-        "1d": 33,
-        "3d": 16,
-        "7d": 31
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/yarn-loop-knit-puzzle/id6755183085?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 24,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6754009969",
       "name": "Jackpot Nights",
-      "developer": "Lucky Link Ltd.",
-      "ranks": {
-        "us": 42,
-        "gb": null,
-        "ca": null,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 1,
-      "spike": false,
-      "rankChange": {
-        "1d": 5,
-        "3d": 17,
-        "7d": 29
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/jackpot-nights/id6754009969?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 1,
-      "confidence": "MEDIUM"
+      "reason": "name matches excluded terms"
     },
     {
       "appId": "6503697761",
       "name": "Playtest Pro by BestPlay",
-      "developer": "Bestplay Systems",
-      "ranks": {
-        "us": 89,
-        "gb": null,
-        "ca": 36,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 2,
-      "spike": false,
-      "rankChange": {
-        "1d": 10,
-        "3d": 11,
-        "7d": 27
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/playtest-pro-by-bestplay/id6503697761?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 0,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6742410648",
       "name": "WhoLiked? - Guess Who Liked it",
-      "developer": "IRL Apps",
-      "ranks": {
-        "us": null,
-        "gb": 42,
-        "ca": null,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 1,
-      "spike": false,
-      "rankChange": {
-        "1d": 8,
-        "3d": 34,
-        "7d": 27
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/gb/app/wholiked-guess-who-liked-it/id6742410648?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 2,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6752886832",
       "name": "Hotel Legacy: Merge Game",
-      "developer": "Century Games Innovation Pte. Ltd.",
-      "ranks": {
-        "us": 65,
-        "gb": 33,
-        "ca": 47,
-        "au": 30
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": 4,
-        "3d": 20,
-        "7d": 26
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/hotel-legacy-merge-game/id6752886832?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 19,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "1446254576",
       "name": "Solitaire Cash: Win Real Money",
-      "developer": "Papaya Gaming",
-      "ranks": {
-        "us": 62,
-        "gb": null,
-        "ca": null,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 1,
-      "spike": false,
-      "rankChange": {
-        "1d": -11,
-        "3d": 2,
-        "7d": 26
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/solitaire-cash-win-real-money/id1446254576?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 17,
-      "confidence": "MEDIUM"
+      "reason": "name matches excluded terms"
     },
     {
       "appId": "1583193717",
       "name": "FanDuel Online Casino",
-      "developer": "FanDuel, Inc.",
-      "ranks": {
-        "us": null,
-        "gb": null,
-        "ca": 28,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 1,
-      "spike": false,
-      "rankChange": {
-        "1d": 4,
-        "3d": 6,
-        "7d": 24
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/ca/app/fanduel-online-casino/id1583193717?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 11,
-      "confidence": "MEDIUM"
+      "reason": "name matches excluded terms"
     },
     {
       "appId": "6475757306",
       "name": "Disney Solitaire",
-      "developer": "SuperPlay",
-      "ranks": {
-        "us": 35,
-        "gb": 26,
-        "ca": 65,
-        "au": 53
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": 16,
-        "3d": 60,
-        "7d": 23
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/disney-solitaire/id6475757306?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 5,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "553834731",
       "name": "Candy Crush Saga",
-      "developer": "King",
-      "ranks": {
-        "us": 44,
-        "gb": 57,
-        "ca": null,
-        "au": 58
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 3,
-      "spike": false,
-      "rankChange": {
-        "1d": 9,
-        "3d": 15,
-        "7d": 23
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/candy-crush-saga/id553834731?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 1,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6503213684",
       "name": "Stake - Real Money Casino",
-      "developer": "Stake.com",
-      "ranks": {
-        "us": null,
-        "gb": null,
-        "ca": 37,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 1,
-      "spike": false,
-      "rankChange": {
-        "1d": -4,
-        "3d": 14,
-        "7d": 22
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/ca/app/stake-real-money-casino/id6503213684?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 18,
-      "confidence": "MEDIUM"
+      "reason": "name matches excluded terms"
     },
     {
       "appId": "543186831",
       "name": "8 Ball Pool™",
-      "developer": "Miniclip.com",
-      "ranks": {
-        "us": 53,
-        "gb": 50,
-        "ca": null,
-        "au": 40
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 3,
-      "spike": false,
-      "rankChange": {
-        "1d": 8,
-        "3d": 7,
-        "7d": 22
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/8-ball-pool/id543186831?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 0,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6756185760",
       "name": "Search It - Hidden Objects",
-      "developer": "LEAP BILISIM TEKNOLOJILERI VE YAZILIM TICARET ANONIM SIRKETI",
-      "ranks": {
-        "us": 95,
-        "gb": 75,
-        "ca": 72,
-        "au": 88
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 4,
-      "spike": false,
-      "rankChange": {
-        "1d": -3,
-        "3d": -4,
-        "7d": 22
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/search-it-hidden-objects/id6756185760?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 2,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6754582466",
       "name": "My Leisure Time",
-      "developer": "HONGKONG YUEYOO TECHNOLOGY CO., LIMITED",
-      "ranks": {
-        "us": null,
-        "gb": null,
-        "ca": null,
-        "au": 76
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 1,
-      "spike": false,
-      "rankChange": {
-        "1d": -19,
-        "3d": -9,
-        "7d": 22
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/au/app/my-leisure-time/id6754582466?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 0,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6772975295",
       "name": "Jewel Color Sort: Pixel Puzzle",
-      "developer": "HappyTapLand Technology Co., Ltd.",
-      "ranks": {
-        "us": null,
-        "gb": 45,
-        "ca": 61,
-        "au": 64
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 3,
-      "spike": false,
-      "rankChange": {
-        "1d": 0,
-        "3d": 4,
-        "7d": 21
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/gb/app/jewel-color-sort-pixel-puzzle/id6772975295?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 28,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6756288168",
       "name": "Cookingo: Perfect Meal",
-      "developer": "Higame Global Limited",
-      "ranks": {
-        "us": null,
-        "gb": null,
-        "ca": 71,
-        "au": 46
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 2,
-      "spike": false,
-      "rankChange": {
-        "1d": 0,
-        "3d": -1,
-        "7d": 21
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/ca/app/cookingo-perfect-meal/id6756288168?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 1,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6756058501",
       "name": "Jelly Busters: Puzzle Game",
-      "developer": "Moon Active",
-      "ranks": {
-        "us": null,
-        "gb": 47,
-        "ca": null,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 1,
-      "spike": false,
-      "rankChange": {
-        "1d": -2,
-        "3d": 6,
-        "7d": 21
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/gb/app/jelly-busters-puzzle-game/id6756058501?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 34,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6745120053",
       "name": "Imposter Game - Party Edition",
-      "developer": "Sven Vucak",
-      "ranks": {
-        "us": 80,
-        "gb": 64,
-        "ca": null,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 4,
-      "placesCharted": 2,
-      "spike": true,
-      "rankChange": {
-        "1d": null,
-        "3d": null,
-        "7d": 21
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/imposter-game-party-edition/id6745120053?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 13,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6738109752",
       "name": "Tiles Survive!",
-      "developer": "FunPlus International AG",
-      "ranks": {
-        "us": null,
-        "gb": null,
-        "ca": null,
-        "au": 74
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 1,
-      "spike": false,
-      "rankChange": {
-        "1d": 11,
-        "3d": 18,
-        "7d": 21
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/au/app/tiles-survive/id6738109752?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 2,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6767834940",
       "name": "Top Lords",
-      "developer": "GAME SPARK PTE. LTD.",
-      "ranks": {
-        "us": null,
-        "gb": 71,
-        "ca": 63,
-        "au": 18
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 3,
-      "spike": false,
-      "rankChange": {
-        "1d": -1,
-        "3d": 3,
-        "7d": 20
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/gb/app/top-lords/id6767834940?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 0,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "1484468651",
       "name": "Dice Dreams™",
-      "developer": "SuperPlay",
-      "ranks": {
-        "us": 72,
-        "gb": 38,
-        "ca": 83,
-        "au": null
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 8,
-      "placesCharted": 3,
-      "spike": false,
-      "rankChange": {
-        "1d": -10,
-        "3d": 10,
-        "7d": 20
-      },
-      "googleRank": null,
-      "candidate": true,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/dice-dreams/id1484468651?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 0,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
     {
       "appId": "6670441558",
       "name": "Dark War:Survival",
-      "developer": "Omnilojo Pte Ltd",
-      "ranks": {
-        "us": null,
-        "gb": null,
-        "ca": null,
-        "au": 59
-      },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
-      "daysInChart": 5,
-      "placesCharted": 1,
-      "spike": true,
-      "rankChange": {
-        "1d": null,
-        "3d": null,
-        "7d": 19
-      },
-      "googleRank": null,
-      "candidate": false,
-      "sourceLinks": {
-        "apple": "https://apps.apple.com/au/app/dark-war-survival/id6670441558?uo=2",
-        "google": null
-      },
-      "lookalikeCount": 1,
-      "confidence": "MEDIUM"
+      "reason": "genre unavailable"
     },
+    {
+      "appId": "1465731199",
+      "name": "2 Player Games : Offline games",
+      "reason": "genre unavailable"
+    },
+    {
+      "appId": "1351168404",
+      "name": "Among Us!",
+      "reason": "genre unavailable"
+    }
+  ],
+  "games": [
     {
       "appId": "6757140488",
       "name": "Sand Blocks: Drop Puzzle",
@@ -1159,7 +290,8 @@
         "7d": 18
       },
       "googleRank": null,
-      "candidate": true,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
       "sourceLinks": {
         "apple": "https://apps.apple.com/us/app/sand-blocks-drop-puzzle/id6757140488?uo=2",
         "google": null
@@ -1168,63 +300,251 @@
       "confidence": "MEDIUM"
     },
     {
-      "appId": "1465731199",
-      "name": "2 Player Games : Offline games",
-      "developer": "Moreno Maio",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
+      "developer": "CrownCards",
       "ranks": {
-        "us": null,
-        "gb": null,
-        "ca": 81,
-        "au": 38
+        "us": 27,
+        "gb": 2,
+        "ca": 4,
+        "au": null
       },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
+      "genre": "Card",
+      "releaseAgeDays": 122,
+      "trendState": "INSUFFICIENT_DATA",
       "daysInChart": 8,
-      "placesCharted": 2,
+      "placesCharted": 3,
       "spike": false,
       "rankChange": {
         "1d": 6,
-        "3d": 14,
-        "7d": 17
+        "3d": 2,
+        "7d": 11
       },
       "googleRank": null,
       "candidate": true,
+      "candidateReason": null,
       "sourceLinks": {
-        "apple": "https://apps.apple.com/ca/app/2-player-games-offline-games/id1465731199?uo=2",
+        "apple": "https://apps.apple.com/us/app/crowncards-trading-cards/id6762010774?uo=2",
         "google": null
       },
-      "lookalikeCount": 9,
+      "lookalikeCount": 0,
       "confidence": "MEDIUM"
     },
     {
-      "appId": "1351168404",
-      "name": "Among Us!",
-      "developer": "InnerSloth LLC",
+      "appId": "1423046460",
+      "name": "Paper.io 2",
+      "developer": "Voodoo",
       "ranks": {
-        "us": 49,
-        "gb": 65,
-        "ca": 53,
-        "au": 45
+        "us": 50,
+        "gb": 72,
+        "ca": null,
+        "au": 11
       },
-      "genre": null,
-      "releaseAgeDays": null,
-      "trendState": null,
+      "genre": "Casual",
+      "releaseAgeDays": 2954,
+      "trendState": "RISING",
+      "daysInChart": 8,
+      "placesCharted": 3,
+      "spike": false,
+      "rankChange": {
+        "1d": 20,
+        "3d": 13,
+        "7d": 11
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/paper-io-2/id1423046460?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 4,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "638689075",
+      "name": "Township",
+      "developer": "Playrix",
+      "ranks": {
+        "us": 19,
+        "gb": 27,
+        "ca": 23,
+        "au": 16
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 4751,
+      "trendState": "ESTABLISHED",
       "daysInChart": 8,
       "placesCharted": 4,
       "spike": false,
       "rankChange": {
-        "1d": 28,
-        "3d": 28,
-        "7d": 17
+        "1d": 9,
+        "3d": 11,
+        "7d": 10
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/township/id638689075?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 2,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6793924927",
+      "name": "Rotate Rings",
+      "developer": "Nebula Studio",
+      "ranks": {
+        "us": 3,
+        "gb": 5,
+        "ca": 3,
+        "au": 3
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 59,
+      "trendState": "ESTABLISHED",
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 2,
+        "3d": 6,
+        "7d": 9
       },
       "googleRank": null,
       "candidate": true,
+      "candidateReason": null,
       "sourceLinks": {
-        "apple": "https://apps.apple.com/us/app/among-us/id1351168404?uo=2",
+        "apple": "https://apps.apple.com/us/app/rotate-rings/id6793924927?uo=2",
         "google": null
       },
-      "lookalikeCount": 0,
+      "lookalikeCount": 4,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6759763476",
+      "name": "Bus Traffic Fever!",
+      "developer": "GOODROID,Inc.",
+      "ranks": {
+        "us": 14,
+        "gb": 7,
+        "ca": 10,
+        "au": 7
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 204,
+      "trendState": "ESTABLISHED",
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 3,
+        "3d": 5,
+        "7d": 5
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/bus-traffic-fever/id6759763476?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 5,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "1443446174",
+      "name": "Magic Tiles 3™: Piano Game",
+      "developer": "Amanotes Pte. Ltd.",
+      "ranks": {
+        "us": 25,
+        "gb": 58,
+        "ca": 45,
+        "au": 29
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 2849,
+      "trendState": "RISING",
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 19,
+        "3d": 20,
+        "7d": 4
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/magic-tiles-3-piano-game/id1443446174?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 19,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6761760135",
+      "name": "Meowdoku!",
+      "developer": "Oakever Games",
+      "ranks": {
+        "us": 1,
+        "gb": 1,
+        "ca": 1,
+        "au": 1
+      },
+      "genre": "Casual",
+      "releaseAgeDays": 137,
+      "trendState": "ESTABLISHED",
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 1,
+        "3d": 1,
+        "7d": 0
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "does not meet the chart evidence rule",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/meowdoku/id6761760135?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 4,
+      "confidence": "MEDIUM"
+    },
+    {
+      "appId": "6752672568",
+      "name": "Block Out! - Color Sort Puzzle",
+      "developer": "Grand Games A.Ş.",
+      "ranks": {
+        "us": 2,
+        "gb": 3,
+        "ca": 2,
+        "au": 2
+      },
+      "genre": "Puzzle",
+      "releaseAgeDays": 337,
+      "trendState": "ESTABLISHED",
+      "daysInChart": 8,
+      "placesCharted": 4,
+      "spike": false,
+      "rankChange": {
+        "1d": 0,
+        "3d": 0,
+        "7d": 0
+      },
+      "googleRank": null,
+      "candidate": false,
+      "candidateReason": "older than 180 days",
+      "sourceLinks": {
+        "apple": "https://apps.apple.com/us/app/block-out-color-sort-puzzle/id6752672568?uo=2",
+        "google": null
+      },
+      "lookalikeCount": 30,
       "confidence": "MEDIUM"
     }
   ]

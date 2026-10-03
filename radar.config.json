@@ -1,5 +1,9 @@
 {
   "genres": ["Puzzle", "Casual", "Arcade"],
+  "includeGenres": ["Puzzle", "Casual", "Arcade", "Word", "Board", "Card"],
+  "excludeGenres": ["Casino"],
+  "excludeNameRegex": "\\b(real money|win real|cash|casino|slots?|jackpot|betting)\\b",
+  "maxAgeDays": 180,
   "storefronts": ["us", "gb", "ca", "au"],
   "googleAccount": "personal",
   "prototypeDays": 14,

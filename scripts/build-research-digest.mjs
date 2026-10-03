@@ -9,6 +9,7 @@ const weeklyDigestRoot = path.resolve('digest');
 const radarRoot = path.resolve('public/data/radar');
 const googleRoot = path.resolve('public/data/platforms/google-play');
 const configPath = path.resolve('radar.config.json');
+const appleMetadataPath = path.resolve('data/apple-metadata.json');
 
 function readJson(file, fallback = null) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; }
@@ -271,6 +272,7 @@ if (!config || !Array.isArray(config.storefronts) || !Number.isInteger(config.pr
 const radarIndex = readJson(path.join(radarRoot, 'index.json'));
 const radarLatest = readJson(path.join(radarRoot, 'latest.json'));
 const googleLatest = readJson(path.join(googleRoot, 'latest.json'));
+const appleMetadata = readJson(appleMetadataPath, { apps: {} });
 if (!radarIndex?.snapshots || !radarLatest?.markets) throw new Error('Committed Apple Radar data is required for weekly digest generation.');
 
 const trackedDates = new Set(radarIndex.snapshots.map((snapshot) => snapshot.date));
@@ -299,10 +301,12 @@ for (const storefront of config.storefronts) {
 
 for (const game of games.values()) {
   const queue = queueById.get(game.appId);
-  const metadata = queue?.appleMetadata;
-  const matchingGenres = (metadata?.genres ?? []).filter((genre) => config.genres.includes(genre));
+  const metadata = appleMetadata?.apps?.[game.appId];
+  const matchingGenres = (metadata?.genres ?? []).filter((genre) => config.includeGenres.includes(genre));
   game.genre = matchingGenres[0] ?? null;
-  game.releaseAgeDays = Number.isInteger(metadata?.releaseAgeDays) ? metadata.releaseAgeDays : null;
+  const releaseTime = metadata?.releaseDate ? new Date(`${metadata.releaseDate.slice(0, 10)}T00:00:00Z`).getTime() : NaN;
+  const radarTime = new Date(`${current.radarDate}T00:00:00Z`).getTime();
+  game.releaseAgeDays = Number.isFinite(releaseTime) ? Math.max(0, Math.floor((radarTime - releaseTime) / 86_400_000)) : null;
   game.trendState = queue?.evidence?.trend?.state ?? null;
   game.daysInChart = availableDates.filter((date) => {
     const snapshot = snapshots.get(date);
@@ -319,7 +323,9 @@ for (const game of games.values()) {
   game.rankChange = Object.fromEntries([1, 3, 7].map((days) => [`${days}d`, bestImprovement(game, snapshots, current.radarDate, config.storefronts, days)]));
   const google = googleByTitle.get(normalizeTitle(game.name));
   game.googleRank = google?.rank ?? null;
-  game.candidate = game.daysInChart >= 5 && (game.rankChange['7d'] ?? 0) > 0 && game.placesCharted >= 2 && game.spike === false;
+  const existingCandidateRule = game.daysInChart >= 5 && (game.rankChange['7d'] ?? 0) > 0 && game.placesCharted >= 2 && game.spike === false;
+  game.candidate = existingCandidateRule && game.releaseAgeDays != null && game.releaseAgeDays <= config.maxAgeDays;
+  game.candidateReason = game.releaseAgeDays == null ? 'age unknown' : game.releaseAgeDays > config.maxAgeDays ? `older than ${config.maxAgeDays} days` : existingCandidateRule ? null : 'does not meet the chart evidence rule';
   game.sourceLinks = { apple: game.storeUrl, google: google?.storeUrl ?? null };
 }
 
@@ -332,28 +338,60 @@ for (const game of allGames) {
   )).length;
 }
 
-const topGames = allGames
+const nameExclusion = new RegExp(config.excludeNameRegex, 'i');
+const rankEligible = allGames
   .filter((game) => game.daysInChart >= 3 && game.rankChange['7d'] != null)
-  .sort((a, b) => b.rankChange['7d'] - a.rankChange['7d'] || Math.min(...Object.values(a.ranks).filter(Number.isInteger)) - Math.min(...Object.values(b.ranks).filter(Number.isInteger)) || a.name.localeCompare(b.name))
-  .slice(0, 30);
+  .sort((a, b) => b.rankChange['7d'] - a.rankChange['7d'] || Math.min(...Object.values(a.ranks).filter(Number.isInteger)) - Math.min(...Object.values(b.ranks).filter(Number.isInteger)) || a.name.localeCompare(b.name));
 
-const missing = [];
-if (missingDates.length > 0) missing.push(`Apple chart dates: ${missingDates.join(', ')}`);
-if (googleLatest?.status !== 'ok') missing.push(`Google Play ranks: ${googleLatest?.status ?? 'missing'}`);
+function exclusionReason(game) {
+  const genres = appleMetadata?.apps?.[game.appId]?.genres;
+  if (nameExclusion.test(game.name)) return 'name matches excluded terms';
+  if (!Array.isArray(genres)) return 'genre unavailable';
+  const blockedGenre = config.excludeGenres.find((genre) => genres.includes(genre));
+  if (blockedGenre) return `excluded genre: ${blockedGenre}`;
+  if (!genres.some((genre) => config.includeGenres.includes(genre))) return 'not an included genre';
+  return null;
+}
+
+const excluded = rankEligible.slice(0, 30).flatMap((game) => {
+  const reason = exclusionReason(game);
+  return reason ? [{ appId: game.appId, name: game.name, reason }] : [];
+});
+const topGames = rankEligible.filter((game) => exclusionReason(game) == null).slice(0, 30);
+const missingDetail = [];
 for (const game of topGames) {
   for (const field of ['developer', 'genre', 'releaseAgeDays', 'trendState', 'googleRank', 'spike']) {
-    if (game[field] == null) missing.push(`games.${game.appId}.${field}`);
+    if (game[field] == null) missingDetail.push(`games.${game.appId}.${field}`);
   }
   for (const storefront of config.storefronts) {
-    if (game.ranks[storefront] == null) missing.push(`games.${game.appId}.ranks.${storefront}`);
+    if (game.ranks[storefront] == null) missingDetail.push(`games.${game.appId}.ranks.${storefront}`);
   }
   for (const window of ['1d', '3d', '7d']) {
-    if (game.rankChange[window] == null) missing.push(`games.${game.appId}.rankChange.${window}`);
+    if (game.rankChange[window] == null) missingDetail.push(`games.${game.appId}.rankChange.${window}`);
   }
   for (const platform of ['apple', 'google']) {
-    if (game.sourceLinks[platform] == null) missing.push(`games.${game.appId}.sourceLinks.${platform}`);
+    if (game.sourceLinks[platform] == null) missingDetail.push(`games.${game.appId}.sourceLinks.${platform}`);
   }
 }
+const missingFields = ['developer', 'genre', 'releaseAgeDays', 'trendState', 'googleRank', 'spike'];
+const missing = [
+  ...missingFields.flatMap((field) => {
+    const count = topGames.filter((game) => game[field] == null).length;
+    return count ? [`${field}: ${count}/${topGames.length} games`] : [];
+  }),
+  ...config.storefronts.flatMap((storefront) => {
+    const count = topGames.filter((game) => game.ranks[storefront] == null).length;
+    return count ? [`rank ${storefront}: ${count}/${topGames.length} games`] : [];
+  }),
+  ...['1d', '3d', '7d'].flatMap((window) => {
+    const count = topGames.filter((game) => game.rankChange[window] == null).length;
+    return count ? [`rankChange ${window}: ${count}/${topGames.length} games`] : [];
+  }),
+  ...['apple', 'google'].flatMap((platform) => {
+    const count = topGames.filter((game) => game.sourceLinks[platform] == null).length;
+    return count ? [`source ${platform}: ${count}/${topGames.length} games`] : [];
+  }),
+].slice(0, 10);
 
 let historyDays = 0;
 while (trackedDates.has(subtractUtcDays(current.radarDate, historyDays))) historyDays += 1;
@@ -370,10 +408,12 @@ const weekly = {
   config,
   selection: {
     rule: 'Top 30 current games by best exact 7-day storefront rank improvement, limited to games charted on at least 3 of the last 14 tracked days.',
-    candidateRule: 'daysInChart >= 5, positive 7-day rank improvement, charted in 2+ places, and not a spike.',
+    candidateRule: `daysInChart >= 5, positive 7-day rank improvement, charted in 2+ places, not a spike, and releaseAgeDays <= ${config.maxAgeDays}; unknown age is not a candidate.`,
+    filters: 'Genre and name filters are applied before ranking the Top 30.',
     trendStateSource: 'Copied from public/data/research/latest.json; null when the research queue has no value.',
   },
   cards: topGames.filter((game) => game.candidate).slice(0, config.maxCards),
+  excluded,
   games: topGames.map(({ storeUrl: _storeUrl, ...game }) => ({ ...game, confidence })),
 };
 
@@ -383,22 +423,32 @@ const md = [
   `Generated: ${weekly.generatedAt}`,
   `History: ${historyDays} day(s) · Confidence: ${confidence}`,
   `Platforms covered: ${weekly.platformsCovered.join(', ') || 'None'}`,
-  `Missing dates: ${missingDates.join(', ') || 'None'}`,
-  `What is missing: ${missing.join('; ') || 'Nothing'}`,
+  '## Missing',
+  '',
+  `- Dates: ${missingDates.join(', ') || 'None'}`,
+  ...missing.map((item) => `- ${item}`),
   '',
   '## Prototype candidates',
   '',
   ...(weekly.cards.length > 0 ? weekly.cards.map((game) => `- **${game.name}** — improved ${game.rankChange['7d']} places in 7 days; charted ${game.daysInChart} days in ${game.placesCharted} places. Next action: inspect the store listing before prototyping.`) : ['No game meets the candidate rule this week. Next action: keep collecting chart history.']),
   '',
-  '## Top 30 by 7-day rank improvement',
+  '## Ranked games',
   '',
   '| Game | Developer | Genre | Release age | US/GB/CA/AU | Google | 1d / 3d / 7d | Days | Places | Spike | Lookalikes | Trend | Candidate | Confidence | Sources |',
   '|---|---|---|---:|---|---:|---|---:|---:|---|---:|---|---|---|---|',
-  ...weekly.games.map((game) => {
+  ...weekly.games.filter((game) => game.releaseAgeDays == null || game.releaseAgeDays <= config.maxAgeDays).map((game) => {
     const appleLink = game.sourceLinks.apple ? `[Apple](${game.sourceLinks.apple})` : '—';
     const googleLink = game.sourceLinks.google ? `[Google](${game.sourceLinks.google})` : '—';
     return `| ${markdownValue(game.name)} | ${markdownValue(game.developer)} | ${markdownValue(game.genre)} | ${markdownValue(game.releaseAgeDays)} | ${config.storefronts.map((code) => markdownValue(game.ranks[code])).join('/')} | ${markdownValue(game.googleRank)} | ${markdownValue(game.rankChange['1d'])} / ${markdownValue(game.rankChange['3d'])} / ${markdownValue(game.rankChange['7d'])} | ${game.daysInChart} | ${game.placesCharted} | ${markdownValue(game.spike)} | ${game.lookalikeCount} | ${markdownValue(game.trendState)} | ${game.candidate} | ${confidence} | ${appleLink} ${googleLink} |`;
   }),
+  '',
+  '## Context',
+  '',
+  ...(weekly.games.filter((game) => game.releaseAgeDays > config.maxAgeDays).map((game) => `- **${game.name}** — ${game.releaseAgeDays} days old; retained for context and never promoted to a card.`).concat(weekly.games.some((game) => game.releaseAgeDays > config.maxAgeDays) ? [] : ['No older ranked games this week.'])),
+  '',
+  '## Excluded',
+  '',
+  ...(excluded.slice(0, 10).map((game) => `- **${game.name}** — ${game.reason}.`).concat(excluded.length > 10 ? [`- ${excluded.length - 10} more excluded games are recorded in latest.json.`] : [])),
   '',
   '_Rank improvement is the best exact storefront change. Missing values are never inferred._',
   '',
@@ -407,4 +457,5 @@ const md = [
 fs.mkdirSync(weeklyDigestRoot, { recursive: true });
 fs.writeFileSync(path.join(weeklyDigestRoot, 'latest.json'), `${JSON.stringify(weekly, null, 2)}\n`);
 fs.writeFileSync(path.join(weeklyDigestRoot, 'latest.md'), md);
+fs.writeFileSync(path.join(weeklyDigestRoot, 'missing-detail.json'), `${JSON.stringify({ schemaVersion: 1, radarDate: current.radarDate, missing: missingDetail }, null, 2)}\n`);
 console.log(`[weekly-digest] ${weekly.games.length} ranked games · ${weekly.cards.length} candidate card(s) · ${confidence}`);

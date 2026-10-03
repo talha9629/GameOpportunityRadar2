@@ -1,50 +1,50 @@
 # Radar Lite weekly digest
 
-Generated: 2026-10-03T10:10:40.282Z
+Generated: 2026-10-03T10:33:29.625Z
 History: 8 day(s) · Confidence: MEDIUM
 Platforms covered: Apple App Store
-Missing dates: 2026-09-20, 2026-09-21, 2026-09-22, 2026-09-23, 2026-09-24, 2026-09-25
-What is missing: Apple chart dates: 2026-09-20, 2026-09-21, 2026-09-22, 2026-09-23, 2026-09-24, 2026-09-25; Google Play ranks: unconfigured; games.1546690510.genre; games.1546690510.releaseAgeDays; games.1546690510.trendState; games.1546690510.googleRank; games.1546690510.sourceLinks.google; games.6748397500.genre; games.6748397500.releaseAgeDays; games.6748397500.trendState; games.6748397500.googleRank; games.6748397500.sourceLinks.google; games.6783815362.genre; games.6783815362.releaseAgeDays; games.6783815362.trendState; games.6783815362.googleRank; games.6783815362.sourceLinks.google; games.6760998152.genre; games.6760998152.releaseAgeDays; games.6760998152.trendState; games.6760998152.googleRank; games.6760998152.ranks.us; games.6760998152.ranks.ca; games.6760998152.sourceLinks.google; games.6760530627.genre; games.6760530627.releaseAgeDays; games.6760530627.trendState; games.6760530627.googleRank; games.6760530627.sourceLinks.google; games.6761757565.genre; games.6761757565.releaseAgeDays; games.6761757565.trendState; games.6761757565.googleRank; games.6761757565.sourceLinks.google; games.6755183085.genre; games.6755183085.releaseAgeDays; games.6755183085.trendState; games.6755183085.googleRank; games.6755183085.ranks.au; games.6755183085.sourceLinks.google; games.6754009969.genre; games.6754009969.releaseAgeDays; games.6754009969.trendState; games.6754009969.googleRank; games.6754009969.ranks.gb; games.6754009969.ranks.ca; games.6754009969.ranks.au; games.6754009969.sourceLinks.google; games.6503697761.genre; games.6503697761.releaseAgeDays; games.6503697761.trendState; games.6503697761.googleRank; games.6503697761.ranks.gb; games.6503697761.ranks.au; games.6503697761.sourceLinks.google; games.6742410648.genre; games.6742410648.releaseAgeDays; games.6742410648.trendState; games.6742410648.googleRank; games.6742410648.ranks.us; games.6742410648.ranks.ca; games.6742410648.ranks.au; games.6742410648.sourceLinks.google; games.6752886832.genre; games.6752886832.releaseAgeDays; games.6752886832.trendState; games.6752886832.googleRank; games.6752886832.sourceLinks.google; games.1446254576.genre; games.1446254576.releaseAgeDays; games.1446254576.trendState; games.1446254576.googleRank; games.1446254576.ranks.gb; games.1446254576.ranks.ca; games.1446254576.ranks.au; games.1446254576.sourceLinks.google; games.1583193717.genre; games.1583193717.releaseAgeDays; games.1583193717.trendState; games.1583193717.googleRank; games.1583193717.ranks.us; games.1583193717.ranks.gb; games.1583193717.ranks.au; games.1583193717.sourceLinks.google; games.6475757306.genre; games.6475757306.releaseAgeDays; games.6475757306.trendState; games.6475757306.googleRank; games.6475757306.sourceLinks.google; games.553834731.genre; games.553834731.releaseAgeDays; games.553834731.trendState; games.553834731.googleRank; games.553834731.ranks.ca; games.553834731.sourceLinks.google; games.6503213684.genre; games.6503213684.releaseAgeDays; games.6503213684.trendState; games.6503213684.googleRank; games.6503213684.ranks.us; games.6503213684.ranks.gb; games.6503213684.ranks.au; games.6503213684.sourceLinks.google; games.543186831.genre; games.543186831.releaseAgeDays; games.543186831.trendState; games.543186831.googleRank; games.543186831.ranks.ca; games.543186831.sourceLinks.google; games.6756185760.genre; games.6756185760.releaseAgeDays; games.6756185760.trendState; games.6756185760.googleRank; games.6756185760.sourceLinks.google; games.6754582466.genre; games.6754582466.releaseAgeDays; games.6754582466.trendState; games.6754582466.googleRank; games.6754582466.ranks.us; games.6754582466.ranks.gb; games.6754582466.ranks.ca; games.6754582466.sourceLinks.google; games.6772975295.genre; games.6772975295.releaseAgeDays; games.6772975295.trendState; games.6772975295.googleRank; games.6772975295.ranks.us; games.6772975295.sourceLinks.google; games.6756288168.genre; games.6756288168.releaseAgeDays; games.6756288168.trendState; games.6756288168.googleRank; games.6756288168.ranks.us; games.6756288168.ranks.gb; games.6756288168.sourceLinks.google; games.6756058501.genre; games.6756058501.releaseAgeDays; games.6756058501.trendState; games.6756058501.googleRank; games.6756058501.ranks.us; games.6756058501.ranks.ca; games.6756058501.ranks.au; games.6756058501.sourceLinks.google; games.6745120053.genre; games.6745120053.releaseAgeDays; games.6745120053.trendState; games.6745120053.googleRank; games.6745120053.ranks.ca; games.6745120053.ranks.au; games.6745120053.rankChange.1d; games.6745120053.rankChange.3d; games.6745120053.sourceLinks.google; games.6738109752.genre; games.6738109752.releaseAgeDays; games.6738109752.trendState; games.6738109752.googleRank; games.6738109752.ranks.us; games.6738109752.ranks.gb; games.6738109752.ranks.ca; games.6738109752.sourceLinks.google; games.6767834940.genre; games.6767834940.releaseAgeDays; games.6767834940.trendState; games.6767834940.googleRank; games.6767834940.ranks.us; games.6767834940.sourceLinks.google; games.1484468651.genre; games.1484468651.releaseAgeDays; games.1484468651.trendState; games.1484468651.googleRank; games.1484468651.ranks.au; games.1484468651.sourceLinks.google; games.6670441558.genre; games.6670441558.releaseAgeDays; games.6670441558.trendState; games.6670441558.googleRank; games.6670441558.ranks.us; games.6670441558.ranks.gb; games.6670441558.ranks.ca; games.6670441558.rankChange.1d; games.6670441558.rankChange.3d; games.6670441558.sourceLinks.google; games.6757140488.googleRank; games.6757140488.sourceLinks.google; games.1465731199.genre; games.1465731199.releaseAgeDays; games.1465731199.trendState; games.1465731199.googleRank; games.1465731199.ranks.us; games.1465731199.ranks.gb; games.1465731199.sourceLinks.google; games.1351168404.genre; games.1351168404.releaseAgeDays; games.1351168404.trendState; games.1351168404.googleRank; games.1351168404.sourceLinks.google
+## Missing
+
+- Dates: 2026-09-20, 2026-09-21, 2026-09-22, 2026-09-23, 2026-09-24, 2026-09-25
+- googleRank: 9/9 games
+- rank ca: 1/9 games
+- rank au: 1/9 games
+- source google: 9/9 games
 
 ## Prototype candidates
 
-- **NoomiClone** — improved 55 places in 7 days; charted 8 days in 4 places. Next action: inspect the store listing before prototyping.
-- **Arrows – Puzzle Escape** — improved 48 places in 7 days; charted 8 days in 4 places. Next action: inspect the store listing before prototyping.
-- **Word Tiles - Relaxing Puzzle** — improved 40 places in 7 days; charted 7 days in 4 places. Next action: inspect the store listing before prototyping.
+- **CrownCards - Trading Cards** — improved 11 places in 7 days; charted 8 days in 3 places. Next action: inspect the store listing before prototyping.
+- **Rotate Rings** — improved 9 places in 7 days; charted 8 days in 4 places. Next action: inspect the store listing before prototyping.
 
-## Top 30 by 7-day rank improvement
+## Ranked games
 
 | Game | Developer | Genre | Release age | US/GB/CA/AU | Google | 1d / 3d / 7d | Days | Places | Spike | Lookalikes | Trend | Candidate | Confidence | Sources |
 |---|---|---|---:|---|---:|---|---:|---:|---|---:|---|---|---|---|
-| NoomiClone | Matthew Jones | — | — | 48/24/40/27 | — | -5 / -16 / 55 | 8 | 4 | false | 0 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/noomiclone/id1546690510?uo=2) — |
-| Arrows – Puzzle Escape | Lessmore GmbH | — | — | 37/67/30/37 | — | 0 / 24 / 48 | 8 | 4 | false | 23 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/arrows-puzzle-escape/id6748397500?uo=2) — |
-| Word Tiles - Relaxing Puzzle | Agave Games | — | — | 84/78/49/72 | — | 6 / 22 / 40 | 7 | 4 | false | 28 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/word-tiles-relaxing-puzzle/id6783815362?uo=2) — |
-| Family Farm Merge | Century Games Innovation Pte. Ltd. | — | — | —/90/—/66 | — | 10 / 11 / 33 | 6 | 2 | false | 9 | — | true | MEDIUM | [Apple](https://apps.apple.com/gb/app/family-farm-merge/id6760998152?uo=2) — |
-| Mahjong Clash: Win Real Cash | Aviagames Inc. | — | — | 86/37/86/57 | — | 1 / 25 / 32 | 8 | 4 | false | 17 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/mahjong-clash-win-real-cash/id6760530627?uo=2) — |
-| Colorever: Gem Art Puzzle | Oakever Games | — | — | 16/19/91/39 | — | -4 / -4 / 31 | 8 | 4 | false | 23 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/colorever-gem-art-puzzle/id6761757565?uo=2) — |
-| Yarn Loop: Knit Puzzle | Combo Games | — | — | 47/43/64/— | — | 33 / 16 / 31 | 8 | 3 | false | 24 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/yarn-loop-knit-puzzle/id6755183085?uo=2) — |
-| Jackpot Nights | Lucky Link Ltd. | — | — | 42/—/—/— | — | 5 / 17 / 29 | 8 | 1 | false | 1 | — | false | MEDIUM | [Apple](https://apps.apple.com/us/app/jackpot-nights/id6754009969?uo=2) — |
-| Playtest Pro by BestPlay | Bestplay Systems | — | — | 89/—/36/— | — | 10 / 11 / 27 | 8 | 2 | false | 0 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/playtest-pro-by-bestplay/id6503697761?uo=2) — |
-| WhoLiked? - Guess Who Liked it | IRL Apps | — | — | —/42/—/— | — | 8 / 34 / 27 | 8 | 1 | false | 2 | — | false | MEDIUM | [Apple](https://apps.apple.com/gb/app/wholiked-guess-who-liked-it/id6742410648?uo=2) — |
-| Hotel Legacy: Merge Game | Century Games Innovation Pte. Ltd. | — | — | 65/33/47/30 | — | 4 / 20 / 26 | 8 | 4 | false | 19 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/hotel-legacy-merge-game/id6752886832?uo=2) — |
-| Solitaire Cash: Win Real Money | Papaya Gaming | — | — | 62/—/—/— | — | -11 / 2 / 26 | 8 | 1 | false | 17 | — | false | MEDIUM | [Apple](https://apps.apple.com/us/app/solitaire-cash-win-real-money/id1446254576?uo=2) — |
-| FanDuel Online Casino | FanDuel, Inc. | — | — | —/—/28/— | — | 4 / 6 / 24 | 8 | 1 | false | 11 | — | false | MEDIUM | [Apple](https://apps.apple.com/ca/app/fanduel-online-casino/id1583193717?uo=2) — |
-| Disney Solitaire | SuperPlay | — | — | 35/26/65/53 | — | 16 / 60 / 23 | 8 | 4 | false | 5 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/disney-solitaire/id6475757306?uo=2) — |
-| Candy Crush Saga | King | — | — | 44/57/—/58 | — | 9 / 15 / 23 | 8 | 3 | false | 1 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/candy-crush-saga/id553834731?uo=2) — |
-| Stake - Real Money Casino | Stake.com | — | — | —/—/37/— | — | -4 / 14 / 22 | 8 | 1 | false | 18 | — | false | MEDIUM | [Apple](https://apps.apple.com/ca/app/stake-real-money-casino/id6503213684?uo=2) — |
-| 8 Ball Pool™ | Miniclip.com | — | — | 53/50/—/40 | — | 8 / 7 / 22 | 8 | 3 | false | 0 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/8-ball-pool/id543186831?uo=2) — |
-| Search It - Hidden Objects | LEAP BILISIM TEKNOLOJILERI VE YAZILIM TICARET ANONIM SIRKETI | — | — | 95/75/72/88 | — | -3 / -4 / 22 | 8 | 4 | false | 2 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/search-it-hidden-objects/id6756185760?uo=2) — |
-| My Leisure Time | HONGKONG YUEYOO TECHNOLOGY CO., LIMITED | — | — | —/—/—/76 | — | -19 / -9 / 22 | 8 | 1 | false | 0 | — | false | MEDIUM | [Apple](https://apps.apple.com/au/app/my-leisure-time/id6754582466?uo=2) — |
-| Jewel Color Sort: Pixel Puzzle | HappyTapLand Technology Co., Ltd. | — | — | —/45/61/64 | — | 0 / 4 / 21 | 8 | 3 | false | 28 | — | true | MEDIUM | [Apple](https://apps.apple.com/gb/app/jewel-color-sort-pixel-puzzle/id6772975295?uo=2) — |
-| Cookingo: Perfect Meal | Higame Global Limited | — | — | —/—/71/46 | — | 0 / -1 / 21 | 8 | 2 | false | 1 | — | true | MEDIUM | [Apple](https://apps.apple.com/ca/app/cookingo-perfect-meal/id6756288168?uo=2) — |
-| Jelly Busters: Puzzle Game | Moon Active | — | — | —/47/—/— | — | -2 / 6 / 21 | 8 | 1 | false | 34 | — | false | MEDIUM | [Apple](https://apps.apple.com/gb/app/jelly-busters-puzzle-game/id6756058501?uo=2) — |
-| Imposter Game - Party Edition | Sven Vucak | — | — | 80/64/—/— | — | — / — / 21 | 4 | 2 | true | 13 | — | false | MEDIUM | [Apple](https://apps.apple.com/us/app/imposter-game-party-edition/id6745120053?uo=2) — |
-| Tiles Survive! | FunPlus International AG | — | — | —/—/—/74 | — | 11 / 18 / 21 | 8 | 1 | false | 2 | — | false | MEDIUM | [Apple](https://apps.apple.com/au/app/tiles-survive/id6738109752?uo=2) — |
-| Top Lords | GAME SPARK PTE. LTD. | — | — | —/71/63/18 | — | -1 / 3 / 20 | 8 | 3 | false | 0 | — | true | MEDIUM | [Apple](https://apps.apple.com/gb/app/top-lords/id6767834940?uo=2) — |
-| Dice Dreams™ | SuperPlay | — | — | 72/38/83/— | — | -10 / 10 / 20 | 8 | 3 | false | 0 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/dice-dreams/id1484468651?uo=2) — |
-| Dark War:Survival | Omnilojo Pte Ltd | — | — | —/—/—/59 | — | — / — / 19 | 5 | 1 | true | 1 | — | false | MEDIUM | [Apple](https://apps.apple.com/au/app/dark-war-survival/id6670441558?uo=2) — |
-| Sand Blocks: Drop Puzzle | Rollic Games | Puzzle | 240 | 60/17/44/34 | — | 11 / 13 / 18 | 8 | 4 | false | 24 | ESTABLISHED | true | MEDIUM | [Apple](https://apps.apple.com/us/app/sand-blocks-drop-puzzle/id6757140488?uo=2) — |
-| 2 Player Games : Offline games | Moreno Maio | — | — | —/—/81/38 | — | 6 / 14 / 17 | 8 | 2 | false | 9 | — | true | MEDIUM | [Apple](https://apps.apple.com/ca/app/2-player-games-offline-games/id1465731199?uo=2) — |
-| Among Us! | InnerSloth LLC | — | — | 49/65/53/45 | — | 28 / 28 / 17 | 8 | 4 | false | 0 | — | true | MEDIUM | [Apple](https://apps.apple.com/us/app/among-us/id1351168404?uo=2) — |
+| CrownCards - Trading Cards | CrownCards | Card | 122 | 27/2/4/— | — | 6 / 2 / 11 | 8 | 3 | false | 0 | INSUFFICIENT_DATA | true | MEDIUM | [Apple](https://apps.apple.com/us/app/crowncards-trading-cards/id6762010774?uo=2) — |
+| Rotate Rings | Nebula Studio | Casual | 59 | 3/5/3/3 | — | 2 / 6 / 9 | 8 | 4 | false | 4 | ESTABLISHED | true | MEDIUM | [Apple](https://apps.apple.com/us/app/rotate-rings/id6793924927?uo=2) — |
+| Meowdoku! | Oakever Games | Casual | 137 | 1/1/1/1 | — | 1 / 1 / 0 | 8 | 4 | false | 4 | ESTABLISHED | false | MEDIUM | [Apple](https://apps.apple.com/us/app/meowdoku/id6761760135?uo=2) — |
+
+## Context
+
+- **Sand Blocks: Drop Puzzle** — 240 days old; retained for context and never promoted to a card.
+- **Paper.io 2** — 2954 days old; retained for context and never promoted to a card.
+- **Township** — 4751 days old; retained for context and never promoted to a card.
+- **Bus Traffic Fever!** — 204 days old; retained for context and never promoted to a card.
+- **Magic Tiles 3™: Piano Game** — 2849 days old; retained for context and never promoted to a card.
+- **Block Out! - Color Sort Puzzle** — 337 days old; retained for context and never promoted to a card.
+
+## Excluded
+
+- **NoomiClone** — genre unavailable.
+- **Arrows – Puzzle Escape** — genre unavailable.
+- **Word Tiles - Relaxing Puzzle** — genre unavailable.
+- **Family Farm Merge** — genre unavailable.
+- **Mahjong Clash: Win Real Cash** — name matches excluded terms.
+- **Colorever: Gem Art Puzzle** — genre unavailable.
+- **Yarn Loop: Knit Puzzle** — genre unavailable.
+- **Jackpot Nights** — name matches excluded terms.
+- **Playtest Pro by BestPlay** — genre unavailable.
+- **WhoLiked? - Guess Who Liked it** — genre unavailable.
+- 19 more excluded games are recorded in latest.json.
 
 _Rank improvement is the best exact storefront change. Missing values are never inferred._
