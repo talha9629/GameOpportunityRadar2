@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-02T09:38:36.901Z",
-  "verificationGeneratedAt": "2026-10-02T09:38:36.784Z",
+  "generatedAt": "2026-10-03T09:04:54.646Z",
+  "verificationGeneratedAt": "2026-10-03T09:04:54.538Z",
   "statement": "Public gameplay discovery proposes search candidates only. A URL is not gameplay evidence until it is saved into Deep Verify, analyzed or inspected, and its timestamped findings receive explicit human review.",
   "provider": {
     "key": "tavily",
@@ -22,184 +22,16 @@
   },
   "sessions": [
     {
-      "sessionId": "3a7f6691d874ccdd06a57902",
-      "appId": "6742809194",
-      "name": "Warline: Sniper Strike",
-      "queueRank": 1,
-      "query": "\"Warline: Sniper Strike\" gameplay walkthrough menu monetization progression",
-      "providerKey": "tavily",
-      "searchQueries": [
-        "\"Warline: Sniper Strike\" gameplay walkthrough menu monetization progression"
-      ],
-      "searchedAt": "2026-10-02T09:38:36.901Z",
-      "status": "found",
-      "candidates": [
-        {
-          "rank": 1,
-          "url": "https://www.youtube.com/watch?v=uKqGuJa7xcE",
-          "title": "Warline: Sniper Strike | Gameplay Walkthrough Part 1(Android, iOS)",
-          "snippet": "sa Gaming 148000 subscribers 113 likes 18048 views 12 Jun 2026 Warline: Sniper Strike | Gameplay Walkthrough Part 1(Android, iOS) The enemy is at the gates! Defend your base and crush the invaders with precise sniper skills and a powerful army! FEATURES EXCITING SNIPER ACTION Take control of the battlefield and destroy your enemies! Master over a hundred missions across diverse battlefields, both on land and in the air. Collect assault rifles, sniper rifles, and other powerful weapons, then modify them with new parts to create the ultimate arsenal. Smooth controls, stunning graphics, immersive sound effects, and heart-pounding slow-mo action shots will keep you on the edge of your seat. MAST",
-          "score": 0.64478505,
-          "channelName": "Elkholasa Gaming",
-          "thumbnailUrl": "https://i.ytimg.com/vi/uKqGuJa7xcE/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:38.992Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        },
-        {
-          "rank": 2,
-          "url": "https://www.youtube.com/watch?v=-ace3v2F-u0",
-          "title": "Warline: Sniper Strike - Gameplay Walkthrough Part 1 - Sniper Action Game (iOS, Android)",
-          "snippet": "d Android iOS Gameplays 1720000 subscribers 21 likes 1904 views 19 Jun 2026 New Warline: Sniper Strike - Gameplay Walkthrough Part 1 - Sniper Action Game (iOS, Android) 📱 Game Name: Warline: Sniper Strike 🎮 Platform: Android & iOS 🕹️ Mode: Gameplay Walkthrough 💰 Price: Warline: Sniper Strike - Free Mobile Game 🖥️ My Popular Android Gameplay Mobile Games: 🎉 Stickman Party: https://www.youtube.com/watch?v=R3BgzTrrF4M 📺 Scary Teacher 3D All Levels: https://www.youtube.com/watch?v=igUPMllp_3w 🏃‍♂️ Temple Run https://www.youtube.com/watch?v=TuGv1WIyUK4 🏫 Scary Teacher 3D Poki https://www.youtube.com/watch?v=RUm9Ds7UukU ⚽ Going Balls https://www.youtube.com/watch?v=b0y1ZhcQhFY 👨‍🌾 Farm",
-          "score": 0.6213807,
-          "channelName": "Pryszard Android iOS Gameplays",
-          "thumbnailUrl": "https://i.ytimg.com/vi/-ace3v2F-u0/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:39.058Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        },
-        {
-          "rank": 3,
-          "url": "https://www.youtube.com/watch?v=xi4oad2mO-I",
-          "title": "Warline: Sniper Strike - Gameplay Walkthrough Part 1 (iOS Android)",
-          "snippet": "amesDaily 794000 subscribers 11 likes 1790 views 25 Jul 2026 Warline: Sniper Strike - Gameplay Walkthrough Part 1 (iOS Android) Fight on the front line as an elite sniper while commanding the battle on a larger scale. Experience a seamless blend of intense tactical shooting and real-time strategy. iTunes Link - https://apps.apple.com/az/app/warline-sniper-strike/id6742809194 Google Play Link - https://play.google.com/store/apps/details?id=com.farlightgames.warline.gp.global&hl=en how to reach me - mgdailyofficial@gmail.com 1 comments",
-          "score": 0.5683445,
-          "channelName": "MobileGamesDaily",
-          "thumbnailUrl": "https://i.ytimg.com/vi/xi4oad2mO-I/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:39.109Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        }
-      ],
-      "error": null
-    },
-    {
-      "sessionId": "a20813e198fcfc535f849cb4",
-      "appId": "6739554056",
-      "name": "Kingshot",
-      "queueRank": 2,
-      "query": "\"Kingshot\" gameplay walkthrough menu monetization progression",
-      "providerKey": "tavily",
-      "searchQueries": [
-        "\"Kingshot\" gameplay walkthrough menu monetization progression"
-      ],
-      "searchedAt": "2026-10-02T09:38:39.109Z",
-      "status": "found",
-      "candidates": [
-        {
-          "rank": 1,
-          "url": "https://www.youtube.com/watch?v=jcxQA8a1GI0",
-          "title": "Kingshot Gameplay 2026 - Best Strategy Tips for Beginners!",
-          "snippet": "amer 122 subscribers 4 views 25 Jul 2026 Kingshot, Kingshot Gameplay, Kingshot 2026, Kingshot Beginner Guide, Kingshot Tips and Tricks, Kingshot Strategy, Kingshot F2P Guide, Kingshot Best Heroes, Kingshot Alliance Guide, Kingshot Fast Progression, Mobile Strategy Game, Android Gaming, iOS Gaming, Kingshot Walkthrough, Kingshot Tutorial. In this video: ⚔️ Best beginner strategy 🏰 Fast base upgrade guide 👑 Hero upgrade tips 🤝 Why joining an active alliance is essential 💎 How to save gems and speedups 🛡️ Best troop formations for early game 🎯 Tips for Free-to-Play (F2P) players Top Beginner Tips: Upgrade your Town Center as your highest priority. Keep builders and troop training active 2",
-          "score": 0.5402697,
-          "channelName": "Anime Gamer",
-          "thumbnailUrl": "https://i.ytimg.com/vi/jcxQA8a1GI0/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:42.438Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        },
-        {
-          "rank": 2,
-          "url": "https://www.youtube.com/watch?v=ie9XwDZT-Q8",
-          "title": "Kingshot - Latest/New Update Apk - Gameplay Review, Walkthrough (iOS,Android) Part 1",
-          "snippet": "Manage Human Resources Enjoy a unique gameplay mechanic involving the allocation of survivor roles such as workers, hunters, and chefs. Monitor their health and happiness to ensure they remain productive. Respond quickly to illness to make sure everyone receives timely treatment. Establish Laws Codes of law are vital for sustaining civilization and are crucial for the growth and strength of your town. [Strategic Gameplay] [...] Compete with Other Governors Hone your heroes' skills, assemble your squads, and challenge other governors. Victory not only earns you valuable points, but also grants access to rare items. Lead your town to the top of the rankings and showcase the rise of a great civ",
-          "score": 0.5331307,
-          "channelName": "AndromalicPlay1337",
-          "thumbnailUrl": "https://i.ytimg.com/vi/ie9XwDZT-Q8/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:42.500Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        },
-        {
-          "rank": 3,
-          "url": "https://www.youtube.com/watch?v=k8fp1UrdrHw",
-          "title": "♖ Kingshot #2 | Chapter 4 - 6 | No commentary Android Gameplay Walkthrough",
-          "snippet": "ys 3710 subscribers 4 likes 69 views 6 Jan 2026 #kingshot #nocommentary Proceed with another single player android strategy game - Kingshot that mixes several nice topics like medieval, strategy & tower defense game elements. In this video made a huge progress in conquest, updated a Town and win two next rebel clashes (and lost one): 00:00 Chapter 4: Roll out 05:18 Chapter 5: Time to mine 22:40 Chapter 6: Obey the Law ♖ Kingshot Android Gameplay Walkthrough Playlist: https://www.youtube.com/playlist?list=PLBbU1wZ94oE8CHEsSZ2fN_TtnxgjoGpqB",
-          "score": 0.5249554,
-          "channelName": "max plays",
-          "thumbnailUrl": "https://i.ytimg.com/vi/k8fp1UrdrHw/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:42.537Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        }
-      ],
-      "error": null
-    },
-    {
-      "sessionId": "ba4b65a5985625de3d60c55a",
-      "appId": "6767834940",
-      "name": "Top Lords",
-      "queueRank": 3,
-      "query": "\"Top Lords\" gameplay walkthrough menu monetization progression",
-      "providerKey": "tavily",
-      "searchQueries": [
-        "\"Top Lords\" gameplay walkthrough menu monetization progression"
-      ],
-      "searchedAt": "2026-10-02T09:38:42.538Z",
-      "status": "found",
-      "candidates": [
-        {
-          "rank": 1,
-          "url": "https://www.youtube.com/watch?v=IGRRXlSTLtc",
-          "title": "(CORTE DA LIVE) UM DIA LINDO PARA UM F2P! ARMA T3 E MAIS... MIR4 KR 👀#mir4",
-          "snippet": "AUTOMATIC PROGRESSION AND FEATURES WITHOUT THE NEED TO KEEP YOUR CELL PHONE OR COMPUTER ON. GET 488 DIAMONDS + 250 FOR FREE HOURS: take your",
-          "score": 0.030935358,
-          "channelName": "🍃ROCK FREE🍃",
-          "thumbnailUrl": "https://i.ytimg.com/vi/IGRRXlSTLtc/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:44.238Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        },
-        {
-          "rank": 2,
-          "url": "https://www.youtube.com/watch?v=BZrio_G_1Cs",
-          "title": "The BEST Facebook Ads Tutorial for Beginners (Full Guide)",
-          "snippet": "every single step and setting you need to get right so before we get into the really interesting part and start putting the ads together start creating the campaign we first need to put the structure in place the correct structure in place it is really important uh not the most interesting part but is really important doesn't take very long I'm going to show you exactly how to do it so the right structure is to First create a meta business manager account which is sort of like the umbrella [...] make sure that you are obviously on the browser that you're using and following along um with this in and then you want to go ahead and click on create an account now unfortunately I can't go ahead a",
-          "score": 0.016864683,
-          "channelName": "Ben Heath",
-          "thumbnailUrl": "https://i.ytimg.com/vi/BZrio_G_1Cs/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:44.257Z",
-          "discoveryProvider": "tavily",
-          "domain": "youtube.com",
-          "sourceOrigin": "third_party_public",
-          "interpretation": "search_candidate",
-          "reviewState": "suggested"
-        }
-      ],
-      "error": null
-    },
-    {
       "sessionId": "60f2b3ae35b05df28d153b48",
       "appId": "6761760135",
       "name": "Meowdoku!",
-      "queueRank": 4,
+      "queueRank": 1,
       "query": "\"Meowdoku!\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
         "\"Meowdoku!\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-10-02T09:38:44.257Z",
+      "searchedAt": "2026-10-03T09:04:54.646Z",
       "status": "found",
       "candidates": [
         {
@@ -210,7 +42,7 @@
           "score": 0.45769477,
           "channelName": "Rock Gaming Channel",
           "thumbnailUrl": "https://i.ytimg.com/vi/qlv3OzlMdkI/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:45.388Z",
+          "availabilityVerifiedAt": "2026-10-03T09:04:55.903Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -225,7 +57,7 @@
           "score": 0.39515805,
           "channelName": "GAMISTAN ARENA",
           "thumbnailUrl": "https://i.ytimg.com/vi/3EiSxVM0FAo/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:45.434Z",
+          "availabilityVerifiedAt": "2026-10-03T09:04:55.971Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -240,7 +72,7 @@
           "score": 0.38456595,
           "channelName": "Game Rush",
           "thumbnailUrl": "https://i.ytimg.com/vi/my7pX7FELfg/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:45.495Z",
+          "availabilityVerifiedAt": "2026-10-03T09:04:56.044Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -254,13 +86,13 @@
       "sessionId": "499a756a0718a91049643fed",
       "appId": "6752672568",
       "name": "Block Out! - Color Sort Puzzle",
-      "queueRank": 5,
+      "queueRank": 2,
       "query": "\"Block Out! - Color Sort Puzzle\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
         "\"Block Out! - Color Sort Puzzle\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-10-02T09:38:45.496Z",
+      "searchedAt": "2026-10-03T09:04:56.044Z",
       "status": "found",
       "candidates": [
         {
@@ -271,7 +103,68 @@
           "score": 0.016981656,
           "channelName": "RTS Mobile",
           "thumbnailUrl": "https://i.ytimg.com/vi/YmFiRmmV6_4/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:47.714Z",
+          "availabilityVerifiedAt": "2026-10-03T09:04:57.809Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
+      "error": null
+    },
+    {
+      "sessionId": "6ad11f74465d2b9c03bed4dd",
+      "appId": "6762010774",
+      "name": "CrownCards - Trading Cards",
+      "queueRank": 3,
+      "query": "\"CrownCards - Trading Cards\" gameplay walkthrough menu monetization progression",
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"CrownCards - Trading Cards\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-10-03T09:04:57.809Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=pQ6Gg8ZuOi4",
+          "title": "Card Evolution: TCG hyper game - Gameplay Walkthrough Part 2 - Android Gameplay",
+          "snippet": "Gameplay 13000 subscribers 11 views 8 Nov 2024 Card Evolution: TCG hyper game - Gameplay Walkthrough Part 2 - Android Gameplay 👍Like and Subscribe for more video games 📱Game Description: Grow and evolve your trading cards collection: collect cards, unlock new character series - ranging from sports to monsters - and build the most powerful hyper cards collection in one of your favorite trading card games. Battle against other tcg card thrower players, like cards against humanity to become the greatest card collector and earn money to unlock card stack, collect cards and make cards combos, just like card animation throwdown and card shuffle sort. Be the owner of the world's rarest and most e",
+          "score": 0.22134264,
+          "channelName": "Mobile Gameplay",
+          "thumbnailUrl": "https://i.ytimg.com/vi/pQ6Gg8ZuOi4/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:04:59.402Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=fjNruk_szo4",
+          "title": "Card Evolution: TCG hyper game - Gameplay Walkthrough Part 5 - Android Gameplay",
+          "snippet": "Gameplay 13100 subscribers 19 views 4 Dec 2024 Card Evolution: TCG hyper game - Gameplay Walkthrough Part 5 - Android Gameplay 👍Like and Subscribe for more video games 📱Game Description: Grow and evolve your trading cards collection: collect cards, unlock new character series - ranging from sports to monsters - and build the most powerful hyper cards collection in one of your favorite trading card games. Battle against other tcg card thrower players, like cards against humanity to become the greatest card collector and earn money to unlock card stack, collect cards and make cards combos, just like card animation throwdown and card shuffle sort. Be the owner of the world's rarest and most e",
+          "score": 0.2168068,
+          "channelName": "Mobile Gameplay",
+          "thumbnailUrl": "https://i.ytimg.com/vi/fjNruk_szo4/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:04:59.511Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=TISmNwasvCw",
+          "title": "$10,000 MAX WIN on CrownCards! (100X PULL)",
+          "snippet": "755000 subscribers 8 likes 455 views 12 Jul 2026 I loaded $10,000 into CrownCards the BEST Pokemon Trading Cards App and went ALL IN on the biggest packs! Only $500, $1,000, and $2,500 pulls, no small packs, chasing the $100,000 MAX WIN! I almost lost my ENTIRE balance down to nothing... then hit a crazy comeback with some of the craziest grails l've ever pulled... 🪎GET A FREE PACK (worth up to $100) + enter my monthly giveaway for up to $10,000: 👉- https://apps.apple.com/app/crowncards-trading-cards/id6762010774 💎Use code “JOSH” for your free pack! This app is super similar to Rips by Triumph, which creators like TrueCeloLive and ObsidianX23 create videos on. If you love pack opening, ca",
+          "score": 0.14404073,
+          "channelName": "Whoods",
+          "thumbnailUrl": "https://i.ytimg.com/vi/TISmNwasvCw/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:04:59.648Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -285,24 +178,24 @@
       "sessionId": "ea059d0454b4206bc64c47d2",
       "appId": "6793924927",
       "name": "Rotate Rings",
-      "queueRank": 6,
+      "queueRank": 4,
       "query": "\"Rotate Rings\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
         "\"Rotate Rings\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-10-02T09:38:47.714Z",
+      "searchedAt": "2026-10-03T09:04:59.648Z",
       "status": "found",
       "candidates": [
         {
           "rank": 1,
           "url": "https://www.youtube.com/watch?v=zHXe-1SOVW8",
           "title": "[OUT DATED SEE NEW ONE IN DESCRIPTION] Black Desert 2026 FULL Gear Progression Guide - BDO",
-          "snippet": "FULL BDO Gear Guide From Start to Finish! Black Desert 2026 FULL Gear Progression Guide. Monetization, Subscription & Server Details",
-          "score": 0.059916034,
+          "snippet": "[OUTDATED - NEW GUIDE IN DESCRIPTION] BDO Gear Progression Guide 2026 | Black Desert ... | Monetization, Subscription & Server Details.",
+          "score": 0.053705383,
           "channelName": "BlueSquadron",
           "thumbnailUrl": "https://i.ytimg.com/vi/zHXe-1SOVW8/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:50.139Z",
+          "availabilityVerifiedAt": "2026-10-03T09:05:02.352Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -317,7 +210,7 @@
           "score": 0.017060088,
           "channelName": "Jackal",
           "thumbnailUrl": "https://i.ytimg.com/vi/yRxkndTfRN0/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:50.189Z",
+          "availabilityVerifiedAt": "2026-10-03T09:05:02.426Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -328,11 +221,11 @@
           "rank": 3,
           "url": "https://www.youtube.com/watch?v=INUdPETwnOE",
           "title": "EVERYTHING You NEED To KNOW About Pixel Quest FULL Guide",
-          "snippet": "finished a guide on Pixel Quest that gives you a basic understanding how certain things work in the game, FULL IN-DEPTH GUIDE FOR ALL PLAYERS",
-          "score": 0.014549746,
+          "snippet": "As promised I have finished a guide on Pixel Quest that gives you a basic understanding how certain things work in the game, tread carefully",
+          "score": 0.012432874,
           "channelName": "Vaporbaby",
           "thumbnailUrl": "https://i.ytimg.com/vi/INUdPETwnOE/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:50.239Z",
+          "availabilityVerifiedAt": "2026-10-03T09:05:02.545Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -343,27 +236,27 @@
       "error": null
     },
     {
-      "sessionId": "a7ed1fe74505c6ed1bc6fdbc",
-      "appId": "6779167923",
-      "name": "Colony Flow!",
-      "queueRank": 7,
-      "query": "\"Colony Flow!\" gameplay walkthrough menu monetization progression",
+      "sessionId": "8e4bbc24cf93328c922d8eab",
+      "appId": "6759763476",
+      "name": "Bus Traffic Fever!",
+      "queueRank": 5,
+      "query": "\"Bus Traffic Fever!\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
-        "\"Colony Flow!\" gameplay walkthrough menu monetization progression"
+        "\"Bus Traffic Fever!\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-10-02T09:38:50.239Z",
+      "searchedAt": "2026-10-03T09:05:02.545Z",
       "status": "found",
       "candidates": [
         {
           "rank": 1,
-          "url": "https://www.youtube.com/watch?v=NCBSNbGnFoY",
-          "title": "Colony Flow! Level 1165 Walkthrough Solution",
-          "snippet": "Colony Flow offers hundreds of increasingly challenging levels with charming animations and no time pressure. In this video: • Full Colony Flow gameplay • Early level walkthrough • Puzzle-solving strategies • Relaxing no-commentary gameplay • Ant colony mechanics • Pixel art puzzle progression Whether you’re looking for a walkthrough, tips before downloading the game, or simply enjoy satisfying mobile puzzle games, I hope you enjoy watching! 👍 If you enjoyed this video, please Like, [...] Colony Flow Gameplay Walkthrough – Relaxing Ant Puzzle Game (No Commentary) Welcome to my full gameplay walkthrough of Colony Flow, a relaxing puzzle game where tiny worker ants transport colorful cubes to",
-          "score": 0.6383174,
-          "channelName": "Nova’s Puzzle Den",
-          "thumbnailUrl": "https://i.ytimg.com/vi/NCBSNbGnFoY/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:51.234Z",
+          "url": "https://www.youtube.com/watch?v=RIonM1ZNsPE",
+          "title": "Bus Traffic Fever Gameplay | Levels 1-9 Full Walkthrough (No Commentary)",
+          "snippet": "Title: Bus Traffic Fever Gameplay | Levels 1-9 Full Walkthrough (No Commentary) # Bus Traffic Fever Gameplay | Levels 1-9 Full Walkthrough (No Commentary). ## Channel: Kukku Channel (verified). ### Description. Enjoy a relaxing Bus Traffic Fever gameplay walkthrough featuring Levels 1 to 9 with no commentary. Watch the early stages of the game as each level is completed step by step. Perfect for players looking for gameplay, puzzle solutions, or simply relaxing game videos. If you enjoy relaxing mobile gameplay, don't forget to Like and Subscribe for more Bus Traffic Fever videos and other mobile game walkthroughs. #BusTrafficFever #Gameplay #Walkthrough #NoCommentary #MobileGame #PuzzleGame",
+          "score": 0.57723385,
+          "channelName": "Kukku Channel",
+          "thumbnailUrl": "https://i.ytimg.com/vi/RIonM1ZNsPE/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:05:03.808Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -372,13 +265,13 @@
         },
         {
           "rank": 2,
-          "url": "https://www.youtube.com/watch?v=lZUUud55liw",
-          "title": "Colony Flow Level 1304 Walkthrough Solution",
-          "snippet": "Colony Flow offers hundreds of increasingly challenging levels with charming animations and no time pressure. In this video: • Full Colony Flow gameplay • Early level walkthrough • Puzzle-solving strategies • Relaxing no-commentary gameplay • Ant colony mechanics • Pixel art puzzle progression Whether you’re looking for a walkthrough, tips before downloading the game, or simply enjoy satisfying mobile puzzle games, I hope you enjoy watching! 👍 If you enjoyed this video, please Like, [...] Colony Flow Gameplay Walkthrough – Relaxing Ant Puzzle Game (No Commentary) Welcome to my full gameplay walkthrough of Colony Flow, a relaxing puzzle game where tiny worker ants transport colorful cubes to",
-          "score": 0.6260562,
-          "channelName": "Nova’s Puzzle Den",
-          "thumbnailUrl": "https://i.ytimg.com/vi/lZUUud55liw/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:51.272Z",
+          "url": "https://www.youtube.com/watch?v=MWse7C_zL1E",
+          "title": "🚌 Bus Traffic Fever! Level 100 Walkthrough | Easy Solution & Gameplay 🚦📱",
+          "snippet": "Title: 🚌 Bus Traffic Fever! Level 100 Walkthrough | Easy Solution & Gameplay 🚦📱 # 🚌 Bus Traffic Fever! Level 100 Walkthrough | Easy Solution & Gameplay 🚦📱. ## Channel: Crazy Games Walkthrough. ### Description. Stuck on Level 100 of Bus Traffic Fever? 🚌🚦 Don't worry, we've got you covered! Watch this quick and easy solution to clear the traffic jam and beat the puzzle in no time. If this guide helped you, make sure to hit that Like button and subscribe for more daily puzzle game walkthroughs! 👇 Don't forget to Subscribe for more Mobile Game Walkthroughs! 📺 Watch the full Bus Traffic Fever! ▶️ Playlist: • Bus Traffic Fever All Levels. 🔹 Game Name: Bus Traffic Fever! Bus Traffic Feve",
+          "score": 0.47285444,
+          "channelName": "Crazy Games Walkthrough",
+          "thumbnailUrl": "https://i.ytimg.com/vi/MWse7C_zL1E/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:05:03.871Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -387,13 +280,13 @@
         },
         {
           "rank": 3,
-          "url": "https://www.youtube.com/watch?v=nF4E683Thkw",
-          "title": "Colony Flow Level 1233 Walkthrough Solution",
-          "snippet": "Colony Flow offers hundreds of increasingly challenging levels with charming animations and no time pressure. In this video: • Full Colony Flow gameplay • Early level walkthrough • Puzzle-solving strategies • Relaxing no-commentary gameplay • Ant colony mechanics • Pixel art puzzle progression Whether you’re looking for a walkthrough, tips before downloading the game, or simply enjoy satisfying mobile puzzle games, I hope you enjoy watching! 👍 If you enjoyed this video, please Like, [...] Colony Flow Gameplay Walkthrough – Relaxing Ant Puzzle Game (No Commentary) Welcome to my full gameplay walkthrough of Colony Flow, a relaxing puzzle game where tiny worker ants transport colorful cubes to",
-          "score": 0.6260562,
-          "channelName": "Nova’s Puzzle Den",
-          "thumbnailUrl": "https://i.ytimg.com/vi/nF4E683Thkw/hqdefault.jpg",
-          "availabilityVerifiedAt": "2026-10-02T09:38:51.315Z",
+          "url": "https://www.youtube.com/watch?v=COIq2x6BTOw",
+          "title": "🚌 Bus Traffic Fever! Level 87 Walkthrough | Full Solution & Gameplay 🚦",
+          "snippet": "ames Walkthrough 24800 subscribers 1 likes 27 views 3 Jul 2026 Stuck on Level 87 of Bus Traffic Fever!? 🚌🚦 Don't worry, we've got the complete solution right here! Watch this quick and easy gameplay walkthrough to clear the traffic jam and pass the level with ease. If this guide helped you out, please drop a LIKE 👍 and leave a comment below! 👇 Don't forget to SUBSCRIBE for more daily puzzle solutions and mobile game walkthroughs! 👇 🔔 Subscribe here: https://www.youtube.com/@CrazyGamesWalkthrough?sub_confirmation=1 📺 Watch the Full Bus Traffic Fever! Playlist: ▶️ https://www.youtube.com/playlist?list=PL5ybSa5BAcE745LdIzyoGzQMxpV5Ljf_9 🎮 Game Information 🔹 Game Name: Bus Traffic Fever",
+          "score": 0.43972388,
+          "channelName": "Crazy Games Walkthrough",
+          "thumbnailUrl": "https://i.ytimg.com/vi/COIq2x6BTOw/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:05:03.931Z",
           "discoveryProvider": "tavily",
           "domain": "youtube.com",
           "sourceOrigin": "third_party_public",
@@ -404,18 +297,141 @@
       "error": null
     },
     {
-      "sessionId": "bdd1c4f061e300b41ac1383c",
-      "appId": "6756482832",
-      "name": "Brain Puzzle 3: Crazy Mind",
-      "queueRank": 8,
-      "query": "\"Brain Puzzle 3: Crazy Mind\" gameplay walkthrough menu monetization progression",
+      "sessionId": "bed1ba3d50febec71be99f3b",
+      "appId": "431946152",
+      "name": "Roblox",
+      "queueRank": 6,
+      "query": "\"Roblox\" gameplay walkthrough menu monetization progression",
       "providerKey": "tavily",
       "searchQueries": [
-        "\"Brain Puzzle 3: Crazy Mind\" gameplay walkthrough menu monetization progression"
+        "\"Roblox\" gameplay walkthrough menu monetization progression"
       ],
-      "searchedAt": "2026-10-02T09:38:51.315Z",
-      "status": "no_result",
-      "candidates": [],
+      "searchedAt": "2026-10-03T09:05:03.931Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=dRUklraiPrU",
+          "title": "[LEAKED] Grow a garden 🌽 UNCOPYLOCKED",
+          "snippet": "Customize crops, mechanics, and progression, then monetize your own game. Watch now and access the download.",
+          "score": 0.20074598,
+          "channelName": "rbstdev",
+          "thumbnailUrl": "https://i.ytimg.com/vi/dRUklraiPrU/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:05:06.818Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=-fiPACmS1nk",
+          "title": "Miliastra Wonderland Complete Reveal & Guide | Genshin’s UGC Revolution",
+          "snippet": "Walk through each major feature. Economy & Monetization Explain how it's separate from the main game (no Primogems) Show hints of different",
+          "score": 0.16587698,
+          "channelName": "NJMH Nexus",
+          "thumbnailUrl": "https://i.ytimg.com/vi/-fiPACmS1nk/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:05:06.948Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 3,
+          "url": "https://www.youtube.com/watch?v=-i5AqES4VtU",
+          "title": "Dino Hunters Roblox ULTIMATE Beginner GUIDE: Best Start & GUNS! Noob Tutorial",
+          "snippet": "This Dino Hunters Roblox guide explains evolution, hidden equipment, better capsules, fossil stones, missions, weapons and an easy boss",
+          "score": 0.056825016,
+          "channelName": "AbductedByRobloxians",
+          "thumbnailUrl": "https://i.ytimg.com/vi/-i5AqES4VtU/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:05:07.025Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
+      "error": null
+    },
+    {
+      "sessionId": "ab030cf9505652d6c9ace154",
+      "appId": "1423046460",
+      "name": "Paper.io 2",
+      "queueRank": 7,
+      "query": "\"Paper.io 2\" gameplay walkthrough menu monetization progression",
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Paper.io 2\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-10-03T09:05:07.025Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=IjF5Uun2jrM",
+          "title": "Google Veo 3 Tutorial: Make Cinematic AI Videos with Just a Prompt",
+          "snippet": "🎒 MY COURSES - Go from Excel novice to data analysis ninja in just 2 hours: 🙏 REQUEST VIDEOS 🔔 SUBSCRIBE ON YOUTUBE 🙌 SUPPORT THE CHANNEL - Hit the THANKS button in any video! - Amazon affiliate link: ⚖ DISCLOSURE Some links are affiliate links. Purchasing through these links gives me a small commission to support videos on this channel. The price to you is the same. #stratvert #Veo3 #earlyaccess [...] 📩 NEWSLETTER - Get the latest high-quality tutorial and tips and tricks videos emailed to your inbox each week: 🔽 CONNECT WITH ME - Official website: - LinkedIn: - Discord: - Twitter: - Facebook: - TikTok: - Instagram: 🎁 TOOLS AND DISCOUNTS ✅ 🎙️ Voicemod AI Voice Changer | 5% off | ✅ \ud83c",
+          "score": 0.01135916,
+          "channelName": "Kevin Stratvert",
+          "thumbnailUrl": "https://i.ytimg.com/vi/IjF5Uun2jrM/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:05:08.579Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
+      "error": null
+    },
+    {
+      "sessionId": "a20813e198fcfc535f849cb4",
+      "appId": "6739554056",
+      "name": "Kingshot",
+      "queueRank": 8,
+      "query": "\"Kingshot\" gameplay walkthrough menu monetization progression",
+      "providerKey": "tavily",
+      "searchQueries": [
+        "\"Kingshot\" gameplay walkthrough menu monetization progression"
+      ],
+      "searchedAt": "2026-10-03T09:05:08.579Z",
+      "status": "found",
+      "candidates": [
+        {
+          "rank": 1,
+          "url": "https://www.youtube.com/watch?v=YmFiRmmV6_4",
+          "title": "Don't Make These Mistakes! Tiles Survive 4 Pro Tips (F2P Hero & Behemoth Secrets)",
+          "snippet": "​If these Tiles Survive tips, tricks, and guides help you conquer the battlefield, please Like & Subscribe for more content! I'm enjoying this game even more than Kingshot and Last War Z – check it out! ​💎 Unlock Pack Discounts with GemZ! 💎 A massive thank you to GemZ for sponsoring this video! Join their Discord to save 15-20% on your in-game pack purchases for Tiles Survive and other titles. Join the GemZ Discord Here: / discord [...] [2:29] two days you're going to have a gole pursuit event that you do with your alliance. As you start to deal damage to the boss, you're going to get a couple different types of rewards. You will [2:37] first get some rewards to upgrade your hero gear, but",
+          "score": 0.062336873,
+          "channelName": "RTS Mobile",
+          "thumbnailUrl": "https://i.ytimg.com/vi/YmFiRmmV6_4/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:05:10.391Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        },
+        {
+          "rank": 2,
+          "url": "https://www.youtube.com/watch?v=T4Hdr_73_p0",
+          "title": "20 lifechanging tips & tricks [gain power fast] Whiteout Survival Guide",
+          "snippet": "[12:39] progress is to just switch them around and see if you can do better now I know that might sound really weird and past a certain point in your progression that [12:47] won't matter anymore but even up to level like 370 or so I could go into this [12:53] exploration game mode and I could just switch to Heroes I hadn't even worked on at all put them in the lineup and end up [...] [1:17] the number of troops you want to join with so if you don't have many and you want to join lots of rallies potentially at a time you can just set it to one troop and it'll send one troop to each [1:26] rally you can get loot from every single one of those rallies you join up to the limit of 50 Polar Terro",
+          "score": 0.027048238,
+          "channelName": "ChisguleWhiteoutSurvival",
+          "thumbnailUrl": "https://i.ytimg.com/vi/T4Hdr_73_p0/hqdefault.jpg",
+          "availabilityVerifiedAt": "2026-10-03T09:05:10.445Z",
+          "discoveryProvider": "tavily",
+          "domain": "youtube.com",
+          "sourceOrigin": "third_party_public",
+          "interpretation": "search_candidate",
+          "reviewState": "suggested"
+        }
+      ],
       "error": null
     }
   ]

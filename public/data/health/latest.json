@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-02T11:07:39.689Z",
+  "generatedAt": "2026-10-03T09:05:10.658Z",
   "overall": "ready",
   "statement": "Data Health reports whether Radar evidence pipelines are usable. It does not score game opportunities or convert missing evidence into confidence.",
   "essentialHealthy": 5,
@@ -14,7 +14,7 @@
         "4/4 healthy Games markets",
         "0 failed market(s)",
         "0 overall-chart fallback market(s)",
-        "1.5h snapshot age"
+        "0.0h snapshot age"
       ],
       "action": null
     },
@@ -26,7 +26,7 @@
         "12 candidates",
         "Apple lookup complete",
         "live evidence complete (8/8)",
-        "1.5h queue age"
+        "0.0h queue age"
       ],
       "action": null
     },
@@ -39,7 +39,7 @@
         "0 omitted task(s)",
         "8 capture session(s) cover 24 gameplay evidence task(s)",
         "derived from current research queue",
-        "1.5h verification age"
+        "0.0h verification age"
       ],
       "action": null
     },
@@ -49,8 +49,8 @@
       "state": "healthy",
       "facts": [
         "Tavily status complete",
-        "7/8 capture session(s) have public source suggestion(s)",
-        "18 suggested YouTube source(s)",
+        "8/8 capture session(s) have public source suggestion(s)",
+        "19 suggested YouTube source(s)",
         "8/8 provider request cap used",
         "8 search queries reported by provider",
         "derived from current verification queue",
@@ -63,7 +63,7 @@
       "label": "Exact Rank History",
       "state": "healthy",
       "facts": [
-        "7/7 consecutive exact dated snapshot(s)",
+        "8/7 consecutive exact dated snapshot(s)",
         "1d/3d/7d comparisons never interpolate missing dates"
       ],
       "action": null
@@ -74,8 +74,8 @@
       "state": "healthy",
       "facts": [
         "status complete",
-        "12 exact-date change(s)",
-        "12 attention item(s)"
+        "20 exact-date change(s)",
+        "19 attention item(s)"
       ],
       "action": null
     },
@@ -88,7 +88,7 @@
         "0 fetch failure(s)",
         "0 stability-confirmed policy change(s)",
         "2 pending hash candidate(s); 5 setup-era transition(s) quarantined",
-        "0.0h policy-index age",
+        "22.0h policy-index age",
         "Owner review state is stored in Supabase and is not inferred from this public health report."
       ],
       "action": null
@@ -112,7 +112,7 @@
         "provider status unconfigured",
         "0/50 AppBrain popularity position(s) available",
         "exact requested depth not currently available",
-        "96.0h provider observation age",
+        "118.0h provider observation age",
         "Positions are AppBrain provider-global popularity ordering, not official Google Play storefront ranks.",
         "Download values, when present, are third-party estimates and are never inferred from Apple ranks."
       ],
@@ -127,8 +127,8 @@
         "4/4 healthy Games market(s) represented",
         "chart depth matches Top 100",
         "derived from current Apple Radar snapshot",
-        "DECLINING 115 · EMERGING 1 · INSUFFICIENT_DATA 192 · RISING 92",
-        "1.5h trend-signal age",
+        "DECLINING 115 · EMERGING 1 · ESTABLISHED 57 · INSUFFICIENT_DATA 120 · RISING 107",
+        "0.0h trend-signal age",
         "Visibility is a bounded chart-position heuristic; it is not downloads, revenue, market share, probability, or a build recommendation."
       ],
       "action": null
@@ -138,8 +138,8 @@
     {
       "priority": 3,
       "action": "DEEP_VERIFY_TOP_CANDIDATE",
-      "appId": "6742809194",
-      "name": "Warline: Sniper Strike",
+      "appId": "6761760135",
+      "name": "Meowdoku!",
       "why": "The highest-priority candidate still has an explicit gameplay-verification unknown; 3 public source suggestion(s) are available for inspection."
     },
     {
@@ -154,9 +154,9 @@
     }
   ],
   "facts": {
-    "radarDate": "2026-10-02",
-    "researchQueueDate": "2026-10-02",
-    "exactHistoryDays": 7,
+    "radarDate": "2026-10-03",
+    "researchQueueDate": "2026-10-03",
+    "exactHistoryDays": 8,
     "verificationTaskCount": 48,
     "verificationRawTaskCount": 48,
     "verificationOmittedTaskCount": 0,
@@ -165,7 +165,7 @@
     "verificationDerivedFromCurrentQueue": true,
     "gameplayDiscoveryConfigured": true,
     "gameplayDiscoveryProvider": "tavily",
-    "gameplayDiscoveryCandidateCount": 18,
+    "gameplayDiscoveryCandidateCount": 19,
     "gameplayDiscoveryRequestsUsed": 8,
     "gameplayDiscoverySearchQueriesUsed": 8,
     "gameplayDiscoveryDerivedFromCurrentVerification": true,
@@ -180,7 +180,7 @@
     "googlePlayRadarEntryCount": 0,
     "googlePlayRadarRequestedDepth": 50,
     "googlePlayRadarExactDepth": false,
-    "googlePlayRadarAgeHours": 96.040305,
+    "googlePlayRadarAgeHours": 117.99890611111111,
     "trendSignalCount": 400,
     "trendExpectedSignalCount": 400,
     "trendHealthyMarketCount": 4,
@@ -188,10 +188,11 @@
     "trendDerivedFromCurrentRadar": true,
     "trendChartDepthMatches": true,
     "trendStateCounts": {
-      "INSUFFICIENT_DATA": 192,
-      "RISING": 92,
-      "EMERGING": 1,
-      "DECLINING": 115
+      "ESTABLISHED": 57,
+      "INSUFFICIENT_DATA": 120,
+      "RISING": 107,
+      "DECLINING": 115,
+      "EMERGING": 1
     }
   }
 }
