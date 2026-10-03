@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-03T09:04:54.320Z",
+  "apps": {
+    "431946152": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Entertainment",
+        "Action",
+        "Adventure"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2011-05-26T20:51:47Z",
+      "currentVersionReleaseDate": "2026-10-01T19:01:38Z",
+      "userRatingCount": 1223100,
+      "averageUserRating": 4.48311,
+      "missing": []
+    },
+    "638689075": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Entertainment",
+        "Puzzle",
+        "Casual"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2013-09-30T23:03:15Z",
+      "currentVersionReleaseDate": "2026-09-17T07:12:34Z",
+      "userRatingCount": 143588,
+      "averageUserRating": 4.67948,
+      "missing": []
+    },
+    "1423046460": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Casual",
+        "Action"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2018-09-01T19:54:13Z",
+      "currentVersionReleaseDate": "2026-09-24T09:20:55Z",
+      "userRatingCount": 207415,
+      "averageUserRating": 4.49267,
+      "missing": []
+    },
+    "1443446174": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Music",
+        "Casual",
+        "Music"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2018-12-15T08:55:33Z",
+      "currentVersionReleaseDate": "2026-09-18T02:59:48Z",
+      "userRatingCount": 833276,
+      "averageUserRating": 4.63069,
+      "missing": []
+    },
+    "6761760135": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Casual",
+        "Puzzle"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2026-05-19T07:00:00Z",
+      "currentVersionReleaseDate": "2026-10-01T05:23:38Z",
+      "userRatingCount": 276830,
+      "averageUserRating": 4.81039,
+      "missing": []
+    },
+    "6752672568": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Puzzle",
+        "Casual"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2025-10-31T07:00:00Z",
+      "currentVersionReleaseDate": "2026-09-28T07:04:43Z",
+      "userRatingCount": 280240,
+      "averageUserRating": 4.72724,
+      "missing": []
+    },
+    "6762010774": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Card"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2026-06-03T07:00:00Z",
+      "currentVersionReleaseDate": "2026-08-24T23:43:08Z",
+      "userRatingCount": 1371,
+      "averageUserRating": 4.72137,
+      "missing": []
+    },
+    "6793924927": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Entertainment",
+        "Casual",
+        "Puzzle"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2026-08-05T07:00:00Z",
+      "currentVersionReleaseDate": "2026-09-29T01:38:05Z",
+      "userRatingCount": 13358,
+      "averageUserRating": 4.79413,
+      "missing": []
+    },
+    "6759763476": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Casual",
+        "Puzzle"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2026-03-13T07:00:00Z",
+      "currentVersionReleaseDate": "2026-09-14T05:26:09Z",
+      "userRatingCount": 8856,
+      "averageUserRating": 4.57148,
+      "missing": []
+    },
+    "6739554056": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Strategy"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2025-02-22T08:00:00Z",
+      "currentVersionReleaseDate": "2026-08-24T07:02:05Z",
+      "userRatingCount": 13606,
+      "averageUserRating": 4.47405,
+      "missing": []
+    },
+    "6757140488": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Puzzle"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2026-02-05T08:00:00Z",
+      "currentVersionReleaseDate": "2026-09-30T16:31:30Z",
+      "userRatingCount": 398,
+      "averageUserRating": 4.57035,
+      "missing": []
+    },
+    "6443575749": {
+      "fetchedAt": "2026-10-03T09:04:47.757Z",
+      "genres": [
+        "Games",
+        "Strategy",
+        "Simulation"
+      ],
+      "primaryGenreName": "Games",
+      "releaseDate": "2022-12-02T08:00:00Z",
+      "currentVersionReleaseDate": "2026-08-17T06:55:59Z",
+      "userRatingCount": 21196,
+      "averageUserRating": 4.47226,
+      "missing": []
+    }
+  }
+}
