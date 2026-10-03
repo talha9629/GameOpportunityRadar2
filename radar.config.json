@@ -1,0 +1,7 @@
+{
+  "genres": ["Puzzle", "Casual", "Arcade"],
+  "storefronts": ["us", "gb", "ca", "au"],
+  "googleAccount": "personal",
+  "prototypeDays": 14,
+  "maxCards": 3
+}
